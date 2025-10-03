@@ -13,6 +13,12 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      letterSpacing: {
+        'tighter': '-0.118em',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
