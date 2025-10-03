@@ -91,15 +91,15 @@ const ProductGrid = () => {
               </div>
               
               <div className="p-6">
-                <p className="text-sm text-muted-foreground mb-1 truncate">{product.brand}</p>
-                <h3 className="text-lg font-semibold mb-3 line-clamp-2">{product.name}</h3>
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-2xl font-bold">${product.price}</span>
+                <p className="text-sm text-muted-foreground mb-2">{product.brand}</p>
+                <h3 className="text-xl font-bold mb-4">{product.name}</h3>
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-3xl font-bold">${product.price}</span>
                   <Button 
-                    className="bg-gradient-primary hover:opacity-90 text-sm px-6"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-6 py-6"
                     onClick={() => addToCart(product)}
                   >
-                    Add to Cart
+                    Shop the Look
                   </Button>
                 </div>
               </div>
