@@ -34,6 +34,9 @@ const Navigation = () => {
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <User className="w-5 h-5" />
             </Button>
+            <Button variant="ghost" className="hover:bg-primary/10">
+              Log In
+            </Button>
             <CartDrawer />
           </div>
         </div>
