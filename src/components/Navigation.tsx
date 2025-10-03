@@ -8,7 +8,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
             <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              StyleAI
+              Monarch
             </h1>
             <div className="hidden md:flex gap-6">
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
