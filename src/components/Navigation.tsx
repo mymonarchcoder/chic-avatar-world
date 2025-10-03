@@ -24,7 +24,7 @@ const Navigation = () => {
             </div>
           </div>
           
-          <div className="flex items-center gap-0.5">
+          <div className="flex items-center">
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <MessageCircle className="w-5 h-5" />
             </Button>
