@@ -128,14 +128,24 @@ const AvatarWidget = () => {
       className="fixed bottom-24 right-6 z-40 group"
     >
       <div className="relative">
-        <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary shadow-elegant hover:shadow-xl transition-all hover:scale-110 bg-gradient-to-br from-primary/10 to-accent/5">
+        {/* 3D Platform Effect */}
+        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-3 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full blur-sm" />
+        
+        {/* Full Body Avatar */}
+        <div className="relative w-32 h-40 transition-all hover:scale-110">
           <img 
             src={avatarShowcase} 
             alt="Your Avatar" 
-            className="w-full h-full object-cover object-top scale-125"
-            style={{ objectPosition: 'center 15%' }}
+            className="w-full h-full object-contain drop-shadow-2xl"
+            style={{ 
+              filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))',
+              transformStyle: 'preserve-3d'
+            }}
           />
+          {/* 3D Lighting Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
         </div>
+        
         <div className="absolute -top-2 -right-2 bg-gradient-primary text-primary-foreground rounded-full p-1.5 shadow-lg animate-pulse">
           <Maximize2 className="w-3 h-3" />
         </div>
