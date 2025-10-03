@@ -145,7 +145,7 @@ const AvatarWidget = () => {
     >
       <div className="relative">
         {/* Full body avatar silhouette - no background */}
-        <div className="relative w-32 h-40 transition-all hover:scale-105">
+        <div className="relative w-48 h-60 transition-all hover:scale-105">
           {processedAvatar ? (
             <img 
               src={processedAvatar} 
@@ -162,10 +162,10 @@ const AvatarWidget = () => {
           )}
         </div>
         
-        <div className="absolute top-2 right-2 bg-gradient-primary text-primary-foreground rounded-full p-1.5 shadow-lg animate-pulse">
-          <Maximize2 className="w-3 h-3" />
+        <div className="absolute top-8 right-4 bg-gradient-primary text-primary-foreground rounded-full p-2 shadow-lg animate-pulse">
+          <Maximize2 className="w-4 h-4" />
         </div>
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 bg-background px-3 py-1 rounded-full border border-primary shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-background px-3 py-1 rounded-full border border-primary shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           <span className="text-xs font-medium text-primary">Virtual Try-On</span>
         </div>
       </div>
