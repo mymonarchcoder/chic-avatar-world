@@ -91,17 +91,13 @@ const ProductGrid = () => {
               </div>
               
               <div className="p-6">
-                <p className="text-sm text-muted-foreground mb-2">{product.brand}</p>
-                <h3 className="text-xl font-bold mb-4">{product.name}</h3>
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-3xl font-bold">${product.price}</span>
-                  <Button 
-                    className="bg-primary text-primary-foreground hover:bg-primary/90 text-sm px-6 py-6"
-                    onClick={() => addToCart(product)}
-                  >
-                    Shop the Look
-                  </Button>
-                </div>
+                <h3 className="text-4xl font-bold mb-6" style={{ letterSpacing: '-0.1em' }}>{product.brand}</h3>
+                <Button 
+                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 text-base py-6"
+                  onClick={() => addToCart(product)}
+                >
+                  Shop the Look
+                </Button>
               </div>
             </Card>
           ))}
