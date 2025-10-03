@@ -38,7 +38,7 @@ const AvatarSection = () => {
                   <span className="text-primary font-bold">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Upload Your Photo</h3>
+                  <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Upload Your Photo</h3>
                   <p className="text-sm text-muted-foreground">
                     Take a full-body photo for the most accurate avatar creation
                   </p>
@@ -50,7 +50,7 @@ const AvatarSection = () => {
                   <span className="text-primary font-bold">2</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">AI Creates Your Avatar</h3>
+                  <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>AI Creates Your Avatar</h3>
                   <p className="text-sm text-muted-foreground">
                     Our AI generates a realistic 3D model based on your photo
                   </p>
@@ -62,7 +62,7 @@ const AvatarSection = () => {
                   <span className="text-primary font-bold">3</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Try On & Mix-Match</h3>
+                  <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Try On & Mix-Match</h3>
                   <p className="text-sm text-muted-foreground">
                     Virtually try on items and create your perfect outfit combinations
                   </p>
