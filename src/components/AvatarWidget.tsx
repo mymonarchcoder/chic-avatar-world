@@ -162,10 +162,10 @@ const AvatarWidget = () => {
           )}
         </div>
         
-        <div className="absolute top-8 right-4 bg-gradient-primary text-primary-foreground rounded-full p-2 shadow-lg animate-pulse">
+        <div className="absolute top-4 left-4 bg-gradient-primary text-primary-foreground rounded-full p-2 shadow-lg animate-pulse">
           <Maximize2 className="w-4 h-4" />
         </div>
-        <div className="absolute top-20 left-1/2 -translate-x-1/2 bg-background px-3 py-1 rounded-full border border-primary shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+        <div className="absolute top-16 left-1/2 -translate-x-1/2 bg-background px-3 py-1 rounded-full border border-primary shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
           <span className="text-xs font-medium text-primary">Virtual Try-On</span>
         </div>
       </div>
