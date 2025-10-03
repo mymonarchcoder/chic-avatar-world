@@ -1,8 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import BrandGrid from "@/components/BrandGrid";
 import AvatarSection from "@/components/AvatarSection";
-import ProductGrid from "@/components/ProductGrid";
+import BrandProductCarousel from "@/components/BrandProductCarousel";
 import ChatAssistant from "@/components/ChatAssistant";
 import AvatarWidget from "@/components/AvatarWidget";
 
@@ -12,8 +11,7 @@ const Index = () => {
       <Navigation />
       <Hero />
       <AvatarSection />
-      <BrandGrid />
-      <ProductGrid />
+      <BrandProductCarousel />
       <ChatAssistant />
       <AvatarWidget />
     </div>
