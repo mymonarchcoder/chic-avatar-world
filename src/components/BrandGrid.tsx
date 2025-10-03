@@ -11,6 +11,10 @@ const brands = [
   { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false },
   { id: 7, name: "Designer Edge", category: "Contemporary", favorited: false },
   { id: 8, name: "Classic Style", category: "Timeless Wear", favorited: true },
+  { id: 9, name: "Modern Essentials", category: "Minimalist", favorited: false },
+  { id: 10, name: "Bold Fashion", category: "Statement Pieces", favorited: false },
+  { id: 11, name: "Eco Wear", category: "Sustainable", favorited: true },
+  { id: 12, name: "Heritage Co", category: "Classic American", favorited: false },
 ];
 
 const BrandGrid = () => {
