@@ -36,7 +36,7 @@ const BrandGrid = () => {
               key={brand.id} 
               className="group relative overflow-hidden border-border hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="aspect-video bg-gradient-primary opacity-10 group-hover:opacity-20 transition-opacity" />
+              <div className="aspect-[4/1] bg-gradient-primary opacity-10 group-hover:opacity-20 transition-opacity" />
               
               <div className="p-4">
                 <div className="flex items-start justify-between mb-2">
