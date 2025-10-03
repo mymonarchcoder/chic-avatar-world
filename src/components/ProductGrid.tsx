@@ -5,12 +5,26 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 const products = [
-  { id: 1, name: "Premium Leather Jacket", brand: "Luxury Brand Co", price: 599, image: "" },
-  { id: 2, name: "Designer Sneakers", brand: "Urban Style", price: 249, image: "" },
-  { id: 3, name: "Tailored Suit", brand: "Elegant Threads", price: 899, image: "" },
-  { id: 4, name: "Performance Hoodie", brand: "Active Life", price: 129, image: "" },
-  { id: 5, name: "Casual Denim", brand: "Casual Comfort", price: 179, image: "" },
-  { id: 6, name: "Statement Dress", brand: "Trend Setters", price: 449, image: "" },
+  { id: 1, name: "Leather Jacket", brand: "Luxury Co", price: 599, image: "" },
+  { id: 2, name: "Designer Sneakers", brand: "Urban", price: 249, image: "" },
+  { id: 3, name: "Tailored Suit", brand: "Elegant", price: 899, image: "" },
+  { id: 4, name: "Performance Hoodie", brand: "Active", price: 129, image: "" },
+  { id: 5, name: "Casual Denim", brand: "Comfort", price: 179, image: "" },
+  { id: 6, name: "Statement Dress", brand: "Trend", price: 449, image: "" },
+  { id: 7, name: "Classic Blazer", brand: "Elite", price: 399, image: "" },
+  { id: 8, name: "Running Shoes", brand: "Sport", price: 189, image: "" },
+  { id: 9, name: "Silk Blouse", brand: "Chic", price: 229, image: "" },
+  { id: 10, name: "Bomber Jacket", brand: "Street", price: 349, image: "" },
+  { id: 11, name: "Yoga Pants", brand: "Flex", price: 89, image: "" },
+  { id: 12, name: "Trench Coat", brand: "Classic", price: 549, image: "" },
+  { id: 13, name: "Chelsea Boots", brand: "Premium", price: 299, image: "" },
+  { id: 14, name: "Knit Sweater", brand: "Cozy", price: 159, image: "" },
+  { id: 15, name: "Cargo Pants", brand: "Utility", price: 139, image: "" },
+  { id: 16, name: "Polo Shirt", brand: "Preppy", price: 79, image: "" },
+  { id: 17, name: "Maxi Skirt", brand: "Boho", price: 119, image: "" },
+  { id: 18, name: "Puffer Vest", brand: "Outdoor", price: 169, image: "" },
+  { id: 19, name: "Loafers", brand: "Refined", price: 219, image: "" },
+  { id: 20, name: "Midi Dress", brand: "Feminine", price: 279, image: "" },
 ];
 
 const ProductGrid = () => {
@@ -76,7 +90,7 @@ const ProductGrid = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {products.map((product) => (
             <Card 
               key={product.id}
@@ -87,22 +101,23 @@ const ProductGrid = () => {
                 <Button
                   size="icon"
                   variant="ghost"
-                  className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm hover:bg-background"
+                  className="absolute top-2 right-2 h-8 w-8 bg-background/80 backdrop-blur-sm hover:bg-background"
                 >
-                  <Heart className="w-5 h-5" />
+                  <Heart className="w-4 h-4" />
                 </Button>
               </div>
               
-              <div className="p-6">
-                <p className="text-sm text-muted-foreground mb-1">{product.brand}</p>
-                <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold">${product.price}</span>
+              <div className="p-3">
+                <p className="text-xs text-muted-foreground mb-1">{product.brand}</p>
+                <h3 className="text-sm font-semibold mb-2 line-clamp-1">{product.name}</h3>
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-lg font-bold">${product.price}</span>
                   <Button 
-                    className="bg-gradient-primary hover:opacity-90"
+                    size="sm"
+                    className="bg-gradient-primary hover:opacity-90 text-xs px-3"
                     onClick={() => addToCart(product)}
                   >
-                    Add to Cart
+                    Add
                   </Button>
                 </div>
               </div>
