@@ -128,14 +128,30 @@ const AvatarWidget = () => {
       className="fixed bottom-24 right-6 z-40 group"
     >
       <div className="relative">
-        <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary shadow-elegant hover:shadow-xl transition-all hover:scale-110 bg-gradient-to-br from-primary/10 to-accent/5">
-          <img 
-            src={avatarShowcase} 
-            alt="Your Avatar" 
-            className="w-full h-full object-cover object-top scale-125"
-            style={{ objectPosition: 'center 15%' }}
-          />
+        {/* 3D Platform Base */}
+        <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg p-4 border border-primary/20 shadow-elegant hover:shadow-xl transition-all hover:scale-105">
+          {/* Lighting effect */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent rounded-lg" />
+          
+          {/* Platform shadow */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-2 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-full blur-sm" />
+          
+          {/* Full body avatar */}
+          <div className="relative w-24 h-32">
+            <img 
+              src={avatarShowcase} 
+              alt="Your 3D Avatar" 
+              className="w-full h-full object-contain"
+              style={{ 
+                filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
+                transformStyle: 'preserve-3d'
+              }}
+            />
+            {/* 3D highlight effect */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-lg pointer-events-none" />
+          </div>
         </div>
+        
         <div className="absolute -top-2 -right-2 bg-gradient-primary text-primary-foreground rounded-full p-1.5 shadow-lg animate-pulse">
           <Maximize2 className="w-3 h-3" />
         </div>
