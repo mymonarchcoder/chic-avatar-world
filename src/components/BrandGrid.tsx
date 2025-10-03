@@ -9,9 +9,6 @@ const brands = [
   { id: 4, name: "Active Life", category: "Sportswear", favorited: true },
   { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false },
   { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false },
-  { id: 7, name: "Designer Edge", category: "Contemporary", favorited: false },
-  { id: 8, name: "Classic Style", category: "Timeless Wear", favorited: true },
-  { id: 9, name: "Modern Essentials", category: "Minimalist", favorited: false },
 ];
 
 const BrandGrid = () => {
