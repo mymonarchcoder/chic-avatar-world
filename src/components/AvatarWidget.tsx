@@ -16,7 +16,7 @@ const AvatarWidget = () => {
             <div className="p-6 border-b bg-gradient-primary text-primary-foreground">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold flex items-center gap-2 tracking-[-0.1em]">
+                  <h2 className="text-2xl font-bold flex items-center gap-2" style={{ letterSpacing: '-100px' }}>
                     <Sparkles className="w-6 h-6" />
                     3D Virtual Try-On Studio
                   </h2>
