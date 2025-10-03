@@ -19,8 +19,8 @@ const Hero = () => {
           </div>
           
           <h1 className="text-6xl md:text-7xl font-bold leading-tight">
-            Your Personal{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="text-primary">Your Personal</span>{" "}
+            <span className="text-foreground">
               Style Assistant
             </span>
           </h1>
