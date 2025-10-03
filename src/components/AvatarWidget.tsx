@@ -141,7 +141,7 @@ const AvatarWidget = () => {
   return (
     <button
       onClick={() => setIsExpanded(true)}
-      className="fixed bottom-0 right-0 z-40 group"
+      className="fixed bottom-0 -right-4 z-40 group"
     >
       <div className="relative">
         {/* Full body avatar silhouette - no background */}
@@ -162,7 +162,7 @@ const AvatarWidget = () => {
           )}
         </div>
         
-        <div className="absolute top-4 left-4 bg-gradient-primary text-primary-foreground rounded-full p-2 shadow-lg animate-pulse">
+        <div className="absolute top-4 right-2 bg-gradient-primary text-primary-foreground rounded-full p-2 shadow-lg animate-pulse">
           <Maximize2 className="w-4 h-4" />
         </div>
         <div className="absolute top-16 left-1/2 -translate-x-1/2 bg-background px-3 py-1 rounded-full border border-primary shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
