@@ -12,7 +12,7 @@ const Hero = () => {
             <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
           </div>
           
-          <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold leading-none text-gray-800 tracking-tighter">
+          <h1 className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-bold leading-none text-gray-800 tracking-tighter">
             Monarch
           </h1>
           
