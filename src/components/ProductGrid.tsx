@@ -18,12 +18,12 @@ const ProductGrid = () => {
 
   const addToCart = async (product: typeof products[0]) => {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const { data: { user }, error: authError } = await supabase.auth.getUser();
       
-      if (!user) {
+      if (authError || !user) {
         toast({
-          title: "Please log in",
-          description: "You need to be logged in to add items to cart",
+          title: "Authentication required",
+          description: "Please log in to add items to your cart. We'll add a login page soon!",
           variant: "destructive",
         });
         return;
@@ -40,7 +40,15 @@ const ProductGrid = () => {
           quantity: 1
         });
 
-      if (error) throw error;
+      if (error) {
+        console.error("Insert error:", error);
+        toast({
+          title: "Error",
+          description: "Failed to add item to cart",
+          variant: "destructive",
+        });
+        return;
+      }
 
       toast({
         title: "Added to cart!",
@@ -50,7 +58,7 @@ const ProductGrid = () => {
       console.error('Error adding to cart:', error);
       toast({
         title: "Error",
-        description: "Failed to add item to cart",
+        description: "Something went wrong",
         variant: "destructive",
       });
     }
