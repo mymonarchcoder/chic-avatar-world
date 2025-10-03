@@ -6,15 +6,15 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary">
       <div className="container mx-auto px-4 py-32 relative z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-8 animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20 mb-4">
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
-          </div>
-          
+        <div className="max-w-5xl mx-auto text-center space-y-6 animate-fade-in pt-16">
           <h1 className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-bold leading-none text-gray-800 tracking-tighter">
             Monarch
           </h1>
+          
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20">
+            <Sparkles className="w-4 h-4 text-white" />
+            <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
+          </div>
           
           <h2 className="text-3xl md:text-4xl font-semibold text-gray-700">
             Your Personal Style Assistant
