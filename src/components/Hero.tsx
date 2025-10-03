@@ -11,14 +11,14 @@ const Hero = () => {
             Monarch
           </h1>
           
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-700">
+            Your Personal Style
+          </h2>
+          
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20">
             <Sparkles className="w-4 h-4 text-white" />
             <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
           </div>
-          
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-700">
-            Your Personal Style Assistant
-          </h2>
           
           <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             Discover your perfect look with AI-powered recommendations, virtual try-ons, 
