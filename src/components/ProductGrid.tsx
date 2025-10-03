@@ -8,6 +8,9 @@ const products = [
   { id: 1, name: "Classic White Tee", brand: "Essential", price: 49, image: "" },
   { id: 2, name: "Black Tailored Pants", brand: "Elegant", price: 129, image: "" },
   { id: 3, name: "Designer Sunglasses", brand: "Cool", price: 179, image: "" },
+  { id: 4, name: "Casual Sneakers", brand: "Sporty", price: 149, image: "" },
+  { id: 5, name: "Leather Jacket", brand: "Edgy", price: 299, image: "" },
+  { id: 6, name: "Minimalist Watch", brand: "Timeless", price: 199, image: "" },
 ];
 
 const ProductGrid = () => {
