@@ -9,15 +9,18 @@ const AvatarWidget = () => {
 
   if (isExpanded) {
     return (
-      <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4">
-        <Card className="w-full max-w-6xl h-[90vh] shadow-elegant overflow-hidden">
+      <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
+        <Card className="w-full max-w-6xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in">
           <div className="h-full flex flex-col">
             {/* Header */}
             <div className="p-6 border-b bg-gradient-primary text-primary-foreground">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-2xl font-bold">Virtual Try-On Studio</h2>
-                  <p className="text-sm opacity-90 mt-1">Mix and match items on your personalized avatar</p>
+                  <h2 className="text-2xl font-bold flex items-center gap-2">
+                    <Sparkles className="w-6 h-6" />
+                    3D Virtual Try-On Studio
+                  </h2>
+                  <p className="text-sm opacity-90 mt-1">Rotate and interact with your personalized 3D avatar</p>
                 </div>
                 <Button
                   onClick={() => setIsExpanded(false)}
@@ -33,22 +36,40 @@ const AvatarWidget = () => {
             {/* Content */}
             <div className="flex-1 overflow-auto p-6">
               <div className="grid md:grid-cols-2 gap-8 h-full">
-                {/* Avatar Display */}
+                {/* 3D Avatar Display */}
                 <div className="flex flex-col">
-                  <div className="flex-1 bg-muted/30 rounded-lg flex items-center justify-center p-8">
-                    <img 
-                      src={avatarShowcase} 
-                      alt="Your Avatar" 
-                      className="max-h-full object-contain rounded-lg shadow-card"
-                    />
+                  <div className="flex-1 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg flex items-center justify-center p-8 relative overflow-hidden">
+                    {/* 3D Stage Background */}
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+                    
+                    {/* Rotating Platform Effect */}
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-full blur-sm" />
+                    
+                    {/* Avatar with 3D Transform */}
+                    <div 
+                      className="relative perspective-1000 transform-gpu transition-transform duration-500 hover:scale-105"
+                      style={{ perspective: '1000px' }}
+                    >
+                      <img 
+                        src={avatarShowcase} 
+                        alt="Your 3D Avatar" 
+                        className="max-h-[600px] object-contain rounded-lg shadow-elegant transform-gpu transition-all duration-700 hover:rotate-y-6"
+                        style={{ 
+                          transformStyle: 'preserve-3d',
+                          filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))'
+                        }}
+                      />
+                      {/* 3D Lighting Effect */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg pointer-events-none" />
+                    </div>
                   </div>
                   <div className="mt-4 flex gap-2">
                     <Button className="flex-1 bg-gradient-primary hover:opacity-90">
                       <Sparkles className="w-4 h-4 mr-2" />
                       Change Outfit
                     </Button>
-                    <Button variant="outline" className="flex-1">
-                      Reset Pose
+                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10">
+                      Rotate 360°
                     </Button>
                   </div>
                 </div>
