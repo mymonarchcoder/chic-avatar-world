@@ -12,8 +12,8 @@ const Index = () => {
       <Navigation />
       <Hero />
       <AvatarSection />
-      <ProductGrid />
       <BrandGrid />
+      <ProductGrid />
       <ChatAssistant />
       <AvatarWidget />
     </div>
