@@ -9,6 +9,8 @@ const brands = [
   { id: 4, name: "Active Life", category: "Sportswear", favorited: true },
   { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false },
   { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false },
+  { id: 7, name: "Designer Edge", category: "Contemporary", favorited: false },
+  { id: 8, name: "Classic Style", category: "Timeless Wear", favorited: true },
 ];
 
 const BrandGrid = () => {
@@ -24,7 +26,7 @@ const BrandGrid = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {brands.map((brand) => (
             <Card 
               key={brand.id} 
@@ -32,11 +34,11 @@ const BrandGrid = () => {
             >
               <div className="aspect-video bg-gradient-primary opacity-10 group-hover:opacity-20 transition-opacity" />
               
-              <div className="p-6">
+              <div className="p-4">
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h3 className="text-xl font-semibold mb-1">{brand.name}</h3>
-                    <p className="text-sm text-muted-foreground">{brand.category}</p>
+                    <h3 className="text-base font-semibold mb-1">{brand.name}</h3>
+                    <p className="text-xs text-muted-foreground">{brand.category}</p>
                   </div>
                   <Button
                     size="icon"
@@ -48,7 +50,8 @@ const BrandGrid = () => {
                 </div>
                 
                 <Button 
-                  className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground"
+                  size="sm"
+                  className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
                 >
                   Explore Collection
                 </Button>
