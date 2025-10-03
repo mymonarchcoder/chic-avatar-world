@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X, Maximize2, ShoppingBag, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import avatarShowcase from "@/assets/avatar-showcase.png";
+import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 
 const AvatarWidget = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [processedAvatar, setProcessedAvatar] = useState<string | null>(null);
+
+  useEffect(() => {
+    const processImage = async () => {
+      try {
+        const img = await loadImage(avatarShowcase);
+        const result = await removeBackground(img);
+        setProcessedAvatar(result);
+      } catch (error) {
+        console.error('Failed to process avatar:', error);
+        setProcessedAvatar(avatarShowcase);
+      }
+    };
+    processImage();
+  }, []);
 
   if (isExpanded) {
     return (
@@ -125,31 +141,25 @@ const AvatarWidget = () => {
   return (
     <button
       onClick={() => setIsExpanded(true)}
-      className="fixed bottom-24 right-6 z-40 group"
+      className="fixed bottom-6 right-6 z-40 group"
     >
       <div className="relative">
-        {/* 3D Platform Base */}
-        <div className="relative bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg p-4 border border-primary/20 shadow-elegant hover:shadow-xl transition-all hover:scale-105">
-          {/* Lighting effect */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent rounded-lg" />
-          
-          {/* Platform shadow */}
-          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-2 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-full blur-sm" />
-          
-          {/* Full body avatar */}
-          <div className="relative w-24 h-32">
+        {/* Full body avatar silhouette - no background */}
+        <div className="relative w-32 h-40 transition-all hover:scale-105">
+          {processedAvatar ? (
             <img 
-              src={avatarShowcase} 
+              src={processedAvatar} 
               alt="Your 3D Avatar" 
               className="w-full h-full object-contain"
               style={{ 
-                filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.2))',
-                transformStyle: 'preserve-3d'
+                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))'
               }}
             />
-            {/* 3D highlight effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent rounded-lg pointer-events-none" />
-          </div>
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <div className="animate-pulse text-primary">Loading...</div>
+            </div>
+          )}
         </div>
         
         <div className="absolute -top-2 -right-2 bg-gradient-primary text-primary-foreground rounded-full p-1.5 shadow-lg animate-pulse">
