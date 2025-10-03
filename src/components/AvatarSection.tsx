@@ -8,7 +8,7 @@ const AvatarSection = () => {
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ letterSpacing: '-0.1em' }}>
               Your Virtual Fitting Room
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
