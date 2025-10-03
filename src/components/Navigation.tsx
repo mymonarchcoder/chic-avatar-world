@@ -8,7 +8,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-2xl font-bold text-gray-800">
+            <h1 className="text-2xl font-bold text-gray-800" style={{ letterSpacing: '-0.1em' }}>
               Monarch
             </h1>
             <div className="hidden md:flex gap-6">
