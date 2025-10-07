@@ -1,8 +1,11 @@
 import { Upload, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { useAvatarModal } from "@/contexts/AvatarModalContext";
 
 const AvatarSection = () => {
+  const { openModal } = useAvatarModal();
+  
   return (
     <section className="py-24">
       <div className="container mx-auto px-4">
@@ -22,7 +25,10 @@ const AvatarSection = () => {
                 <User className="w-32 h-32 text-primary/30" />
               </div>
               
-              <Button className="w-full bg-gradient-primary hover:opacity-90 text-lg py-6">
+              <Button 
+                onClick={openModal}
+                className="w-full bg-gradient-primary hover:opacity-90 text-lg py-6"
+              >
                 <Upload className="w-5 h-5 mr-2" />
                 Upload Your Photo
               </Button>

@@ -1,8 +1,11 @@
 import { Button } from "./ui/button";
 import { Sparkles } from "lucide-react";
+import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const Hero = () => {
+  const { openModal } = useAvatarModal();
+  
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       <div className="container mx-auto px-4 py-16 relative z-10">
@@ -35,6 +38,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               variant="outline" 
+              onClick={openModal}
               className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800/10 text-lg px-8"
             >
               Try Virtual Fitting

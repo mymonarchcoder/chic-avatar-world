@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
-import { X, Maximize2, ShoppingBag, Sparkles } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { X, Maximize2, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 
 const AvatarWidget = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { isOpen, openModal, closeModal } = useAvatarModal();
   const [processedAvatar, setProcessedAvatar] = useState<string | null>(null);
+  const [selectedItems, setSelectedItems] = useState<{[key: string]: any}>({});
+  const [avatarDimensions, setAvatarDimensions] = useState<{width: number, height: number} | null>(null);
+  const [isRemoving, setIsRemoving] = useState<string | null>(null);
+  const avatarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const processImage = async () => {
@@ -23,66 +28,350 @@ const AvatarWidget = () => {
     processImage();
   }, []);
 
-  if (isExpanded) {
+  // Track avatar dimensions for responsive clothing positioning
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (avatarRef.current) {
+        const rect = avatarRef.current.getBoundingClientRect();
+        const dimensions = {
+          width: rect.width,
+          height: rect.height
+        };
+        setAvatarDimensions(dimensions);
+      }
+    };
+
+    // Use a small delay to ensure the avatar is rendered
+    const timer = setTimeout(updateDimensions, 100);
+    window.addEventListener('resize', updateDimensions);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateDimensions);
+    };
+  }, [isOpen]);
+
+  const handleTryOn = (item: any) => {
+    const currentItem = selectedItems[item.category];
+    if (currentItem && currentItem.name === item.name) {
+      // If the same item is already selected, remove it with fade-out animation
+      setIsRemoving(item.category);
+      setTimeout(() => {
+        setSelectedItems(prev => {
+          const newItems = { ...prev };
+          delete newItems[item.category];
+          return newItems;
+        });
+        setIsRemoving(null);
+      }, 300); // Match the fade-out duration
+    } else {
+      // Otherwise, select this item (try on)
+      setSelectedItems(prev => ({
+        ...prev,
+        [item.category]: item
+      }));
+    }
+  };
+
+  const getSelectedItemForCategory = (category: string) => {
+    return selectedItems[category] || null;
+  };
+
+  // Function to get clothing image URL (using placeholder images for now)
+  const getClothingImageUrl = (item: any) => {
+    // In a real implementation, these would be actual clothing PNG images
+    const clothingImages: {[key: string]: string} = {
+      'Leather Jacket': `data:image/svg+xml;base64,${btoa(`
+        <svg width="200" height="300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="jacketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#2c1810;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M20 50 L180 50 L190 80 L185 200 L15 200 L10 80 Z" fill="url(#jacketGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M20 50 L10 80 L20 100" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M180 50 L190 80 L180 100" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      `)}`,
+      'Designer Sneakers': `data:image/svg+xml;base64,${btoa(`
+        <svg width="150" height="80" viewBox="0 0 150 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sneakerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#333333;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="75" cy="40" rx="70" ry="35" fill="url(#sneakerGrad)" stroke="#000" stroke-width="2"/>
+          <rect x="20" y="25" width="110" height="30" rx="15" fill="#fff" opacity="0.3"/>
+        </svg>
+      `)}`,
+      'Statement Belt': `data:image/svg+xml;base64,${btoa(`
+        <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="beltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect x="10" y="15" width="100" height="10" rx="5" fill="url(#beltGrad)" stroke="#000" stroke-width="1"/>
+          <rect x="50" y="10" width="20" height="20" rx="10" fill="#ffd700"/>
+        </svg>
+      `)}`,
+      'Premium White Tee': `data:image/svg+xml;base64,${btoa(`
+        <svg width="180" height="250" viewBox="0 0 180 250" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="teeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M30 40 L150 40 L160 80 L155 200 L25 200 L20 80 Z" fill="url(#teeGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M30 40 L20 80 L30 100" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M150 40 L160 80 L150 100" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      `)}`,
+      'Classic Denim': `data:image/svg+xml;base64,${btoa(`
+        <svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="denimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#4169E1;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M20 20 L140 20 L145 180 L15 180 Z" fill="url(#denimGrad)" stroke="#000" stroke-width="2"/>
+          <rect x="30" y="40" width="20" height="30" fill="#fff" opacity="0.3"/>
+          <rect x="110" y="40" width="20" height="30" fill="#fff" opacity="0.3"/>
+        </svg>
+      `)}`,
+      'Wool Blazer': `data:image/svg+xml;base64,${btoa(`
+        <svg width="200" height="280" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="blazerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M25 45 L175 45 L185 85 L180 250 L20 250 L15 85 Z" fill="url(#blazerGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M25 45 L15 85 L25 105" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M175 45 L185 85 L175 105" fill="none" stroke="#000" stroke-width="2"/>
+          <rect x="90" y="120" width="20" height="40" fill="#000"/>
+        </svg>
+      `)}`,
+      'Silk Scarf': `data:image/svg+xml;base64,${btoa(`
+        <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="scarfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ff8e8e;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M20 20 L80 20 L85 130 L15 130 Z" fill="url(#scarfGrad)" stroke="#000" stroke-width="1"/>
+          <circle cx="50" cy="50" r="5" fill="#fff" opacity="0.5"/>
+          <circle cx="50" cy="100" r="5" fill="#fff" opacity="0.5"/>
+        </svg>
+      `)}`,
+      'Leather Boots': `data:image/svg+xml;base64,${btoa(`
+        <svg width="140" height="100" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="bootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#2c1810;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M20 20 L120 20 L125 80 L15 80 Z" fill="url(#bootGrad)" stroke="#000" stroke-width="2"/>
+          <rect x="30" y="10" width="80" height="20" rx="10" fill="#000"/>
+        </svg>
+      `)}`,
+      'Cashmere Sweater': `data:image/svg+xml;base64,${btoa(`
+        <svg width="190" height="260" viewBox="0 0 190 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sweaterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M25 35 L165 35 L175 75 L170 220 L20 220 L15 75 Z" fill="url(#sweaterGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M25 35 L15 75 L25 95" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M165 35 L175 75 L165 95" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      `)}`,
+      'Silk Dress': `data:image/svg+xml;base64,${btoa(`
+        <svg width="180" height="300" viewBox="0 0 180 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="dressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ffb6c1;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#ff69b4;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M30 30 L150 30 L160 70 L155 280 L25 280 L20 70 Z" fill="url(#dressGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M30 30 L20 70 L30 90" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M150 30 L160 70 L150 90" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      `)}`,
+      'Gold Watch': `data:image/svg+xml;base64,${btoa(`
+        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="watchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#daa520;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <circle cx="30" cy="30" r="25" fill="url(#watchGrad)" stroke="#000" stroke-width="2"/>
+          <circle cx="30" cy="30" r="20" fill="#000"/>
+          <line x1="30" y1="30" x2="30" y2="15" stroke="#fff" stroke-width="2"/>
+          <line x1="30" y1="30" x2="35" y2="30" stroke="#fff" stroke-width="1"/>
+        </svg>
+      `)}`,
+      'Canvas Sneakers': `data:image/svg+xml;base64,${btoa(`
+        <svg width="150" height="80" viewBox="0 0 150 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="canvasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="75" cy="40" rx="70" ry="35" fill="url(#canvasGrad)" stroke="#000" stroke-width="2"/>
+          <rect x="20" y="25" width="110" height="30" rx="15" fill="#000" opacity="0.1"/>
+        </svg>
+      `)}`,
+      'Wool Coat': `data:image/svg+xml;base64,${btoa(`
+        <svg width="200" height="320" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="coatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M20 30 L180 30 L190 70 L185 300 L15 300 L10 70 Z" fill="url(#coatGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M20 30 L10 70 L20 90" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M180 30 L190 70 L180 90" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      `)}`
+    };
+    return clothingImages[item.name] || clothingImages['Premium White Tee'];
+  };
+
+  // Function to calculate clothing positioning based on avatar dimensions
+  const getClothingPosition = (item: any, avatarWidth: number, avatarHeight: number) => {
+    const baseWidth = 300; // Base avatar width for calculations
+    const baseHeight = 600; // Base avatar height for calculations (full-length)
+    
+    const scaleX = avatarWidth / baseWidth;
+    const scaleY = avatarHeight / baseHeight;
+    const scale = Math.min(scaleX, scaleY);
+
+    const positions: {[key: string]: any} = {
+      'Outerwear': {
+        top: avatarHeight * 0.08,
+        left: avatarWidth * 0.5,
+        width: avatarWidth * 0.85 * scale,
+        height: avatarHeight * 0.35 * scale,
+        zIndex: 3,
+        transform: 'translateX(-50%) rotate(-2deg)'
+      },
+      'Tops': {
+        top: avatarHeight * 0.10,
+        left: avatarWidth * 0.5,
+        width: avatarWidth * 0.8 * scale,
+        height: avatarHeight * 0.30 * scale,
+        zIndex: 2,
+        transform: 'translateX(-50%) rotate(1deg)'
+      },
+      'Bottoms': {
+        top: avatarHeight * 0.40,
+        left: avatarWidth * 0.5,
+        width: avatarWidth * 0.7 * scale,
+        height: avatarHeight * 0.45 * scale,
+        zIndex: 1,
+        transform: 'translateX(-50%) rotate(-1deg)'
+      },
+      'Footwear': {
+        top: avatarHeight * 0.85,
+        left: avatarWidth * 0.5,
+        width: avatarWidth * 0.6 * scale,
+        height: avatarHeight * 0.12 * scale,
+        zIndex: 1,
+        transform: 'translateX(-50%) rotate(2deg)'
+      },
+      'Accessories': {
+        top: avatarHeight * 0.20,
+        left: avatarWidth * 0.5,
+        width: avatarWidth * 0.3 * scale,
+        height: avatarHeight * 0.15 * scale,
+        zIndex: 4,
+        transform: 'translateX(-50%) rotate(-3deg)'
+      },
+      'Dresses': {
+        top: avatarHeight * 0.08,
+        left: avatarWidth * 0.5,
+        width: avatarWidth * 0.8 * scale,
+        height: avatarHeight * 0.80 * scale,
+        zIndex: 2,
+        transform: 'translateX(-50%) rotate(1deg)'
+      }
+    };
+
+    return positions[item.category] || positions['Tops'];
+  };
+
+  if (isOpen) {
     return (
       <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-        <Card className="w-full max-w-6xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in">
-          <div className="h-full flex flex-col">
-            {/* Header */}
-            <div className="p-6 border-b bg-gradient-primary text-primary-foreground">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-bold flex items-center gap-2 tracking-[-0.1em]">
-                    <Sparkles className="w-6 h-6" />
-                    3D Virtual Try-On Studio
-                  </h2>
-                  <p className="text-sm opacity-90 mt-1">Rotate and interact with your personalized 3D avatar</p>
-                </div>
-                <Button
-                  onClick={() => setIsExpanded(false)}
-                  size="icon"
-                  variant="ghost"
-                  className="text-primary-foreground hover:bg-primary-foreground/20"
-                >
-                  <X className="w-6 h-6" />
-                </Button>
-              </div>
-            </div>
+        <Card className="w-full max-w-7xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in relative">
+          {/* Floating Close Button */}
+          <Button
+            onClick={closeModal}
+            size="icon"
+            variant="ghost"
+            className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground"
+          >
+            <X className="w-6 h-6" />
+          </Button>
 
-            {/* Content */}
-            <div className="flex-1 overflow-auto p-6">
-              <div className="grid md:grid-cols-2 gap-8 h-full">
-                {/* 3D Avatar Display */}
-                <div className="flex flex-col">
-                  <div className="flex-1 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg flex items-center justify-center p-8 relative overflow-hidden">
-                    {/* 3D Stage Background */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
+          {/* Content */}
+          <div className="h-full p-4 overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+                {/* Left Column - Avatar Body (Fixed) */}
+                <div className="flex flex-col h-full overflow-hidden">
+                  <div 
+                    ref={avatarRef}
+                    className="flex-1 flex items-start justify-center p-2 relative min-h-[500px]"
+                  >
+                    {/* Full-Length Avatar Body - No Background */}
+                    <img 
+                      src={avatarShowcase} 
+                      alt="Your 3D Avatar" 
+                      className="h-full w-full object-contain object-top"
+                    />
                     
-                    {/* Rotating Platform Effect */}
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-transparent via-primary/20 to-transparent rounded-full blur-sm" />
-                    
-                    {/* Avatar with 3D Transform */}
-                    <div 
-                      className="relative perspective-1000 transform-gpu transition-transform duration-500 hover:scale-105"
-                      style={{ perspective: '1000px' }}
-                    >
-                      <img 
-                        src={avatarShowcase} 
-                        alt="Your 3D Avatar" 
-                        className="max-h-[600px] object-contain rounded-lg shadow-elegant transform-gpu transition-all duration-700 hover:rotate-y-6"
-                        style={{ 
-                          transformStyle: 'preserve-3d',
-                          filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.2))'
-                        }}
-                      />
-                      {/* 3D Lighting Effect */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg pointer-events-none" />
-                    </div>
+                    {/* Virtual Try-On Clothing Images */}
+                    {avatarDimensions && Object.values(selectedItems).map((item: any, index) => {
+                      const position = getClothingPosition(item, avatarDimensions.width, avatarDimensions.height);
+                      const isCurrentlyRemoving = isRemoving === item.category;
+                      
+                      return (
+                        <img
+                          key={`${item.category}-${index}`}
+                          src={getClothingImageUrl(item)}
+                          alt={item.name}
+                          className="absolute pointer-events-none object-contain"
+                          style={{
+                            ...position,
+                            opacity: isCurrentlyRemoving ? 0 : 1,
+                            transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
+                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+                          }}
+                        />
+                      );
+                    })}
                   </div>
                   <div className="mt-4 flex gap-2">
-                    <Button className="flex-1 bg-gradient-primary hover:opacity-90">
+                    <Button 
+                      onClick={() => setSelectedItems({})}
+                      className="flex-1 bg-gradient-primary hover:opacity-90"
+                    >
                       <Sparkles className="w-4 h-4 mr-2" />
-                      Change Outfit
+                      Clear All
                     </Button>
                     <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10">
                       Rotate 360°
@@ -90,27 +379,135 @@ const AvatarWidget = () => {
                   </div>
                 </div>
 
-                {/* Item Selection */}
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold mb-4">Available Items</h3>
-                  <div className="flex-1 space-y-3 overflow-auto">
+                {/* Right Column - Product Try-On Options (Scrollable) */}
+                <div className="flex flex-col h-full overflow-hidden">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-base font-semibold flex-shrink-0">Try-On Options</h3>
+                    {Object.keys(selectedItems).length > 0 && (
+                      <div className="text-xs text-green-600 font-medium">
+                        {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} worn
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0">
                     {[
-                      { name: "Premium White Tee", brand: "Luxury Brand Co", category: "Tops" },
-                      { name: "Classic Denim", brand: "Urban Style", category: "Bottoms" },
-                      { name: "Leather Jacket", brand: "Elegant Threads", category: "Outerwear" },
-                      { name: "Designer Sneakers", brand: "Active Life", category: "Footwear" },
-                      { name: "Statement Belt", brand: "Trend Setters", category: "Accessories" },
+                      { 
+                        name: "Leather Jacket", 
+                        brand: "Elegant Threads", 
+                        category: "Outerwear",
+                        price: "$299",
+                        image: "🧥"
+                      },
+                      { 
+                        name: "Designer Sneakers", 
+                        brand: "Active Life", 
+                        category: "Footwear",
+                        price: "$189",
+                        image: "👟"
+                      },
+                      { 
+                        name: "Statement Belt", 
+                        brand: "Trend Setters", 
+                        category: "Accessories",
+                        price: "$89",
+                        image: "👔"
+                      },
+                      { 
+                        name: "Premium White Tee", 
+                        brand: "Luxury Brand Co", 
+                        category: "Tops",
+                        price: "$79",
+                        image: "👕"
+                      },
+                      { 
+                        name: "Classic Denim", 
+                        brand: "Urban Style", 
+                        category: "Bottoms",
+                        price: "$129",
+                        image: "👖"
+                      },
+                      { 
+                        name: "Wool Blazer", 
+                        brand: "Professional Wear", 
+                        category: "Outerwear",
+                        price: "$399",
+                        image: "🤵"
+                      },
+                      { 
+                        name: "Silk Scarf", 
+                        brand: "Elegant Threads", 
+                        category: "Accessories",
+                        price: "$59",
+                        image: "🧣"
+                      },
+                      { 
+                        name: "Leather Boots", 
+                        brand: "Active Life", 
+                        category: "Footwear",
+                        price: "$249",
+                        image: "👢"
+                      },
+                      { 
+                        name: "Cashmere Sweater", 
+                        brand: "Luxury Co", 
+                        category: "Tops",
+                        price: "$199",
+                        image: "🧶"
+                      },
+                      { 
+                        name: "Silk Dress", 
+                        brand: "Elegant Threads", 
+                        category: "Dresses",
+                        price: "$399",
+                        image: "👗"
+                      },
+                      { 
+                        name: "Gold Watch", 
+                        brand: "Time Masters", 
+                        category: "Accessories",
+                        price: "$599",
+                        image: "⌚"
+                      },
+                      { 
+                        name: "Canvas Sneakers", 
+                        brand: "Street Style", 
+                        category: "Footwear",
+                        price: "$89",
+                        image: "👟"
+                      },
+                      { 
+                        name: "Wool Coat", 
+                        brand: "Winter Wear", 
+                        category: "Outerwear",
+                        price: "$349",
+                        image: "🧥"
+                      },
                     ].map((item, idx) => (
-                      <Card key={idx} className="p-4 hover:shadow-card transition-shadow cursor-pointer">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="font-semibold">{item.name}</p>
-                            <p className="text-sm text-muted-foreground">{item.brand}</p>
-                            <p className="text-xs text-primary mt-1">{item.category}</p>
+                      <Card key={idx} className="p-2 hover:shadow-card transition-all duration-300 cursor-pointer border hover:border-primary/30 group">
+                        <div className="flex items-start gap-2">
+                          <div className="text-xl">{item.image}</div>
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-1">
+                              <div>
+                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors">{item.name}</h4>
+                                <p className="text-xs text-muted-foreground">{item.brand}</p>
+                                <p className="text-xs text-primary font-medium">{item.category}</p>
+                              </div>
+                              <span className="text-xs font-bold text-primary">{item.price}</span>
+                            </div>
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleTryOn(item)}
+                              className={`w-full h-7 text-xs transition-all duration-300 group-hover:scale-105 ${
+                                getSelectedItemForCategory(item.category)?.name === item.name
+                                  ? 'bg-red-600 hover:bg-red-700 text-white'
+                                  : 'bg-gradient-primary hover:opacity-90'
+                              }`}
+                            >
+                              <Sparkles className="w-3 h-3 mr-1" />
+                              {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
+                            </Button>
                           </div>
-                          <Button size="sm" className="bg-gradient-primary hover:opacity-90">
-                            Try On
-                          </Button>
                         </div>
                       </Card>
                     ))}
@@ -118,21 +515,6 @@ const AvatarWidget = () => {
                 </div>
               </div>
             </div>
-
-            {/* Footer */}
-            <div className="p-6 border-t bg-muted/30">
-              <div className="flex items-center justify-between">
-                <p className="text-sm text-muted-foreground">
-                  <Sparkles className="w-4 h-4 inline mr-1" />
-                  AI-powered size recommendations available
-                </p>
-                <Button className="bg-gradient-primary hover:opacity-90">
-                  <ShoppingBag className="w-4 h-4 mr-2" />
-                  Add to Cart
-                </Button>
-              </div>
-            </div>
-          </div>
         </Card>
       </div>
     );
@@ -140,7 +522,7 @@ const AvatarWidget = () => {
 
   return (
     <button
-      onClick={() => setIsExpanded(true)}
+      onClick={openModal}
       className="fixed bottom-0 -right-12 z-40 group"
     >
       <div className="relative">
