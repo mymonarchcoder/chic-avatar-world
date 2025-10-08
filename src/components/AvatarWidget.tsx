@@ -484,7 +484,6 @@ const AvatarWidget = () => {
                               : 'bg-gradient-primary hover:opacity-90'
                           }`}
                         >
-                          <Sparkles className="w-3 h-3 mr-0.5" />
                           {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try On'}
                         </Button>
                         <Button 
@@ -509,7 +508,6 @@ const AvatarWidget = () => {
                   }}
                   className="flex-1 bg-gradient-primary hover:opacity-90 text-xs"
                 >
-                  <Sparkles className="w-3 h-3 mr-1" />
                   Take Back
                 </Button>
               </div>
