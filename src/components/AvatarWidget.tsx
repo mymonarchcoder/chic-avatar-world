@@ -378,7 +378,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden flex-1 -ml-40">
+            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-40">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
@@ -507,10 +507,10 @@ const AvatarWidget = () => {
                     setSelectedItems({});
                     toast.success("Cleared all items");
                   }}
-                  className="flex-1 bg-gradient-primary hover:opacity-90"
+                  className="flex-1 bg-gradient-primary hover:opacity-90 text-xs"
                 >
-                  <Sparkles className="w-4 h-4 mr-2" />
-                  Clear All
+                  <Sparkles className="w-3 h-3 mr-1" />
+                  Take Back
                 </Button>
               </div>
             </div>
