@@ -323,8 +323,8 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-2 sm:p-8 animate-fade-in overflow-auto">
-        <div className="w-full max-w-7xl min-h-[95vh] sm:h-[95vh] overflow-hidden animate-scale-in relative">
+      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-2 sm:p-8 animate-fade-in">
+        <div className="w-full max-w-7xl h-[95vh] flex flex-col overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
             onClick={closeModal}
@@ -335,13 +335,13 @@ const AvatarWidget = () => {
             <X className="w-6 h-6" />
           </Button>
 
-          {/* Content - Two Column Layout */}
-          <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
-            {/* Left Column - Full Body Avatar (No Box) */}
-            <div className="flex flex-col h-full justify-center items-center">
+          {/* Content - Two Column Layout for Desktop, Stacked for Mobile */}
+          <div className="h-full flex flex-col md:grid md:grid-cols-2 gap-4 sm:gap-8 overflow-hidden">
+            {/* Left Column - Full Body Avatar (No Box) - Fixed height on mobile */}
+            <div className="flex flex-col justify-center items-center flex-shrink-0 md:h-full h-[35vh] pt-8 md:pt-0">
               <div 
                 ref={avatarRef}
-                className="relative w-full h-[40vh] md:h-full flex items-center justify-center py-4 md:py-8"
+                className="relative w-full h-full flex items-center justify-center"
               >
                 {/* Full-Body Avatar - No Gray Background */}
                 <img 
@@ -378,8 +378,8 @@ const AvatarWidget = () => {
               </div>
             </div>
 
-            {/* Right Column - Apparel Items List (No Box) */}
-            <div className="flex flex-col h-full py-4 md:py-8 overflow-hidden">
+            {/* Right Column - Apparel Items List (No Box) - Scrollable on mobile */}
+            <div className="flex flex-col flex-1 md:h-full py-4 md:py-8 overflow-hidden min-h-0">
               <div className="flex items-center justify-between mb-4 sm:mb-6">
                 <h3 className="text-xl sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
