@@ -338,7 +338,7 @@ const AvatarWidget = () => {
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
             {/* Left Column - Full Body Avatar - Touching Left Edge */}
-            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 -ml-20" style={{ width: '45%' }}>
+            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 -ml-20">
               <div 
                 ref={avatarRef}
                 className="relative h-full flex items-center justify-start"
@@ -378,7 +378,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List - Starting at her right elbow */}
-            <div className="flex flex-col h-full py-4 pr-0 overflow-hidden flex-1">
+            <div className="flex flex-col h-full py-4 pr-0 overflow-hidden ml-auto mr-0 w-[calc(100%-35%)]">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
