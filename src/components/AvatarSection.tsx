@@ -20,56 +20,56 @@ const AvatarSection = () => {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
-            <Card className="p-8 shadow-card">
-              <div className="aspect-square bg-gradient-primary/10 rounded-lg flex items-center justify-center mb-6 border-2 border-dashed border-primary/30">
-                <User className="w-32 h-32 text-primary/30" />
+            <Card className="p-4 sm:p-8 shadow-card">
+              <div className="aspect-square bg-gradient-primary/10 rounded-lg flex items-center justify-center mb-4 sm:mb-6 border-2 border-dashed border-primary/30">
+                <User className="w-24 h-24 sm:w-32 sm:h-32 text-primary/30" />
               </div>
               
               <Button 
                 onClick={openModal}
-                className="w-full bg-gradient-primary hover:opacity-90 text-lg py-6"
+                className="w-full bg-gradient-primary hover:opacity-90 text-base sm:text-lg py-4 sm:py-6"
               >
-                <Upload className="w-5 h-5 mr-2" />
+                <Upload className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Upload Your Photo
               </Button>
               
-              <p className="text-sm text-muted-foreground text-center mt-4">
+              <p className="text-xs sm:text-sm text-muted-foreground text-center mt-3 sm:mt-4">
                 We'll create a personalized 3D avatar for virtual try-ons
               </p>
             </Card>
             
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-primary font-bold">1</span>
+            <div className="space-y-4 sm:space-y-6">
+              <div className="flex gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-primary font-bold text-sm sm:text-base">1</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Upload Your Photo</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base" style={{ letterSpacing: '-0.1em' }}>Upload Your Photo</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Take a full-body photo for the most accurate avatar creation
                   </p>
                 </div>
               </div>
               
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-primary font-bold">2</span>
+              <div className="flex gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-primary font-bold text-sm sm:text-base">2</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>AI Creates Your Avatar</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base" style={{ letterSpacing: '-0.1em' }}>AI Creates Your Avatar</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Our AI generates a realistic 3D model based on your photo
                   </p>
                 </div>
               </div>
               
-              <div className="flex gap-4">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <span className="text-primary font-bold">3</span>
+              <div className="flex gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span className="text-primary font-bold text-sm sm:text-base">3</span>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Try On & Mix-Match</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-semibold mb-1 text-sm sm:text-base" style={{ letterSpacing: '-0.1em' }}>Try On & Mix-Match</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     Virtually try on items and create your perfect outfit combinations
                   </p>
                 </div>

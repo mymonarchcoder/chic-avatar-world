@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Maximize2, Sparkles } from "lucide-react";
+import { X, Maximize2, Sparkles, ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
+import { toast } from "sonner";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
@@ -63,13 +64,19 @@ const AvatarWidget = () => {
         });
         setIsRemoving(null);
       }, 300); // Match the fade-out duration
+      toast.success(`Removed ${item.name}`);
     } else {
       // Otherwise, select this item (try on)
       setSelectedItems(prev => ({
         ...prev,
         [item.category]: item
       }));
+      toast.success(`Trying on ${item.name}`);
     }
+  };
+
+  const handleAddToCart = (item: any) => {
+    toast.success(`Added ${item.name} to cart!`);
   };
 
   const getSelectedItemForCategory = (category: string) => {
@@ -329,13 +336,13 @@ const AvatarWidget = () => {
           </Button>
 
           {/* Content */}
-          <div className="h-full p-4 overflow-hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
+          <div className="h-full p-2 sm:p-4 overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 h-full">
                 {/* Left Column - Avatar Body (Fixed) */}
-                <div className="flex flex-col h-full overflow-hidden">
+                <div className="flex flex-col h-full overflow-hidden min-h-0">
                   <div 
                     ref={avatarRef}
-                    className="flex-1 flex items-start justify-center p-2 relative min-h-[500px]"
+                    className="flex-1 flex items-start justify-center p-1 sm:p-2 relative min-h-[300px] sm:min-h-[500px]"
                   >
                     {/* Full-Length Avatar Body - No Background */}
                     <img 
@@ -365,31 +372,34 @@ const AvatarWidget = () => {
                       );
                     })}
                   </div>
-                  <div className="mt-4 flex gap-2">
+                  <div className="mt-2 sm:mt-4 flex gap-2">
                     <Button 
-                      onClick={() => setSelectedItems({})}
-                      className="flex-1 bg-gradient-primary hover:opacity-90"
+                      onClick={() => {
+                        setSelectedItems({});
+                        toast.success("Cleared all items");
+                      }}
+                      className="flex-1 bg-gradient-primary hover:opacity-90 text-xs sm:text-sm py-2 sm:py-3"
                     >
-                      <Sparkles className="w-4 h-4 mr-2" />
+                      <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                       Clear All
                     </Button>
-                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10">
+                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10 text-xs sm:text-sm py-2 sm:py-3">
                       Rotate 360°
                     </Button>
                   </div>
                 </div>
 
                 {/* Right Column - Product Try-On Options (Scrollable) */}
-                <div className="flex flex-col h-full overflow-hidden">
+                <div className="flex flex-col h-full overflow-hidden min-h-0">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-base font-semibold flex-shrink-0">Try-On Options</h3>
+                    <h3 className="text-sm sm:text-base font-semibold flex-shrink-0">Try-On Options</h3>
                     {Object.keys(selectedItems).length > 0 && (
                       <div className="text-xs text-green-600 font-medium">
                         {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} worn
                       </div>
                     )}
                   </div>
-                  <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0">
+                  <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0 scrollbar-thin">
                     {[
                       { 
                         name: "Leather Jacket", 
@@ -485,28 +495,38 @@ const AvatarWidget = () => {
                     ].map((item, idx) => (
                       <Card key={idx} className="p-2 hover:shadow-card transition-all duration-300 cursor-pointer border hover:border-primary/30 group">
                         <div className="flex items-start gap-2">
-                          <div className="text-xl">{item.image}</div>
-                          <div className="flex-1">
-                            <div className="flex items-start justify-between mb-1">
-                              <div>
-                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors">{item.name}</h4>
-                                <p className="text-xs text-muted-foreground">{item.brand}</p>
+                          <div className="text-base sm:text-xl flex-shrink-0">{item.image}</div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between mb-1 gap-2">
+                              <div className="min-w-0">
+                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors truncate">{item.name}</h4>
+                                <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
                                 <p className="text-xs text-primary font-medium">{item.category}</p>
                               </div>
-                              <span className="text-xs font-bold text-primary">{item.price}</span>
+                              <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
                             </div>
-                            <Button 
-                              size="sm" 
-                              onClick={() => handleTryOn(item)}
-                              className={`w-full h-7 text-xs transition-all duration-300 group-hover:scale-105 ${
-                                getSelectedItemForCategory(item.category)?.name === item.name
-                                  ? 'bg-red-600 hover:bg-red-700 text-white'
-                                  : 'bg-gradient-primary hover:opacity-90'
-                              }`}
-                            >
-                              <Sparkles className="w-3 h-3 mr-1" />
-                              {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
-                            </Button>
+                            <div className="flex gap-1">
+                              <Button 
+                                size="sm" 
+                                onClick={() => handleTryOn(item)}
+                                className={`flex-1 h-7 text-xs transition-all duration-300 ${
+                                  getSelectedItemForCategory(item.category)?.name === item.name
+                                    ? 'bg-red-600 hover:bg-red-700 text-white'
+                                    : 'bg-gradient-primary hover:opacity-90'
+                                }`}
+                              >
+                                <Sparkles className="w-3 h-3 mr-1" />
+                                {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
+                              </Button>
+                              <Button 
+                                size="sm"
+                                onClick={() => handleAddToCart(item)}
+                                variant="outline"
+                                className="h-7 px-2 border-primary text-primary hover:bg-primary/10"
+                              >
+                                <ShoppingCart className="w-3 h-3" />
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       </Card>
