@@ -3,7 +3,7 @@ import { X, Maximize2, Sparkles, ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import avatarShowcase from "@/assets/avatar-showcase.png";
+import avatarSilhouette from "@/assets/avatar-silhouette.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 
@@ -18,12 +18,12 @@ const AvatarWidget = () => {
   useEffect(() => {
     const processImage = async () => {
       try {
-        const img = await loadImage(avatarShowcase);
+        const img = await loadImage(avatarSilhouette);
         const result = await removeBackground(img);
         setProcessedAvatar(result);
       } catch (error) {
         console.error('Failed to process avatar:', error);
-        setProcessedAvatar(avatarShowcase);
+        setProcessedAvatar(avatarSilhouette);
       }
     };
     processImage();
@@ -346,7 +346,7 @@ const AvatarWidget = () => {
                   >
                     {/* Full-Length Avatar Body - No Background */}
                     <img 
-                      src={avatarShowcase} 
+                      src={avatarSilhouette} 
                       alt="Your 3D Avatar" 
                       className="h-full w-full object-contain object-top"
                     />
@@ -392,7 +392,7 @@ const AvatarWidget = () => {
                 {/* Right Column - Product Try-On Options (Scrollable) */}
                 <div className="flex flex-col h-full overflow-hidden min-h-0">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm sm:text-base font-semibold flex-shrink-0">Try-On Options</h3>
+                    <h3 className="text-sm sm:text-base font-semibold flex-shrink-0">Mix-Match</h3>
                     {Object.keys(selectedItems).length > 0 && (
                       <div className="text-xs text-green-600 font-medium">
                         {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} worn
@@ -402,106 +402,84 @@ const AvatarWidget = () => {
                   <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0 scrollbar-thin">
                     {[
                       { 
-                        name: "Leather Jacket", 
-                        brand: "Elegant Threads", 
-                        category: "Outerwear",
-                        price: "$299",
-                        image: "🧥"
-                      },
-                      { 
-                        name: "Designer Sneakers", 
-                        brand: "Active Life", 
-                        category: "Footwear",
-                        price: "$189",
-                        image: "👟"
-                      },
-                      { 
-                        name: "Statement Belt", 
-                        brand: "Trend Setters", 
-                        category: "Accessories",
-                        price: "$89",
-                        image: "👔"
-                      },
-                      { 
-                        name: "Premium White Tee", 
-                        brand: "Luxury Brand Co", 
-                        category: "Tops",
-                        price: "$79",
-                        image: "👕"
-                      },
-                      { 
-                        name: "Classic Denim", 
-                        brand: "Urban Style", 
+                        name: "Black Jeans", 
+                        brand: "Gucci", 
                         category: "Bottoms",
-                        price: "$129",
+                        price: "$899.99",
                         image: "👖"
                       },
                       { 
-                        name: "Wool Blazer", 
-                        brand: "Professional Wear", 
-                        category: "Outerwear",
-                        price: "$399",
-                        image: "🤵"
+                        name: "Gray Jeans", 
+                        brand: "Prada", 
+                        category: "Bottoms",
+                        price: "$799.99",
+                        image: "👖"
                       },
                       { 
-                        name: "Silk Scarf", 
-                        brand: "Elegant Threads", 
-                        category: "Accessories",
-                        price: "$59",
-                        image: "🧣"
+                        name: "White Pants", 
+                        brand: "Monarch Apparel", 
+                        category: "Bottoms",
+                        price: "$649.99",
+                        image: "👖"
                       },
                       { 
-                        name: "Leather Boots", 
-                        brand: "Active Life", 
-                        category: "Footwear",
-                        price: "$249",
-                        image: "👢"
+                        name: "Jean Shorts", 
+                        brand: "Gucci", 
+                        category: "Bottoms",
+                        price: "$599.99",
+                        image: "🩳"
                       },
                       { 
-                        name: "Cashmere Sweater", 
-                        brand: "Luxury Co", 
-                        category: "Tops",
-                        price: "$199",
-                        image: "🧶"
+                        name: "White Shorts", 
+                        brand: "Prada", 
+                        category: "Bottoms",
+                        price: "$549.99",
+                        image: "🩳"
                       },
                       { 
-                        name: "Silk Dress", 
-                        brand: "Elegant Threads", 
+                        name: "Red Dress", 
+                        brand: "Monarch Apparel", 
                         category: "Dresses",
-                        price: "$399",
+                        price: "$1299.99",
                         image: "👗"
                       },
                       { 
-                        name: "Gold Watch", 
-                        brand: "Time Masters", 
-                        category: "Accessories",
-                        price: "$599",
-                        image: "⌚"
-                      },
-                      { 
-                        name: "Canvas Sneakers", 
-                        brand: "Street Style", 
-                        category: "Footwear",
-                        price: "$89",
-                        image: "👟"
-                      },
-                      { 
-                        name: "Wool Coat", 
-                        brand: "Winter Wear", 
+                        name: "Black Leather Jacket", 
+                        brand: "Gucci", 
                         category: "Outerwear",
-                        price: "$349",
+                        price: "$2499.99",
+                        image: "🧥"
+                      },
+                      { 
+                        name: "Black Blazer", 
+                        brand: "Prada", 
+                        category: "Outerwear",
+                        price: "$1899.99",
+                        image: "🧥"
+                      },
+                      { 
+                        name: "Blue Shirt", 
+                        brand: "Monarch Apparel", 
+                        category: "Tops",
+                        price: "$399.99",
+                        image: "👕"
+                      },
+                      { 
+                        name: "Green Cardigan", 
+                        brand: "Gucci", 
+                        category: "Tops",
+                        price: "$999.99",
                         image: "🧥"
                       },
                     ].map((item, idx) => (
                       <Card key={idx} className="p-2 hover:shadow-card transition-all duration-300 cursor-pointer border hover:border-primary/30 group">
                         <div className="flex items-start gap-2">
-                          <div className="text-base sm:text-xl flex-shrink-0">{item.image}</div>
+                          <div className="text-2xl sm:text-3xl flex-shrink-0">{item.image}</div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between mb-1 gap-2">
                               <div className="min-w-0">
-                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors truncate">{item.name}</h4>
+                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors truncate tracking-wide">{item.name}</h4>
                                 <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
-                                <p className="text-xs text-primary font-medium">{item.category}</p>
                               </div>
                               <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
                             </div>
