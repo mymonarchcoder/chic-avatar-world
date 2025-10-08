@@ -330,7 +330,7 @@ const AvatarWidget = () => {
 
           {/* Content */}
           <div className="h-full p-4 overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-full">
                 {/* Left Column - Avatar Body (Fixed) */}
                 <div className="flex flex-col h-full overflow-hidden">
                   <div 

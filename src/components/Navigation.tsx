@@ -11,7 +11,7 @@ const Navigation = () => {
             <h1 className="text-2xl font-bold text-gray-800" style={{ letterSpacing: '-0.1em' }}>
               Monarch
             </h1>
-            <div className="hidden md:flex gap-6">
+            <div className="hidden sm:flex gap-6">
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
                 Brands
               </Button>

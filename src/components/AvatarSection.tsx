@@ -19,7 +19,7 @@ const AvatarSection = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
             <Card className="p-8 shadow-card">
               <div className="aspect-square bg-gradient-primary/10 rounded-lg flex items-center justify-center mb-6 border-2 border-dashed border-primary/30">
                 <User className="w-32 h-32 text-primary/30" />
