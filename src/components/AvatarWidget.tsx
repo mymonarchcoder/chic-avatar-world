@@ -323,29 +323,29 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-4 sm:p-8 animate-fade-in">
-        <div className="w-full max-w-7xl h-[95vh] overflow-hidden animate-scale-in relative">
+      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-2 sm:p-8 animate-fade-in overflow-auto">
+        <div className="w-full max-w-7xl min-h-[95vh] sm:h-[95vh] overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
             onClick={closeModal}
             size="icon"
             variant="ghost"
-            className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground rounded-full"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground rounded-full"
           >
             <X className="w-6 h-6" />
           </Button>
 
           {/* Content - Two Column Layout */}
-          <div className="h-full grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             {/* Left Column - Full Body Avatar (No Box) */}
             <div className="flex flex-col h-full justify-center items-center">
               <div 
                 ref={avatarRef}
-                className="relative w-full h-full flex items-center justify-center py-8"
+                className="relative w-full h-[40vh] md:h-full flex items-center justify-center py-4 md:py-8"
               >
-                {/* Full-Body Avatar - No Background */}
+                {/* Full-Body Avatar - No Gray Background */}
                 <img 
-                  src={avatarShowcase} 
+                  src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
                   className="h-full w-auto object-contain object-center"
                   style={{
@@ -379,9 +379,9 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List (No Box) */}
-            <div className="flex flex-col h-full py-8 overflow-hidden">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold tracking-wide">Mix-Match</h3>
+            <div className="flex flex-col h-full py-4 md:py-8 overflow-hidden">
+              <div className="flex items-center justify-between mb-4 sm:mb-6">
+                <h3 className="text-xl sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
                   <div className="text-sm text-primary font-medium">
                     {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} selected
@@ -389,7 +389,7 @@ const AvatarWidget = () => {
                 )}
               </div>
               
-              <div className="flex-1 space-y-3 overflow-y-auto pr-2">
+              <div className="flex-1 space-y-2 sm:space-y-3 overflow-y-auto pr-2">
                 {[
                   { 
                     name: "Black Jeans", 
@@ -462,13 +462,13 @@ const AvatarWidget = () => {
                     image: "🧶"
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="p-4 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
-                    <div className="flex items-center gap-4">
-                      <div className="text-6xl flex-shrink-0">{item.image}</div>
+                  <div key={idx} className="p-3 sm:p-4 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="text-4xl sm:text-6xl flex-shrink-0">{item.image}</div>
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between mb-2 gap-3">
+                        <div className="flex items-start justify-between mb-1 sm:mb-2 gap-2 sm:gap-3">
                           <div className="min-w-0 flex-1">
-                            <h4 className="font-semibold text-base tracking-widest group-hover:text-primary transition-colors mb-1">{item.name}</h4>
+                            <h4 className="font-semibold text-sm sm:text-base tracking-widest group-hover:text-primary transition-colors mb-1">{item.name}</h4>
                             <p className="text-sm text-muted-foreground">{item.brand}</p>
                           </div>
                           <span className="text-sm font-bold text-primary flex-shrink-0">{item.price}</span>
@@ -501,7 +501,7 @@ const AvatarWidget = () => {
                 ))}
               </div>
               
-              <div className="mt-6 flex gap-3">
+              <div className="mt-4 sm:mt-6 flex gap-3">
                 <Button 
                   onClick={() => {
                     setSelectedItems({});
