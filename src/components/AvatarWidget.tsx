@@ -428,7 +428,7 @@ const AvatarWidget = () => {
                   },
                   { 
                     name: "White Pants", 
-                    brand: "Monarch Apparel", 
+                    brand: "Lioness",
                     category: "Bottoms",
                     price: "$320",
                     image: "👖"
@@ -449,7 +449,7 @@ const AvatarWidget = () => {
                   },
                   { 
                     name: "Red Dress", 
-                    brand: "Monarch Apparel", 
+                    brand: "Lioness",
                     category: "Dresses",
                     price: "$580",
                     image: "👗"
@@ -470,7 +470,7 @@ const AvatarWidget = () => {
                   },
                   { 
                     name: "Blue Shirt", 
-                    brand: "Monarch Apparel", 
+                    brand: "Lioness",
                     category: "Tops",
                     price: "$180",
                     image: "👔"
@@ -487,7 +487,7 @@ const AvatarWidget = () => {
                     <div className="flex flex-col gap-1.5">
                        {/* Emoji and name on same line */}
                        <div className="flex items-center gap-2">
-                         <div className="text-4xl sm:text-5xl flex-shrink-0 ml-4">{item.image}</div>
+                         <div className="text-5xl sm:text-6xl flex-shrink-0 ml-4">{item.image}</div>
                          <div className="flex-1 min-w-0 text-center">
                            <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                            <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
