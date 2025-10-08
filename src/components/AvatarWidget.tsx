@@ -466,7 +466,7 @@ const AvatarWidget = () => {
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex flex-col gap-1.5">
                       {/* Emoji and name on same line */}
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
                         <div className="text-3xl sm:text-4xl flex-shrink-0">{item.image}</div>
                         <div className="flex-1 min-w-0 text-center">
                           <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
