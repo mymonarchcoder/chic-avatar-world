@@ -323,8 +323,8 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-        <Card className="w-full max-w-7xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in relative">
+      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-4 sm:p-6 lg:p-8 animate-fade-in">
+        <div className="w-full max-w-[95vw] h-[95vh] overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
             onClick={closeModal}
@@ -335,22 +335,24 @@ const AvatarWidget = () => {
             <X className="w-6 h-6" />
           </Button>
 
-          {/* Content */}
-          <div className="h-full p-2 sm:p-4 overflow-hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 h-full">
-                {/* Left Column - Avatar Body (Full Body in Popup) */}
+          {/* Content - No Card borders or backgrounds */}
+          <div className="h-full overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-12 h-full">
+                {/* Left Column - Full-Body Avatar (uses full vertical space) */}
                 <div className="flex flex-col h-full overflow-hidden min-h-0">
                   <div 
                     ref={avatarRef}
-                    className="flex-1 flex items-center justify-center relative min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] animate-fade-in"
+                    className="flex-1 flex items-center justify-center relative animate-fade-in"
                   >
-                    {/* Full-Body Avatar - No Background Box */}
+                    {/* Full-Body Avatar - Maximum size, no background box */}
                     <img 
                       src={avatarShowcase} 
                       alt="Your 3D Avatar" 
                       className="h-full w-auto object-contain animate-scale-in"
                       style={{
-                        filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.15))'
+                        filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.15))',
+                        maxHeight: '100%',
+                        maxWidth: '100%'
                       }}
                     />
                     
@@ -375,34 +377,34 @@ const AvatarWidget = () => {
                       );
                     })}
                   </div>
-                  <div className="mt-2 sm:mt-4 flex gap-2">
+                  <div className="mt-4 flex gap-3">
                     <Button 
                       onClick={() => {
                         setSelectedItems({});
                         toast.success("Cleared all items");
                       }}
-                      className="flex-1 bg-gradient-primary hover:opacity-90 text-xs sm:text-sm py-2 sm:py-3"
+                      className="flex-1 bg-gradient-primary hover:opacity-90 text-sm py-3"
                     >
-                      <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                      <Sparkles className="w-4 h-4 mr-2" />
                       Clear All
                     </Button>
-                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10 text-xs sm:text-sm py-2 sm:py-3">
+                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10 text-sm py-3">
                       Rotate 360°
                     </Button>
                   </div>
                 </div>
 
-                {/* Right Column - Product Try-On Options (Scrollable) */}
+                {/* Right Column - Mix-Match Item List (No boxes) */}
                 <div className="flex flex-col h-full overflow-hidden min-h-0">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm sm:text-base font-semibold flex-shrink-0">Mix-Match</h3>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-semibold flex-shrink-0">Mix-Match</h3>
                     {Object.keys(selectedItems).length > 0 && (
-                      <div className="text-xs text-green-600 font-medium">
+                      <div className="text-sm text-green-600 font-medium">
                         {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} worn
                       </div>
                     )}
                   </div>
-                  <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0 scrollbar-thin">
+                  <div className="flex-1 space-y-2 overflow-y-auto pr-2 min-h-0 scrollbar-thin">
                     {[
                       { 
                         name: "Black Jeans", 
@@ -475,22 +477,22 @@ const AvatarWidget = () => {
                         image: "🧥"
                       },
                     ].map((item, idx) => (
-                      <Card key={idx} className="p-2 hover:shadow-card transition-all duration-300 cursor-pointer border hover:border-primary/30 group">
-                        <div className="flex items-start gap-2">
-                          <div className="text-2xl sm:text-3xl flex-shrink-0">{item.image}</div>
+                      <div key={idx} className="p-3 hover:bg-gray-50/50 transition-all duration-300 cursor-pointer rounded-lg group">
+                        <div className="flex items-start gap-3">
+                          <div className="text-4xl flex-shrink-0">{item.image}</div>
                           <div className="flex-1 min-w-0">
-                            <div className="flex items-start justify-between mb-1 gap-2">
+                            <div className="flex items-start justify-between mb-2 gap-3">
                               <div className="min-w-0">
-                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors truncate tracking-wide">{item.name}</h4>
-                                <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
+                                <h4 className="font-semibold text-sm group-hover:text-primary transition-colors truncate tracking-wider">{item.name}</h4>
+                                <p className="text-sm text-muted-foreground truncate">{item.brand}</p>
                               </div>
-                              <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
+                              <span className="text-sm font-bold text-primary flex-shrink-0">{item.price}</span>
                             </div>
-                            <div className="flex gap-1">
+                            <div className="flex gap-2">
                               <Button 
                                 size="sm" 
                                 onClick={() => handleTryOn(item)}
-                                className={`flex-1 h-7 text-xs transition-all duration-300 ${
+                                className={`flex-1 h-8 text-xs transition-all duration-300 ${
                                   getSelectedItemForCategory(item.category)?.name === item.name
                                     ? 'bg-red-600 hover:bg-red-700 text-white'
                                     : 'bg-gradient-primary hover:opacity-90'
@@ -503,20 +505,20 @@ const AvatarWidget = () => {
                                 size="sm"
                                 onClick={() => handleAddToCart(item)}
                                 variant="outline"
-                                className="h-7 px-2 border-primary text-primary hover:bg-primary/10"
+                                className="h-8 px-3 border-primary text-primary hover:bg-primary/10"
                               >
                                 <ShoppingCart className="w-3 h-3" />
                               </Button>
                             </div>
                           </div>
                         </div>
-                      </Card>
+                      </div>
                     ))}
                   </div>
                 </div>
               </div>
             </div>
-        </Card>
+        </div>
       </div>
     );
   }
