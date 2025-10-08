@@ -392,7 +392,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-2 overflow-hidden w-80 md:w-[600px] lg:w-[700px] -ml-24 ml-auto">
+            <div className="flex flex-col h-full py-4 pr-2 overflow-hidden w-80 -ml-24 ml-auto">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
@@ -403,7 +403,7 @@ const AvatarWidget = () => {
               </div>
               
               <ScrollArea className="flex-1 pr-2">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+                <div className="space-y-1">
                 {[
                   { 
                     name: "Red Shirt", 
