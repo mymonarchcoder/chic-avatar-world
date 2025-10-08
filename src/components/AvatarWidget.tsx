@@ -478,20 +478,20 @@ const AvatarWidget = () => {
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`flex-1 h-7 text-xs transition-all duration-300 ${
+                          className={`flex-1 h-6 text-xs transition-all duration-300 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
                               ? 'bg-red-600 hover:bg-red-700 text-white'
                               : 'bg-gradient-primary hover:opacity-90'
                           }`}
                         >
                           <Sparkles className="w-3 h-3 mr-0.5" />
-                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try'}
+                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try On'}
                         </Button>
                         <Button 
                           size="sm"
                           onClick={() => handleAddToCart(item)}
                           variant="outline"
-                          className="h-7 w-7 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
+                          className="h-6 w-6 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
                         >
                           <ShoppingCart className="w-3 h-3" />
                         </Button>
