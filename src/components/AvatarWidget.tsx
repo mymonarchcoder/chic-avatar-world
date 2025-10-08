@@ -323,219 +323,199 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4 animate-fade-in">
-        <Card className="w-full max-w-7xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in relative">
+      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-4 sm:p-8 animate-fade-in">
+        <div className="w-full max-w-7xl h-[95vh] overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
             onClick={closeModal}
             size="icon"
             variant="ghost"
-            className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground"
+            className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground rounded-full"
           >
             <X className="w-6 h-6" />
           </Button>
 
-          {/* Content */}
-          <div className="h-full p-2 sm:p-4 overflow-hidden">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 h-full">
-                {/* Left Column - Avatar Body (Fixed) */}
-                <div className="flex flex-col h-full overflow-hidden min-h-0">
-                  <div 
-                    ref={avatarRef}
-                    className="flex-1 flex items-start justify-center p-1 sm:p-2 relative min-h-[300px] sm:min-h-[500px]"
-                  >
-                    {/* Full-Length Avatar Body - No Background */}
-                    <img 
-                      src={avatarShowcase} 
-                      alt="Your 3D Avatar" 
-                      className="h-full w-full object-contain object-top"
-                    />
-                    
-                    {/* Virtual Try-On Clothing Images */}
-                    {avatarDimensions && Object.values(selectedItems).map((item: any, index) => {
-                      const position = getClothingPosition(item, avatarDimensions.width, avatarDimensions.height);
-                      const isCurrentlyRemoving = isRemoving === item.category;
-                      
-                      return (
-                        <img
-                          key={`${item.category}-${index}`}
-                          src={getClothingImageUrl(item)}
-                          alt={item.name}
-                          className="absolute pointer-events-none object-contain"
-                          style={{
-                            ...position,
-                            opacity: isCurrentlyRemoving ? 0 : 1,
-                            transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
-                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
-                          }}
-                        />
-                      );
-                    })}
-                  </div>
-                  <div className="mt-2 sm:mt-4 flex gap-2">
-                    <Button 
-                      onClick={() => {
-                        setSelectedItems({});
-                        toast.success("Cleared all items");
+          {/* Content - Two Column Layout */}
+          <div className="h-full grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {/* Left Column - Full Body Avatar (No Box) */}
+            <div className="flex flex-col h-full justify-center items-center">
+              <div 
+                ref={avatarRef}
+                className="relative w-full h-full flex items-center justify-center"
+              >
+                {/* Full-Body Avatar - No Background Box */}
+                <img 
+                  src={avatarShowcase} 
+                  alt="Your 3D Avatar" 
+                  className="h-full w-auto object-contain"
+                  style={{
+                    filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
+                    transition: 'all 0.3s ease-in-out'
+                  }}
+                />
+                
+                {/* Virtual Try-On Clothing Images */}
+                {avatarDimensions && Object.values(selectedItems).map((item: any, index) => {
+                  const position = getClothingPosition(item, avatarDimensions.width, avatarDimensions.height);
+                  const isCurrentlyRemoving = isRemoving === item.category;
+                  
+                  return (
+                    <img
+                      key={`${item.category}-${index}`}
+                      src={getClothingImageUrl(item)}
+                      alt={item.name}
+                      className="absolute pointer-events-none object-contain"
+                      style={{
+                        ...position,
+                        opacity: isCurrentlyRemoving ? 0 : 1,
+                        transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
+                        filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
                       }}
-                      className="flex-1 bg-gradient-primary hover:opacity-90 text-xs sm:text-sm py-2 sm:py-3"
-                    >
-                      <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
-                      Clear All
-                    </Button>
-                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10 text-xs sm:text-sm py-2 sm:py-3">
-                      Rotate 360°
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Right Column - Product Try-On Options (Scrollable) */}
-                <div className="flex flex-col h-full overflow-hidden min-h-0">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm sm:text-base font-semibold flex-shrink-0">Try-On Options</h3>
-                    {Object.keys(selectedItems).length > 0 && (
-                      <div className="text-xs text-green-600 font-medium">
-                        {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} worn
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0 scrollbar-thin">
-                    {[
-                      { 
-                        name: "Leather Jacket", 
-                        brand: "Elegant Threads", 
-                        category: "Outerwear",
-                        price: "$299",
-                        image: "🧥"
-                      },
-                      { 
-                        name: "Designer Sneakers", 
-                        brand: "Active Life", 
-                        category: "Footwear",
-                        price: "$189",
-                        image: "👟"
-                      },
-                      { 
-                        name: "Statement Belt", 
-                        brand: "Trend Setters", 
-                        category: "Accessories",
-                        price: "$89",
-                        image: "👔"
-                      },
-                      { 
-                        name: "Premium White Tee", 
-                        brand: "Luxury Brand Co", 
-                        category: "Tops",
-                        price: "$79",
-                        image: "👕"
-                      },
-                      { 
-                        name: "Classic Denim", 
-                        brand: "Urban Style", 
-                        category: "Bottoms",
-                        price: "$129",
-                        image: "👖"
-                      },
-                      { 
-                        name: "Wool Blazer", 
-                        brand: "Professional Wear", 
-                        category: "Outerwear",
-                        price: "$399",
-                        image: "🤵"
-                      },
-                      { 
-                        name: "Silk Scarf", 
-                        brand: "Elegant Threads", 
-                        category: "Accessories",
-                        price: "$59",
-                        image: "🧣"
-                      },
-                      { 
-                        name: "Leather Boots", 
-                        brand: "Active Life", 
-                        category: "Footwear",
-                        price: "$249",
-                        image: "👢"
-                      },
-                      { 
-                        name: "Cashmere Sweater", 
-                        brand: "Luxury Co", 
-                        category: "Tops",
-                        price: "$199",
-                        image: "🧶"
-                      },
-                      { 
-                        name: "Silk Dress", 
-                        brand: "Elegant Threads", 
-                        category: "Dresses",
-                        price: "$399",
-                        image: "👗"
-                      },
-                      { 
-                        name: "Gold Watch", 
-                        brand: "Time Masters", 
-                        category: "Accessories",
-                        price: "$599",
-                        image: "⌚"
-                      },
-                      { 
-                        name: "Canvas Sneakers", 
-                        brand: "Street Style", 
-                        category: "Footwear",
-                        price: "$89",
-                        image: "👟"
-                      },
-                      { 
-                        name: "Wool Coat", 
-                        brand: "Winter Wear", 
-                        category: "Outerwear",
-                        price: "$349",
-                        image: "🧥"
-                      },
-                    ].map((item, idx) => (
-                      <Card key={idx} className="p-2 hover:shadow-card transition-all duration-300 cursor-pointer border hover:border-primary/30 group">
-                        <div className="flex items-start gap-2">
-                          <div className="text-base sm:text-xl flex-shrink-0">{item.image}</div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-start justify-between mb-1 gap-2">
-                              <div className="min-w-0">
-                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors truncate">{item.name}</h4>
-                                <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
-                                <p className="text-xs text-primary font-medium">{item.category}</p>
-                              </div>
-                              <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
-                            </div>
-                            <div className="flex gap-1">
-                              <Button 
-                                size="sm" 
-                                onClick={() => handleTryOn(item)}
-                                className={`flex-1 h-7 text-xs transition-all duration-300 ${
-                                  getSelectedItemForCategory(item.category)?.name === item.name
-                                    ? 'bg-red-600 hover:bg-red-700 text-white'
-                                    : 'bg-gradient-primary hover:opacity-90'
-                                }`}
-                              >
-                                <Sparkles className="w-3 h-3 mr-1" />
-                                {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
-                              </Button>
-                              <Button 
-                                size="sm"
-                                onClick={() => handleAddToCart(item)}
-                                variant="outline"
-                                className="h-7 px-2 border-primary text-primary hover:bg-primary/10"
-                              >
-                                <ShoppingCart className="w-3 h-3" />
-                              </Button>
-                            </div>
-                          </div>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
+                    />
+                  );
+                })}
               </div>
             </div>
-        </Card>
+
+            {/* Right Column - Apparel Items List (No Box) */}
+            <div className="flex flex-col h-full py-8 overflow-hidden">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold tracking-wide">Mix-Match</h3>
+                {Object.keys(selectedItems).length > 0 && (
+                  <div className="text-sm text-primary font-medium">
+                    {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} selected
+                  </div>
+                )}
+              </div>
+              
+              <div className="flex-1 space-y-3 overflow-y-auto pr-2">
+                {[
+                  { 
+                    name: "Black Jeans", 
+                    brand: "Gucci", 
+                    category: "Bottoms",
+                    price: "$450",
+                    image: "👖"
+                  },
+                  { 
+                    name: "Gray Jeans", 
+                    brand: "Prada", 
+                    category: "Bottoms",
+                    price: "$380",
+                    image: "👖"
+                  },
+                  { 
+                    name: "White Pants", 
+                    brand: "Monarch Apparel", 
+                    category: "Bottoms",
+                    price: "$320",
+                    image: "👖"
+                  },
+                  { 
+                    name: "Jean Shorts", 
+                    brand: "Gucci", 
+                    category: "Bottoms",
+                    price: "$290",
+                    image: "🩳"
+                  },
+                  { 
+                    name: "White Shorts", 
+                    brand: "Prada", 
+                    category: "Bottoms",
+                    price: "$250",
+                    image: "🩳"
+                  },
+                  { 
+                    name: "Red Dress", 
+                    brand: "Monarch Apparel", 
+                    category: "Dresses",
+                    price: "$580",
+                    image: "👗"
+                  },
+                  { 
+                    name: "Black Leather Jacket", 
+                    brand: "Gucci", 
+                    category: "Outerwear",
+                    price: "$890",
+                    image: "🧥"
+                  },
+                  { 
+                    name: "Black Blazer", 
+                    brand: "Prada", 
+                    category: "Outerwear",
+                    price: "$720",
+                    image: "🤵"
+                  },
+                  { 
+                    name: "Blue Shirt", 
+                    brand: "Monarch Apparel", 
+                    category: "Tops",
+                    price: "$180",
+                    image: "👔"
+                  },
+                  { 
+                    name: "Green Cardigan", 
+                    brand: "Gucci", 
+                    category: "Tops",
+                    price: "$420",
+                    image: "🧶"
+                  },
+                ].map((item, idx) => (
+                  <div key={idx} className="p-4 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
+                    <div className="flex items-center gap-4">
+                      <div className="text-4xl flex-shrink-0">{item.image}</div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between mb-2 gap-3">
+                          <div className="min-w-0 flex-1">
+                            <h4 className="font-semibold text-base tracking-widest group-hover:text-primary transition-colors mb-1">{item.name}</h4>
+                            <p className="text-sm text-muted-foreground">{item.brand}</p>
+                          </div>
+                          <span className="text-sm font-bold text-primary flex-shrink-0">{item.price}</span>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button 
+                            size="sm" 
+                            onClick={() => handleTryOn(item)}
+                            className={`flex-1 h-9 text-sm transition-all duration-300 ${
+                              getSelectedItemForCategory(item.category)?.name === item.name
+                                ? 'bg-red-600 hover:bg-red-700 text-white'
+                                : 'bg-gradient-primary hover:opacity-90'
+                            }`}
+                          >
+                            <Sparkles className="w-4 h-4 mr-1.5" />
+                            {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
+                          </Button>
+                          <Button 
+                            size="sm"
+                            onClick={() => handleAddToCart(item)}
+                            variant="outline"
+                            className="h-9 px-4 border-primary text-primary hover:bg-primary/10"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-1.5" />
+                            Add to Cart
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6 flex gap-3">
+                <Button 
+                  onClick={() => {
+                    setSelectedItems({});
+                    toast.success("Cleared all items");
+                  }}
+                  className="flex-1 bg-gradient-primary hover:opacity-90"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Clear All
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
