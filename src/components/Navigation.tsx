@@ -9,7 +9,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
             <h1 className="text-2xl font-bold text-gray-800" style={{ letterSpacing: '-0.1em' }}>
-              Vers
+              Monarch
             </h1>
             <div className="hidden sm:flex gap-6">
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">

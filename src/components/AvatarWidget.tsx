@@ -125,19 +125,6 @@ const AvatarWidget = () => {
           <rect x="50" y="10" width="20" height="20" rx="10" fill="#ffd700"/>
         </svg>
       `)}`,
-      'Red Shirt': `data:image/svg+xml;base64,${btoa(`
-        <svg width="180" height="250" viewBox="0 0 180 250" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="redShirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#991b1b;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M30 40 L150 40 L160 80 L155 200 L25 200 L20 80 Z" fill="url(#redShirtGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M30 40 L20 80 L30 100" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M150 40 L160 80 L150 100" fill="none" stroke="#000" stroke-width="2"/>
-        </svg>
-      `)}`,
       'Premium White Tee': `data:image/svg+xml;base64,${btoa(`
         <svg width="180" height="250" viewBox="0 0 180 250" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -392,7 +379,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-2 overflow-hidden w-80 -ml-16 ml-auto">
+            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-24">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
@@ -405,13 +392,6 @@ const AvatarWidget = () => {
               <ScrollArea className="flex-1 pr-2">
                 <div className="space-y-1">
                 {[
-                  { 
-                    name: "Red Shirt", 
-                    brand: "Reformation", 
-                    category: "Tops",
-                    price: "$180",
-                    image: "👕"
-                  },
                   { 
                     name: "Black Jeans", 
                     brand: "Gucci", 
@@ -428,7 +408,7 @@ const AvatarWidget = () => {
                   },
                   { 
                     name: "White Pants", 
-                    brand: "Lioness",
+                    brand: "Monarch Apparel", 
                     category: "Bottoms",
                     price: "$320",
                     image: "👖"
@@ -449,7 +429,7 @@ const AvatarWidget = () => {
                   },
                   { 
                     name: "Red Dress", 
-                    brand: "Lioness",
+                    brand: "Monarch Apparel", 
                     category: "Dresses",
                     price: "$580",
                     image: "👗"
@@ -470,7 +450,7 @@ const AvatarWidget = () => {
                   },
                   { 
                     name: "Blue Shirt", 
-                    brand: "Lioness",
+                    brand: "Monarch Apparel", 
                     category: "Tops",
                     price: "$180",
                     image: "👔"
@@ -485,15 +465,15 @@ const AvatarWidget = () => {
                 ].map((item, idx) => (
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex flex-col gap-1.5">
-                       {/* Emoji and name on same line */}
-                       <div className="flex items-center gap-2">
-                         <div className="text-5xl sm:text-6xl flex-shrink-0 ml-4">{item.image}</div>
-                         <div className="flex-1 min-w-0 text-center">
-                           <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
-                           <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
-                         </div>
-                         <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
-                       </div>
+                      {/* Emoji and name on same line */}
+                      <div className="flex items-center gap-2">
+                        <div className="text-3xl sm:text-4xl flex-shrink-0">{item.image}</div>
+                        <div className="flex-1 min-w-0 text-center">
+                          <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
+                          <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
+                        </div>
+                        <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
+                      </div>
                       
                       {/* Buttons */}
                       <div className="flex gap-1 justify-center">
