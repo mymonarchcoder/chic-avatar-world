@@ -393,6 +393,13 @@ const AvatarWidget = () => {
                 <div className="space-y-1">
                 {[
                   { 
+                    name: "Red Shirt", 
+                    brand: "Reformation", 
+                    category: "Tops",
+                    price: "$180",
+                    image: "👕"
+                  },
+                  { 
                     name: "Black Jeans", 
                     brand: "Gucci", 
                     category: "Bottoms",
