@@ -336,14 +336,14 @@ const AvatarWidget = () => {
           </Button>
 
           {/* Content - Two Column Layout Always Side by Side */}
-          <div className="h-full grid grid-cols-[auto_1fr] gap-4 overflow-hidden">
-            {/* Left Column - Full Body Avatar - Far Left, Full Height */}
-            <div className="flex flex-col justify-center items-start h-full pl-2">
+          <div className="h-full flex overflow-hidden relative">
+            {/* Left Column - Full Body Avatar - Very Close to Left Edge */}
+            <div className="flex flex-col justify-center items-start h-full flex-shrink-0">
               <div 
                 ref={avatarRef}
                 className="relative h-full flex items-center justify-start"
               >
-                {/* Full-Body Avatar - No Spacing, Far Left */}
+                {/* Full-Body Avatar - Very Close to Left Edge */}
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
@@ -377,8 +377,8 @@ const AvatarWidget = () => {
               </div>
             </div>
 
-            {/* Right Column - Apparel Items List - Scrollable */}
-            <div className="flex flex-col h-full py-4 pr-2 overflow-hidden">
+            {/* Right Column - Apparel Items List - Overlapping Avatar */}
+            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden flex-1 -ml-24">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
