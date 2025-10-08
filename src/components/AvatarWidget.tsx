@@ -343,11 +343,11 @@ const AvatarWidget = () => {
                 ref={avatarRef}
                 className="relative h-full flex items-center justify-start"
               >
-                {/* Full-Body Avatar - Elbow Touching Left Side */}
+                {/* Full-Body Avatar - Smaller for Symmetry */}
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-full w-auto object-contain object-left"
+                  className="h-[90vh] w-auto object-contain object-left"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
                     transition: 'all 0.3s ease-in-out'
@@ -388,7 +388,7 @@ const AvatarWidget = () => {
                 )}
               </div>
               
-              <div className="flex-1 space-y-1.5 sm:space-y-2 overflow-y-auto pr-2">
+              <div className="flex-1 space-y-1 overflow-y-auto pr-2">
                 {[
                   { 
                     name: "Black Jeans", 
@@ -461,37 +461,37 @@ const AvatarWidget = () => {
                     image: "🧶"
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="p-2 sm:p-3 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
-                    <div className="flex flex-col gap-2">
+                  <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
+                    <div className="flex flex-col gap-1.5">
                       {/* Emoji and name on same line */}
                       <div className="flex items-center gap-2">
-                        <div className="text-2xl sm:text-3xl flex-shrink-0">{item.image}</div>
+                        <div className="text-xl sm:text-2xl flex-shrink-0">{item.image}</div>
                         <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-xs sm:text-sm tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
+                          <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                           <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
                         </div>
-                        <span className="text-xs sm:text-sm font-bold text-primary flex-shrink-0">{item.price}</span>
+                        <span className="text-xs font-bold text-primary flex-shrink-0">{item.price}</span>
                       </div>
                       
                       {/* Buttons */}
-                      <div className="flex gap-1.5">
+                      <div className="flex gap-1">
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`flex-1 h-8 text-xs transition-all duration-300 ${
+                          className={`flex-1 h-7 text-xs transition-all duration-300 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
                               ? 'bg-red-600 hover:bg-red-700 text-white'
                               : 'bg-gradient-primary hover:opacity-90'
                           }`}
                         >
-                          <Sparkles className="w-3 h-3 mr-1" />
-                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
+                          <Sparkles className="w-3 h-3 mr-0.5" />
+                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try'}
                         </Button>
                         <Button 
                           size="sm"
                           onClick={() => handleAddToCart(item)}
                           variant="outline"
-                          className="h-8 w-8 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
+                          className="h-7 w-7 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
                         >
                           <ShoppingCart className="w-3 h-3" />
                         </Button>
