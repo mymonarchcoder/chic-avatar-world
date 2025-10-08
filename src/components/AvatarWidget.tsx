@@ -388,7 +388,7 @@ const AvatarWidget = () => {
                 )}
               </div>
               
-              <div className="flex-1 space-y-2 sm:space-y-3 overflow-y-auto pr-2">
+              <div className="flex-1 space-y-1.5 sm:space-y-2 overflow-y-auto pr-2">
                 {[
                   { 
                     name: "Black Jeans", 
@@ -461,42 +461,40 @@ const AvatarWidget = () => {
                     image: "🧶"
                   },
                 ].map((item, idx) => (
-                  <div key={idx} className="p-3 sm:p-4 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
-                    <div className="flex flex-col items-center text-center gap-2">
-                      {/* Emoji on top */}
-                      <div className="text-3xl sm:text-4xl">{item.image}</div>
+                  <div key={idx} className="p-2 sm:p-3 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
+                    <div className="flex flex-col gap-2">
+                      {/* Emoji and name on same line */}
+                      <div className="flex items-center gap-2">
+                        <div className="text-2xl sm:text-3xl flex-shrink-0">{item.image}</div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-xs sm:text-sm tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
+                          <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
+                        </div>
+                        <span className="text-xs sm:text-sm font-bold text-primary flex-shrink-0">{item.price}</span>
+                      </div>
                       
-                      {/* Content below */}
-                      <div className="w-full">
-                        <div className="flex items-start justify-between mb-1 sm:mb-2 gap-2">
-                          <div className="flex-1 text-left">
-                            <h4 className="font-semibold text-sm sm:text-base tracking-widest group-hover:text-primary transition-colors mb-1">{item.name}</h4>
-                            <p className="text-sm text-muted-foreground">{item.brand}</p>
-                          </div>
-                          <span className="text-sm font-bold text-primary flex-shrink-0">{item.price}</span>
-                        </div>
-                        <div className="flex gap-2">
-                          <Button 
-                            size="sm" 
-                            onClick={() => handleTryOn(item)}
-                            className={`flex-1 h-9 text-sm transition-all duration-300 ${
-                              getSelectedItemForCategory(item.category)?.name === item.name
-                                ? 'bg-red-600 hover:bg-red-700 text-white'
-                                : 'bg-gradient-primary hover:opacity-90'
-                            }`}
-                          >
-                            <Sparkles className="w-4 h-4 mr-1.5" />
-                            {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
-                          </Button>
-                          <Button 
-                            size="sm"
-                            onClick={() => handleAddToCart(item)}
-                            variant="outline"
-                            className="h-9 w-9 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
-                          >
-                            <ShoppingCart className="w-4 h-4" />
-                          </Button>
-                        </div>
+                      {/* Buttons */}
+                      <div className="flex gap-1.5">
+                        <Button 
+                          size="sm" 
+                          onClick={() => handleTryOn(item)}
+                          className={`flex-1 h-8 text-xs transition-all duration-300 ${
+                            getSelectedItemForCategory(item.category)?.name === item.name
+                              ? 'bg-red-600 hover:bg-red-700 text-white'
+                              : 'bg-gradient-primary hover:opacity-90'
+                          }`}
+                        >
+                          <Sparkles className="w-3 h-3 mr-1" />
+                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
+                        </Button>
+                        <Button 
+                          size="sm"
+                          onClick={() => handleAddToCart(item)}
+                          variant="outline"
+                          className="h-8 w-8 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
+                        >
+                          <ShoppingCart className="w-3 h-3" />
+                        </Button>
                       </div>
                     </div>
                   </div>
