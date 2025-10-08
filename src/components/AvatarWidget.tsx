@@ -474,11 +474,11 @@ const AvatarWidget = () => {
                       </div>
                       
                       {/* Buttons */}
-                      <div className="flex gap-1 justify-between items-center">
+                      <div className="flex gap-1">
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`w-[70%] h-6 text-xs transition-all duration-300 ${
+                          className={`flex-1 h-6 text-xs transition-all duration-300 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
                               ? 'bg-red-600 hover:bg-red-700 text-white'
                               : 'bg-gradient-primary hover:opacity-90'
