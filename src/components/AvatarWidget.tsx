@@ -3,7 +3,7 @@ import { X, Maximize2, Sparkles, ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import avatarSilhouette from "@/assets/avatar-silhouette.png";
+import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 
@@ -18,12 +18,12 @@ const AvatarWidget = () => {
   useEffect(() => {
     const processImage = async () => {
       try {
-        const img = await loadImage(avatarSilhouette);
+        const img = await loadImage(avatarShowcase);
         const result = await removeBackground(img);
         setProcessedAvatar(result);
       } catch (error) {
         console.error('Failed to process avatar:', error);
-        setProcessedAvatar(avatarSilhouette);
+        setProcessedAvatar(avatarShowcase);
       }
     };
     processImage();
@@ -338,17 +338,20 @@ const AvatarWidget = () => {
           {/* Content */}
           <div className="h-full p-2 sm:p-4 overflow-hidden">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 h-full">
-                {/* Left Column - Avatar Body (Fixed) */}
+                {/* Left Column - Avatar Body (Full Body in Popup) */}
                 <div className="flex flex-col h-full overflow-hidden min-h-0">
                   <div 
                     ref={avatarRef}
-                    className="flex-1 flex items-start justify-center p-1 sm:p-2 relative min-h-[300px] sm:min-h-[500px]"
+                    className="flex-1 flex items-center justify-center relative min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] animate-fade-in"
                   >
-                    {/* Full-Length Avatar Body - No Background */}
+                    {/* Full-Body Avatar - No Background Box */}
                     <img 
-                      src={avatarSilhouette} 
+                      src={avatarShowcase} 
                       alt="Your 3D Avatar" 
-                      className="h-full w-full object-contain object-top"
+                      className="h-full w-auto object-contain animate-scale-in"
+                      style={{
+                        filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.15))'
+                      }}
                     />
                     
                     {/* Virtual Try-On Clothing Images */}
@@ -524,15 +527,16 @@ const AvatarWidget = () => {
       className="fixed bottom-0 -right-12 z-40 group"
     >
       <div className="relative">
-        {/* Full body avatar silhouette - no background */}
-        <div className="relative w-48 h-60 transition-all hover:scale-105">
+        {/* Half-body avatar (waist-up) for widget view */}
+        <div className="relative w-48 h-60 overflow-hidden transition-all hover:scale-105">
           {processedAvatar ? (
             <img 
               src={processedAvatar} 
               alt="Your 3D Avatar" 
-              className="w-full h-full object-contain"
+              className="w-full h-auto object-cover object-top"
               style={{ 
-                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))'
+                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))',
+                transform: 'scale(1.5) translateY(-15%)'
               }}
             />
           ) : (
