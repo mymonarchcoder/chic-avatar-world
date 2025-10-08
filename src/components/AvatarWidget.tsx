@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { X, Maximize2, Sparkles, ShoppingCart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { ScrollArea } from "./ui/scroll-area";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
@@ -388,7 +389,8 @@ const AvatarWidget = () => {
                 )}
               </div>
               
-              <div className="flex-1 space-y-1 overflow-y-auto pr-2">
+              <ScrollArea className="flex-1 pr-2">
+                <div className="space-y-1">
                 {[
                   { 
                     name: "Black Jeans", 
@@ -498,7 +500,8 @@ const AvatarWidget = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+                </div>
+              </ScrollArea>
               
               <div className="mt-3 flex gap-2">
                 <Button 
