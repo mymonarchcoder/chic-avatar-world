@@ -323,35 +323,34 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center p-2 sm:p-8 animate-fade-in">
-        <div className="w-full max-w-7xl h-[95vh] flex flex-col overflow-hidden animate-scale-in relative">
+      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center animate-fade-in">
+        <div className="w-full h-full max-w-7xl flex flex-col overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
             onClick={closeModal}
             size="icon"
             variant="ghost"
-            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground rounded-full"
+            className="absolute top-2 right-2 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground rounded-full"
           >
             <X className="w-6 h-6" />
           </Button>
 
-          {/* Content - Two Column Layout for Desktop, Stacked for Mobile */}
-          <div className="h-full flex flex-col md:grid md:grid-cols-2 gap-4 sm:gap-8 overflow-hidden">
-            {/* Left Column - Full Body Avatar (No Box) - Fixed height on mobile */}
-            <div className="flex flex-col justify-center items-center flex-shrink-0 md:h-full h-[35vh] pt-8 md:pt-0">
+          {/* Content - Two Column Layout Always Side by Side */}
+          <div className="h-full grid grid-cols-[auto_1fr] gap-4 overflow-hidden">
+            {/* Left Column - Full Body Avatar - Far Left, Full Height */}
+            <div className="flex flex-col justify-center items-start h-full pl-2">
               <div 
                 ref={avatarRef}
-                className="relative w-full h-full flex items-center justify-center"
+                className="relative h-full flex items-center justify-start"
               >
-                {/* Full-Body Avatar - No Gray Background */}
+                {/* Full-Body Avatar - No Spacing, Far Left */}
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-full w-auto object-contain object-center"
+                  className="h-full w-auto object-contain object-left"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
-                    transition: 'all 0.3s ease-in-out',
-                    maxHeight: '100%'
+                    transition: 'all 0.3s ease-in-out'
                   }}
                 />
                 
@@ -378,10 +377,10 @@ const AvatarWidget = () => {
               </div>
             </div>
 
-            {/* Right Column - Apparel Items List (No Box) - Scrollable on mobile */}
-            <div className="flex flex-col flex-1 md:h-full py-4 md:py-8 overflow-hidden min-h-0">
-              <div className="flex items-center justify-between mb-4 sm:mb-6">
-                <h3 className="text-xl sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
+            {/* Right Column - Apparel Items List - Scrollable */}
+            <div className="flex flex-col h-full py-4 pr-2 overflow-hidden">
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
                   <div className="text-sm text-primary font-medium">
                     {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} selected
@@ -501,7 +500,7 @@ const AvatarWidget = () => {
                 ))}
               </div>
               
-              <div className="mt-4 sm:mt-6 flex gap-3">
+              <div className="mt-3 flex gap-2">
                 <Button 
                   onClick={() => {
                     setSelectedItems({});
