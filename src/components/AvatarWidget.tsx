@@ -379,7 +379,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-40">
+            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-24">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
@@ -468,7 +468,7 @@ const AvatarWidget = () => {
                       {/* Emoji and name on same line */}
                       <div className="flex items-center gap-2">
                         <div className="text-xl sm:text-2xl flex-shrink-0">{item.image}</div>
-                        <div className="flex-1 min-w-0">
+                        <div className="flex-1 min-w-0 text-center">
                           <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                           <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
                         </div>
@@ -480,7 +480,7 @@ const AvatarWidget = () => {
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`flex-1 h-6 text-xs transition-all duration-300 ${
+                          className={`h-6 text-xs transition-all duration-300 px-3 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
                               ? 'bg-red-600 hover:bg-red-700 text-white'
                               : 'bg-gradient-primary hover:opacity-90'
