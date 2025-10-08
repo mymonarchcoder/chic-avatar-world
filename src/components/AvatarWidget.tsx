@@ -463,7 +463,7 @@ const AvatarWidget = () => {
                 ].map((item, idx) => (
                   <div key={idx} className="p-4 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex items-center gap-4">
-                      <div className="text-4xl flex-shrink-0">{item.image}</div>
+                      <div className="text-6xl flex-shrink-0">{item.image}</div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-start justify-between mb-2 gap-3">
                           <div className="min-w-0 flex-1">
