@@ -338,7 +338,7 @@ const AvatarWidget = () => {
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
             {/* Left Column - Full Body Avatar - Touching Left Edge */}
-            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 -ml-8">
+            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 -ml-20">
               <div 
                 ref={avatarRef}
                 className="relative h-full flex items-center justify-start"
@@ -378,7 +378,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden flex-1 -ml-32">
+            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden flex-1 -ml-40">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
@@ -462,11 +462,14 @@ const AvatarWidget = () => {
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="p-3 sm:p-4 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
-                    <div className="flex items-center gap-3 sm:gap-4">
-                      <div className="text-4xl sm:text-6xl flex-shrink-0">{item.image}</div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between mb-1 sm:mb-2 gap-2 sm:gap-3">
-                          <div className="min-w-0 flex-1">
+                    <div className="flex flex-col items-center text-center gap-2">
+                      {/* Emoji on top */}
+                      <div className="text-3xl sm:text-4xl">{item.image}</div>
+                      
+                      {/* Content below */}
+                      <div className="w-full">
+                        <div className="flex items-start justify-between mb-1 sm:mb-2 gap-2">
+                          <div className="flex-1 text-left">
                             <h4 className="font-semibold text-sm sm:text-base tracking-widest group-hover:text-primary transition-colors mb-1">{item.name}</h4>
                             <p className="text-sm text-muted-foreground">{item.brand}</p>
                           </div>
