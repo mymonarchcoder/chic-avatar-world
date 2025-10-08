@@ -341,16 +341,17 @@ const AvatarWidget = () => {
             <div className="flex flex-col h-full justify-center items-center">
               <div 
                 ref={avatarRef}
-                className="relative w-full h-full flex items-center justify-center"
+                className="relative w-full h-full flex items-center justify-center py-8"
               >
-                {/* Full-Body Avatar - No Background Box */}
+                {/* Full-Body Avatar - No Background */}
                 <img 
                   src={avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-full w-auto object-contain"
+                  className="h-full w-auto object-contain object-center"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
-                    transition: 'all 0.3s ease-in-out'
+                    transition: 'all 0.3s ease-in-out',
+                    maxHeight: '100%'
                   }}
                 />
                 
@@ -489,10 +490,9 @@ const AvatarWidget = () => {
                             size="sm"
                             onClick={() => handleAddToCart(item)}
                             variant="outline"
-                            className="h-9 px-4 border-primary text-primary hover:bg-primary/10"
+                            className="h-9 w-9 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
                           >
-                            <ShoppingCart className="w-4 h-4 mr-1.5" />
-                            Add to Cart
+                            <ShoppingCart className="w-4 h-4" />
                           </Button>
                         </div>
                       </div>
