@@ -410,98 +410,84 @@ const AvatarWidget = () => {
                     brand: "Reformation", 
                     category: "Tops",
                     price: "$180",
-                    image: "👕",
-                    color: "#dc2626"
+                    image: "👕"
                   },
                   { 
                     name: "Black Jeans", 
                     brand: "Gucci", 
                     category: "Bottoms",
                     price: "$450",
-                    image: "👖",
-                    color: "#1a1a1a"
+                    image: "👖"
                   },
                   { 
                     name: "Gray Jeans", 
                     brand: "Prada", 
                     category: "Bottoms",
                     price: "$380",
-                    image: "👖",
-                    color: "#6b7280"
+                    image: "👖"
                   },
                   { 
                     name: "White Pants", 
                     brand: "Lioness",
                     category: "Bottoms",
                     price: "$320",
-                    image: "👖",
-                    color: "#f5f5f5"
+                    image: "👖"
                   },
                   { 
                     name: "Jean Shorts", 
                     brand: "Gucci", 
                     category: "Bottoms",
                     price: "$290",
-                    image: "🩳",
-                    color: "#3b82f6"
+                    image: "🩳"
                   },
                   { 
                     name: "White Shorts", 
                     brand: "Prada", 
                     category: "Bottoms",
                     price: "$250",
-                    image: "🩳",
-                    color: "#f5f5f5"
+                    image: "🩳"
                   },
                   { 
                     name: "Red Dress", 
                     brand: "Lioness",
                     category: "Dresses",
                     price: "$580",
-                    image: "👗",
-                    color: "#dc2626"
+                    image: "👗"
                   },
                   { 
                     name: "Black Leather Jacket", 
                     brand: "Gucci", 
                     category: "Outerwear",
                     price: "$890",
-                    image: "🧥",
-                    color: "#1a1a1a"
+                    image: "🧥"
                   },
                   { 
                     name: "Black Blazer", 
                     brand: "Prada", 
                     category: "Outerwear",
                     price: "$720",
-                    image: "🤵",
-                    color: "#1a1a1a"
+                    image: "🤵"
                   },
                   { 
                     name: "Blue Shirt", 
                     brand: "Lioness",
                     category: "Tops",
                     price: "$180",
-                    image: "👔",
-                    color: "#3b82f6"
+                    image: "👔"
                   },
                   { 
                     name: "Green Cardigan", 
                     brand: "Gucci", 
                     category: "Tops",
                     price: "$420",
-                    image: "🧶",
-                    color: "#22c55e"
+                    image: "🧶"
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex flex-col gap-1.5">
-                       {/* Colored circle and item info */}
+                       {/* Emoji and name on same line */}
                        <div className="flex items-center gap-2">
-                         <div 
-                           className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex-shrink-0 ml-4 border-2 border-gray-200"
-                           style={{ backgroundColor: item.color }}
-                         />
+                         <div className="text-5xl sm:text-6xl flex-shrink-0 ml-4">{item.image}</div>
                          <div className="flex-1 min-w-0 text-center">
                            <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                            <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
