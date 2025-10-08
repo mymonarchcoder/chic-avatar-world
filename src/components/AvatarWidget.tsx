@@ -125,6 +125,19 @@ const AvatarWidget = () => {
           <rect x="50" y="10" width="20" height="20" rx="10" fill="#ffd700"/>
         </svg>
       `)}`,
+      'Red Shirt': `data:image/svg+xml;base64,${btoa(`
+        <svg width="180" height="250" viewBox="0 0 180 250" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="redShirtGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#dc2626;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#991b1b;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M30 40 L150 40 L160 80 L155 200 L25 200 L20 80 Z" fill="url(#redShirtGrad)" stroke="#000" stroke-width="2"/>
+          <path d="M30 40 L20 80 L30 100" fill="none" stroke="#000" stroke-width="2"/>
+          <path d="M150 40 L160 80 L150 100" fill="none" stroke="#000" stroke-width="2"/>
+        </svg>
+      `)}`,
       'Premium White Tee': `data:image/svg+xml;base64,${btoa(`
         <svg width="180" height="250" viewBox="0 0 180 250" xmlns="http://www.w3.org/2000/svg">
           <defs>
