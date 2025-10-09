@@ -9,8 +9,8 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-7xl mx-auto text-center space-y-1 animate-fade-in pt-8">
-          <h1 className="text-[10rem] sm:text-[12rem] md:text-[14rem] lg:text-[16rem] xl:text-[18rem] font-bold leading-none text-gray-800 tracking-tighter">
+        <div className="w-full px-4 text-center space-y-1 animate-fade-in pt-8">
+          <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-gray-800 tracking-tighter">
             VERS
           </h1>
           
@@ -23,12 +23,12 @@ const Hero = () => {
             <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
           </div>
           
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto -mt-1">
             Discover your perfect look with AI-powered recommendations, virtual try-ons, 
             and curated collections from your favorite brands.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
             <Button 
               size="lg" 
               className="bg-gray-800 text-white hover:bg-gray-900 transition-opacity shadow-elegant text-lg px-8"
