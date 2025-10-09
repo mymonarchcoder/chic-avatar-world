@@ -40,6 +40,10 @@ const ChatAssistant = () => {
 
       {isOpen && (
         <Card className="fixed bottom-20 left-6 z-50 w-80 h-[500px] shadow-elegant flex flex-col animate-scale-in">
+          <div className="p-4 border-b bg-gradient-primary text-primary-foreground rounded-t-lg">
+            <h3 className="font-semibold">AI Shopping Assistant</h3>
+            <p className="text-sm opacity-90">Always here to help you shop smarter</p>
+          </div>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.map((msg, idx) => (
