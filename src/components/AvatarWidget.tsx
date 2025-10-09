@@ -393,74 +393,39 @@ const AvatarWidget = () => {
                 <div className="space-y-1">
                 {[
                   { 
-                    name: "Black Jeans", 
-                    brand: "Gucci", 
-                    category: "Bottoms",
-                    price: "$450",
-                    image: "👖"
-                  },
-                  { 
-                    name: "Gray Jeans", 
-                    brand: "Prada", 
-                    category: "Bottoms",
-                    price: "$380",
-                    image: "👖"
-                  },
-                  { 
-                    name: "White Pants", 
-                    brand: "Monarch Apparel", 
-                    category: "Bottoms",
-                    price: "$320",
-                    image: "👖"
-                  },
-                  { 
-                    name: "Jean Shorts", 
-                    brand: "Gucci", 
-                    category: "Bottoms",
-                    price: "$290",
-                    image: "🩳"
-                  },
-                  { 
-                    name: "White Shorts", 
-                    brand: "Prada", 
-                    category: "Bottoms",
-                    price: "$250",
-                    image: "🩳"
-                  },
-                  { 
-                    name: "Red Dress", 
-                    brand: "Monarch Apparel", 
+                    name: "Silver Dress", 
+                    brand: "Reform", 
                     category: "Dresses",
-                    price: "$580",
+                    price: "$180",
                     image: "👗"
                   },
                   { 
-                    name: "Black Leather Jacket", 
-                    brand: "Gucci", 
-                    category: "Outerwear",
-                    price: "$890",
-                    image: "🧥"
+                    name: "Burgundy Dress", 
+                    brand: "Evolv", 
+                    category: "Dresses",
+                    price: "$195",
+                    image: "👗"
                   },
                   { 
-                    name: "Black Blazer", 
-                    brand: "Prada", 
-                    category: "Outerwear",
-                    price: "$720",
-                    image: "🤵"
+                    name: "Black Dress", 
+                    brand: "Larson", 
+                    category: "Dresses",
+                    price: "$250",
+                    image: "👗"
                   },
                   { 
-                    name: "Blue Shirt", 
-                    brand: "Monarch Apparel", 
-                    category: "Tops",
-                    price: "$180",
-                    image: "👔"
+                    name: "Red Dress", 
+                    brand: "Reform", 
+                    category: "Dresses",
+                    price: "$200",
+                    image: "👗"
                   },
                   { 
-                    name: "Green Cardigan", 
-                    brand: "Gucci", 
-                    category: "Tops",
-                    price: "$420",
-                    image: "🧶"
+                    name: "Evening Dress", 
+                    brand: "Evolv", 
+                    category: "Dresses",
+                    price: "$165",
+                    image: "👗"
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
