@@ -9,12 +9,12 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-2 animate-fade-in pt-8">
-          <h1 className="text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] xl:text-[14rem] font-bold leading-none text-gray-800 tracking-tighter">
+        <div className="max-w-7xl mx-auto text-center space-y-1 animate-fade-in pt-8">
+          <h1 className="text-[10rem] sm:text-[12rem] md:text-[14rem] lg:text-[16rem] xl:text-[18rem] font-bold leading-none text-gray-800 tracking-tighter">
             VERS
           </h1>
           
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-700">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 -mt-2">
             Your Personal Style
           </h2>
           
