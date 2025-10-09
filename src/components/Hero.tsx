@@ -8,7 +8,7 @@ const Hero = () => {
   
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="max-w-4xl mx-auto px-4 py-16 relative z-10">
         <div className="w-full px-4 text-center space-y-1 animate-fade-in pt-8">
           <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-gray-800 tracking-tighter">
             VERS
