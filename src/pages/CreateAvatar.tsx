@@ -113,6 +113,15 @@ const CreateAvatar = () => {
               </div>
               <span className="hidden sm:inline text-xs">Complete</span>
             </div>
+            
+            <div className="w-6 h-0.5 bg-border"></div>
+            
+            <div className="flex items-center gap-1 text-muted-foreground">
+              <div className="w-6 h-6 rounded-full flex items-center justify-center border-2 text-xs border-muted-foreground">
+                4
+              </div>
+              <span className="hidden sm:inline text-xs">Step 4</span>
+            </div>
           </div>
         </div>
 
