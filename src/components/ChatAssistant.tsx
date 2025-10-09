@@ -32,14 +32,14 @@ const ChatAssistant = () => {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full shadow-elegant bg-gradient-primary hover:opacity-90"
+        className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full shadow-elegant bg-gradient-primary hover:opacity-90"
         size="icon"
       >
-        {isOpen ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
+        {isOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-6 h-6" />}
       </Button>
 
       {isOpen && (
-        <Card className="fixed bottom-24 left-6 z-50 w-80 h-[500px] shadow-elegant flex flex-col animate-scale-in">
+        <Card className="fixed bottom-20 left-6 z-50 w-80 h-[500px] shadow-elegant flex flex-col animate-scale-in">
           <div className="p-4 border-b bg-gradient-primary text-primary-foreground rounded-t-lg">
             <h3 className="font-semibold">AI Shopping Assistant</h3>
             <p className="text-sm opacity-90">Always here to help you shop smarter</p>
