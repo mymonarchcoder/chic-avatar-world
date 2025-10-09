@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'baloo': ['Baloo Bhaijaan 2', 'cursive'],
       },
       letterSpacing: {
         'tighter': '-0.118em',

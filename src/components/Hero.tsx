@@ -12,7 +12,7 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       <div className="max-w-4xl mx-auto px-4 py-16 relative z-10">
         <div className="w-full px-4 text-center space-y-1 animate-fade-in pt-8">
-          <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-gray-800 tracking-tighter">
+          <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-gray-800 tracking-tighter font-baloo">
             VERS
           </h1>
           
@@ -30,22 +30,12 @@ const Hero = () => {
             and curated collections from your favorite brands.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
+          <div className="flex justify-center pt-2">
             <Button 
               size="lg" 
-              onClick={() => navigate('/create-avatar')}
               className="bg-gray-800 text-white hover:bg-gray-900 transition-opacity shadow-elegant text-lg px-8"
             >
-              <UserCircle className="w-5 h-5 mr-2" />
-              Create Your Avatar
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              onClick={openModal}
-              className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800/10 text-lg px-8"
-            >
-              Try Virtual Fitting
+              Top Emerging Brands
             </Button>
           </div>
         </div>
