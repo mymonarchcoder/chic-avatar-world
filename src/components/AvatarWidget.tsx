@@ -431,13 +431,13 @@ const AvatarWidget = () => {
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex flex-col gap-1.5">
                       {/* Emoji and name on same line */}
-                      <div className="flex items-center gap-0.5 pr-3 pl-3">
-                        <div className="text-3xl sm:text-4xl flex-shrink-0">{item.image}</div>
-                        <div className="min-w-0 mr-1">
+                      <div className="flex items-center pr-3 pl-3">
+                        <div className="text-3xl sm:text-4xl flex-shrink-0 mr-1">{item.image}</div>
+                        <div className="min-w-0 flex-1">
                           <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                           <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
                         </div>
-                        <span className="text-[10px] font-bold text-primary flex-shrink-0 whitespace-nowrap">{item.price}</span>
+                        <span className="text-[10px] font-bold text-primary flex-shrink-0 whitespace-nowrap ml-2">{item.price}</span>
                       </div>
                       
                       {/* Buttons */}
