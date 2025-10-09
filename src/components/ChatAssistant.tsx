@@ -7,7 +7,9 @@ import { useState } from "react";
 const ChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi! I'm your personal shopping assistant. How can I help you find the perfect outfit today?" }
+    { role: "assistant", content: "Hi Katie! Fall is just around the corner — what are you shopping for today?" },
+    { role: "user", content: "I have a friend's wedding in two months and her colors are burgundy, cream, and fall tones. I prefer something long and silky, nothing over $250." },
+    { role: "assistant", content: "How exciting — that sounds like such a beautiful event! You're going to love these options I've found." }
   ]);
   const [input, setInput] = useState("");
 
