@@ -437,7 +437,7 @@ const AvatarWidget = () => {
                           <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                           <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
                         </div>
-                        <span className="text-xs font-bold text-primary flex-shrink-0 ml-auto">{item.price}</span>
+                        <span className="text-sm font-bold text-primary flex-shrink-0 ml-auto">{item.price}</span>
                       </div>
                       
                       {/* Buttons */}
