@@ -1,9 +1,11 @@
 import { Button } from "./ui/button";
-import { Sparkles } from "lucide-react";
+import { Sparkles, UserCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import heroBanner from "@/assets/hero-banner.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
   const { openModal } = useAvatarModal();
   
   return (
@@ -31,9 +33,11 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-2">
             <Button 
               size="lg" 
+              onClick={() => navigate('/create-avatar')}
               className="bg-gray-800 text-white hover:bg-gray-900 transition-opacity shadow-elegant text-lg px-8"
             >
-              Start Shopping
+              <UserCircle className="w-5 h-5 mr-2" />
+              Create Your Avatar
             </Button>
             <Button 
               size="lg" 
