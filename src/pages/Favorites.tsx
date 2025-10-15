@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import whiteTeeImg from "@/assets/white-tee.png";
 
 const Favorites = () => {
   const { favorites, removeFavorite, favoriteCount } = useFavorites();
@@ -35,7 +36,15 @@ const Favorites = () => {
                   className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300"
                 >
                   <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                    {item.id === 1 ? (
+                      <img 
+                        src={whiteTeeImg} 
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity" />
+                    )}
                   </div>
                   
                   <div className="p-3">

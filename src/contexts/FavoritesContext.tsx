@@ -19,7 +19,7 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 
 // Sample favorite items from Lioness brand
 const initialFavorites: FavoriteItem[] = [
-  { id: 1, name: "Classic White Tee", brand: "Lioness", price: 49, image: "" },
+  { id: 1, name: "Classic White Tee", brand: "Lioness", price: 49, image: "/src/assets/white-tee.png" },
   { id: 2, name: "Satin Slip Dress", brand: "Lioness", price: 179, image: "" },
   { id: 3, name: "High Waist Jeans", brand: "Lioness", price: 129, image: "" },
   { id: 4, name: "Cropped Blazer", brand: "Lioness", price: 199, image: "" },
