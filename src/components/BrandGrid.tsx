@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
-import { useState } from "react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import skimsLogo from "@/assets/skims-logo.png";
 import vuoriLogo from "@/assets/vuori-logo.png";
 import malbonLogo from "@/assets/malbon-logo.png";
@@ -19,15 +19,7 @@ const brands = [
 ];
 
 const BrandGrid = () => {
-  const [favoritedBrands, setFavoritedBrands] = useState<number[]>([2, 4]);
-
-  const toggleFavorite = (brandId: number) => {
-    setFavoritedBrands(prev => 
-      prev.includes(brandId) 
-        ? prev.filter(id => id !== brandId)
-        : [...prev, brandId]
-    );
-  };
+  const { toggleFavoriteBrand, isBrandFavorited } = useFavorites();
   
   return (
     <section className="py-24 bg-muted/30">
@@ -62,10 +54,10 @@ const BrandGrid = () => {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className={favoritedBrands.includes(brand.id) ? "text-primary" : ""}
-                    onClick={() => toggleFavorite(brand.id)}
+                    className={isBrandFavorited(brand.id) ? "text-primary" : ""}
+                    onClick={() => toggleFavoriteBrand(brand)}
                   >
-                    <Star className={`w-5 h-5 ${favoritedBrands.includes(brand.id) ? "fill-current" : ""}`} />
+                    <Star className={`w-5 h-5 ${isBrandFavorited(brand.id) ? "fill-current" : ""}`} />
                   </Button>
                 </div>
                 

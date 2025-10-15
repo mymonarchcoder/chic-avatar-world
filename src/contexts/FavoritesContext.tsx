@@ -8,11 +8,21 @@ interface FavoriteItem {
   image: string;
 }
 
+interface FavoriteBrand {
+  id: number;
+  name: string;
+  category: string;
+  logo: string;
+}
+
 interface FavoritesContextType {
   favorites: FavoriteItem[];
   addFavorite: (item: FavoriteItem) => void;
   removeFavorite: (itemId: number) => void;
   favoriteCount: number;
+  favoriteBrands: FavoriteBrand[];
+  toggleFavoriteBrand: (brand: FavoriteBrand) => void;
+  isBrandFavorited: (brandId: number) => boolean;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
@@ -27,6 +37,7 @@ const initialFavorites: FavoriteItem[] = [
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<FavoriteItem[]>(initialFavorites);
+  const [favoriteBrands, setFavoriteBrands] = useState<FavoriteBrand[]>([]);
 
   const addFavorite = (item: FavoriteItem) => {
     setFavorites(prev => [...prev, item]);
@@ -36,10 +47,32 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     setFavorites(prev => prev.filter(item => item.id !== itemId));
   };
 
+  const toggleFavoriteBrand = (brand: FavoriteBrand) => {
+    setFavoriteBrands(prev => {
+      const exists = prev.find(b => b.id === brand.id);
+      if (exists) {
+        return prev.filter(b => b.id !== brand.id);
+      }
+      return [...prev, brand];
+    });
+  };
+
+  const isBrandFavorited = (brandId: number) => {
+    return favoriteBrands.some(b => b.id === brandId);
+  };
+
   const favoriteCount = favorites.length;
 
   return (
-    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, favoriteCount }}>
+    <FavoritesContext.Provider value={{ 
+      favorites, 
+      addFavorite, 
+      removeFavorite, 
+      favoriteCount,
+      favoriteBrands,
+      toggleFavoriteBrand,
+      isBrandFavorited
+    }}>
       {children}
     </FavoritesContext.Provider>
   );
