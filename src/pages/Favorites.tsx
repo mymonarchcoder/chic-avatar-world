@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import whiteTeeImg from "@/assets/white-tee.png";
 import satinDressImg from "@/assets/satin-slip-dress.png";
+import jeansImg from "@/assets/high-waist-jeans.png";
 
 const Favorites = () => {
   const { favorites, removeFavorite, favoriteCount } = useFavorites();
@@ -46,6 +47,12 @@ const Favorites = () => {
                     ) : item.id === 2 ? (
                       <img 
                         src={satinDressImg} 
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : item.id === 3 ? (
+                      <img 
+                        src={jeansImg} 
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
