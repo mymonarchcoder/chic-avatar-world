@@ -76,6 +76,10 @@ const BrandCollection = () => {
   
   const brandData = brandProducts[brandId as keyof typeof brandProducts];
 
+  const getProductId = (productName: string) => {
+    return productName.toLowerCase().replace(/\s+/g, '-');
+  };
+
   if (!brandData) {
     return (
       <div className="min-h-screen">
@@ -133,7 +137,8 @@ const BrandCollection = () => {
             {brandData.products.map((product) => (
               <Card 
                 key={product.id}
-                className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300"
+                className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 cursor-pointer"
+                onClick={() => navigate(`/product/${getProductId(product.name)}`)}
               >
                 <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                   <img 
