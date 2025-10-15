@@ -8,23 +8,11 @@ interface FavoriteItem {
   image: string;
 }
 
-interface FavoriteBrand {
-  id: number;
-  name: string;
-  category: string;
-  logo: string;
-}
-
 interface FavoritesContextType {
   favorites: FavoriteItem[];
-  favoriteBrands: FavoriteBrand[];
   addFavorite: (item: FavoriteItem) => void;
   removeFavorite: (itemId: number) => void;
-  addFavoriteBrand: (brand: FavoriteBrand) => void;
-  removeFavoriteBrand: (brandId: number) => void;
-  toggleFavoriteBrand: (brand: FavoriteBrand) => void;
   favoriteCount: number;
-  isBrandFavorited: (brandId: number) => boolean;
 }
 
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined);
@@ -39,7 +27,6 @@ const initialFavorites: FavoriteItem[] = [
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<FavoriteItem[]>(initialFavorites);
-  const [favoriteBrands, setFavoriteBrands] = useState<FavoriteBrand[]>([]);
 
   const addFavorite = (item: FavoriteItem) => {
     setFavorites(prev => [...prev, item]);
@@ -49,43 +36,10 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     setFavorites(prev => prev.filter(item => item.id !== itemId));
   };
 
-  const addFavoriteBrand = (brand: FavoriteBrand) => {
-    setFavoriteBrands(prev => [...prev, brand]);
-  };
-
-  const removeFavoriteBrand = (brandId: number) => {
-    setFavoriteBrands(prev => prev.filter(brand => brand.id !== brandId));
-  };
-
-  const toggleFavoriteBrand = (brand: FavoriteBrand) => {
-    setFavoriteBrands(prev => {
-      const exists = prev.find(b => b.id === brand.id);
-      if (exists) {
-        return prev.filter(b => b.id !== brand.id);
-      } else {
-        return [...prev, brand];
-      }
-    });
-  };
-
-  const isBrandFavorited = (brandId: number) => {
-    return favoriteBrands.some(brand => brand.id === brandId);
-  };
-
-  const favoriteCount = favorites.length + favoriteBrands.length;
+  const favoriteCount = favorites.length;
 
   return (
-    <FavoritesContext.Provider value={{ 
-      favorites, 
-      favoriteBrands,
-      addFavorite, 
-      removeFavorite, 
-      addFavoriteBrand,
-      removeFavoriteBrand,
-      toggleFavoriteBrand,
-      isBrandFavorited,
-      favoriteCount 
-    }}>
+    <FavoritesContext.Provider value={{ favorites, addFavorite, removeFavorite, favoriteCount }}>
       {children}
     </FavoritesContext.Provider>
   );

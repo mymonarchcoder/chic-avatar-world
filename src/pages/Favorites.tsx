@@ -11,7 +11,7 @@ import jeansImg from "@/assets/high-waist-jeans.png";
 import blazerImg from "@/assets/cropped-blazer.png";
 
 const Favorites = () => {
-  const { favorites, favoriteBrands, removeFavorite, removeFavoriteBrand, favoriteCount } = useFavorites();
+  const { favorites, removeFavorite, favoriteCount } = useFavorites();
   const { openModal } = useAvatarModal();
 
   return (
@@ -27,7 +27,7 @@ const Favorites = () => {
             <p className="text-lg text-muted-foreground">{favoriteCount} saved items</p>
           </div>
 
-          {favorites.length === 0 && favoriteBrands.length === 0 ? (
+          {favorites.length === 0 ? (
             <div className="text-center py-24">
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
                 <ShoppingCart className="w-12 h-12 text-muted-foreground opacity-50" />
@@ -36,49 +36,8 @@ const Favorites = () => {
               <p className="text-muted-foreground">Start adding items you love!</p>
             </div>
           ) : (
-            <>
-              {favoriteBrands.length > 0 && (
-                <div className="mb-12">
-                  <h2 className="text-2xl font-bold mb-6" style={{ letterSpacing: '-0.1em' }}>
-                    Favorite Brands
-                  </h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {favoriteBrands.map((brand) => (
-                      <Card 
-                        key={brand.id}
-                        className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300"
-                      >
-                        <div className="aspect-[3/1] bg-background flex items-center justify-center p-6">
-                          <img src={brand.logo} alt={brand.name} className="h-16 w-auto object-contain" />
-                        </div>
-                        
-                        <div className="p-3">
-                          <h3 className="text-sm font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>{brand.name}</h3>
-                          <p className="text-xs text-muted-foreground mb-3">{brand.category}</p>
-                          
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="w-full text-destructive hover:bg-destructive/10 text-xs"
-                            onClick={() => removeFavoriteBrand(brand.id)}
-                          >
-                            <Trash2 className="w-3 h-3 mr-1" />
-                            Remove
-                          </Button>
-                        </div>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              )}
-              
-              {favorites.length > 0 && (
-                <div>
-                  <h2 className="text-2xl font-bold mb-6" style={{ letterSpacing: '-0.1em' }}>
-                    Favorite Items
-                  </h2>
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {favorites.map((item) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {favorites.map((item) => (
                 <Card 
                   key={item.id}
                   className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300"
@@ -146,12 +105,9 @@ const Favorites = () => {
                       </Button>
                     </div>
                   </div>
-                  </Card>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </>
+                </Card>
+              ))}
+            </div>
           )}
         </div>
       </div>
