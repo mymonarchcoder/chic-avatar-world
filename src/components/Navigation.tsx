@@ -1,6 +1,7 @@
-import { Heart, User, MessageCircle } from "lucide-react";
+import { User, MessageCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
+import FavoritesDrawer from "./FavoritesDrawer";
 
 const Navigation = () => {
   return (
@@ -28,9 +29,7 @@ const Navigation = () => {
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <MessageCircle className="w-5 h-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10">
-              <Heart className="w-5 h-5" />
-            </Button>
+            <FavoritesDrawer />
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <User className="w-5 h-5" />
             </Button>
