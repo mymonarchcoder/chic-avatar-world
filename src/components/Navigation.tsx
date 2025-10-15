@@ -1,9 +1,11 @@
-import { User, MessageCircle } from "lucide-react";
+import { User, MessageCircle, Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
-import FavoritesDrawer from "./FavoritesDrawer";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
+  const navigate = useNavigate();
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4 py-2">
@@ -29,7 +31,14 @@ const Navigation = () => {
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <MessageCircle className="w-5 h-5" />
             </Button>
-            <FavoritesDrawer />
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-primary/10"
+              onClick={() => navigate('/favorites')}
+            >
+              <Heart className="w-5 h-5" />
+            </Button>
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <User className="w-5 h-5" />
             </Button>
