@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import CreateAvatar from "./pages/CreateAvatar";
 import Favorites from "./pages/Favorites";
 import Chat from "./pages/Chat";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
             <Route path="/create-avatar" element={<CreateAvatar />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/chat" element={<Chat />} />
+            <Route path="/auth" element={<Auth />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
             </Routes>

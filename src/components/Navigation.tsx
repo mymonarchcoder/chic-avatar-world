@@ -79,7 +79,11 @@ const Navigation = () => {
               <User className="w-5 h-5" />
             </Button>
             <CartDrawer />
-            <Button variant="ghost" className="hover:bg-primary/10">
+            <Button 
+              variant="ghost" 
+              className="hover:bg-primary/10"
+              onClick={() => navigate('/auth')}
+            >
               Log In
             </Button>
           </div>
