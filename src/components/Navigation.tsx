@@ -36,7 +36,11 @@ const Navigation = () => {
               VERS
             </h1>
             <div className="hidden sm:flex gap-6">
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+              <Button 
+                variant="ghost" 
+                className="text-muted-foreground hover:text-foreground"
+                onClick={() => navigate('/brands')}
+              >
                 Brands
               </Button>
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
