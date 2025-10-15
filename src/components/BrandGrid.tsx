@@ -2,14 +2,15 @@ import { Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import skimsLogo from "@/assets/skims-logo.png";
+import vuoriLogo from "@/assets/vuori-logo.png";
 
 const brands = [
-  { id: 1, name: "SKIMS", category: "Premium Fashion", favorited: false, logo: true },
-  { id: 2, name: "Urban Style", category: "Streetwear", favorited: true, logo: false },
-  { id: 3, name: "Elegant Threads", category: "Formal Wear", favorited: false, logo: false },
-  { id: 4, name: "Active Life", category: "Sportswear", favorited: true, logo: false },
-  { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false, logo: false },
-  { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false, logo: false },
+  { id: 1, name: "SKIMS", category: "Premium Fashion", favorited: false, logo: skimsLogo },
+  { id: 2, name: "Vuori", category: "Athleisure wear", favorited: true, logo: vuoriLogo },
+  { id: 3, name: "Elegant Threads", category: "Formal Wear", favorited: false, logo: null },
+  { id: 4, name: "Active Life", category: "Sportswear", favorited: true, logo: null },
+  { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false, logo: null },
+  { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false, logo: null },
 ];
 
 const BrandGrid = () => {
@@ -33,7 +34,7 @@ const BrandGrid = () => {
             >
               <div className="aspect-[4/1] bg-gradient-primary opacity-10 group-hover:opacity-20 transition-opacity flex items-center justify-center">
                 {brand.logo && (
-                  <img src={skimsLogo} alt={brand.name} className="h-12 object-contain" />
+                  <img src={brand.logo} alt={brand.name} className="h-12 object-contain" />
                 )}
               </div>
               
