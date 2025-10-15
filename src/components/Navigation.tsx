@@ -1,12 +1,25 @@
 import { User, MessageCircle, Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useFavorites } from "@/contexts/FavoritesContext";
 
 const Navigation = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { favoriteCount } = useFavorites();
+
+  const handleHeartClick = () => {
+    if (location.pathname === '/favorites') {
+      navigate('/');
+    } else {
+      navigate('/favorites');
+    }
+  };
+
+  const handleChatClick = () => {
+    navigate('/chat');
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -30,14 +43,19 @@ const Navigation = () => {
           </div>
           
           <div className="flex items-center">
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-primary/10"
+              onClick={handleChatClick}
+            >
               <MessageCircle className="w-5 h-5" />
             </Button>
             <Button 
               variant="ghost" 
               size="icon" 
               className="hover:bg-primary/10 relative"
-              onClick={() => navigate('/favorites')}
+              onClick={handleHeartClick}
             >
               <Heart className="w-5 h-5" />
               {favoriteCount > 0 && (
