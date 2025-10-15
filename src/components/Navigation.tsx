@@ -1,4 +1,4 @@
-import { User, MessageCircle, Heart } from "lucide-react";
+import { User, MessageCircle, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -11,7 +11,7 @@ const Navigation = () => {
   const { favoriteCount } = useFavorites();
   const { openModal } = useAvatarModal();
 
-  const handleHeartClick = () => {
+  const handleStarClick = () => {
     if (location.pathname === '/favorites') {
       navigate('/');
     } else {
@@ -61,9 +61,9 @@ const Navigation = () => {
               variant="ghost" 
               size="icon" 
               className="hover:bg-primary/10 relative"
-              onClick={handleHeartClick}
+              onClick={handleStarClick}
             >
-              <Heart className="w-5 h-5" />
+              <Star className="w-5 h-5" />
               {favoriteCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {favoriteCount}
