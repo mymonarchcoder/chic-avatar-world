@@ -2,9 +2,11 @@ import { User, MessageCircle, Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
 import { useNavigate } from "react-router-dom";
+import { useFavorites } from "@/contexts/FavoritesContext";
 
 const Navigation = () => {
   const navigate = useNavigate();
+  const { favoriteCount } = useFavorites();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
@@ -34,10 +36,15 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10"
+              className="hover:bg-primary/10 relative"
               onClick={() => navigate('/favorites')}
             >
               <Heart className="w-5 h-5" />
+              {favoriteCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {favoriteCount}
+                </span>
+              )}
             </Button>
             <Button variant="ghost" size="icon" className="hover:bg-primary/10">
               <User className="w-5 h-5" />
