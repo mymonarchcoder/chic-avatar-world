@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import AvatarWidget from "@/components/AvatarWidget";
 import whiteTeeImg from "@/assets/white-tee.png";
 import satinDressImg from "@/assets/satin-slip-dress.png";
 import jeansImg from "@/assets/high-waist-jeans.png";
@@ -16,6 +17,7 @@ const Favorites = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <AvatarWidget />
       <div className="pt-20 px-4 pb-12">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8">
