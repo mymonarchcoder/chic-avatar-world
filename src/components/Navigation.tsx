@@ -35,7 +35,7 @@ const Navigation = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4">
             <h1 
               className="text-2xl font-bold text-gray-800 font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
               style={{ letterSpacing: '-0.1em' }}
@@ -43,21 +43,21 @@ const Navigation = () => {
             >
               VERS
             </h1>
-            <div className="hidden sm:flex gap-6">
+            <div className="flex gap-4">
               <Button 
                 variant="ghost" 
-                className="text-muted-foreground hover:text-foreground"
+                className="text-muted-foreground hover:text-foreground text-sm px-2"
                 onClick={() => navigate('/brands')}
               >
                 Brands
               </Button>
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+              <Button variant="ghost" className="text-muted-foreground hover:text-foreground text-sm px-2 hidden sm:block">
                 New Arrivals
               </Button>
             </div>
           </div>
           
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
             <Button 
               variant="ghost" 
               size="icon" 
