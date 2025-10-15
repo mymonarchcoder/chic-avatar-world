@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart, Star } from "lucide-react";
+import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -31,7 +32,7 @@ const productData = {
       { name: "Sand", hex: "#c4a57b" },
       { name: "Grey", hex: "#808080" },
     ],
-    image: "/placeholder.svg",
+    image: haloWidelegPant,
     isBestSeller: false,
   },
   "performance-jogger": {

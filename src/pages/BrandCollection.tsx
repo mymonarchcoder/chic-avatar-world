@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
+import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -16,7 +17,7 @@ const brandProducts = {
         id: 1,
         name: "Halo Essential Wideleg Pant",
         price: 108,
-        image: "/placeholder.svg",
+        image: haloWidelegPant,
         colors: ["Black Heather", "Charcoal", "Navy", "Olive", "Sand"],
         isBestSeller: false,
       },
