@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
@@ -77,11 +78,21 @@ const BrandCollection = () => {
   const { brandId } = useParams<{ brandId: string }>();
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
+  const [favoritedProducts, setFavoritedProducts] = useState<number[]>([]);
   
   const brandData = brandProducts[brandId as keyof typeof brandProducts];
 
   const getProductId = (productName: string) => {
     return productName.toLowerCase().replace(/\s+/g, '-');
+  };
+
+  const toggleFavorite = (productId: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setFavoritedProducts(prev => 
+      prev.includes(productId)
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
   };
 
   if (!brandData) {
@@ -156,6 +167,20 @@ const BrandCollection = () => {
                       BEST SELLER
                     </Badge>
                   )}
+                  <Button
+                    size="icon"
+                    variant="ghost"
+                    className={`absolute top-4 right-4 bg-background/80 hover:bg-background ${
+                      favoritedProducts.includes(product.id) ? 'text-primary' : ''
+                    }`}
+                    onClick={(e) => toggleFavorite(product.id, e)}
+                  >
+                    <Heart 
+                      className={`w-5 h-5 ${
+                        favoritedProducts.includes(product.id) ? 'fill-current' : ''
+                      }`} 
+                    />
+                  </Button>
                 </div>
                 
                 <div className="p-6">
