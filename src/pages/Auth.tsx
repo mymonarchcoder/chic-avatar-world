@@ -118,10 +118,18 @@ const Auth = () => {
                 
                 <Button 
                   onClick={openModal}
-                  className="w-full bg-gradient-primary hover:opacity-90 text-lg py-6"
+                  className="w-full bg-gradient-primary hover:opacity-90 text-lg py-6 mb-3"
                 >
                   <Upload className="w-5 h-5 mr-2" />
                   Upload Your Photos
+                </Button>
+                
+                <Button 
+                  onClick={openModal}
+                  variant="outline"
+                  className="w-full text-lg py-6"
+                >
+                  Take Body Scan
                 </Button>
               </Card>
 
