@@ -94,7 +94,7 @@ const Auth = () => {
             {/* Right Column - Virtual Fitting Room Info */}
             <div>
               <h2 className="text-3xl font-bold mb-6" style={{ letterSpacing: '-0.1em' }}>
-                Your Virtual Fitting Room
+                Recreate You
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Upload your photo to create a personalized 3D avatar and try on items from your favorite brands
