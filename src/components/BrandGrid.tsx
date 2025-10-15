@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { useNavigate } from "react-router-dom";
 import skimsLogo from "@/assets/skims-logo.png";
 import vuoriLogo from "@/assets/vuori-logo.png";
 import malbonLogo from "@/assets/malbon-logo.png";
@@ -19,7 +19,15 @@ const brands = [
 ];
 
 const BrandGrid = () => {
-  const navigate = useNavigate();
+  const [favoritedBrands, setFavoritedBrands] = useState<number[]>([2, 4]);
+
+  const toggleFavorite = (brandId: number) => {
+    setFavoritedBrands(prev => 
+      prev.includes(brandId) 
+        ? prev.filter(id => id !== brandId)
+        : [...prev, brandId]
+    );
+  };
   
   return (
     <section className="py-24 bg-muted/30">
@@ -54,10 +62,10 @@ const BrandGrid = () => {
                   <Button
                     size="icon"
                     variant="ghost"
-                    className={brand.favorited ? "text-primary" : ""}
-                    onClick={() => navigate('/favorites')}
+                    className={favoritedBrands.includes(brand.id) ? "text-primary" : ""}
+                    onClick={() => toggleFavorite(brand.id)}
                   >
-                    <Star className={`w-5 h-5 ${brand.favorited ? "fill-current" : ""}`} />
+                    <Star className={`w-5 h-5 ${favoritedBrands.includes(brand.id) ? "fill-current" : ""}`} />
                   </Button>
                 </div>
                 
