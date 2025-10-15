@@ -33,7 +33,7 @@ const BrandGrid = () => {
               key={brand.id} 
               className="group relative overflow-hidden border-border hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="aspect-[3/1] bg-gradient-primary opacity-20 group-hover:opacity-30 transition-opacity flex items-center justify-center p-6">
+              <div className="aspect-[3/1] bg-background flex items-center justify-center p-6">
                 {brand.logo && (
                   <img src={brand.logo} alt={brand.name} className="h-20 w-auto object-contain" />
                 )}
