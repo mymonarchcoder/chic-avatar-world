@@ -3,11 +3,13 @@ import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useAvatarModal } from "@/contexts/AvatarModalContext";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { favoriteCount } = useFavorites();
+  const { openModal } = useAvatarModal();
 
   const handleHeartClick = () => {
     if (location.pathname === '/favorites') {
@@ -64,7 +66,12 @@ const Navigation = () => {
                 </span>
               )}
             </Button>
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-primary/10"
+              onClick={openModal}
+            >
               <User className="w-5 h-5" />
             </Button>
             <CartDrawer />
