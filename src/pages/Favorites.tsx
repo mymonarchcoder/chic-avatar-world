@@ -3,12 +3,15 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import whiteTeeImg from "@/assets/white-tee.png";
 import satinDressImg from "@/assets/satin-slip-dress.png";
 import jeansImg from "@/assets/high-waist-jeans.png";
+import blazerImg from "@/assets/cropped-blazer.png";
 
 const Favorites = () => {
   const { favorites, removeFavorite, favoriteCount } = useFavorites();
+  const { openModal } = useAvatarModal();
 
   return (
     <div className="min-h-screen bg-background">
@@ -56,6 +59,12 @@ const Favorites = () => {
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
+                    ) : item.id === 4 ? (
+                      <img 
+                        src={blazerImg} 
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity" />
                     )}
@@ -69,19 +78,28 @@ const Favorites = () => {
                     <div className="flex gap-2">
                       <Button 
                         size="sm"
+                        variant="outline"
+                        className="flex-1 text-xs"
+                        onClick={() => openModal()}
+                      >
+                        Try On
+                      </Button>
+                      <Button 
+                        size="sm"
                         className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 text-xs"
                       >
                         Add to Cart
                       </Button>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        className="text-destructive hover:bg-destructive/10 px-2"
-                        onClick={() => removeFavorite(item.id)}
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
                     </div>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="w-full text-destructive hover:bg-destructive/10 mt-2"
+                      onClick={() => removeFavorite(item.id)}
+                    >
+                      <Trash2 className="w-4 h-4 mr-1" />
+                      Remove
+                    </Button>
                   </div>
                 </Card>
               ))}
