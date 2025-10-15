@@ -54,9 +54,6 @@ const Navigation = () => {
               <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
                 New Arrivals
               </Button>
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
-                Collections
-              </Button>
             </div>
           </div>
           
