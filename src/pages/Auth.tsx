@@ -96,13 +96,24 @@ const Auth = () => {
               <h2 className="text-3xl font-bold mb-6 text-center" style={{ letterSpacing: '-0.1em' }}>
                 Recreate You
               </h2>
-              <p className="text-lg text-muted-foreground mb-8">
-                Upload your photo to create a personalized 3D avatar and try on items from your favorite brands
+              <p className="text-lg text-muted-foreground mb-8 text-center">
+                Upload at least 4 photos to create your personalized 3D avatar
               </p>
 
               <Card className="p-8 shadow-card mb-6">
-                <div className="aspect-square bg-gradient-primary/10 rounded-lg flex items-center justify-center mb-6 border-2 border-dashed border-primary/30">
-                  <User className="w-32 h-32 text-primary/30" />
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {[1, 2, 3, 4].map((num) => (
+                    <div 
+                      key={num}
+                      className="aspect-square bg-gradient-primary/10 rounded-lg flex items-center justify-center border-2 border-dashed border-primary/30 hover:border-primary/50 transition-colors cursor-pointer"
+                      onClick={openModal}
+                    >
+                      <div className="text-center">
+                        <Upload className="w-12 h-12 text-primary/30 mx-auto mb-2" />
+                        <span className="text-sm text-muted-foreground">Photo {num}</span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
                 
                 <Button 
@@ -110,12 +121,8 @@ const Auth = () => {
                   className="w-full bg-gradient-primary hover:opacity-90 text-lg py-6"
                 >
                   <Upload className="w-5 h-5 mr-2" />
-                  Upload Your Photo
+                  Upload Your Photos
                 </Button>
-                
-                <p className="text-sm text-muted-foreground text-center mt-4">
-                  We'll create a personalized 3D avatar for virtual try-ons
-                </p>
               </Card>
 
               <div className="space-y-6">
@@ -124,9 +131,9 @@ const Auth = () => {
                     <span className="text-primary font-bold">1</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Upload Your Photo</h3>
+                    <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Meet your virtual self 👋</h3>
                     <p className="text-sm text-muted-foreground">
-                      Take a full-body photo for the most accurate avatar creation
+                      Step in front of the camera to build your 3D avatar — or upload your photos and we'll design it for you.
                     </p>
                   </div>
                 </div>
@@ -136,9 +143,9 @@ const Auth = () => {
                     <span className="text-primary font-bold">2</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>AI Creates Your Avatar</h3>
+                    <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Bring your look to life</h3>
                     <p className="text-sm text-muted-foreground">
-                      Our AI generates a realistic 3D model based on your photo
+                      Take a few quick photos or a body scan to see how every piece really fits you.
                     </p>
                   </div>
                 </div>
@@ -148,9 +155,9 @@ const Auth = () => {
                     <span className="text-primary font-bold">3</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Try On & Mix-Match</h3>
+                    <h3 className="font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>Your style, your shape, your way</h3>
                     <p className="text-sm text-muted-foreground">
-                      Virtually try on items and create your perfect outfit combinations
+                      Upload or scan to create a true-to-you 3D model for the perfect fit every time.
                     </p>
                   </div>
                 </div>
