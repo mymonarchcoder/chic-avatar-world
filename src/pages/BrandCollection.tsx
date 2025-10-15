@@ -156,7 +156,7 @@ const BrandCollection = () => {
                 className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 cursor-pointer"
                 onClick={() => navigate(`/product/${getProductId(product.name)}`)}
               >
-                <div className="aspect-[4/5] bg-muted relative overflow-hidden">
+                <div className="aspect-square bg-muted relative overflow-hidden">
                   <img 
                     src={product.image} 
                     alt={product.name}
