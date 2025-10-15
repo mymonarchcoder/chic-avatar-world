@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
+import performanceJogger from "@/assets/performance-jogger.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -54,7 +55,7 @@ const productData = {
       { name: "Charcoal", hex: "#4a4a4a" },
       { name: "Grey", hex: "#808080" },
     ],
-    image: "/placeholder.svg",
+    image: performanceJogger,
     isBestSeller: true,
   },
 };

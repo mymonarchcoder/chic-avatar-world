@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
+import performanceJogger from "@/assets/performance-jogger.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,7 +26,7 @@ const brandProducts = {
         id: 2,
         name: "Performance Jogger",
         price: 94,
-        image: "/placeholder.svg",
+        image: performanceJogger,
         colors: ["Black Heather", "Navy", "Charcoal", "Grey", "Blue", "Teal", "Olive", "Brown", "Plum"],
         isBestSeller: true,
       },
