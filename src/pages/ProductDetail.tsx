@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart, Star } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import performanceJogger from "@/assets/performance-jogger.png";
+import dailyLegging from "@/assets/daily-legging-skyblue.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -57,6 +58,28 @@ const productData = {
     ],
     image: performanceJogger,
     isBestSeller: true,
+  },
+  "daily-legging": {
+    id: 3,
+    name: "Daily Legging",
+    brand: "Vuori",
+    price: 78,
+    description: "Essential high-rise leggings for everyday wear and movement.",
+    features: [
+      "High-rise waistband",
+      "Compression fit",
+      "Squat-proof fabric",
+      "No front seam",
+    ],
+    sizes: ["XXS", "XS", "S", "M", "L", "XL"],
+    colors: [
+      { name: "Sky Blue", hex: "#87CEEB" },
+      { name: "Navy", hex: "#1e3a5f" },
+      { name: "Charcoal", hex: "#4a4a4a" },
+      { name: "Olive", hex: "#4a5d3f" },
+    ],
+    image: dailyLegging,
+    isBestSeller: false,
   },
 };
 

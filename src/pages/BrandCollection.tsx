@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import performanceJogger from "@/assets/performance-jogger.png";
+import dailyLegging from "@/assets/daily-legging-skyblue.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -34,8 +35,8 @@ const brandProducts = {
         id: 3,
         name: "Daily Legging",
         price: 78,
-        image: "/placeholder.svg",
-        colors: ["Black", "Navy", "Charcoal", "Olive"],
+        image: dailyLegging,
+        colors: ["Sky Blue", "Navy", "Charcoal", "Olive"],
         isBestSeller: false,
       },
       {
@@ -109,6 +110,7 @@ const BrandCollection = () => {
       "Plum": "bg-purple-900",
       "White": "bg-white border border-gray-300",
       "Pink": "bg-pink-400",
+      "Sky Blue": "bg-sky-300",
     };
     return colorMap[color] || "bg-gray-400";
   };
