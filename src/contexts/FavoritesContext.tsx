@@ -5,7 +5,7 @@ interface FavoriteItem {
   name: string;
   brand: string;
   price: number;
-  image: string;
+  image: string | any;
 }
 
 interface FavoriteBrand {

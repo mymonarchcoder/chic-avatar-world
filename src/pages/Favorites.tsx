@@ -42,35 +42,13 @@ const Favorites = () => {
                   key={item.id}
                   className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300"
                 >
-                  <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 relative overflow-hidden">
-                    {item.id === 1 ? (
-                      <img 
-                        src={whiteTeeImg} 
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : item.id === 2 ? (
-                      <img 
-                        src={satinDressImg} 
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : item.id === 3 ? (
-                      <img 
-                        src={jeansImg} 
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : item.id === 4 ? (
-                      <img 
-                        src={blazerImg} 
-                        alt={item.name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-10 transition-opacity" />
-                    )}
-                  </div>
+                <div className="aspect-square bg-gradient-to-br from-primary/10 to-accent/10 relative overflow-hidden">
+                  <img 
+                    src={typeof item.image === 'string' ? item.image : item.image} 
+                    alt={item.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                   
                   <div className="p-3">
                     <p className="text-xs text-muted-foreground mb-1">{item.brand}</p>

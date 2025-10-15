@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import performanceJogger from "@/assets/performance-jogger.png";
 import dailyLegging from "@/assets/daily-legging-skyblue.png";
@@ -78,7 +79,7 @@ const BrandCollection = () => {
   const { brandId } = useParams<{ brandId: string }>();
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
-  const [favoritedProducts, setFavoritedProducts] = useState<number[]>([]);
+  const { addFavorite, removeFavorite, favorites } = useFavorites();
   
   const brandData = brandProducts[brandId as keyof typeof brandProducts];
 
@@ -86,13 +87,24 @@ const BrandCollection = () => {
     return productName.toLowerCase().replace(/\s+/g, '-');
   };
 
-  const toggleFavorite = (productId: number, e: React.MouseEvent) => {
+  const isFavorited = (productId: number) => {
+    return favorites.some(fav => fav.id === productId);
+  };
+
+  const toggleFavorite = (product: typeof brandData.products[0], e: React.MouseEvent) => {
     e.stopPropagation();
-    setFavoritedProducts(prev => 
-      prev.includes(productId)
-        ? prev.filter(id => id !== productId)
-        : [...prev, productId]
-    );
+    
+    if (isFavorited(product.id)) {
+      removeFavorite(product.id);
+    } else {
+      addFavorite({
+        id: product.id,
+        name: product.name,
+        brand: brandData.name,
+        price: product.price,
+        image: product.image,
+      });
+    }
   };
 
   if (!brandData) {
@@ -171,13 +183,13 @@ const BrandCollection = () => {
                     size="icon"
                     variant="ghost"
                     className={`absolute top-4 right-4 bg-background/80 hover:bg-background ${
-                      favoritedProducts.includes(product.id) ? 'text-primary' : ''
+                      isFavorited(product.id) ? 'text-primary' : ''
                     }`}
-                    onClick={(e) => toggleFavorite(product.id, e)}
+                    onClick={(e) => toggleFavorite(product, e)}
                   >
                     <Heart 
                       className={`w-5 h-5 ${
-                        favoritedProducts.includes(product.id) ? 'fill-current' : ''
+                        isFavorited(product.id) ? 'fill-current' : ''
                       }`} 
                     />
                   </Button>
