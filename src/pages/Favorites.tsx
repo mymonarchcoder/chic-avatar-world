@@ -3,7 +3,7 @@ import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
-import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import { useNavigate } from "react-router-dom";
 import whiteTeeImg from "@/assets/white-tee.png";
 import satinDressImg from "@/assets/satin-slip-dress.png";
 import jeansImg from "@/assets/high-waist-jeans.png";
@@ -11,7 +11,7 @@ import blazerImg from "@/assets/cropped-blazer.png";
 
 const Favorites = () => {
   const { favorites, removeFavorite, favoriteCount } = useFavorites();
-  const { openModal } = useAvatarModal();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-background">
@@ -81,7 +81,7 @@ const Favorites = () => {
                           size="sm"
                           variant="outline"
                           className="text-xs"
-                          onClick={() => openModal()}
+                          onClick={() => navigate('/create-avatar')}
                         >
                           Try On
                         </Button>
