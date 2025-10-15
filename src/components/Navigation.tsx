@@ -1,4 +1,4 @@
-import { User, MessageCircle, Heart } from "lucide-react";
+import { User, MessageCircle, Heart, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -60,6 +60,14 @@ const Navigation = () => {
               onClick={handleChatClick}
             >
               <MessageCircle className="w-5 h-5" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-primary/10"
+              onClick={handleHeartClick}
+            >
+              <Star className="w-5 h-5" />
             </Button>
             <Button 
               variant="ghost" 
