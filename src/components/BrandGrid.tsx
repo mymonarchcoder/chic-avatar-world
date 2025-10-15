@@ -4,12 +4,13 @@ import { Card } from "./ui/card";
 import skimsLogo from "@/assets/skims-logo.png";
 import vuoriLogo from "@/assets/vuori-logo.png";
 import malbonLogo from "@/assets/malbon-logo.png";
+import lululemonLogo from "@/assets/lululemon-logo.png";
 
 const brands = [
   { id: 1, name: "SKIMS", category: "Premium Fashion", favorited: false, logo: skimsLogo },
   { id: 2, name: "Vuori", category: "Athleisure wear", favorited: true, logo: vuoriLogo },
   { id: 3, name: "Malbon Golf", category: "Athleisure wear", favorited: false, logo: malbonLogo },
-  { id: 4, name: "Active Life", category: "Sportswear", favorited: true, logo: null },
+  { id: 4, name: "lululemon", category: "Athleisure wear", favorited: true, logo: lululemonLogo },
   { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false, logo: null },
   { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false, logo: null },
 ];
