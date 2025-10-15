@@ -75,31 +75,33 @@ const Favorites = () => {
                     <h3 className="text-sm font-semibold mb-1 line-clamp-2">{item.name}</h3>
                     <p className="text-lg font-bold text-primary mb-3">${item.price}</p>
                     
-                    <div className="flex gap-2">
-                      <Button 
+                    <div className="space-y-2">
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button 
+                          size="sm"
+                          variant="outline"
+                          className="text-xs"
+                          onClick={() => openModal()}
+                        >
+                          Try On
+                        </Button>
+                        <Button 
+                          size="sm"
+                          className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs"
+                        >
+                          Add to Cart
+                        </Button>
+                      </div>
+                      <Button
                         size="sm"
-                        variant="outline"
-                        className="flex-1 text-xs"
-                        onClick={() => openModal()}
+                        variant="ghost"
+                        className="w-full text-destructive hover:bg-destructive/10 text-xs"
+                        onClick={() => removeFavorite(item.id)}
                       >
-                        Try On
-                      </Button>
-                      <Button 
-                        size="sm"
-                        className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 text-xs"
-                      >
-                        Add to Cart
+                        <Trash2 className="w-3 h-3 mr-1" />
+                        Remove
                       </Button>
                     </div>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="w-full text-destructive hover:bg-destructive/10 mt-2"
-                      onClick={() => removeFavorite(item.id)}
-                    >
-                      <Trash2 className="w-4 h-4 mr-1" />
-                      Remove
-                    </Button>
                   </div>
                 </Card>
               ))}
