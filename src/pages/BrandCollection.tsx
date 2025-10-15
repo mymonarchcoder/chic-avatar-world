@@ -3,6 +3,7 @@ import { Heart, ShoppingCart } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import performanceJogger from "@/assets/performance-jogger.png";
 import dailyLegging from "@/assets/daily-legging-skyblue.png";
+import metaPant from "@/assets/meta-pant.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -43,7 +44,7 @@ const brandProducts = {
         id: 4,
         name: "Meta Pant",
         price: 118,
-        image: "/placeholder.svg",
+        image: metaPant,
         colors: ["Black", "Navy", "Charcoal", "Sand"],
         isBestSeller: true,
       },

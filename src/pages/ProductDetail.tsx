@@ -4,6 +4,7 @@ import { Heart, ShoppingCart, Star } from "lucide-react";
 import haloWidelegPant from "@/assets/halo-wideleg-pant.png";
 import performanceJogger from "@/assets/performance-jogger.png";
 import dailyLegging from "@/assets/daily-legging-skyblue.png";
+import metaPant from "@/assets/meta-pant.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -80,6 +81,28 @@ const productData = {
     ],
     image: dailyLegging,
     isBestSeller: false,
+  },
+  "meta-pant": {
+    id: 4,
+    name: "Meta Pant",
+    brand: "Vuori",
+    price: 118,
+    description: "Elevated performance pant with a flattering flared silhouette for movement and style.",
+    features: [
+      "Flared leg design",
+      "Moisture-wicking fabric",
+      "4-way stretch",
+      "Hidden waistband pocket",
+    ],
+    sizes: ["XXS", "XS", "S", "M", "L", "XL"],
+    colors: [
+      { name: "Black", hex: "#000000" },
+      { name: "Navy", hex: "#1e3a5f" },
+      { name: "Charcoal", hex: "#4a4a4a" },
+      { name: "Sand", hex: "#c4a57b" },
+    ],
+    image: metaPant,
+    isBestSeller: true,
   },
 };
 
