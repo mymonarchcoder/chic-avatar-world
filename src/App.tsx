@@ -9,6 +9,7 @@ import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import Index from "./pages/Index";
 import CreateAvatar from "./pages/CreateAvatar";
 import Favorites from "./pages/Favorites";
+import FavoriteBrands from "./pages/FavoriteBrands";
 import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
 import Brands from "./pages/Brands";
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/create-avatar" element={<CreateAvatar />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/favorite-brands" element={<FavoriteBrands />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/brands" element={<Brands />} />

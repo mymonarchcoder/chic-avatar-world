@@ -19,6 +19,14 @@ const Navigation = () => {
     }
   };
 
+  const handleStarClick = () => {
+    if (location.pathname === '/favorite-brands') {
+      navigate('/');
+    } else {
+      navigate('/favorite-brands');
+    }
+  };
+
   const handleChatClick = () => {
     navigate('/chat');
   };
@@ -65,7 +73,7 @@ const Navigation = () => {
               variant="ghost" 
               size="icon" 
               className="hover:bg-primary/10"
-              onClick={handleHeartClick}
+              onClick={handleStarClick}
             >
               <Star className="w-5 h-5" />
             </Button>
