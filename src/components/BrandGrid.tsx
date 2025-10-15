@@ -1,14 +1,15 @@
 import { Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
+import skimsLogo from "@/assets/skims-logo.png";
 
 const brands = [
-  { id: 1, name: "Luxury Brand Co", category: "Premium Fashion", favorited: false },
-  { id: 2, name: "Urban Style", category: "Streetwear", favorited: true },
-  { id: 3, name: "Elegant Threads", category: "Formal Wear", favorited: false },
-  { id: 4, name: "Active Life", category: "Sportswear", favorited: true },
-  { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false },
-  { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false },
+  { id: 1, name: "SKIMS", category: "Premium Fashion", favorited: false, logo: true },
+  { id: 2, name: "Urban Style", category: "Streetwear", favorited: true, logo: false },
+  { id: 3, name: "Elegant Threads", category: "Formal Wear", favorited: false, logo: false },
+  { id: 4, name: "Active Life", category: "Sportswear", favorited: true, logo: false },
+  { id: 5, name: "Casual Comfort", category: "Everyday Style", favorited: false, logo: false },
+  { id: 6, name: "Trend Setters", category: "High Fashion", favorited: false, logo: false },
 ];
 
 const BrandGrid = () => {
@@ -30,7 +31,11 @@ const BrandGrid = () => {
               key={brand.id} 
               className="group relative overflow-hidden border-border hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="aspect-[4/1] bg-gradient-primary opacity-10 group-hover:opacity-20 transition-opacity" />
+              <div className="aspect-[4/1] bg-gradient-primary opacity-10 group-hover:opacity-20 transition-opacity flex items-center justify-center">
+                {brand.logo && (
+                  <img src={skimsLogo} alt={brand.name} className="h-12 object-contain" />
+                )}
+              </div>
               
               <div className="p-4">
                 <div className="flex items-start justify-between mb-2">
