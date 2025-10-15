@@ -4,6 +4,7 @@ import { Card } from "./ui/card";
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 
 interface CartItem {
   id: string;
@@ -20,6 +21,7 @@ const CartDrawer = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const { itemCount, refreshCart } = useCart();
 
   useEffect(() => {
     if (isOpen) {
@@ -48,6 +50,7 @@ const CartDrawer = () => {
       }
       
       setCartItems(data || []);
+      refreshCart();
     } catch (error) {
       console.error('Error fetching cart:', error);
       setCartItems([]);
@@ -155,7 +158,6 @@ const CartDrawer = () => {
   };
 
   const total = cartItems.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
-  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
     <>

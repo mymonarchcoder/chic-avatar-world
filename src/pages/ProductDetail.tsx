@@ -11,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const productData = {
   "halo-essential-wideleg-pant": {
@@ -111,6 +113,7 @@ const ProductDetail = () => {
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
   const { toast } = useToast();
+  const { refreshCart } = useCart();
   
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState(0);
@@ -129,7 +132,7 @@ const ProductDetail = () => {
     );
   }
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!selectedSize) {
       toast({
         title: "Please select a size",
@@ -137,11 +140,48 @@ const ProductDetail = () => {
       });
       return;
     }
-    
-    toast({
-      title: "Added to cart",
-      description: `${product.name} - ${product.colors[selectedColor].name} - Size ${selectedSize}`,
-    });
+
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast({
+          title: "Please log in",
+          description: "You need to be logged in to add items to cart",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const { error } = await supabase
+        .from('cart_items')
+        .insert({
+          user_id: user.id,
+          product_id: productId || '',
+          product_name: product.name,
+          product_brand: product.brand,
+          product_price: product.price,
+          quantity: 1,
+          size: selectedSize,
+          color: product.colors[selectedColor].name,
+        });
+
+      if (error) throw error;
+
+      refreshCart();
+      
+      toast({
+        title: "Added to cart",
+        description: `${product.name} - ${product.colors[selectedColor].name} - Size ${selectedSize}`,
+      });
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast({
+        title: "Error",
+        description: "Failed to add item to cart",
+        variant: "destructive",
+      });
+    }
   };
 
   return (

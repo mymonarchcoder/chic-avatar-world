@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AvatarModalProvider } from "@/contexts/AvatarModalContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
+import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import CreateAvatar from "./pages/CreateAvatar";
 import Favorites from "./pages/Favorites";
@@ -24,23 +25,25 @@ const App = () => (
     <TooltipProvider>
       <FavoritesProvider>
         <AvatarModalProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/create-avatar" element={<CreateAvatar />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/favorite-brands" element={<FavoriteBrands />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/brands" element={<Brands />} />
-            <Route path="/brand/:brandId" element={<BrandCollection />} />
-            <Route path="/product/:productId" element={<ProductDetail />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
+          <CartProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/create-avatar" element={<CreateAvatar />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/favorite-brands" element={<FavoriteBrands />} />
+              <Route path="/chat" element={<Chat />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/brands" element={<Brands />} />
+              <Route path="/brand/:brandId" element={<BrandCollection />} />
+              <Route path="/product/:productId" element={<ProductDetail />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </CartProvider>
         </AvatarModalProvider>
       </FavoritesProvider>
     </TooltipProvider>
