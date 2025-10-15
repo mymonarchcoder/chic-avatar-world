@@ -13,6 +13,7 @@ import FavoriteBrands from "./pages/FavoriteBrands";
 import Chat from "./pages/Chat";
 import Auth from "./pages/Auth";
 import Brands from "./pages/Brands";
+import BrandCollection from "./pages/BrandCollection";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/chat" element={<Chat />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/brands" element={<Brands />} />
+            <Route path="/brand/:brandId" element={<BrandCollection />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
             </Routes>

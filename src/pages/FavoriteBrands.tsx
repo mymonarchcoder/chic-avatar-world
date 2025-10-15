@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,6 +8,11 @@ import AvatarWidget from "@/components/AvatarWidget";
 
 const FavoriteBrands = () => {
   const { favoriteBrands } = useFavorites();
+  const navigate = useNavigate();
+
+  const getBrandId = (brandName: string) => {
+    return brandName.toLowerCase().replace(/\s+/g, '');
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -51,6 +57,7 @@ const FavoriteBrands = () => {
                     <Button 
                       size="sm"
                       className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
+                      onClick={() => navigate(`/brand/${getBrandId(brand.name)}`)}
                     >
                       Explore Collection
                     </Button>
