@@ -5,8 +5,34 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+
+const personalizeSchema = z.object({
+  userName: z.string().min(1, "Name is required"),
+  heightFt: z.string().optional(),
+  heightIn: z.string().optional(),
+  heightCm: z.string().optional(),
+  weight: z.string().optional(),
+  weightUnit: z.enum(["lbs", "kg"]),
+  bodyType: z.string().optional(),
+  topSize: z.string().optional(),
+  topFit: z.string().optional(),
+  bottomSize: z.string().optional(),
+  bottomFit: z.string().optional(),
+  shoeSize: z.string().optional(),
+  fitPriority: z.string().optional(),
+  colors: z.array(z.string()).optional(),
+  fabrics: z.array(z.string()).optional(),
+  occasions: z.array(z.string()).optional(),
+});
 
 const CreateAvatar = () => {
   const navigate = useNavigate();
@@ -16,7 +42,17 @@ const CreateAvatar = () => {
   const [bodyPhoto2, setBodyPhoto2] = useState<string | null>(null);
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [userName, setUserName] = useState("");
+  
+  const form = useForm<z.infer<typeof personalizeSchema>>({
+    resolver: zodResolver(personalizeSchema),
+    defaultValues: {
+      userName: "",
+      weightUnit: "lbs",
+      colors: [],
+      fabrics: [],
+      occasions: [],
+    },
+  });
 
   const handleImageUpload = useCallback(async (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -91,17 +127,13 @@ const CreateAvatar = () => {
     }
   };
 
-  const handleComplete = () => {
-    if (!userName.trim()) {
-      toast.error("Please enter your name");
-      return;
-    }
-    
-    // Store avatar data
+  const handleComplete = (data: z.infer<typeof personalizeSchema>) => {
+    // Store avatar data and preferences
     localStorage.setItem('userAvatar', processedImage || facePhoto || '');
-    localStorage.setItem('userName', userName);
+    localStorage.setItem('userName', data.userName);
+    localStorage.setItem('userPreferences', JSON.stringify(data));
     
-    toast.success(`Welcome, ${userName}! Your avatar is ready.`);
+    toast.success(`Welcome, ${data.userName}! Your avatar is ready.`);
     setStep(3);
     
     // Redirect to main app after a brief delay
@@ -325,59 +357,440 @@ const CreateAvatar = () => {
           )}
 
           {step === 2 && (
-            <div className="space-y-2">
-              <div className="text-center mb-2">
+            <div className="space-y-4">
+              <div className="text-center mb-3">
                 <h2 className="text-lg font-bold mb-0.5">Personalize Your Profile</h2>
                 <p className="text-muted-foreground text-xs tracking-wide">
-                  Tell us a bit about yourself
+                  Help us create the perfect fit for you
                 </p>
               </div>
 
-              <div className="flex flex-col md:flex-row gap-3 items-center">
-                <div className="flex-shrink-0">
-                  <div className="w-28 h-28 rounded-full overflow-hidden border-3 border-primary shadow-lg">
-                    <img 
-                      src={processedImage || facePhoto || ''}
-                      alt="Your avatar" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex-1 w-full space-y-2">
-                  <div>
-                    <Label htmlFor="userName" className="text-xs">What should we call you?</Label>
-                    <Input
-                      id="userName"
-                      type="text"
-                      placeholder="Enter your name"
-                      value={userName}
-                      onChange={(e) => setUserName(e.target.value)}
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div className="bg-muted/50 rounded-lg p-2">
-                    <div className="flex items-start gap-2">
-                      <User className="w-3 h-3 text-primary mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-xs mb-0.5">Your AI Shopping Assistant</h4>
-                        <p className="text-xs text-muted-foreground tracking-wide">
-                          Try on clothes virtually and get personalized style recommendations.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <Button 
-                    onClick={handleComplete} 
-                    className="w-full mt-1"
-                  >
-                    Complete Setup
-                    <ArrowRight className="w-3 h-3 ml-2" />
-                  </Button>
+              <div className="flex justify-center mb-4">
+                <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary shadow-lg">
+                  <img 
+                    src={processedImage || facePhoto || ''}
+                    alt="Your avatar" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
+
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(handleComplete)} className="space-y-6">
+                  {/* Basic Info */}
+                  <div className="space-y-3">
+                    <FormField
+                      control={form.control}
+                      name="userName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-semibold">What should we call you? *</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Enter your name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Core Body Data */}
+                  <div className="space-y-3">
+                    <h3 className="font-semibold text-sm">Core Body Data</h3>
+                    
+                    {/* Height */}
+                    <div className="space-y-2">
+                      <Label className="text-sm">Height</Label>
+                      <div className="grid grid-cols-2 gap-2">
+                        <FormField
+                          control={form.control}
+                          name="heightFt"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="ft" type="number" {...field} />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="heightIn"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input placeholder="in" type="number" {...field} />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <FormField
+                        control={form.control}
+                        name="heightCm"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input placeholder="or cm" type="number" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Weight */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <FormField
+                        control={form.control}
+                        name="weight"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">Weight</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Weight" type="number" {...field} />
+                            </FormControl>
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="weightUnit"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">Unit</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="lbs">lbs</SelectItem>
+                                <SelectItem value="kg">kg</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Body Type */}
+                    <FormField
+                      control={form.control}
+                      name="bodyType"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Body Type (Optional)</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select body type" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="athletic">Athletic</SelectItem>
+                              <SelectItem value="curvy">Curvy</SelectItem>
+                              <SelectItem value="lean">Lean</SelectItem>
+                              <SelectItem value="broad">Broad-shouldered</SelectItem>
+                              <SelectItem value="petite">Petite</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Top Size */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <FormField
+                        control={form.control}
+                        name="topSize"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">Top Size</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Size" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="xs">XS</SelectItem>
+                                <SelectItem value="s">S</SelectItem>
+                                <SelectItem value="m">M</SelectItem>
+                                <SelectItem value="l">L</SelectItem>
+                                <SelectItem value="xl">XL</SelectItem>
+                                <SelectItem value="xxl">XXL</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="topFit"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">Fit</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Fit" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="fitted">Fitted</SelectItem>
+                                <SelectItem value="true">True to Size</SelectItem>
+                                <SelectItem value="oversized">Oversized</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Bottom Size */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <FormField
+                        control={form.control}
+                        name="bottomSize"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">Bottom Size</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Size" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="xs">XS</SelectItem>
+                                <SelectItem value="s">S</SelectItem>
+                                <SelectItem value="m">M</SelectItem>
+                                <SelectItem value="l">L</SelectItem>
+                                <SelectItem value="xl">XL</SelectItem>
+                                <SelectItem value="xxl">XXL</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="bottomFit"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel className="text-sm">Fit</FormLabel>
+                            <Select onValueChange={field.onChange} value={field.value}>
+                              <FormControl>
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Fit" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="fitted">Fitted</SelectItem>
+                                <SelectItem value="true">True to Size</SelectItem>
+                                <SelectItem value="oversized">Oversized</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+
+                    {/* Shoe Size */}
+                    <FormField
+                      control={form.control}
+                      name="shoeSize"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Shoe Size (Optional)</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., 9, 10.5" {...field} />
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Fit Priorities */}
+                    <FormField
+                      control={form.control}
+                      name="fitPriority"
+                      render={({ field }) => (
+                        <FormItem className="space-y-3">
+                          <FormLabel className="text-sm">Fit Priorities</FormLabel>
+                          <FormControl>
+                            <RadioGroup
+                              onValueChange={field.onChange}
+                              value={field.value}
+                              className="flex flex-col space-y-1"
+                            >
+                              <FormItem className="flex items-center space-x-2 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value="comfort" />
+                                </FormControl>
+                                <FormLabel className="font-normal text-sm">
+                                  Comfort
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-2 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value="performance" />
+                                </FormControl>
+                                <FormLabel className="font-normal text-sm">
+                                  Performance
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-2 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value="style" />
+                                </FormControl>
+                                <FormLabel className="font-normal text-sm">
+                                  Style / Trend
+                                </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-2 space-y-0">
+                                <FormControl>
+                                  <RadioGroupItem value="sustainability" />
+                                </FormControl>
+                                <FormLabel className="font-normal text-sm">
+                                  Sustainability
+                                </FormLabel>
+                              </FormItem>
+                            </RadioGroup>
+                          </FormControl>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  {/* Style & Fit Preferences */}
+                  <div className="space-y-3">
+                    <h3 className="font-semibold text-sm">Style & Fit Preferences</h3>
+                    
+                    {/* Favorite Colors */}
+                    <FormField
+                      control={form.control}
+                      name="colors"
+                      render={() => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Favorite Colors (select multiple)</FormLabel>
+                          <div className="grid grid-cols-2 gap-2">
+                            {["Neutrals", "Brights", "Pastels", "Earth Tones", "Black & White", "Jewel Tones"].map((color) => (
+                              <FormField
+                                key={color}
+                                control={form.control}
+                                name="colors"
+                                render={({ field }) => (
+                                  <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                      <Checkbox
+                                        checked={field.value?.includes(color)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? field.onChange([...field.value || [], color])
+                                            : field.onChange(
+                                                field.value?.filter((value) => value !== color)
+                                              );
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="font-normal text-sm">
+                                      {color}
+                                    </FormLabel>
+                                  </FormItem>
+                                )}
+                              />
+                            ))}
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Preferred Fabrics */}
+                    <FormField
+                      control={form.control}
+                      name="fabrics"
+                      render={() => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Preferred Fabrics (select multiple)</FormLabel>
+                          <div className="grid grid-cols-2 gap-2">
+                            {["Cotton", "Modal", "Bamboo", "Recycled Poly", "Linen", "Merino Wool"].map((fabric) => (
+                              <FormField
+                                key={fabric}
+                                control={form.control}
+                                name="fabrics"
+                                render={({ field }) => (
+                                  <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                      <Checkbox
+                                        checked={field.value?.includes(fabric)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? field.onChange([...field.value || [], fabric])
+                                            : field.onChange(
+                                                field.value?.filter((value) => value !== fabric)
+                                              );
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="font-normal text-sm">
+                                      {fabric}
+                                    </FormLabel>
+                                  </FormItem>
+                                )}
+                              />
+                            ))}
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Occasion Tags */}
+                    <FormField
+                      control={form.control}
+                      name="occasions"
+                      render={() => (
+                        <FormItem>
+                          <FormLabel className="text-sm">Occasion Tags (select multiple)</FormLabel>
+                          <div className="grid grid-cols-2 gap-2">
+                            {["Lounge", "Gym", "Casual Out", "Work From Home", "Athleisure", "Travel"].map((occasion) => (
+                              <FormField
+                                key={occasion}
+                                control={form.control}
+                                name="occasions"
+                                render={({ field }) => (
+                                  <FormItem className="flex items-center space-x-2 space-y-0">
+                                    <FormControl>
+                                      <Checkbox
+                                        checked={field.value?.includes(occasion)}
+                                        onCheckedChange={(checked) => {
+                                          return checked
+                                            ? field.onChange([...field.value || [], occasion])
+                                            : field.onChange(
+                                                field.value?.filter((value) => value !== occasion)
+                                              );
+                                        }}
+                                      />
+                                    </FormControl>
+                                    <FormLabel className="font-normal text-sm">
+                                      {occasion}
+                                    </FormLabel>
+                                  </FormItem>
+                                )}
+                              />
+                            ))}
+                          </div>
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full">
+                    Complete Setup
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </form>
+              </Form>
             </div>
           )}
 
