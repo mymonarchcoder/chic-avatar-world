@@ -4,14 +4,15 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import { useAvatarItems } from "@/contexts/AvatarItemsContext";
 import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
+  const { selectedItems, addItem, removeItem, clearItems } = useAvatarItems();
   const [processedAvatar, setProcessedAvatar] = useState<string | null>(null);
-  const [selectedItems, setSelectedItems] = useState<{[key: string]: any}>({});
   const [avatarDimensions, setAvatarDimensions] = useState<{width: number, height: number} | null>(null);
   const [isRemoving, setIsRemoving] = useState<string | null>(null);
   const avatarRef = useRef<HTMLDivElement>(null);
@@ -58,20 +59,13 @@ const AvatarWidget = () => {
       // If the same item is already selected, remove it with fade-out animation
       setIsRemoving(item.category);
       setTimeout(() => {
-        setSelectedItems(prev => {
-          const newItems = { ...prev };
-          delete newItems[item.category];
-          return newItems;
-        });
+        removeItem(item.category);
         setIsRemoving(null);
       }, 300); // Match the fade-out duration
       toast.success(`Removed ${item.name}`);
     } else {
       // Otherwise, select this item (try on)
-      setSelectedItems(prev => ({
-        ...prev,
-        [item.category]: item
-      }));
+      addItem(item);
       toast.success(`Trying on ${item.name}`);
     }
   };
@@ -471,7 +465,7 @@ const AvatarWidget = () => {
               <div className="mt-3 flex gap-2">
                 <Button 
                   onClick={() => {
-                    setSelectedItems({});
+                    clearItems();
                     toast.success("Cleared all items");
                   }}
                   className="flex-1 bg-gradient-primary hover:opacity-90 text-xs"

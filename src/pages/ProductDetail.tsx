@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import { useAvatarItems } from "@/contexts/AvatarItemsContext";
 import { useToast } from "@/hooks/use-toast";
 import { useCart } from "@/contexts/CartContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -112,6 +113,7 @@ const ProductDetail = () => {
   const { productId } = useParams<{ productId: string }>();
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
+  const { addItem } = useAvatarItems();
   const { toast } = useToast();
   const { refreshCart } = useCart();
   
@@ -170,8 +172,20 @@ const ProductDetail = () => {
 
       refreshCart();
       
+      // Add to avatar try-on list
+      addItem({
+        name: product.name,
+        category: "Bottoms", // Categorize based on product type
+        price: product.price,
+        brand: product.brand,
+        image: product.image,
+      });
+      
+      // Open avatar modal to show the try-on
+      openModal();
+      
       toast({
-        title: "Added to cart",
+        title: "Added to cart & try-on",
         description: `${product.name} - ${product.colors[selectedColor].name} - Size ${selectedSize}`,
       });
     } catch (error) {

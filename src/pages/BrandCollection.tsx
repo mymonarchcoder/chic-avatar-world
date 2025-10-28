@@ -12,6 +12,8 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import { useAvatarItems } from "@/contexts/AvatarItemsContext";
+import { toast } from "sonner";
 
 // Mock product data
 const brandProducts = {
@@ -79,6 +81,7 @@ const BrandCollection = () => {
   const { brandId } = useParams<{ brandId: string }>();
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
+  const { addItem } = useAvatarItems();
   const { addFavorite, removeFavorite, favorites } = useFavorites();
   
   const brandData = brandProducts[brandId as keyof typeof brandProducts];
@@ -137,6 +140,24 @@ const BrandCollection = () => {
       "Sky Blue": "bg-sky-300",
     };
     return colorMap[color] || "bg-gray-400";
+  };
+
+  const handleAddToCart = (product: typeof brandData.products[0], e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    // Add to avatar try-on list
+    addItem({
+      name: product.name,
+      category: "Bottoms",
+      price: product.price,
+      brand: brandData.name,
+      image: product.image,
+    });
+    
+    // Open avatar modal
+    openModal();
+    
+    toast.success(`${product.name} added to Mix & Match!`);
   };
 
   return (
@@ -218,11 +239,17 @@ const BrandCollection = () => {
                   <div className="grid grid-cols-2 gap-2">
                     <Button 
                       variant="outline"
-                      onClick={openModal}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal();
+                      }}
                     >
                       Try On
                     </Button>
-                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
+                    <Button 
+                      className="bg-primary text-primary-foreground hover:bg-primary/90"
+                      onClick={(e) => handleAddToCart(product, e)}
+                    >
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Add
                     </Button>
