@@ -8,6 +8,7 @@ import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
+import Rotation360Widget from "./Rotation360Widget";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
@@ -414,6 +415,14 @@ const AvatarWidget = () => {
                     />
                   );
                 })}
+                
+                {/* 360 Rotation Widget */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10">
+                  <Rotation360Widget 
+                    rotation={rotation} 
+                    onRotationChange={setRotation} 
+                  />
+                </div>
               </div>
             </div>
 
