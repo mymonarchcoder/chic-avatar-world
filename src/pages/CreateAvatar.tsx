@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
-import avatarShowcase from "@/assets/avatar-showcase.png";
+import avatarShowcase from "@/assets/avatar-showcase-nobg.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -796,7 +796,7 @@ const CreateAvatar = () => {
                     <img 
                       src={avatarShowcase} 
                       alt="Your avatar" 
-                      className="w-48 h-auto rounded-lg shadow-lg"
+                      className="w-96 h-auto"
                     />
                   </div>
                   <Button 
