@@ -16,12 +16,12 @@ import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 const personalizeSchema = z.object({
-  userName: z.string().min(1, "Name is required"),
+  userName: z.string().optional(),
   heightFt: z.string().optional(),
   heightIn: z.string().optional(),
   heightCm: z.string().optional(),
   weight: z.string().optional(),
-  weightUnit: z.enum(["lbs", "kg"]),
+  weightUnit: z.enum(["lbs", "kg"]).optional(),
   bodyType: z.string().optional(),
   topSize: z.string().optional(),
   topFit: z.string().optional(),
@@ -760,16 +760,34 @@ const CreateAvatar = () => {
           )}
 
           {step === 3 && (
-            <div className="text-center py-4 space-y-2 animate-fade-in">
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-1">
-                <CheckCircle2 className="w-8 h-8 text-primary" />
+            <div className="text-center py-8 space-y-6 animate-fade-in">
+              {/* 3D Avatar Loading Animation */}
+              <div className="relative w-32 h-32 mx-auto">
+                <div className="absolute inset-0 rounded-full border-4 border-[hsl(225_73%_57%)] border-t-transparent animate-spin"></div>
+                <div className="absolute inset-2 rounded-full border-4 border-[hsl(225_73%_57%)]/40 border-b-transparent animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <User className="w-12 h-12 text-[hsl(225_73%_57%)] animate-pulse" />
+                </div>
               </div>
-              <h2 className="text-xl font-bold">You're All Set!</h2>
-              <p className="text-muted-foreground text-xs max-w-md mx-auto tracking-wide">
-                Your AI shopping avatar is ready. Get ready for personalized virtual try-ons!
-              </p>
-              <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-primary mt-1"></div>
-              <p className="text-xs text-muted-foreground tracking-wide">Redirecting...</p>
+              
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold">We're building your digital twin… just a sec!</h2>
+                <div className="space-y-2 max-w-md mx-auto">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full bg-[hsl(225_73%_57%)] animate-[slide-in-right_2s_ease-in-out_infinite]"></div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 p-6 bg-[hsl(225_73%_57%)]/10 rounded-lg border-2 border-[hsl(225_73%_57%)] animate-scale-in">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-4">
+                    <CheckCircle2 className="w-10 h-10 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Your avatar is ready!</h3>
+                  <p className="text-muted-foreground text-sm max-w-md mx-auto">
+                    You'll get exclusive early access to try-on looks from your favorite brands!
+                  </p>
+                </div>
+              </div>
             </div>
           )}
         </Card>
