@@ -12,10 +12,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import { useAvatarItems } from "@/contexts/AvatarItemsContext";
-import { useCart } from "@/contexts/CartContext";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
 
 // Mock product data
 const brandProducts = {
@@ -83,8 +79,6 @@ const BrandCollection = () => {
   const { brandId } = useParams<{ brandId: string }>();
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
-  const { addItem } = useAvatarItems();
-  const { refreshCart } = useCart();
   const { addFavorite, removeFavorite, favorites } = useFavorites();
   
   const brandData = brandProducts[brandId as keyof typeof brandProducts];
@@ -143,71 +137,6 @@ const BrandCollection = () => {
       "Sky Blue": "bg-sky-300",
     };
     return colorMap[color] || "bg-gray-400";
-  };
-
-  const handleAddToCart = async (product: typeof brandData.products[0], e: React.MouseEvent) => {
-    e.stopPropagation();
-    
-    try {
-      const { data: { user } } = await supabase.auth.getUser();
-      
-      // If user is logged in, save to database
-      if (user) {
-        const { error } = await supabase
-          .from('cart_items')
-          .insert({
-            user_id: user.id,
-            product_id: getProductId(product.name),
-            product_name: product.name,
-            product_brand: brandData.name,
-            product_price: product.price,
-            quantity: 1,
-            color: product.colors[0],
-          });
-
-        if (error) throw error;
-      } else {
-        // For guest users, save to localStorage
-        const guestCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
-        const existingItemIndex = guestCart.findIndex(
-          (item: any) => item.product_id === getProductId(product.name)
-        );
-        
-        if (existingItemIndex >= 0) {
-          guestCart[existingItemIndex].quantity += 1;
-        } else {
-          guestCart.push({
-            product_id: getProductId(product.name),
-            product_name: product.name,
-            product_brand: brandData.name,
-            product_price: product.price,
-            quantity: 1,
-            color: product.colors[0],
-          });
-        }
-        
-        localStorage.setItem('guestCart', JSON.stringify(guestCart));
-      }
-
-      refreshCart();
-      
-      // Add to avatar try-on list
-      addItem({
-        name: product.name,
-        category: "Bottoms",
-        price: product.price,
-        brand: brandData.name,
-        image: product.image,
-      });
-      
-      // Open avatar modal
-      openModal();
-      
-      toast.success(`${product.name} added to cart & Mix & Match!`);
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      toast.error("Failed to add item to cart");
-    }
   };
 
   return (
@@ -289,17 +218,11 @@ const BrandCollection = () => {
                   <div className="grid grid-cols-2 gap-2">
                     <Button 
                       variant="outline"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        openModal();
-                      }}
+                      onClick={openModal}
                     >
                       Try On
                     </Button>
-                    <Button 
-                      className="bg-primary text-primary-foreground hover:bg-primary/90"
-                      onClick={(e) => handleAddToCart(product, e)}
-                    >
+                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                       <ShoppingCart className="w-4 h-4 mr-2" />
                       Add
                     </Button>

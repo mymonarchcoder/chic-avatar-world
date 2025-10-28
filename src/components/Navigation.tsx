@@ -1,32 +1,15 @@
-import { User, MessageCircle, Heart, Star, LogOut } from "lucide-react";
+import { User, MessageCircle, Heart, Star } from "lucide-react";
 import { Button } from "./ui/button";
 import CartDrawer from "./CartDrawer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import { supabase } from "@/integrations/supabase/client";
-import { useState, useEffect } from "react";
-import { useToast } from "@/hooks/use-toast";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { favoriteCount } = useFavorites();
   const { openModal } = useAvatarModal();
-  const { toast } = useToast();
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setIsLoggedIn(!!session);
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      setIsLoggedIn(!!session);
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
 
   const handleHeartClick = () => {
     if (location.pathname === '/favorites') {
@@ -46,23 +29,6 @@ const Navigation = () => {
 
   const handleChatClick = () => {
     navigate('/chat');
-  };
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      toast({
-        title: "Error",
-        description: "Failed to log out",
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Logged out",
-        description: "See you soon!",
-      });
-      navigate('/');
-    }
   };
 
   return (
@@ -130,24 +96,13 @@ const Navigation = () => {
               <User className="w-5 h-5" />
             </Button>
             <CartDrawer />
-            {isLoggedIn ? (
-              <Button 
-                variant="ghost" 
-                className="hover:bg-primary/10"
-                onClick={handleLogout}
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Log Out
-              </Button>
-            ) : (
-              <Button 
-                variant="ghost" 
-                className="hover:bg-primary/10"
-                onClick={() => navigate('/auth')}
-              >
-                Log In
-              </Button>
-            )}
+            <Button 
+              variant="ghost" 
+              className="hover:bg-primary/10"
+              onClick={() => navigate('/auth')}
+            >
+              Log In
+            </Button>
           </div>
         </div>
       </div>

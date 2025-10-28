@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Upload, User, Mail, Lock } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,76 +7,20 @@ import { Input } from "@/components/ui/input";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 const Auth = () => {
   const { openModal } = useAvatarModal();
   const { toast } = useToast();
-  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    // Check if user is already logged in
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) {
-        navigate('/');
-      }
-    });
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        navigate('/');
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
-
-  const handleAuth = async (e: React.FormEvent) => {
+  const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-
-    try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Logged in!",
-          description: "Welcome back to VERS",
-        });
-      } else {
-        const { error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/`,
-          },
-        });
-
-        if (error) throw error;
-
-        toast({
-          title: "Account created!",
-          description: "Welcome to VERS",
-        });
-      }
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Something went wrong",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
+    toast({
+      title: isLogin ? "Logged in!" : "Account created!",
+      description: "Welcome to VERS",
+    });
   };
 
   return (
@@ -133,12 +76,8 @@ const Auth = () => {
                   </div>
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-primary hover:bg-primary/90 py-6 text-lg"
-                  disabled={loading}
-                >
-                  {loading ? "Loading..." : (isLogin ? "Log In" : "Create Account")}
+                <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-6 text-lg">
+                  {isLogin ? "Log In" : "Create Account"}
                 </Button>
               </form>
 

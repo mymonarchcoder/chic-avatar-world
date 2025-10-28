@@ -2,7 +2,6 @@ import { Star } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
-import { useNavigate } from "react-router-dom";
 import skimsLogo from "@/assets/skims-logo.png";
 import vuoriLogo from "@/assets/vuori-logo.png";
 import malbonLogo from "@/assets/malbon-logo.png";
@@ -21,12 +20,6 @@ const brands = [
 
 const BrandGrid = () => {
   const { toggleFavoriteBrand, isBrandFavorited } = useFavorites();
-  const navigate = useNavigate();
-
-  const handleExploreCollection = (brandName: string) => {
-    const brandId = brandName.toLowerCase().replace(/\s+/g, '');
-    navigate(`/brand/${brandId}`);
-  };
   
   return (
     <section className="py-24 bg-muted/30">
@@ -71,7 +64,6 @@ const BrandGrid = () => {
                 <Button 
                   size="sm"
                   className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
-                  onClick={() => handleExploreCollection(brand.name)}
                 >
                   Explore Collection
                 </Button>
