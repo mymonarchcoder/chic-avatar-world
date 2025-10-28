@@ -20,11 +20,6 @@ const Hero = () => {
             Your Personal Style
           </h2>
           
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-foreground/10 rounded-full border border-foreground/20">
-            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-foreground" />
-            <span className="text-xs sm:text-sm font-medium text-foreground">AI-Powered Shopping Experience</span>
-          </div>
-          
           <p className="text-base sm:text-xl text-foreground max-w-2xl mx-auto px-2 sm:px-0">
             Discover your perfect look with AI-powered recommendations, virtual try-ons, 
             and curated collections from your favorite brands.
