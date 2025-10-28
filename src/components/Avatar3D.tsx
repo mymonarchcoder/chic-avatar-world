@@ -32,13 +32,13 @@ export const Avatar3D = ({ className = "w-96 h-96" }: Avatar3DProps) => {
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Suspense fallback={null}>
           <AvatarModel />
+          <OrbitControls 
+            enableZoom={true}
+            enablePan={false}
+            minDistance={2}
+            maxDistance={5}
+          />
         </Suspense>
-        <OrbitControls 
-          enableZoom={true}
-          enablePan={false}
-          minDistance={2}
-          maxDistance={5}
-        />
       </Canvas>
     </div>
   );
