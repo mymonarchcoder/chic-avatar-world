@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import avatarShowcase from "@/assets/avatar-showcase.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -783,9 +784,22 @@ const CreateAvatar = () => {
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Your avatar is ready!</h3>
-                  <p className="text-muted-foreground text-sm max-w-md mx-auto">
+                  <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6">
                     You'll get exclusive early access to try-on looks from your favorite brands!
                   </p>
+                  <div className="flex justify-center">
+                    <img 
+                      src={avatarShowcase} 
+                      alt="Your avatar" 
+                      className="w-48 h-auto rounded-lg shadow-lg"
+                    />
+                  </div>
+                  <Button 
+                    className="mt-6" 
+                    onClick={() => navigate('/')}
+                  >
+                    Let's go!
+                  </Button>
                 </div>
               </div>
             </div>
