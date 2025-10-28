@@ -377,13 +377,13 @@ const AvatarWidget = () => {
             <div className="flex flex-col justify-center items-end h-full flex-shrink-0 flex-1 overflow-visible">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-end overflow-visible"
+                className="relative flex items-center justify-center overflow-visible h-full w-full max-w-md"
               >
                 {/* Full-Body Avatar - Larger */}
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-full w-auto object-contain cursor-grab active:cursor-grabbing select-none"
+                  className="max-h-[80vh] w-auto object-contain cursor-grab active:cursor-grabbing select-none"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
                     transition: isDragging ? 'none' : 'all 0.3s ease-in-out',
