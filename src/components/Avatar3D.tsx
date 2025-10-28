@@ -2,10 +2,10 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { Suspense } from 'react';
 import * as THREE from 'three';
-import avatarModel from "@/assets/avatar-model.png";
+import avatarTurnaround from "@/assets/avatar-360-turnaround.png";
 
 function AvatarModel() {
-  const texture = useTexture(avatarModel);
+  const texture = useTexture(avatarTurnaround);
   
   // Create a plane for the avatar model
   return (
