@@ -383,13 +383,12 @@ const AvatarWidget = () => {
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-screen w-auto object-contain object-right cursor-grab active:cursor-grabbing select-none"
+                  className="h-full w-auto object-contain cursor-grab active:cursor-grabbing select-none"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
                     transition: isDragging ? 'none' : 'all 0.3s ease-in-out',
-                    marginRight: '-2rem',
-                    transform: `scale(3) rotateY(${rotation}deg)`,
-                    transformOrigin: 'right center'
+                    transform: `rotateY(${rotation}deg)`,
+                    transformOrigin: 'center center'
                   }}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
