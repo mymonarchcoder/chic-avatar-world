@@ -186,8 +186,7 @@ const CreateAvatar = () => {
                 {/* Full Body Scan Button - Moved to top */}
                 <div>
                   <Button
-                    variant="default"
-                    className="w-full h-16"
+                    className="w-full h-16 bg-primary hover:bg-primary/90"
                     onClick={handleFullBodyScan}
                   >
                     <Sparkles className="w-5 h-5 mr-2" />
