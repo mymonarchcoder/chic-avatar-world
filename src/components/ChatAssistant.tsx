@@ -32,7 +32,7 @@ const ChatAssistant = () => {
     <>
       <Button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full shadow-elegant bg-gradient-primary hover:opacity-90"
+        className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full shadow-elegant bg-foreground text-background hover:bg-foreground/90"
         size="icon"
       >
         {isOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-6 h-6" />}
