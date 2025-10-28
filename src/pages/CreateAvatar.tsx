@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
-import avatarShowcase from "@/assets/avatar-showcase-nobg.png";
+import avatarShowcase from "@/assets/avatar-showcase-clean.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
