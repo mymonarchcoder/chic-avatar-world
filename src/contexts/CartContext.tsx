@@ -16,7 +16,10 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const { data: { user } } = await supabase.auth.getUser();
       
       if (!user) {
-        setItemCount(0);
+        // For guest users, count from localStorage
+        const guestCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
+        const total = guestCart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+        setItemCount(total);
         return;
       }
 

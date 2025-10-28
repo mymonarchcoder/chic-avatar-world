@@ -146,29 +146,45 @@ const ProductDetail = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       
-      if (!user) {
-        toast({
-          title: "Please log in",
-          description: "You need to be logged in to add items to cart",
-          variant: "destructive",
-        });
-        return;
+      // If user is logged in, save to database
+      if (user) {
+        const { error } = await supabase
+          .from('cart_items')
+          .insert({
+            user_id: user.id,
+            product_id: productId || '',
+            product_name: product.name,
+            product_brand: product.brand,
+            product_price: product.price,
+            quantity: 1,
+            size: selectedSize,
+            color: product.colors[selectedColor].name,
+          });
+
+        if (error) throw error;
+      } else {
+        // For guest users, save to localStorage
+        const guestCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
+        const existingItemIndex = guestCart.findIndex(
+          (item: any) => item.product_id === productId
+        );
+        
+        if (existingItemIndex >= 0) {
+          guestCart[existingItemIndex].quantity += 1;
+        } else {
+          guestCart.push({
+            product_id: productId || '',
+            product_name: product.name,
+            product_brand: product.brand,
+            product_price: product.price,
+            quantity: 1,
+            size: selectedSize,
+            color: product.colors[selectedColor].name,
+          });
+        }
+        
+        localStorage.setItem('guestCart', JSON.stringify(guestCart));
       }
-
-      const { error } = await supabase
-        .from('cart_items')
-        .insert({
-          user_id: user.id,
-          product_id: productId || '',
-          product_name: product.name,
-          product_brand: product.brand,
-          product_price: product.price,
-          quantity: 1,
-          size: selectedSize,
-          color: product.colors[selectedColor].name,
-        });
-
-      if (error) throw error;
 
       refreshCart();
       

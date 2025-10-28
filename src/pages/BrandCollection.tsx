@@ -151,24 +151,43 @@ const BrandCollection = () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
       
-      if (!user) {
-        toast.error("Please log in to add items to cart");
-        return;
+      // If user is logged in, save to database
+      if (user) {
+        const { error } = await supabase
+          .from('cart_items')
+          .insert({
+            user_id: user.id,
+            product_id: getProductId(product.name),
+            product_name: product.name,
+            product_brand: brandData.name,
+            product_price: product.price,
+            quantity: 1,
+            color: product.colors[0],
+          });
+
+        if (error) throw error;
+      } else {
+        // For guest users, save to localStorage
+        const guestCart = JSON.parse(localStorage.getItem('guestCart') || '[]');
+        const existingItemIndex = guestCart.findIndex(
+          (item: any) => item.product_id === getProductId(product.name)
+        );
+        
+        if (existingItemIndex >= 0) {
+          guestCart[existingItemIndex].quantity += 1;
+        } else {
+          guestCart.push({
+            product_id: getProductId(product.name),
+            product_name: product.name,
+            product_brand: brandData.name,
+            product_price: product.price,
+            quantity: 1,
+            color: product.colors[0],
+          });
+        }
+        
+        localStorage.setItem('guestCart', JSON.stringify(guestCart));
       }
-
-      const { error } = await supabase
-        .from('cart_items')
-        .insert({
-          user_id: user.id,
-          product_id: getProductId(product.name),
-          product_name: product.name,
-          product_brand: brandData.name,
-          product_price: product.price,
-          quantity: 1,
-          color: product.colors[0],
-        });
-
-      if (error) throw error;
 
       refreshCart();
       
