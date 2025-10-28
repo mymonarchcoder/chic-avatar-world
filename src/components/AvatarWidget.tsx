@@ -383,7 +383,7 @@ const AvatarWidget = () => {
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="max-h-[80vh] w-auto object-contain cursor-grab active:cursor-grabbing select-none"
+                  className="h-full w-auto object-contain cursor-grab active:cursor-grabbing select-none"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
                     transition: isDragging ? 'none' : 'all 0.3s ease-in-out',
