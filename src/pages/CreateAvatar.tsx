@@ -116,7 +116,7 @@ const CreateAvatar = () => {
         {/* Header */}
         <div className="text-center mb-2 animate-fade-in">
           <h1 className="text-2xl md:text-3xl font-bold mb-0.5">Welcome to VERS!</h1>
-          <p className="text-muted-foreground text-xs">Create Your AI Shopping Avatar</p>
+          <p className="text-muted-foreground text-xs tracking-wider">Create Your AI Shopping Avatar</p>
         </div>
 
         {/* Progress Steps */}
@@ -164,20 +164,20 @@ const CreateAvatar = () => {
             <div className="space-y-2">
               <div className="text-center mb-2">
                 <h2 className="text-lg font-bold mb-0.5">Upload Your Photos</h2>
-                <p className="text-muted-foreground text-xs">
+                <p className="text-muted-foreground text-xs tracking-wide">
                   Create your AI shopping avatar by uploading a few photos. These help us render your body and facial details accurately.
                 </p>
               </div>
 
               <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 mb-3">
-                <h3 className="font-semibold text-sm mb-2">Upload Instructions:</h3>
-                <p className="text-xs text-muted-foreground mb-2">Please upload the following:</p>
-                <ul className="text-xs text-muted-foreground space-y-1.5 ml-4 list-disc">
+                <h3 className="font-semibold text-sm mb-2 tracking-wide">Upload Instructions:</h3>
+                <p className="text-xs text-muted-foreground mb-2 tracking-wide">Please upload the following:</p>
+                <ul className="text-xs text-muted-foreground space-y-1.5 ml-4 list-disc tracking-wide">
                   <li>1 clear, front-facing close-up of your face</li>
                   <li>1–2 full-body photos standing straight, well-lit, against a plain background</li>
                   <li><span className="text-muted-foreground/80">Optional:</span> Full-body scan (use camera mode to capture a 360° view if available)</li>
                 </ul>
-                <p className="text-xs text-muted-foreground mt-2">
+                <p className="text-xs text-muted-foreground mt-2 tracking-wide">
                   <span className="font-medium">Supported formats:</span> PNG, JPG up to 10MB each
                 </p>
               </div>
@@ -193,7 +193,7 @@ const CreateAvatar = () => {
                           <img src={facePhoto} alt="Face" className="w-16 h-16 object-cover rounded-lg" />
                           <div className="flex-1">
                             <p className="text-sm font-medium">Face photo uploaded</p>
-                            <p className="text-xs text-muted-foreground">Click to change</p>
+                            <p className="text-xs text-muted-foreground tracking-wide">Click to change</p>
                           </div>
                         </div>
                       ) : (
@@ -201,7 +201,7 @@ const CreateAvatar = () => {
                           <Upload className="w-6 h-6 text-primary" />
                           <div>
                             <p className="font-medium text-sm">Upload face close-up</p>
-                            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+                            <p className="text-xs text-muted-foreground tracking-wide">PNG, JPG up to 10MB</p>
                           </div>
                         </>
                       )}
@@ -226,7 +226,7 @@ const CreateAvatar = () => {
                           <img src={bodyPhoto1} alt="Body 1" className="w-16 h-16 object-cover rounded-lg" />
                           <div className="flex-1">
                             <p className="text-sm font-medium">Full-body photo uploaded</p>
-                            <p className="text-xs text-muted-foreground">Click to change</p>
+                            <p className="text-xs text-muted-foreground tracking-wide">Click to change</p>
                           </div>
                         </div>
                       ) : (
@@ -234,7 +234,7 @@ const CreateAvatar = () => {
                           <Upload className="w-6 h-6 text-primary" />
                           <div>
                             <p className="font-medium text-sm">Upload full-body photo</p>
-                            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+                            <p className="text-xs text-muted-foreground tracking-wide">PNG, JPG up to 10MB</p>
                           </div>
                         </>
                       )}
@@ -259,7 +259,7 @@ const CreateAvatar = () => {
                           <img src={bodyPhoto2} alt="Body 2" className="w-16 h-16 object-cover rounded-lg" />
                           <div className="flex-1">
                             <p className="text-sm font-medium">Full-body photo uploaded</p>
-                            <p className="text-xs text-muted-foreground">Click to change</p>
+                            <p className="text-xs text-muted-foreground tracking-wide">Click to change</p>
                           </div>
                         </div>
                       ) : (
@@ -267,7 +267,7 @@ const CreateAvatar = () => {
                           <Upload className="w-6 h-6 text-muted-foreground" />
                           <div>
                             <p className="font-medium text-sm">Upload second full-body photo</p>
-                            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+                            <p className="text-xs text-muted-foreground tracking-wide">PNG, JPG up to 10MB</p>
                           </div>
                         </>
                       )}
@@ -308,10 +308,10 @@ const CreateAvatar = () => {
               </div>
 
               <div className="bg-muted/50 rounded-lg p-3 mt-2">
-                <h3 className="font-semibold text-sm mb-2">
+                <h3 className="font-semibold text-sm mb-2 tracking-wide">
                   Tips for best results:
                 </h3>
-                <ul className="text-xs text-muted-foreground space-y-1 ml-4 list-disc">
+                <ul className="text-xs text-muted-foreground space-y-1 ml-4 list-disc tracking-wide">
                   <li>Use a well-lit area with a neutral background</li>
                   <li>Face the camera directly with a natural expression</li>
                   <li>Ensure your full face and shoulders are visible in the close-up</li>
@@ -326,7 +326,7 @@ const CreateAvatar = () => {
             <div className="space-y-2">
               <div className="text-center mb-2">
                 <h2 className="text-lg font-bold mb-0.5">Personalize Your Profile</h2>
-                <p className="text-muted-foreground text-xs">
+                <p className="text-muted-foreground text-xs tracking-wide">
                   Tell us a bit about yourself
                 </p>
               </div>
@@ -360,7 +360,7 @@ const CreateAvatar = () => {
                       <User className="w-3 h-3 text-primary mt-0.5" />
                       <div>
                         <h4 className="font-semibold text-xs mb-0.5">Your AI Shopping Assistant</h4>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs text-muted-foreground tracking-wide">
                           Try on clothes virtually and get personalized style recommendations.
                         </p>
                       </div>
@@ -385,17 +385,17 @@ const CreateAvatar = () => {
                 <CheckCircle2 className="w-8 h-8 text-primary" />
               </div>
               <h2 className="text-xl font-bold">You're All Set!</h2>
-              <p className="text-muted-foreground text-xs max-w-md mx-auto">
+              <p className="text-muted-foreground text-xs max-w-md mx-auto tracking-wide">
                 Your AI shopping avatar is ready. Get ready for personalized virtual try-ons!
               </p>
               <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-primary mt-1"></div>
-              <p className="text-xs text-muted-foreground">Redirecting...</p>
+              <p className="text-xs text-muted-foreground tracking-wide">Redirecting...</p>
             </div>
           )}
         </Card>
 
         {/* Footer */}
-        <div className="text-center mt-2 text-xs text-muted-foreground">
+        <div className="text-center mt-2 text-xs text-muted-foreground tracking-wide">
           <p>Your photos are processed securely and never shared.</p>
         </div>
       </div>
