@@ -32,12 +32,12 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 
-              className="text-2xl font-bold text-primary font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
+              className="text-2xl font-bold text-foreground font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
               style={{ letterSpacing: '-0.1em' }}
               onClick={() => navigate('/')}
             >
@@ -61,7 +61,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10 text-primary"
+              className="hover:bg-foreground/10 text-foreground"
               onClick={handleChatClick}
             >
               <MessageCircle className="w-5 h-5" />
@@ -69,7 +69,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10 text-primary"
+              className="hover:bg-foreground/10 text-foreground"
               onClick={handleStarClick}
             >
               <Star className="w-5 h-5" />
@@ -77,12 +77,12 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10 relative text-primary"
+              className="hover:bg-foreground/10 relative text-foreground"
               onClick={handleHeartClick}
             >
               <Heart className="w-5 h-5" />
               {favoriteCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-foreground text-background text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {favoriteCount}
                 </span>
               )}
@@ -90,7 +90,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10 text-primary"
+              className="hover:bg-foreground/10 text-foreground"
               onClick={openModal}
             >
               <User className="w-5 h-5" />

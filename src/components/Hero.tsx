@@ -9,7 +9,7 @@ const Hero = () => {
   const { openModal } = useAvatarModal();
   
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">,
       <div className="max-w-4xl mx-auto px-4 py-16 relative z-10">
         <div className="w-full px-4 text-center space-y-1 animate-fade-in pt-8">
           <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-primary tracking-tighter font-baloo">
@@ -20,9 +20,9 @@ const Hero = () => {
             Your Personal Style
           </h2>
           
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full border border-white/20">
-            <Sparkles className="w-4 h-4 text-white" />
-            <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-foreground/10 rounded-full border border-foreground/20">
+            <Sparkles className="w-4 h-4 text-foreground" />
+            <span className="text-sm font-medium text-foreground">AI-Powered Shopping Experience</span>
           </div>
           
           <p className="text-xl text-foreground max-w-2xl mx-auto -mt-1">
