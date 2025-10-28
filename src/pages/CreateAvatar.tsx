@@ -1,7 +1,6 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
-import avatarShowcase from "@/assets/avatar-showcase.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -106,11 +105,16 @@ const CreateAvatar = () => {
   const handleComplete = (data: z.infer<typeof personalizeSchema>) => {
     // Store avatar data and preferences
     localStorage.setItem('userAvatar', processedImage || facePhoto || '');
-    localStorage.setItem('userName', data.userName || '');
+    localStorage.setItem('userName', data.userName);
     localStorage.setItem('userPreferences', JSON.stringify(data));
     
-    toast.success(`Welcome${data.userName ? `, ${data.userName}` : ''}! Your avatar is ready.`);
+    toast.success(`Welcome, ${data.userName}! Your avatar is ready.`);
     setStep(3);
+    
+    // Redirect to main app after a brief delay
+    setTimeout(() => {
+      navigate('/');
+    }, 2000);
   };
 
   return (
@@ -757,34 +761,32 @@ const CreateAvatar = () => {
 
           {step === 3 && (
             <div className="text-center py-8 space-y-6 animate-fade-in">
-              {/* Avatar Image */}
-              <div className="relative w-48 h-48 mx-auto mb-6">
-                <img 
-                  src={avatarShowcase} 
-                  alt="Your AI Avatar" 
-                  className="w-full h-full object-contain animate-scale-in"
-                />
+              {/* 3D Avatar Loading Animation */}
+              <div className="relative w-32 h-32 mx-auto">
+                <div className="absolute inset-0 rounded-full border-4 border-[hsl(225_73%_57%)] border-t-transparent animate-spin"></div>
+                <div className="absolute inset-2 rounded-full border-4 border-[hsl(225_73%_57%)]/40 border-b-transparent animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }}></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <User className="w-12 h-12 text-[hsl(225_73%_57%)] animate-pulse" />
+                </div>
               </div>
               
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-2">
+              <div className="space-y-4">
+                <h2 className="text-2xl font-bold">We're building your digital twin… just a sec!</h2>
+                <div className="space-y-2 max-w-md mx-auto">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <div className="h-full bg-[hsl(225_73%_57%)] animate-[slide-in-right_2s_ease-in-out_infinite]"></div>
+                  </div>
+                </div>
+                
+                <div className="mt-8 p-6 bg-[hsl(225_73%_57%)]/10 rounded-lg border-2 border-[hsl(225_73%_57%)] animate-scale-in">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-4">
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
-                  <h2 className="text-2xl font-bold">Your avatar is ready!</h2>
-                  <p className="text-muted-foreground text-base max-w-md mx-auto">
+                  <h3 className="text-xl font-bold mb-2">Your avatar is ready!</h3>
+                  <p className="text-muted-foreground text-sm max-w-md mx-auto">
                     You'll get exclusive early access to try-on looks from your favorite brands!
                   </p>
                 </div>
-                
-                <Button 
-                  onClick={() => navigate('/')}
-                  className="w-full max-w-md mx-auto bg-[hsl(225_73%_57%)] hover:bg-[hsl(225_73%_47%)] text-white"
-                  size="lg"
-                >
-                  Let's go!
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
               </div>
             </div>
           )}
