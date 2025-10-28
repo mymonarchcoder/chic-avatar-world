@@ -2,20 +2,19 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { Suspense } from 'react';
 import * as THREE from 'three';
-import avatarTurnaround from "@/assets/avatar-360-turnaround.png";
+import avatarModel from "@/assets/avatar-model.png";
 
 function AvatarModel() {
-  const texture = useTexture(avatarTurnaround);
+  const texture = useTexture(avatarModel);
   
-  // Create a cylindrical model for 360-degree viewing
-  // Starting rotation set to face front (0 degrees)
+  // Create a plane for the avatar model
   return (
     <mesh rotation={[0, 0, 0]} position={[0, 0, 0]}>
-      <cylinderGeometry args={[1.2, 1.2, 4, 64, 1, true]} />
+      <planeGeometry args={[3, 4]} />
       <meshStandardMaterial 
         map={texture} 
         side={THREE.DoubleSide}
-        transparent={false}
+        transparent={true}
       />
     </mesh>
   );
@@ -29,10 +28,10 @@ export const Avatar3D = ({ className = "w-96 h-96" }: Avatar3DProps) => {
   return (
     <div className={className}>
       <Canvas 
-        camera={{ position: [0, 0, 4.5], fov: 45 }}
-        style={{ background: 'white' }}
+        camera={{ position: [0, 0, 5], fov: 50 }}
+        style={{ background: 'hsl(var(--background))' }}
       >
-        <color attach="background" args={['white']} />
+        <color attach="background" args={['hsl(var(--background))']} />
         <ambientLight intensity={1.2} />
         <directionalLight position={[5, 5, 5]} intensity={0.8} />
         <directionalLight position={[-5, 5, -5]} intensity={0.5} />
