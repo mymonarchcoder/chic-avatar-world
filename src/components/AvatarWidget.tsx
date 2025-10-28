@@ -338,20 +338,21 @@ const AvatarWidget = () => {
 
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
-            {/* Left Column - Full Body Avatar - Touching Left Edge */}
-            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 -ml-20">
+            {/* Left Column - Full Body Avatar - Larger and closer to right */}
+            <div className="flex flex-col justify-center items-end h-full flex-shrink-0 flex-1">
               <div 
                 ref={avatarRef}
-                className="relative h-full flex items-center justify-start"
+                className="relative h-full flex items-center justify-end"
               >
-                {/* Full-Body Avatar - Smaller for Symmetry */}
+                {/* Full-Body Avatar - Larger */}
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-[90vh] w-auto object-contain object-left"
+                  className="h-[95vh] w-auto object-contain object-right"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
-                    transition: 'all 0.3s ease-in-out'
+                    transition: 'all 0.3s ease-in-out',
+                    marginRight: '-2rem'
                   }}
                 />
                 
