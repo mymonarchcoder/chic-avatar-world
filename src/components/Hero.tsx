@@ -12,11 +12,11 @@ const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       <div className="max-w-4xl mx-auto px-4 py-16 relative z-10">
         <div className="w-full px-4 text-center space-y-1 animate-fade-in pt-8">
-          <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-gray-800 tracking-tighter font-baloo">
+          <h1 className="text-[8rem] sm:text-[10rem] md:text-[12rem] lg:text-[14rem] xl:text-[16rem] font-bold leading-none text-primary tracking-tighter font-baloo">
             VERS
           </h1>
           
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-700 -mt-2">
+          <h2 className="text-3xl md:text-4xl font-semibold text-primary -mt-2">
             Your Personal Style
           </h2>
           
@@ -25,7 +25,7 @@ const Hero = () => {
             <span className="text-sm font-medium text-white">AI-Powered Shopping Experience</span>
           </div>
           
-          <p className="text-xl text-gray-700 max-w-2xl mx-auto -mt-1">
+          <p className="text-xl text-foreground max-w-2xl mx-auto -mt-1">
             Discover your perfect look with AI-powered recommendations, virtual try-ons, 
             and curated collections from your favorite brands.
           </p>
@@ -33,7 +33,7 @@ const Hero = () => {
           <div className="flex justify-center pt-2">
             <Button 
               size="lg" 
-              className="bg-gray-800 text-white hover:bg-gray-900 transition-opacity shadow-elegant text-lg px-8"
+              className="shadow-elegant text-lg px-8"
             >
               Top Emerging Brands
             </Button>

@@ -37,7 +37,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 
-              className="text-2xl font-bold text-gray-800 font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
+              className="text-2xl font-bold text-primary font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
               style={{ letterSpacing: '-0.1em' }}
               onClick={() => navigate('/')}
             >
@@ -61,7 +61,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10"
+              className="hover:bg-primary/10 text-primary"
               onClick={handleChatClick}
             >
               <MessageCircle className="w-5 h-5" />
@@ -69,7 +69,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10"
+              className="hover:bg-primary/10 text-primary"
               onClick={handleStarClick}
             >
               <Star className="w-5 h-5" />
@@ -77,7 +77,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10 relative"
+              className="hover:bg-primary/10 relative text-primary"
               onClick={handleHeartClick}
             >
               <Heart className="w-5 h-5" />
@@ -90,7 +90,7 @@ const Navigation = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="hover:bg-primary/10"
+              className="hover:bg-primary/10 text-primary"
               onClick={openModal}
             >
               <User className="w-5 h-5" />
