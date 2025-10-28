@@ -63,7 +63,7 @@ const BrandGrid = () => {
                 
                 <Button 
                   size="sm"
-                  className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
+                  className="w-full mt-4 bg-muted text-background hover:bg-muted/80 text-xs"
                 >
                   Explore Collection
                 </Button>
