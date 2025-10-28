@@ -343,17 +343,18 @@ const AvatarWidget = () => {
               <div 
                 ref={avatarRef}
                 className="relative flex items-center justify-end overflow-visible"
-                style={{ height: '400vh' }}
               >
                 {/* Full-Body Avatar - Larger */}
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-[400vh] w-auto object-contain object-right"
+                  className="h-screen w-auto object-contain object-right"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
                     transition: 'all 0.3s ease-in-out',
-                    marginRight: '-2rem'
+                    marginRight: '-2rem',
+                    transform: 'scale(3)',
+                    transformOrigin: 'right center'
                   }}
                 />
                 
