@@ -13,9 +13,13 @@ import { Badge } from "@/components/ui/badge";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 
-// Mock product data
-const brandProducts = {
-  vuori: {
+// Map brand IDs to brand data
+const brandDataMap: Record<string, { name: string; products: any[] }> = {
+  "1": {
+    name: "SKIMS",
+    products: [],
+  },
+  "2": {
     name: "Vuori",
     products: [
       {
@@ -52,7 +56,11 @@ const brandProducts = {
       },
     ],
   },
-  lululemon: {
+  "3": {
+    name: "Malbon Golf",
+    products: [],
+  },
+  "4": {
     name: "lululemon",
     products: [
       {
@@ -73,6 +81,14 @@ const brandProducts = {
       },
     ],
   },
+  "5": {
+    name: "Alo",
+    products: [],
+  },
+  "6": {
+    name: "Levi's",
+    products: [],
+  },
 };
 
 const BrandCollection = () => {
@@ -81,7 +97,7 @@ const BrandCollection = () => {
   const { openModal } = useAvatarModal();
   const { addFavorite, removeFavorite, favorites } = useFavorites();
   
-  const brandData = brandProducts[brandId as keyof typeof brandProducts];
+  const brandData = brandDataMap[brandId || ""];
 
   const getProductId = (productName: string) => {
     return productName.toLowerCase().replace(/\s+/g, '-');
@@ -107,13 +123,16 @@ const BrandCollection = () => {
     }
   };
 
-  if (!brandData) {
+  if (!brandData || brandData.products.length === 0) {
     return (
       <div className="min-h-screen">
         <Navigation />
         <div className="pt-20 px-4 text-center">
-          <h1 className="text-2xl font-bold mb-4">Brand not found</h1>
-          <Button onClick={() => navigate('/brands')}>Back to Brands</Button>
+          <h1 className="text-2xl font-bold mb-4">{brandData ? `${brandData.name} - Coming Soon` : 'Brand not found'}</h1>
+          <p className="text-muted-foreground mb-4">
+            {brandData ? 'Products will be available soon!' : 'This brand does not exist.'}
+          </p>
+          <Button onClick={() => navigate('/')}>Back to Home</Button>
         </div>
       </div>
     );
@@ -148,10 +167,10 @@ const BrandCollection = () => {
           <div className="mb-8">
             <Button 
               variant="ghost" 
-              onClick={() => navigate('/favorite-brands')}
+              onClick={() => navigate('/')}
               className="mb-4"
             >
-              ← Back to Favorites
+              ← Back to Home
             </Button>
             <h1 className="text-4xl md:text-5xl font-bold mb-2" style={{ letterSpacing: '-0.1em' }}>
               {brandData.name}
