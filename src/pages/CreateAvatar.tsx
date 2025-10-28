@@ -11,12 +11,17 @@ import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 const CreateAvatar = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [facePhoto, setFacePhoto] = useState<string | null>(null);
+  const [bodyPhoto1, setBodyPhoto1] = useState<string | null>(null);
+  const [bodyPhoto2, setBodyPhoto2] = useState<string | null>(null);
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [userName, setUserName] = useState("");
 
-  const handleImageUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = useCallback(async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    photoType: 'face' | 'body1' | 'body2'
+  ) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -32,31 +37,59 @@ const CreateAvatar = () => {
       return;
     }
 
-    setIsProcessing(true);
     const reader = new FileReader();
     
     reader.onload = async (event) => {
       const imageUrl = event.target?.result as string;
-      setUploadedImage(imageUrl);
       
-      try {
-        toast.loading("Creating your avatar...");
-        const img = await loadImage(imageUrl);
-        const processed = await removeBackground(img);
-        setProcessedImage(processed);
-        toast.success("Avatar created successfully!");
-        setStep(2);
-      } catch (error) {
-        console.error('Failed to process image:', error);
-        toast.error("Failed to process image. Please try again.");
-        setProcessedImage(imageUrl);
-      } finally {
-        setIsProcessing(false);
+      // Set the appropriate photo state
+      if (photoType === 'face') {
+        setFacePhoto(imageUrl);
+      } else if (photoType === 'body1') {
+        setBodyPhoto1(imageUrl);
+      } else {
+        setBodyPhoto2(imageUrl);
       }
+      
+      toast.success("Photo uploaded successfully!");
     };
     
     reader.readAsDataURL(file);
   }, []);
+
+  const handleFullBodyScan = () => {
+    toast.info("Full body scan feature coming soon!");
+  };
+
+  const handleContinue = async () => {
+    if (!facePhoto) {
+      toast.error("Please upload a face close-up photo");
+      return;
+    }
+    
+    if (!bodyPhoto1) {
+      toast.error("Please upload at least one full-body photo");
+      return;
+    }
+
+    setIsProcessing(true);
+    
+    try {
+      toast.loading("Creating your avatar...");
+      const img = await loadImage(facePhoto);
+      const processed = await removeBackground(img);
+      setProcessedImage(processed);
+      toast.success("Avatar created successfully!");
+      setStep(2);
+    } catch (error) {
+      console.error('Failed to process image:', error);
+      toast.error("Failed to process image. Please try again.");
+      setProcessedImage(facePhoto);
+      setStep(2);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
 
   const handleComplete = () => {
     if (!userName.trim()) {
@@ -64,8 +97,8 @@ const CreateAvatar = () => {
       return;
     }
     
-    // Store avatar data (in a real app, this would save to backend)
-    localStorage.setItem('userAvatar', processedImage || uploadedImage || '');
+    // Store avatar data
+    localStorage.setItem('userAvatar', processedImage || facePhoto || '');
     localStorage.setItem('userName', userName);
     
     toast.success(`Welcome, ${userName}! Your avatar is ready.`);
@@ -149,37 +182,129 @@ const CreateAvatar = () => {
                 </p>
               </div>
 
-              <div className="flex flex-col items-center">
-                <label htmlFor="avatar-upload" className="cursor-pointer">
-                  <div className="w-40 h-40 border-2 border-dashed border-primary rounded-lg flex flex-col items-center justify-center gap-2 hover:bg-muted/50 transition-colors">
-                    {uploadedImage ? (
-                      <img src={uploadedImage} alt="Uploaded" className="w-full h-full object-cover rounded-lg" />
-                    ) : (
-                      <>
-                        <Upload className="w-10 h-10 text-primary" />
-                        <div className="text-center px-2">
-                          <p className="font-medium text-xs mb-0.5">Click to upload</p>
-                          <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+              <div className="space-y-4">
+                {/* Face Photo Upload */}
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Face Close-Up *</Label>
+                  <label htmlFor="face-upload" className="cursor-pointer block">
+                    <div className="h-32 border-2 border-dashed border-primary rounded-lg flex items-center justify-center gap-3 hover:bg-muted/50 transition-colors px-3">
+                      {facePhoto ? (
+                        <div className="flex items-center gap-3 w-full">
+                          <img src={facePhoto} alt="Face" className="w-16 h-16 object-cover rounded-lg" />
+                          <div className="flex-1">
+                            <p className="text-sm font-medium">Face photo uploaded</p>
+                            <p className="text-xs text-muted-foreground">Click to change</p>
+                          </div>
                         </div>
-                      </>
-                    )}
-                  </div>
-                  <Input
-                    id="avatar-upload"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    className="hidden"
-                    disabled={isProcessing}
-                  />
-                </label>
+                      ) : (
+                        <>
+                          <Upload className="w-6 h-6 text-primary" />
+                          <div>
+                            <p className="font-medium text-sm">Upload face close-up</p>
+                            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <Input
+                      id="face-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'face')}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
 
-                {isProcessing && (
-                  <div className="mt-2 text-center">
-                    <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-primary"></div>
-                    <p className="mt-1 text-xs text-muted-foreground">Processing...</p>
-                  </div>
-                )}
+                {/* Body Photo 1 Upload */}
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Full-Body Photo 1 *</Label>
+                  <label htmlFor="body1-upload" className="cursor-pointer block">
+                    <div className="h-32 border-2 border-dashed border-primary rounded-lg flex items-center justify-center gap-3 hover:bg-muted/50 transition-colors px-3">
+                      {bodyPhoto1 ? (
+                        <div className="flex items-center gap-3 w-full">
+                          <img src={bodyPhoto1} alt="Body 1" className="w-16 h-16 object-cover rounded-lg" />
+                          <div className="flex-1">
+                            <p className="text-sm font-medium">Full-body photo uploaded</p>
+                            <p className="text-xs text-muted-foreground">Click to change</p>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <Upload className="w-6 h-6 text-primary" />
+                          <div>
+                            <p className="font-medium text-sm">Upload full-body photo</p>
+                            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <Input
+                      id="body1-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'body1')}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+
+                {/* Body Photo 2 Upload */}
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Full-Body Photo 2 (Optional)</Label>
+                  <label htmlFor="body2-upload" className="cursor-pointer block">
+                    <div className="h-32 border-2 border-dashed border-muted-foreground/30 rounded-lg flex items-center justify-center gap-3 hover:bg-muted/50 transition-colors px-3">
+                      {bodyPhoto2 ? (
+                        <div className="flex items-center gap-3 w-full">
+                          <img src={bodyPhoto2} alt="Body 2" className="w-16 h-16 object-cover rounded-lg" />
+                          <div className="flex-1">
+                            <p className="text-sm font-medium">Full-body photo uploaded</p>
+                            <p className="text-xs text-muted-foreground">Click to change</p>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <Upload className="w-6 h-6 text-muted-foreground" />
+                          <div>
+                            <p className="font-medium text-sm">Upload second full-body photo</p>
+                            <p className="text-xs text-muted-foreground">PNG, JPG up to 10MB</p>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <Input
+                      id="body2-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageUpload(e, 'body2')}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+
+                {/* Full Body Scan Button */}
+                <div className="pt-2">
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={handleFullBodyScan}
+                  >
+                    <Sparkles className="w-4 h-4 mr-2" />
+                    Full Body Scan (360° view)
+                  </Button>
+                </div>
+
+                {/* Continue Button */}
+                <div className="pt-2">
+                  <Button
+                    className="w-full"
+                    onClick={handleContinue}
+                    disabled={isProcessing || !facePhoto || !bodyPhoto1}
+                  >
+                    {isProcessing ? "Processing..." : "Continue"}
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </div>
               </div>
 
               <div className="bg-muted/50 rounded-lg p-3 mt-2">
@@ -210,7 +335,7 @@ const CreateAvatar = () => {
                 <div className="flex-shrink-0">
                   <div className="w-28 h-28 rounded-full overflow-hidden border-3 border-primary shadow-lg">
                     <img 
-                      src={processedImage || uploadedImage || ''}
+                      src={processedImage || facePhoto || ''}
                       alt="Your avatar" 
                       className="w-full h-full object-cover"
                     />
