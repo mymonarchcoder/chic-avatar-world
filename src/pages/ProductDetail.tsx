@@ -8,8 +8,7 @@ import metaPant from "@/assets/meta-pant.png";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import AvatarWidget from "@/components/AvatarWidget";
-import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import ProductPageAvatar from "@/components/ProductPageAvatar";
 import { useToast } from "@/hooks/use-toast";
 import { useCart } from "@/contexts/CartContext";
 import { supabase } from "@/integrations/supabase/client";
@@ -111,12 +110,12 @@ const productData = {
 const ProductDetail = () => {
   const { productId } = useParams<{ productId: string }>();
   const navigate = useNavigate();
-  const { openModal } = useAvatarModal();
   const { toast } = useToast();
   const { refreshCart } = useCart();
   
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState(0);
+  const [isTryingOn, setIsTryingOn] = useState(false);
 
   const product = productData[productId as keyof typeof productData];
 
@@ -187,7 +186,6 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <AvatarWidget />
       <div className="pt-20 px-4 pb-12">
         <div className="max-w-7xl mx-auto">
           <Button 
@@ -199,20 +197,12 @@ const ProductDetail = () => {
           </Button>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Product Image */}
+            {/* Avatar with Product Try-On */}
             <div className="space-y-4">
-              <div className="aspect-[3/4] bg-muted relative overflow-hidden rounded-lg">
-                <img 
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-                {product.isBestSeller && (
-                  <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
-                    BEST SELLER
-                  </Badge>
-                )}
-              </div>
+              <ProductPageAvatar 
+                productImage={product.image}
+                isTryingOn={isTryingOn}
+              />
             </div>
 
             {/* Product Info */}
@@ -277,11 +267,11 @@ const ProductDetail = () => {
                 </Button>
                 <div className="grid grid-cols-2 gap-3">
                   <Button 
-                    variant="outline"
+                    variant={isTryingOn ? "default" : "outline"}
                     size="lg"
-                    onClick={openModal}
+                    onClick={() => setIsTryingOn(!isTryingOn)}
                   >
-                    Try On Avatar
+                    {isTryingOn ? "Remove" : "Try On Avatar"}
                   </Button>
                   <Button 
                     variant="outline"
