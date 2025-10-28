@@ -496,7 +496,7 @@ const AvatarWidget = () => {
     >
       <div className="relative">
         {/* Full body avatar silhouette - no background */}
-        <div className="relative w-64 h-96 sm:w-96 sm:h-[32rem] transition-all hover:scale-105">
+        <div className="relative w-48 h-72 sm:w-72 sm:h-96 transition-all hover:scale-105">
           {processedAvatar ? (
             <img 
               src={processedAvatar} 
