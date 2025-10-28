@@ -130,9 +130,22 @@ const CreateAvatar = () => {
           {step === 1 && (
             <div className="space-y-2">
               <div className="text-center mb-2">
-                <h2 className="text-lg font-bold mb-0.5">Upload Your Photo</h2>
+                <h2 className="text-lg font-bold mb-0.5">Upload Your Photos</h2>
                 <p className="text-muted-foreground text-xs">
-                  Choose a clear, front-facing photo
+                  Create your AI shopping avatar by uploading a few photos. These help us render your body and facial details accurately.
+                </p>
+              </div>
+
+              <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 mb-3">
+                <h3 className="font-semibold text-sm mb-2">Upload Instructions:</h3>
+                <p className="text-xs text-muted-foreground mb-2">Please upload the following:</p>
+                <ul className="text-xs text-muted-foreground space-y-1.5 ml-4 list-disc">
+                  <li>1 clear, front-facing close-up of your face</li>
+                  <li>1–2 full-body photos standing straight, well-lit, against a plain background</li>
+                  <li><span className="text-muted-foreground/80">Optional:</span> Full-body scan (use camera mode to capture a 360° view if available)</li>
+                </ul>
+                <p className="text-xs text-muted-foreground mt-2">
+                  <span className="font-medium">Supported formats:</span> PNG, JPG up to 10MB each
                 </p>
               </div>
 
@@ -169,15 +182,16 @@ const CreateAvatar = () => {
                 )}
               </div>
 
-              <div className="bg-muted/50 rounded-lg p-2 mt-2">
-                <h3 className="font-semibold text-xs mb-1">
+              <div className="bg-muted/50 rounded-lg p-3 mt-2">
+                <h3 className="font-semibold text-sm mb-2">
                   Tips for best results:
                 </h3>
-                <ul className="text-xs text-muted-foreground space-y-0.5 ml-4 list-disc">
-                  <li>Use a well-lit photo with a clear background</li>
-                  <li>Face the camera directly with a neutral expression</li>
-                  <li>Ensure your full face and shoulders are visible</li>
-                  <li>Avoid sunglasses or accessories covering your face</li>
+                <ul className="text-xs text-muted-foreground space-y-1 ml-4 list-disc">
+                  <li>Use a well-lit area with a neutral background</li>
+                  <li>Face the camera directly with a natural expression</li>
+                  <li>Ensure your full face and shoulders are visible in the close-up</li>
+                  <li>For full-body shots, include your entire figure (head to feet)</li>
+                  <li>Avoid sunglasses, hats, or accessories that obscure your face</li>
                 </ul>
               </div>
             </div>
@@ -257,7 +271,7 @@ const CreateAvatar = () => {
 
         {/* Footer */}
         <div className="text-center mt-2 text-xs text-muted-foreground">
-          <p>Your photo is processed securely and never shared</p>
+          <p>Your photos are processed securely and never shared.</p>
         </div>
       </div>
     </div>
