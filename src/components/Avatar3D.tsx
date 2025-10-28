@@ -1,21 +1,15 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { Suspense } from 'react';
-import * as THREE from 'three';
-import avatarTurnaround from "@/assets/avatar-360-turnaround.png";
+import avatarShowcase from "@/assets/avatar-showcase-clean.png";
 
 function AvatarModel() {
-  const texture = useTexture(avatarTurnaround);
+  const texture = useTexture(avatarShowcase);
   
-  // Create a cylindrical model for 360-degree viewing
   return (
-    <mesh rotation={[0, Math.PI, 0]}>
-      <cylinderGeometry args={[0.8, 0.8, 3.5, 32, 1, true]} />
-      <meshStandardMaterial 
-        map={texture} 
-        side={THREE.DoubleSide}
-        transparent={false}
-      />
+    <mesh>
+      <planeGeometry args={[2, 3]} />
+      <meshStandardMaterial map={texture} transparent={true} />
     </mesh>
   );
 }
