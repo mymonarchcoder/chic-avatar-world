@@ -98,33 +98,8 @@ const CreateAvatar = () => {
   };
 
   const handleContinue = async () => {
-    if (!facePhoto) {
-      toast.error("Please upload a face close-up photo");
-      return;
-    }
-    
-    if (!bodyPhoto1) {
-      toast.error("Please upload at least one full-body photo");
-      return;
-    }
-
-    setIsProcessing(true);
-    
-    try {
-      toast.loading("Creating your avatar...");
-      const img = await loadImage(facePhoto);
-      const processed = await removeBackground(img);
-      setProcessedImage(processed);
-      toast.success("Avatar created successfully!");
-      setStep(2);
-    } catch (error) {
-      console.error('Failed to process image:', error);
-      toast.error("Failed to process image. Please try again.");
-      setProcessedImage(facePhoto);
-      setStep(2);
-    } finally {
-      setIsProcessing(false);
-    }
+    // Demo mode - skip validation
+    setStep(2);
   };
 
   const handleComplete = (data: z.infer<typeof personalizeSchema>) => {
@@ -324,9 +299,8 @@ const CreateAvatar = () => {
                   <Button
                     className="w-full"
                     onClick={handleContinue}
-                    disabled={isProcessing || !facePhoto || !bodyPhoto1}
                   >
-                    {isProcessing ? "Processing..." : "Continue"}
+                    Continue
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
