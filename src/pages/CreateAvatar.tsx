@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
-import avatarShowcase from "@/assets/avatar-showcase-clean.png";
+import { Avatar3D } from "@/components/Avatar3D";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -793,12 +793,11 @@ const CreateAvatar = () => {
                     You'll get exclusive early access to try-on looks from your favorite brands!
                   </p>
                   <div className="flex justify-center">
-                    <img 
-                      src={avatarShowcase} 
-                      alt="Your avatar" 
-                      className="w-96 h-auto"
-                    />
+                    <Avatar3D className="w-full h-[500px]" />
                   </div>
+                  <p className="text-xs text-muted-foreground mt-2">
+                    Click and drag to rotate • Scroll to zoom
+                  </p>
                   <Button 
                     className="mt-6" 
                     onClick={() => navigate('/')}
