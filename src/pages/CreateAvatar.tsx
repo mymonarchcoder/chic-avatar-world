@@ -58,7 +58,7 @@ const CreateAvatar = () => {
   }, []);
 
   const handleFullBodyScan = () => {
-    toast.info("Full body scan feature coming soon!");
+    navigate('/body-scan');
   };
 
   const handleContinue = async () => {

@@ -9,6 +9,7 @@ import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { CartProvider } from "@/contexts/CartContext";
 import Index from "./pages/Index";
 import CreateAvatar from "./pages/CreateAvatar";
+import BodyScan from "./pages/BodyScan";
 import Favorites from "./pages/Favorites";
 import FavoriteBrands from "./pages/FavoriteBrands";
 import Chat from "./pages/Chat";
@@ -32,6 +33,7 @@ const App = () => (
               <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/create-avatar" element={<CreateAvatar />} />
+              <Route path="/body-scan" element={<BodyScan />} />
               <Route path="/favorites" element={<Favorites />} />
               <Route path="/favorite-brands" element={<FavoriteBrands />} />
               <Route path="/chat" element={<Chat />} />
