@@ -183,6 +183,30 @@ const CreateAvatar = () => {
               </div>
 
               <div className="space-y-4">
+                {/* Full Body Scan Button - Moved to top */}
+                <div>
+                  <Button
+                    variant="default"
+                    className="w-full h-16"
+                    onClick={handleFullBodyScan}
+                  >
+                    <Sparkles className="w-5 h-5 mr-2" />
+                    <div className="flex flex-col items-start">
+                      <span className="font-semibold">Full Body Scan (360° view)</span>
+                      <span className="text-xs opacity-80">Recommended for best results</span>
+                    </div>
+                  </Button>
+                </div>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                  </div>
+                  <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">Or upload photos</span>
+                  </div>
+                </div>
+
                 {/* Face Photo Upload */}
                 <div>
                   <Label className="text-sm font-medium mb-2 block">Face Close-Up *</Label>
@@ -280,18 +304,6 @@ const CreateAvatar = () => {
                       className="hidden"
                     />
                   </label>
-                </div>
-
-                {/* Full Body Scan Button */}
-                <div className="pt-2">
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={handleFullBodyScan}
-                  >
-                    <Sparkles className="w-4 h-4 mr-2" />
-                    Full Body Scan (360° view)
-                  </Button>
                 </div>
 
                 {/* Continue Button */}
