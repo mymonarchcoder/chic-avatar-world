@@ -375,10 +375,10 @@ const AvatarWidget = () => {
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
             {/* Left Column - Full Body Avatar - Larger and closer to right */}
-            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 w-[55%] overflow-visible">
+            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 w-[60%] overflow-visible">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-start overflow-visible h-full w-full pl-8"
+                className="relative flex items-center justify-start overflow-visible h-full w-full"
               >
                 {/* Animated Avatar */}
                 <AnimatedAvatar
