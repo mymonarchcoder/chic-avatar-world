@@ -348,7 +348,7 @@ const AvatarWidget = () => {
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-[105vh] w-auto object-contain object-right"
+                  className="h-[120vh] w-auto object-contain object-right"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
                     transition: 'all 0.3s ease-in-out',
