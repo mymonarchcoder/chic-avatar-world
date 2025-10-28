@@ -13,6 +13,8 @@ import { Badge } from "@/components/ui/badge";
 import AvatarWidget from "@/components/AvatarWidget";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import { useAvatarItems } from "@/contexts/AvatarItemsContext";
+import { useCart } from "@/contexts/CartContext";
+import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
 // Mock product data
@@ -82,6 +84,7 @@ const BrandCollection = () => {
   const navigate = useNavigate();
   const { openModal } = useAvatarModal();
   const { addItem } = useAvatarItems();
+  const { refreshCart } = useCart();
   const { addFavorite, removeFavorite, favorites } = useFavorites();
   
   const brandData = brandProducts[brandId as keyof typeof brandProducts];
@@ -142,22 +145,50 @@ const BrandCollection = () => {
     return colorMap[color] || "bg-gray-400";
   };
 
-  const handleAddToCart = (product: typeof brandData.products[0], e: React.MouseEvent) => {
+  const handleAddToCart = async (product: typeof brandData.products[0], e: React.MouseEvent) => {
     e.stopPropagation();
     
-    // Add to avatar try-on list
-    addItem({
-      name: product.name,
-      category: "Bottoms",
-      price: product.price,
-      brand: brandData.name,
-      image: product.image,
-    });
-    
-    // Open avatar modal
-    openModal();
-    
-    toast.success(`${product.name} added to Mix & Match!`);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        toast.error("Please log in to add items to cart");
+        return;
+      }
+
+      const { error } = await supabase
+        .from('cart_items')
+        .insert({
+          user_id: user.id,
+          product_id: getProductId(product.name),
+          product_name: product.name,
+          product_brand: brandData.name,
+          product_price: product.price,
+          quantity: 1,
+          color: product.colors[0],
+        });
+
+      if (error) throw error;
+
+      refreshCart();
+      
+      // Add to avatar try-on list
+      addItem({
+        name: product.name,
+        category: "Bottoms",
+        price: product.price,
+        brand: brandData.name,
+        image: product.image,
+      });
+      
+      // Open avatar modal
+      openModal();
+      
+      toast.success(`${product.name} added to cart & Mix & Match!`);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast.error("Failed to add item to cart");
+    }
   };
 
   return (
