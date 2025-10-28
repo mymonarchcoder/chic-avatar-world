@@ -28,10 +28,10 @@ const AnimatedAvatar = ({
   const [animationPhase, setAnimationPhase] = useState(0);
 
   useEffect(() => {
-    // Cycle through animation phases every 6 seconds
+    // Cycle through animation phases every 4 seconds for smoother, more frequent movement
     const interval = setInterval(() => {
       setAnimationPhase((prev) => (prev + 1) % 4);
-    }, 6000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, []);
@@ -73,7 +73,7 @@ const AnimatedAvatar = ({
       <div
         className="absolute inset-0 flex items-center justify-center"
         style={{
-          animation: 'breathe 4s ease-in-out infinite',
+          animation: 'breathe 3s ease-in-out infinite, subtleFloat 5s ease-in-out infinite',
         }}
       >
         <img
@@ -84,7 +84,7 @@ const AnimatedAvatar = ({
             ...getPoseStyles(),
             transition: isDragging
               ? 'none'
-              : 'all 6s cubic-bezier(0.4, 0, 0.2, 1)',
+              : 'all 4s cubic-bezier(0.4, 0, 0.2, 1)',
             transformOrigin: 'center center',
           }}
           onMouseDown={onMouseDown}
@@ -104,7 +104,19 @@ const AnimatedAvatar = ({
             transform: scale(1) translateY(0px);
           }
           50% {
-            transform: scale(1.005) translateY(-3px);
+            transform: scale(1.008) translateY(-4px);
+          }
+        }
+        
+        @keyframes subtleFloat {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          25% {
+            transform: translateY(-2px) rotate(0.3deg);
+          }
+          75% {
+            transform: translateY(-2px) rotate(-0.3deg);
           }
         }
       `}</style>
