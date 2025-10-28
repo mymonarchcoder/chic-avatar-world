@@ -186,13 +186,13 @@ const CreateAvatar = () => {
                 {/* Full Body Scan Button - Moved to top */}
                 <div>
                   <Button
-                    className="w-full h-16"
+                    className="w-full h-16 bg-primary text-primary-foreground hover:bg-primary/90"
                     onClick={handleFullBodyScan}
                   >
                     <Sparkles className="w-5 h-5 mr-2" />
                     <div className="flex flex-col items-start">
                       <span className="font-semibold">Full Body Scan (360° view)</span>
-                      <span className="text-xs opacity-80">Recommended for best results</span>
+                      <span className="text-xs opacity-90">Recommended for best results</span>
                     </div>
                   </Button>
                 </div>
