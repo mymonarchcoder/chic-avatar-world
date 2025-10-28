@@ -7,6 +7,7 @@ import { useAvatarModal } from "@/contexts/AvatarModalContext";
 import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
+import AnimatedAvatar from "./AnimatedAvatar";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
@@ -379,17 +380,11 @@ const AvatarWidget = () => {
                 ref={avatarRef}
                 className="relative flex items-center justify-center overflow-visible h-full w-full max-w-md"
               >
-                {/* Full-Body Avatar - Larger */}
-                <img 
-                  src={processedAvatar || avatarShowcase} 
-                  alt="Your 3D Avatar" 
-                  className="h-full w-auto object-contain cursor-grab active:cursor-grabbing select-none"
-                  style={{
-                    filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
-                    transition: isDragging ? 'none' : 'all 0.3s ease-in-out',
-                    transform: `rotateY(${rotation}deg)`,
-                    transformOrigin: 'center center'
-                  }}
+                {/* Animated Avatar */}
+                <AnimatedAvatar
+                  src={processedAvatar || avatarShowcase}
+                  rotation={rotation}
+                  isDragging={isDragging}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
@@ -397,7 +392,6 @@ const AvatarWidget = () => {
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
-                  draggable={false}
                 />
                 
                 {/* Virtual Try-On Clothing Images */}
