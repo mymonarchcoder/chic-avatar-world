@@ -14,6 +14,9 @@ const AvatarWidget = () => {
   const [selectedItems, setSelectedItems] = useState<{[key: string]: any}>({});
   const [avatarDimensions, setAvatarDimensions] = useState<{width: number, height: number} | null>(null);
   const [isRemoving, setIsRemoving] = useState<string | null>(null);
+  const [rotation, setRotation] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
   const avatarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -74,6 +77,38 @@ const AvatarWidget = () => {
       }));
       toast.success(`Trying on ${item.name}`);
     }
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - startX;
+    setRotation(prev => prev + deltaX * 0.5);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const deltaX = e.touches[0].clientX - startX;
+    setRotation(prev => prev + deltaX * 0.5);
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
   };
 
   const handleAddToCart = (item: any) => {
@@ -348,14 +383,22 @@ const AvatarWidget = () => {
                 <img 
                   src={processedAvatar || avatarShowcase} 
                   alt="Your 3D Avatar" 
-                  className="h-screen w-auto object-contain object-right"
+                  className="h-screen w-auto object-contain object-right cursor-grab active:cursor-grabbing select-none"
                   style={{
                     filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.1))',
-                    transition: 'all 0.3s ease-in-out',
+                    transition: isDragging ? 'none' : 'all 0.3s ease-in-out',
                     marginRight: '-2rem',
-                    transform: 'scale(3)',
+                    transform: `scale(3) rotateY(${rotation}deg)`,
                     transformOrigin: 'right center'
                   }}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  draggable={false}
                 />
                 
                 {/* Virtual Try-On Clothing Images */}
