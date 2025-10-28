@@ -79,7 +79,7 @@ const AnimatedAvatar = ({
         <img
           src={src}
           alt="Your 3D Avatar"
-          className="h-full w-auto object-contain cursor-grab active:cursor-grabbing select-none"
+          className="h-full w-auto object-contain object-left cursor-grab active:cursor-grabbing select-none"
           style={{
             ...getPoseStyles(),
             transition: isDragging
