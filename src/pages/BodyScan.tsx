@@ -175,7 +175,7 @@ const BodyScan = () => {
 
       {/* 3D Canvas */}
       <Canvas
-        camera={{ position: [0, 0.5, 3], fov: 50 }}
+        camera={{ position: [0, 0.3, 5], fov: 50 }}
         style={{ width: "100%", height: "100vh" }}
       >
         <ambientLight intensity={0.5} />
@@ -187,8 +187,8 @@ const BodyScan = () => {
         <OrbitControls
           enableZoom={true}
           enablePan={false}
-          minDistance={2}
-          maxDistance={5}
+          minDistance={3}
+          maxDistance={8}
           maxPolarAngle={Math.PI / 1.5}
           minPolarAngle={Math.PI / 3}
         />
