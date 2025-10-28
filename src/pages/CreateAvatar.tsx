@@ -173,9 +173,9 @@ const CreateAvatar = () => {
                 <h3 className="font-semibold text-sm mb-2 tracking-wide">Upload Instructions:</h3>
                 <p className="text-xs text-muted-foreground mb-2 tracking-wide">Please upload the following:</p>
                 <ul className="text-xs text-muted-foreground space-y-1.5 ml-4 list-disc tracking-wide">
+                  <li><span className="text-muted-foreground/80">Optional:</span> Full-body scan (use camera mode to capture a 360° view if available)</li>
                   <li>1 clear, front-facing close-up of your face</li>
                   <li>1–2 full-body photos standing straight, well-lit, against a plain background</li>
-                  <li><span className="text-muted-foreground/80">Optional:</span> Full-body scan (use camera mode to capture a 360° view if available)</li>
                 </ul>
                 <p className="text-xs text-muted-foreground mt-2 tracking-wide">
                   <span className="font-medium">Supported formats:</span> PNG, JPG up to 10MB each
