@@ -93,12 +93,6 @@ const Auth = () => {
 
             {/* Right Column - Virtual Fitting Room Info */}
             <div>
-              <h2 className="text-3xl font-bold mb-6 text-center" style={{ letterSpacing: '-0.1em' }}>
-                Recreate You
-              </h2>
-              <p className="text-lg text-muted-foreground mb-8 text-center">
-                Upload at least 4 photos to create your personalized 3D avatar
-              </p>
 
               <Card className="p-8 shadow-card mb-6">
                 <div className="grid grid-cols-2 gap-4 mb-6">
