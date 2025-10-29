@@ -10,7 +10,7 @@ import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
 
 const AvatarWidget = () => {
-  const { isOpen, openModal, closeModal, pendingItem } = useAvatarModal();
+  const { isOpen, openModal, closeModal } = useAvatarModal();
   const [processedAvatar, setProcessedAvatar] = useState<string | null>(null);
   const [selectedItems, setSelectedItems] = useState<{[key: string]: any}>({});
   const [avatarDimensions, setAvatarDimensions] = useState<{width: number, height: number} | null>(null);
@@ -33,13 +33,6 @@ const AvatarWidget = () => {
     };
     processImage();
   }, []);
-
-  // Handle pending item when modal opens
-  useEffect(() => {
-    if (isOpen && pendingItem) {
-      handleTryOn(pendingItem);
-    }
-  }, [isOpen, pendingItem]);
 
   // Track avatar dimensions for responsive clothing positioning
   useEffect(() => {

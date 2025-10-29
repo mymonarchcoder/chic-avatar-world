@@ -2,9 +2,8 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface AvatarModalContextType {
   isOpen: boolean;
-  openModal: (item?: any) => void;
+  openModal: () => void;
   closeModal: () => void;
-  pendingItem: any | null;
 }
 
 const AvatarModalContext = createContext<AvatarModalContextType | undefined>(undefined);
@@ -23,22 +22,12 @@ interface AvatarModalProviderProps {
 
 export const AvatarModalProvider = ({ children }: AvatarModalProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [pendingItem, setPendingItem] = useState<any | null>(null);
 
-  const openModal = (item?: any) => {
-    if (item) {
-      setPendingItem(item);
-    }
-    setIsOpen(true);
-  };
-  
-  const closeModal = () => {
-    setIsOpen(false);
-    setPendingItem(null);
-  };
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   return (
-    <AvatarModalContext.Provider value={{ isOpen, openModal, closeModal, pendingItem }}>
+    <AvatarModalContext.Provider value={{ isOpen, openModal, closeModal }}>
       {children}
     </AvatarModalContext.Provider>
   );
