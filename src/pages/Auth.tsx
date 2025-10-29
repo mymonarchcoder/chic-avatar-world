@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Upload, User, Mail, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -11,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 const Auth = () => {
   const { openModal } = useAvatarModal();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +23,7 @@ const Auth = () => {
       title: isLogin ? "Logged in!" : "Account created!",
       description: "Welcome to VERS",
     });
+    navigate("/");
   };
 
   return (
