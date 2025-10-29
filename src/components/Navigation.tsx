@@ -28,7 +28,11 @@ const Navigation = () => {
   };
 
   const handleChatClick = () => {
-    navigate('/chat');
+    if (location.pathname === '/chat') {
+      navigate('/');
+    } else {
+      navigate('/chat');
+    }
   };
 
   return (
