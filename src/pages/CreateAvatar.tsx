@@ -788,9 +788,9 @@ const CreateAvatar = () => {
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-1">
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-4xl font-bold mb-2">Your avatar is ready!</h3>
+                  <h3 className="text-2xl font-bold mb-2">Your avatar is ready!</h3>
                   <div className="flex justify-center -mx-6">
-                    <Avatar3D className="w-full h-[500px]" />
+                    <Avatar3D className="w-full h-[600px]" />
                   </div>
                   <p className="text-xs text-muted-foreground -mt-2">
                     Click and drag to rotate • Scroll to zoom
