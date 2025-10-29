@@ -53,14 +53,14 @@ const BrandGrid = () => {
                     <h3 className="text-base font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>{brand.name}</h3>
                     <p className="text-xs text-muted-foreground">{brand.category}</p>
                   </div>
-                  <Button
-                    size="icon"
-                    variant="ghost"
-                    className={isBrandFavorited(brand.id) ? "text-primary" : ""}
-                    onClick={() => toggleFavoriteBrand(brand)}
-                  >
-                    <Star className={`w-5 h-5 ${isBrandFavorited(brand.id) ? "fill-current" : ""}`} />
-                  </Button>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className={isBrandFavorited(brand.id) ? "text-yellow-500 hover:text-yellow-600" : ""}
+                  onClick={() => toggleFavoriteBrand(brand)}
+                >
+                  <Star className={`w-5 h-5 ${isBrandFavorited(brand.id) ? "fill-yellow-500" : ""}`} />
+                </Button>
                 </div>
                 
                 <Button 
