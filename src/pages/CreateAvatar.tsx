@@ -789,10 +789,10 @@ const CreateAvatar = () => {
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
                   <h3 className="text-4xl font-bold mb-1">Your avatar is ready!</h3>
-                  <p className="text-muted-foreground text-base max-w-md mx-auto mb-2">
+                  <p className="text-muted-foreground text-base max-w-md mx-auto mb-1">
                     You'll get exclusive early access to try-on looks from your favorite brands!
                   </p>
-                  <div className="flex justify-center -mx-6">
+                  <div className="flex justify-center -mx-6 mt-0">
                     <Avatar3D className="w-full h-[1200px]" />
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
