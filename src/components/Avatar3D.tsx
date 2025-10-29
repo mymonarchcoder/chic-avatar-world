@@ -2,10 +2,10 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
 import { Suspense, useRef, useState } from 'react';
 import * as THREE from 'three';
-import modelFront from "@/assets/model-front-real.png";
-import modelSideRight from "@/assets/model-side-real.png";
-import modelBack from "@/assets/model-back-real.png";
-import modelSideLeft from "@/assets/model-side-left-real.png";
+import modelFront from "@/assets/model-front.png";
+import modelSideRight from "@/assets/model-side-right.png";
+import modelBack from "@/assets/model-back.png";
+import modelSideLeft from "@/assets/model-side-left.png";
 
 function AvatarModel() {
   const meshRef = useRef<THREE.Mesh>(null);
