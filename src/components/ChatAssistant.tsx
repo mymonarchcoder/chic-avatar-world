@@ -70,7 +70,7 @@ const ChatAssistant = () => {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && handleSend()}
               placeholder="Ask me anything..."
-              className="flex-1"
+              className="flex-1 text-black"
             />
             <Button onClick={handleSend} size="icon" className="bg-gradient-primary">
               <Send className="w-5 h-5" />
