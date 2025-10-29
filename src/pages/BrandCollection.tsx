@@ -239,7 +239,16 @@ const BrandCollection = () => {
                       variant="outline"
                       size="sm"
                       className="text-xs h-7"
-                      onClick={openModal}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openModal({
+                          name: product.name,
+                          category: 'Bottoms',
+                          brand: brandData.name,
+                          price: product.price,
+                          image: product.image
+                        });
+                      }}
                     >
                       Try On
                     </Button>
