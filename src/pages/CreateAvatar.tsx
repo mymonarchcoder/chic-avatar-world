@@ -2,6 +2,7 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Avatar3D } from "@/components/Avatar3D";
+import personalizeAvatar from "@/assets/personalize-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -347,7 +348,7 @@ const CreateAvatar = () => {
               <div className="flex justify-center mb-4">
                 <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-primary shadow-lg">
                   <img 
-                    src={processedImage || facePhoto || ''}
+                    src={personalizeAvatar}
                     alt="Your avatar" 
                     className="w-full h-full object-cover"
                   />
