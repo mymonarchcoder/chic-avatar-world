@@ -39,10 +39,8 @@ export const Avatar3D = ({ className = "w-96 h-96" }: Avatar3DProps) => {
         <Suspense fallback={null}>
           <AvatarModel />
           <OrbitControls 
-            enableZoom={isHovering}
+            enableZoom={false}
             enablePan={false}
-            minDistance={3}
-            maxDistance={8}
           />
         </Suspense>
       </Canvas>
