@@ -180,69 +180,70 @@ const BrandCollection = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {brandData.products.map((product) => (
               <Card 
                 key={product.id}
                 className="group overflow-hidden border-border hover:shadow-lg transition-all duration-300 cursor-pointer"
                 onClick={() => navigate(`/product/${getProductId(product.name)}`)}
               >
-                <div className="aspect-square bg-muted relative overflow-hidden">
+                <div className="aspect-[3/4] bg-muted relative overflow-hidden">
                   <img 
                     src={product.image} 
                     alt={product.name}
                     className="w-full h-full object-cover"
                   />
                   {product.isBestSeller && (
-                    <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">
+                    <Badge className="absolute top-2 left-2 text-xs bg-primary text-primary-foreground">
                       BEST SELLER
                     </Badge>
                   )}
                   <Button
                     size="icon"
                     variant="ghost"
-                    className={`absolute top-4 right-4 bg-background/80 hover:bg-background ${
+                    className={`absolute top-2 right-2 h-8 w-8 bg-background/80 hover:bg-background ${
                       isFavorited(product.id) ? 'text-primary' : ''
                     }`}
                     onClick={(e) => toggleFavorite(product, e)}
                   >
                     <Heart 
-                      className={`w-5 h-5 ${
+                      className={`w-4 h-4 ${
                         isFavorited(product.id) ? 'fill-current' : ''
                       }`} 
                     />
                   </Button>
                 </div>
                 
-                <div className="p-4">
-                  <h3 className="text-sm font-semibold mb-1">{product.name}</h3>
-                  <p className="text-muted-foreground text-xs mb-2">{product.colors[0]}</p>
-                  <p className="text-lg font-bold mb-3">${product.price}</p>
+                <div className="p-3">
+                  <h3 className="text-xs font-semibold mb-1 line-clamp-1">{product.name}</h3>
+                  <p className="text-muted-foreground text-[10px] mb-1.5">{product.colors[0]}</p>
+                  <p className="text-sm font-bold mb-2">${product.price}</p>
                   
-                  <div className="flex gap-1.5 mb-3 flex-wrap">
-                    {product.colors.slice(0, 8).map((color, index) => (
+                  <div className="flex gap-1 mb-2 flex-wrap">
+                    {product.colors.slice(0, 6).map((color, index) => (
                       <div
                         key={index}
-                        className={`w-6 h-6 rounded-full ${getColorCircle(color)} cursor-pointer hover:scale-110 transition-transform`}
+                        className={`w-5 h-5 rounded-full ${getColorCircle(color)} cursor-pointer hover:scale-110 transition-transform`}
                         title={color}
                       />
                     ))}
-                    {product.colors.length > 8 && (
-                      <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px]">
-                        +{product.colors.length - 8}
+                    {product.colors.length > 6 && (
+                      <div className="w-5 h-5 rounded-full bg-muted flex items-center justify-center text-[9px]">
+                        +{product.colors.length - 6}
                       </div>
                     )}
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-2 gap-1.5">
                     <Button 
                       variant="outline"
                       size="sm"
+                      className="text-xs h-7"
                       onClick={openModal}
                     >
                       Try On
                     </Button>
-                    <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                    <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs h-7">
                       <ShoppingCart className="w-3 h-3 mr-1" />
                       Add
                     </Button>
