@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
 import { Avatar3D } from "@/components/Avatar3D";
 import personalizeAvatar from "@/assets/personalize-avatar.png";
+import completedAvatar from "@/assets/completed-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -801,13 +802,10 @@ const CreateAvatar = () => {
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-1">
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-0">Your avatar is ready!</h3>
-                  <div className="flex justify-center -mx-6 -mt-2">
-                    <Avatar3D className="w-full h-[600px]" />
+                  <h3 className="text-2xl font-bold mb-4">Your avatar is ready!</h3>
+                  <div className="flex justify-center">
+                    <img src={completedAvatar} alt="Your Avatar" className="w-full max-w-md rounded-lg" />
                   </div>
-                  <p className="text-xs text-muted-foreground -mt-4">
-                    Click and drag to rotate
-                  </p>
                   <Button 
                     className="mt-2" 
                     onClick={() => navigate('/')}
