@@ -793,7 +793,7 @@ const CreateAvatar = () => {
                     You'll get exclusive early access to try-on looks from your favorite brands!
                   </p>
                   <div className="flex justify-center -mx-6 -mt-4">
-                    <Avatar3D className="w-full h-[1200px]" />
+                    <Avatar3D className="w-full h-[500px]" />
                   </div>
                   <p className="text-xs text-muted-foreground -mt-4">
                     Click and drag to rotate • Scroll to zoom
