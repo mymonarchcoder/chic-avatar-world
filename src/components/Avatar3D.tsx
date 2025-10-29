@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useTexture } from '@react-three/drei';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import * as THREE from 'three';
 import avatarTurnaround from "@/assets/avatar-360-turnaround.png";
 
@@ -25,15 +25,21 @@ interface Avatar3DProps {
 }
 
 export const Avatar3D = ({ className = "w-96 h-96" }: Avatar3DProps) => {
+  const [isHovering, setIsHovering] = useState(false);
+
   return (
-    <div className={className}>
+    <div 
+      className={className}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
         <ambientLight intensity={0.8} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Suspense fallback={null}>
           <AvatarModel />
           <OrbitControls 
-            enableZoom={true}
+            enableZoom={isHovering}
             enablePan={false}
             minDistance={3}
             maxDistance={8}
