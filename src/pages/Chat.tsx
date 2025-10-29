@@ -212,7 +212,7 @@ const Chat = () => {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === "Enter" && sendMessage()}
                   disabled={isLoading}
-                  className="flex-1"
+                  className="flex-1 text-black"
                 />
                 <Button onClick={sendMessage} disabled={!input.trim() || isLoading}>
                   <Send className="w-5 h-5" />
