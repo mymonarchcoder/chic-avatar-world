@@ -214,21 +214,21 @@ const BrandCollection = () => {
                   </Button>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-3">{product.colors[0]}</p>
-                  <p className="text-xl font-bold mb-4">${product.price}</p>
+                <div className="p-4">
+                  <h3 className="text-sm font-semibold mb-1">{product.name}</h3>
+                  <p className="text-muted-foreground text-xs mb-2">{product.colors[0]}</p>
+                  <p className="text-lg font-bold mb-3">${product.price}</p>
                   
-                  <div className="flex gap-2 mb-4 flex-wrap">
+                  <div className="flex gap-1.5 mb-3 flex-wrap">
                     {product.colors.slice(0, 8).map((color, index) => (
                       <div
                         key={index}
-                        className={`w-8 h-8 rounded-full ${getColorCircle(color)} cursor-pointer hover:scale-110 transition-transform`}
+                        className={`w-6 h-6 rounded-full ${getColorCircle(color)} cursor-pointer hover:scale-110 transition-transform`}
                         title={color}
                       />
                     ))}
                     {product.colors.length > 8 && (
-                      <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs">
+                      <div className="w-6 h-6 rounded-full bg-muted flex items-center justify-center text-[10px]">
                         +{product.colors.length - 8}
                       </div>
                     )}
@@ -237,12 +237,13 @@ const BrandCollection = () => {
                   <div className="grid grid-cols-2 gap-2">
                     <Button 
                       variant="outline"
+                      size="sm"
                       onClick={openModal}
                     >
                       Try On
                     </Button>
-                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                      <ShoppingCart className="w-4 h-4 mr-2" />
+                    <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
+                      <ShoppingCart className="w-3 h-3 mr-1" />
                       Add
                     </Button>
                   </div>
