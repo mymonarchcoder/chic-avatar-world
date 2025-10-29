@@ -10,8 +10,8 @@ function AvatarModel() {
   // Create a cylindrical model for 360-degree viewing
   return (
     <mesh rotation={[0, Math.PI / 2, 0]}>
-      <cylinderGeometry args={[1.4, 1.4, 3.5, 32, 1, true]} />
-      <meshStandardMaterial 
+      <cylinderGeometry args={[1.4, 1.4, 2.8, 32, 1, true]} />
+      <meshStandardMaterial
         map={texture} 
         side={THREE.DoubleSide}
         transparent={false}
