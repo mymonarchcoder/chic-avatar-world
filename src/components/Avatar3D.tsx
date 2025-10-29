@@ -27,7 +27,7 @@ interface Avatar3DProps {
 export const Avatar3D = ({ className = "w-96 h-96" }: Avatar3DProps) => {
   return (
     <div className={className}>
-      <Canvas camera={{ position: [0, 0, 3], fov: 50 }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
         <ambientLight intensity={0.8} />
         <directionalLight position={[5, 5, 5]} intensity={1} />
         <Suspense fallback={null}>
@@ -35,8 +35,8 @@ export const Avatar3D = ({ className = "w-96 h-96" }: Avatar3DProps) => {
           <OrbitControls 
             enableZoom={true}
             enablePan={false}
-            minDistance={2}
-            maxDistance={5}
+            minDistance={3}
+            maxDistance={8}
           />
         </Suspense>
       </Canvas>
