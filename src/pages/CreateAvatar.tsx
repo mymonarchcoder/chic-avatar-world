@@ -145,7 +145,10 @@ const CreateAvatar = () => {
             
             <div 
               className={`flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
-              onClick={() => setStep(2)}
+              onClick={() => {
+                setStep(2);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
             >
               <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 text-xs ${step >= 2 ? 'border-primary bg-primary text-primary-foreground' : 'border-muted-foreground'}`}>
                 {step > 2 ? <CheckCircle2 className="w-3 h-3" /> : '2'}
