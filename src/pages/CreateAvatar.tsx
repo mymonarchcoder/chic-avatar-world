@@ -784,22 +784,22 @@ const CreateAvatar = () => {
                   </div>
                 </>
               ) : (
-                <div className="mt-8 p-6 bg-[hsl(225_73%_57%)]/10 rounded-lg border-2 border-[hsl(225_73%_57%)] animate-scale-in">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-4">
+                <div className="space-y-4">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-2">
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Your avatar is ready!</h3>
-                  <p className="text-muted-foreground text-sm max-w-md mx-auto mb-6">
+                  <h3 className="text-2xl font-bold mb-2">Your avatar is ready!</h3>
+                  <p className="text-muted-foreground text-sm max-w-md mx-auto mb-4">
                     You'll get exclusive early access to try-on looks from your favorite brands!
                   </p>
-                  <div className="flex justify-center">
-                    <Avatar3D className="w-full h-[500px]" />
+                  <div className="flex justify-center -mx-6">
+                    <Avatar3D className="w-full h-[600px]" />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">
+                  <p className="text-xs text-muted-foreground mt-1">
                     Click and drag to rotate • Scroll to zoom
                   </p>
                   <Button 
-                    className="mt-6" 
+                    className="mt-4" 
                     onClick={() => navigate('/')}
                   >
                     Let's go!
