@@ -131,7 +131,10 @@ const CreateAvatar = () => {
         {/* Progress Steps */}
         <div className="flex justify-center mb-2">
           <div className="flex items-center gap-1.5">
-            <div className={`flex items-center gap-1 ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}>
+            <div 
+              className={`flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity ${step >= 1 ? 'text-primary' : 'text-muted-foreground'}`}
+              onClick={() => setStep(1)}
+            >
               <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 text-xs ${step >= 1 ? 'border-primary bg-primary text-primary-foreground' : 'border-muted-foreground'}`}>
                 {step > 1 ? <CheckCircle2 className="w-3 h-3" /> : '1'}
               </div>
@@ -140,7 +143,10 @@ const CreateAvatar = () => {
             
             <div className="w-6 h-0.5 bg-border"></div>
             
-            <div className={`flex items-center gap-1 ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}>
+            <div 
+              className={`flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity ${step >= 2 ? 'text-primary' : 'text-muted-foreground'}`}
+              onClick={() => setStep(2)}
+            >
               <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 text-xs ${step >= 2 ? 'border-primary bg-primary text-primary-foreground' : 'border-muted-foreground'}`}>
                 {step > 2 ? <CheckCircle2 className="w-3 h-3" /> : '2'}
               </div>
@@ -149,7 +155,10 @@ const CreateAvatar = () => {
             
             <div className="w-6 h-0.5 bg-border"></div>
             
-            <div className={`flex items-center gap-1 ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}>
+            <div 
+              className={`flex items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity ${step >= 3 ? 'text-primary' : 'text-muted-foreground'}`}
+              onClick={() => setStep(3)}
+            >
               <div className={`w-6 h-6 rounded-full flex items-center justify-center border-2 text-xs ${step >= 3 ? 'border-primary bg-primary text-primary-foreground' : 'border-muted-foreground'}`}>
                 {step > 3 ? <CheckCircle2 className="w-3 h-3" /> : '3'}
               </div>
