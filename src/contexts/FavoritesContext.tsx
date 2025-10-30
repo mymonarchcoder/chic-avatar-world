@@ -1,4 +1,8 @@
 import { createContext, useContext, useState, ReactNode } from "react";
+import whiteTeeImg from "@/assets/white-tee.png";
+import satinDressImg from "@/assets/satin-slip-dress.png";
+import jeansImg from "@/assets/high-waist-jeans.png";
+import blazerImg from "@/assets/cropped-blazer.png";
 
 interface FavoriteItem {
   id: number;
@@ -29,10 +33,10 @@ const FavoritesContext = createContext<FavoritesContextType | undefined>(undefin
 
 // Sample favorite items from Lioness brand
 const initialFavorites: FavoriteItem[] = [
-  { id: 1, name: "Classic White Tee", brand: "Frame", price: 49, image: "/src/assets/white-tee.png" },
-  { id: 2, name: "Satin Slip Dress", brand: "Frame", price: 179, image: "/src/assets/satin-slip-dress.png" },
-  { id: 3, name: "High Waist Jeans", brand: "Frame", price: 129, image: "/src/assets/high-waist-jeans.png" },
-  { id: 4, name: "Cropped Blazer", brand: "Frame", price: 199, image: "/src/assets/cropped-blazer.png" },
+  { id: 1, name: "Classic White Tee", brand: "Frame", price: 49, image: whiteTeeImg },
+  { id: 2, name: "Satin Slip Dress", brand: "Frame", price: 179, image: satinDressImg },
+  { id: 3, name: "High Waist Jeans", brand: "Frame", price: 129, image: jeansImg },
+  { id: 4, name: "Cropped Blazer", brand: "Frame", price: 199, image: blazerImg },
 ];
 
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
