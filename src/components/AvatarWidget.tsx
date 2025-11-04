@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import avatarShowcase from "@/assets/avatar-showcase-posed.png";
+import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
@@ -395,7 +395,7 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-transparent flex items-center justify-center animate-fade-in">
+      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center animate-fade-in">
         <div className="w-full h-full max-w-7xl flex flex-col overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
