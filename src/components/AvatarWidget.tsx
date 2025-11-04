@@ -378,7 +378,7 @@ const AvatarWidget = () => {
             <div className="flex flex-col justify-center items-start h-full flex-shrink-0 w-[68%] overflow-visible -ml-8">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-start overflow-visible h-full w-full scale-[1.4]"
+                className="relative flex items-center justify-start overflow-visible h-full w-full scale-[1.6]"
               >
                 {/* Animated Avatar */}
                 <AnimatedAvatar
