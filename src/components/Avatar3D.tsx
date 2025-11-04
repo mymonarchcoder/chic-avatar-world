@@ -26,9 +26,9 @@ function ResponsiveCamera({ setBasePosition, setAvatarScale }: { setBasePosition
     camera.position.set(0, 0, distance);
     camera.updateProjectionMatrix();
 
-    // Center avatar more on screen
-    const leftBias = isLandscape ? -0.8 : -1.2 - (1 / Math.max(0.5, aspect)) * 0.2;
-    const clampedLeft = Math.max(-2.5, Math.min(0, leftBias));
+    // Position avatar more to the left to show entire model
+    const leftBias = isLandscape ? -1.8 : -2.2 - (1 / Math.max(0.5, aspect)) * 0.3;
+    const clampedLeft = Math.max(-3.5, Math.min(-0.5, leftBias));
     const yOffset = isLandscape ? -0.15 : -0.2;
     setBasePosition([clampedLeft, yOffset, 0]);
 
@@ -52,10 +52,10 @@ export default function Avatar3D() {
     basePosition[2]
   ];
 
-  // Nudge avatar left on the home page
+  // Nudge avatar left on the home page to show full model
   useEffect(() => {
     if (location.pathname === "/") {
-      setOffset(prev => [Math.min(prev[0] - 0.6, 0), prev[1]]);
+      setOffset(prev => [Math.min(prev[0] - 1.0, -0.5), prev[1]]);
     } else {
       // Reset when navigating away from home
       setOffset([0, 0]);
@@ -67,8 +67,8 @@ export default function Avatar3D() {
     const handleKeyDown = (e: KeyboardEvent) => {
       const step = 0.15; // movement step per key press
       // Allowed bounds for final position (approx viewport-safe)
-      const minX = -2.5;
-      const maxX = 0.0;
+      const minX = -3.5;
+      const maxX = 0.5;
       const minY = -0.6;
       const maxY = 0.4;
 
