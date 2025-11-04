@@ -206,10 +206,10 @@ const BodyScan = () => {
       {/* Instructions */}
       <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center z-10">
         <div className="bg-background/80 backdrop-blur-sm rounded-lg px-6 py-3">
-          <p className="text-sm text-muted-foreground mb-2">
+          <p className="text-sm text-white mb-2">
             {isScanning ? "Hold still while we capture your 360° scan" : "Scan captured successfully!"}
           </p>
-          <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 text-xs text-white">
             <Camera className="w-3 h-3" />
             <span>Drag to rotate • Scroll to zoom</span>
           </div>
