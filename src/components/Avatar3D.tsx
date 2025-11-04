@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import * as THREE from "three";
 import { Canvas, useThree } from "@react-three/fiber";
 import { OrbitControls, useTexture } from "@react-three/drei";
@@ -14,7 +15,7 @@ function InlineAvatarModel() {
   );
 }
 
-function ResponsiveCamera({ setAvatarPosition, setAvatarScale }: { setAvatarPosition: (pos: [number, number, number]) => void; setAvatarScale: (s: number) => void }) {
+function ResponsiveCamera({ setBasePosition, setAvatarScale }: { setBasePosition: (pos: [number, number, number]) => void; setAvatarScale: (s: number) => void }) {
   const { camera, size } = useThree();
 
   useEffect(() => {
@@ -25,26 +26,77 @@ function ResponsiveCamera({ setAvatarPosition, setAvatarScale }: { setAvatarPosi
     camera.position.set(0, 0, distance);
     camera.updateProjectionMatrix();
 
-    const leftBias = isLandscape ? -4.2 : -5.8 - (1 / Math.max(0.5, aspect)) * 0.6;
-    const clampedLeft = Math.max(-6.5, Math.min(-3.5, leftBias));
+    // Center avatar more on screen
+    const leftBias = isLandscape ? -0.8 : -1.2 - (1 / Math.max(0.5, aspect)) * 0.2;
+    const clampedLeft = Math.max(-2.5, Math.min(0, leftBias));
     const yOffset = isLandscape ? -0.15 : -0.2;
-    setAvatarPosition([clampedLeft, yOffset, 0]);
+    setBasePosition([clampedLeft, yOffset, 0]);
 
     const scale = isLandscape ? 1 : Math.max(0.9, Math.min(1, aspect * 0.95));
     setAvatarScale(scale);
-  }, [camera, size, setAvatarPosition, setAvatarScale]);
+  }, [camera, size, setBasePosition, setAvatarScale]);
 
   return null;
 }
 
 export default function Avatar3D() {
-  const [avatarPosition, setAvatarPosition] = useState<[number, number, number]>([-5.5, 0, 0]);
+  const [basePosition, setBasePosition] = useState<[number, number, number]>([-1.5, 0, 0]);
+  const [offset, setOffset] = useState<[number, number]>([0, 0]);
   const [avatarScale, setAvatarScale] = useState<number>(1);
+  const location = useLocation();
+
+  // Derived final position = responsive base + user offset
+  const avatarPosition: [number, number, number] = [
+    basePosition[0] + offset[0],
+    basePosition[1] + offset[1],
+    basePosition[2]
+  ];
+
+  // Nudge avatar left on the home page
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setOffset(prev => [Math.min(prev[0] - 0.6, 0), prev[1]]);
+    } else {
+      // Reset when navigating away from home
+      setOffset([0, 0]);
+    }
+  }, [location.pathname]);
+
+  // Arrow-key movement with clamped bounds
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const step = 0.15; // movement step per key press
+      // Allowed bounds for final position (approx viewport-safe)
+      const minX = -2.5;
+      const maxX = 0.0;
+      const minY = -0.6;
+      const maxY = 0.4;
+
+      let dx = 0;
+      let dy = 0;
+      if (e.key === "ArrowLeft") dx = -step;
+      if (e.key === "ArrowRight") dx = step;
+      if (e.key === "ArrowUp") dy = step;
+      if (e.key === "ArrowDown") dy = -step;
+      if (dx === 0 && dy === 0) return;
+
+      e.preventDefault();
+
+      setOffset(prev => {
+        const nextX = Math.max(minX - basePosition[0], Math.min(maxX - basePosition[0], prev[0] + dx));
+        const nextY = Math.max(minY - basePosition[1], Math.min(maxY - basePosition[1], prev[1] + dy));
+        return [nextX, nextY];
+      });
+    };
+
+    window.addEventListener("keydown", handleKeyDown, { passive: false });
+    return () => window.removeEventListener("keydown", handleKeyDown as EventListener);
+  }, [basePosition]);
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Canvas camera={{ position: [0, 0, 12], fov: 55 }}>
-        <ResponsiveCamera setAvatarPosition={setAvatarPosition} setAvatarScale={setAvatarScale} />
+        <ResponsiveCamera setBasePosition={setBasePosition} setAvatarScale={setAvatarScale} />
 
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 3]} intensity={0.8} />
