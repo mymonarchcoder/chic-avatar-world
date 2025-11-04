@@ -151,7 +151,7 @@ const BodyScan = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white relative">
+    <div className="min-h-screen bg-[#0a0e1a] relative">
       {/* Back button */}
       <div className="absolute top-4 left-4 z-10">
         <Button
@@ -167,8 +167,8 @@ const BodyScan = () => {
 
       {/* Header */}
       <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 text-center">
-        <h1 className="text-foreground text-xl font-bold mb-1">Full Body Scan</h1>
-        <p className="text-muted-foreground text-sm">
+        <h1 className="text-white text-xl font-bold mb-1">Full Body Scan</h1>
+        <p className="text-white/70 text-sm">
           {isScanning ? "Scanning..." : "Scan Complete"}
         </p>
       </div>
