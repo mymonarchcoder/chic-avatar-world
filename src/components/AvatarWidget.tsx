@@ -484,13 +484,13 @@ const AvatarWidget = () => {
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`h-6 text-xs transition-all duration-300 px-3 ${
+                          className={`h-6 text-xs transition-all duration-300 px-3 text-white ${
                             getSelectedItemForCategory(item.category)?.name === item.name
-                              ? 'bg-red-600 hover:bg-red-700 text-white'
+                              ? 'bg-red-600 hover:bg-red-700'
                               : 'bg-gradient-primary hover:opacity-90'
                           }`}
                         >
-                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try On'}
+                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Back' : 'Try On'}
                         </Button>
                         <Button 
                           size="sm"
@@ -499,6 +499,13 @@ const AvatarWidget = () => {
                           className="h-6 w-6 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
                         >
                           <ShoppingCart className="w-3 h-3" />
+                        </Button>
+                        <Button 
+                          size="sm"
+                          variant="outline"
+                          className="h-6 text-[10px] px-2 border-border hover:bg-accent flex-shrink-0"
+                        >
+                          Size
                         </Button>
                       </div>
                     </div>

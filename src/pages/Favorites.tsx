@@ -67,11 +67,18 @@ const Favorites = () => {
                         </Button>
                         <Button 
                           size="sm"
-                          className="bg-primary text-primary-foreground hover:bg-primary/90 text-xs"
+                          className="bg-primary hover:bg-primary/90 text-white text-xs"
                         >
                           Add to Cart
                         </Button>
                       </div>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full text-xs"
+                      >
+                        Change Size
+                      </Button>
                       <Button
                         size="sm"
                         variant="ghost"
