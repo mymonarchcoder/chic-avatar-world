@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, User, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
-import Avatar3D from "@/components/Avatar3D";
+import { Avatar3D } from "@/components/Avatar3D";
 import personalizeAvatar from "@/assets/personalize-avatar.png";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -802,8 +802,8 @@ const CreateAvatar = () => {
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold mb-0">Your avatar is ready!</h3>
-                  <div className="flex justify-center -mx-6 -mt-2 w-full h-[600px]">
-                    <Avatar3D />
+                  <div className="flex justify-center -mx-6 -mt-2">
+                    <Avatar3D className="w-full h-[600px]" />
                   </div>
                   <p className="text-xs text-muted-foreground -mt-4">
                     Click and drag to rotate
