@@ -42,7 +42,8 @@ const Hero = () => {
             <img 
               src={heroBanner} 
               alt="Style avatar" 
-              className="w-full max-w-lg object-contain"
+              className="w-full max-w-lg object-contain cursor-pointer hover:scale-105 transition-transform duration-300"
+              onClick={openModal}
             />
           </div>
         </div>
