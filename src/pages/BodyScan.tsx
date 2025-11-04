@@ -204,7 +204,7 @@ const BodyScan = () => {
       </div>
 
       {/* Instructions */}
-      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 text-center z-10">
+      <div className="absolute bottom-16 left-1/2 -translate-x-1/2 text-center z-10">
         <div className="bg-background/80 backdrop-blur-sm rounded-lg px-6 py-3">
           <p className="text-sm text-muted-foreground mb-2">
             {isScanning ? "Hold still while we capture your 360° scan" : "Scan captured successfully!"}
