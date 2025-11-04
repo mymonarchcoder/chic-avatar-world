@@ -300,7 +300,7 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-<div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm avatar-modal-content">
+<div className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm avatar-modal-content">
         <Card className="w-full max-w-7xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
