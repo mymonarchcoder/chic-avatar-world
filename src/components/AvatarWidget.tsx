@@ -378,7 +378,7 @@ const AvatarWidget = () => {
             <div className="flex flex-col justify-center items-start h-full flex-shrink-0 w-[65%] overflow-visible">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-start overflow-visible h-full w-full scale-110"
+                className="relative flex items-center justify-start overflow-visible h-full w-full scale-125"
               >
                 {/* Animated Avatar */}
                 <AnimatedAvatar
@@ -484,7 +484,8 @@ const AvatarWidget = () => {
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`h-6 text-xs transition-all duration-300 px-3 !text-white ${
+                          style={{ color: 'white' }}
+                          className={`h-6 text-xs transition-all duration-300 px-3 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
                               ? 'bg-red-600 hover:bg-red-700'
                               : 'bg-gradient-primary hover:opacity-90'
