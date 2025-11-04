@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import avatarShowcase from "@/assets/avatar-showcase.png";
+import avatarShowcase from "@/assets/avatar-showcase-posed.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
