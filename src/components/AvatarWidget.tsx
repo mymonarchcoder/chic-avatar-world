@@ -1,38 +1,16 @@
 import { useState, useEffect, useRef } from "react";
-import { X, Maximize2, Sparkles, ShoppingCart } from "lucide-react";
+import { X, Maximize2, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
-import { ScrollArea } from "./ui/scroll-area";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
-import avatarShowcase from "@/assets/avatar-showcase.png";
-import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
-import { toast } from "sonner";
-import AnimatedAvatar from "./AnimatedAvatar";
+import Avatar3D from "./Avatar3D";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
-  const [processedAvatar, setProcessedAvatar] = useState<string | null>(null);
   const [selectedItems, setSelectedItems] = useState<{[key: string]: any}>({});
   const [avatarDimensions, setAvatarDimensions] = useState<{width: number, height: number} | null>(null);
   const [isRemoving, setIsRemoving] = useState<string | null>(null);
-  const [rotation, setRotation] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
   const avatarRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const processImage = async () => {
-      try {
-        const img = await loadImage(avatarShowcase);
-        const result = await removeBackground(img);
-        setProcessedAvatar(result);
-      } catch (error) {
-        console.error('Failed to process avatar:', error);
-        setProcessedAvatar(avatarShowcase);
-      }
-    };
-    processImage();
-  }, []);
 
   // Track avatar dimensions for responsive clothing positioning
   useEffect(() => {
@@ -69,51 +47,13 @@ const AvatarWidget = () => {
         });
         setIsRemoving(null);
       }, 300); // Match the fade-out duration
-      toast.success(`Removed ${item.name}`);
     } else {
       // Otherwise, select this item (try on)
       setSelectedItems(prev => ({
         ...prev,
         [item.category]: item
       }));
-      toast.success(`Trying on ${item.name}`);
     }
-  };
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.clientX);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    const deltaX = e.clientX - startX;
-    setRotation(prev => prev + deltaX * 0.5);
-    setStartX(e.clientX);
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const deltaX = e.touches[0].clientX - startX;
-    setRotation(prev => prev + deltaX * 0.5);
-    setStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-  };
-
-  const handleAddToCart = (item: any) => {
-    toast.success(`Added ${item.name} to cart!`);
   };
 
   const getSelectedItemForCategory = (category: string) => {
@@ -295,10 +235,10 @@ const AvatarWidget = () => {
     return clothingImages[item.name] || clothingImages['Premium White Tee'];
   };
 
-  // Function to calculate clothing positioning based on avatar dimensions
+  // Function to calculate clothing positioning based on 3D avatar dimensions
   const getClothingPosition = (item: any, avatarWidth: number, avatarHeight: number) => {
-    const baseWidth = 300; // Base avatar width for calculations
-    const baseHeight = 600; // Base avatar height for calculations (full-length)
+    const baseWidth = 400; // Base 3D avatar width for calculations
+    const baseHeight = 400; // Base 3D avatar height for calculations
     
     const scaleX = avatarWidth / baseWidth;
     const scaleY = avatarHeight / baseHeight;
@@ -306,50 +246,50 @@ const AvatarWidget = () => {
 
     const positions: {[key: string]: any} = {
       'Outerwear': {
-        top: avatarHeight * 0.08,
+        top: avatarHeight * 0.15,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.85 * scale,
-        height: avatarHeight * 0.35 * scale,
+        width: avatarWidth * 0.7 * scale,
+        height: avatarHeight * 0.4 * scale,
         zIndex: 3,
         transform: 'translateX(-50%) rotate(-2deg)'
       },
       'Tops': {
-        top: avatarHeight * 0.10,
+        top: avatarHeight * 0.2,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.8 * scale,
-        height: avatarHeight * 0.30 * scale,
+        width: avatarWidth * 0.6 * scale,
+        height: avatarHeight * 0.3 * scale,
         zIndex: 2,
         transform: 'translateX(-50%) rotate(1deg)'
       },
       'Bottoms': {
-        top: avatarHeight * 0.40,
+        top: avatarHeight * 0.5,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.7 * scale,
-        height: avatarHeight * 0.45 * scale,
+        width: avatarWidth * 0.5 * scale,
+        height: avatarHeight * 0.4 * scale,
         zIndex: 1,
         transform: 'translateX(-50%) rotate(-1deg)'
       },
       'Footwear': {
-        top: avatarHeight * 0.85,
+        top: avatarHeight * 0.9,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.6 * scale,
-        height: avatarHeight * 0.12 * scale,
+        width: avatarWidth * 0.4 * scale,
+        height: avatarHeight * 0.1 * scale,
         zIndex: 1,
         transform: 'translateX(-50%) rotate(2deg)'
       },
       'Accessories': {
-        top: avatarHeight * 0.20,
+        top: avatarHeight * 0.3,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.3 * scale,
+        width: avatarWidth * 0.25 * scale,
         height: avatarHeight * 0.15 * scale,
         zIndex: 4,
         transform: 'translateX(-50%) rotate(-3deg)'
       },
       'Dresses': {
-        top: avatarHeight * 0.08,
+        top: avatarHeight * 0.15,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.8 * scale,
-        height: avatarHeight * 0.80 * scale,
+        width: avatarWidth * 0.6 * scale,
+        height: avatarHeight * 0.7 * scale,
         zIndex: 2,
         transform: 'translateX(-50%) rotate(1deg)'
       }
@@ -360,167 +300,204 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center animate-fade-in">
-        <div className="w-full h-full max-w-7xl flex flex-col overflow-hidden animate-scale-in relative">
+<div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm avatar-modal-content">
+        <Card className="w-full max-w-7xl h-[90vh] shadow-elegant overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
             onClick={closeModal}
             size="icon"
             variant="ghost"
-            className="absolute top-2 right-2 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground rounded-full"
+            className="absolute top-4 right-4 z-10 bg-background/80 hover:bg-background text-foreground hover:text-foreground"
           >
             <X className="w-6 h-6" />
           </Button>
 
-          {/* Content - Two Column Layout Always Side by Side */}
-          <div className="h-full flex overflow-hidden relative">
-            {/* Left Column - Full Body Avatar - Larger and closer to right */}
-            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 w-[60%] overflow-visible">
-              <div 
-                ref={avatarRef}
-                className="relative flex items-center justify-start overflow-visible h-full w-full"
-              >
-                {/* Animated Avatar */}
-                <AnimatedAvatar
-                  src={processedAvatar || avatarShowcase}
-                  rotation={rotation}
-                  isDragging={isDragging}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                />
-                
-                {/* Virtual Try-On Clothing Images */}
-                {avatarDimensions && Object.values(selectedItems).map((item: any, index) => {
-                  const position = getClothingPosition(item, avatarDimensions.width, avatarDimensions.height);
-                  const isCurrentlyRemoving = isRemoving === item.category;
-                  
-                  return (
-                    <img
-                      key={`${item.category}-${index}`}
-                      src={getClothingImageUrl(item)}
-                      alt={item.name}
-                      className="absolute pointer-events-none object-contain"
-                      style={{
-                        ...position,
-                        opacity: isCurrentlyRemoving ? 0 : 1,
-                        transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
-                        filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
-                      }}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-24">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
-                {Object.keys(selectedItems).length > 0 && (
-                  <div className="text-sm text-primary font-medium">
-                    {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} selected
-                  </div>
-                )}
-              </div>
-              
-              <ScrollArea className="flex-1 pr-2">
-                <div className="space-y-1">
-                {[
-                  { 
-                    name: "Silver Dress", 
-                    brand: "Reform", 
-                    category: "Dresses",
-                    price: "$180",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Burgundy Dress", 
-                    brand: "Evolv", 
-                    category: "Dresses",
-                    price: "$195",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Black Dress", 
-                    brand: "Larson", 
-                    category: "Dresses",
-                    price: "$250",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Red Dress", 
-                    brand: "Reform", 
-                    category: "Dresses",
-                    price: "$200",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Evening Dress", 
-                    brand: "Evolv", 
-                    category: "Dresses",
-                    price: "$165",
-                    image: "👗"
-                  },
-                ].map((item, idx) => (
-                  <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
-                    <div className="flex flex-col gap-1.5">
-                      {/* Emoji and name on same line */}
-                      <div className="flex items-center gap-0.5 pr-3 pl-3">
-                        <div className="text-3xl sm:text-4xl flex-shrink-0">{item.image}</div>
-                        <div className="min-w-0 mr-1">
-                          <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
-                          <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
-                        </div>
-                        <span className="text-[10px] font-bold text-primary flex-shrink-0 whitespace-nowrap">{item.price}</span>
-                      </div>
-                      
-                      {/* Buttons */}
-                      <div className="flex gap-1 justify-center">
-                        <Button 
-                          size="sm" 
-                          onClick={() => handleTryOn(item)}
-                          className={`h-6 text-xs transition-all duration-300 px-3 ${
-                            getSelectedItemForCategory(item.category)?.name === item.name
-                              ? 'bg-red-600 hover:bg-red-700 text-white'
-                              : 'bg-gradient-primary hover:opacity-90'
-                          }`}
-                        >
-                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try On'}
-                        </Button>
-                        <Button 
-                          size="sm"
-                          onClick={() => handleAddToCart(item)}
-                          variant="outline"
-                          className="h-6 w-6 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
-                        >
-                          <ShoppingCart className="w-3 h-3" />
-                        </Button>
-                      </div>
+          {/* Content */}
+          <div className="h-full p-4 overflow-hidden">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
+                {/* Left Column - Avatar Body (Fixed) */}
+                <div className="flex flex-col h-full overflow-hidden">
+                  <div 
+                    ref={avatarRef}
+                    className="flex-1 flex items-center justify-center p-4 relative min-h-[500px]"
+                  >
+                    {/* 3D Avatar Model */}
+                    <div className="w-full h-[400px] max-h-[400px]">
+                      <Avatar3D />
                     </div>
+                    
+                    {/* Virtual Try-On Clothing Images */}
+                    {avatarDimensions && Object.values(selectedItems).map((item: any, index) => {
+                      const position = getClothingPosition(item, avatarDimensions.width, avatarDimensions.height);
+                      const isCurrentlyRemoving = isRemoving === item.category;
+                      
+                      return (
+                        <img
+                          key={`${item.category}-${index}`}
+                          src={getClothingImageUrl(item)}
+                          alt={item.name}
+                          className="absolute pointer-events-none object-contain"
+                          style={{
+                            ...position,
+                            opacity: isCurrentlyRemoving ? 0 : 1,
+                            transition: 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out',
+                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))'
+                          }}
+                        />
+                      );
+                    })}
                   </div>
-                ))}
+                  <div className="mt-4 flex gap-2">
+                    <Button 
+                      onClick={() => setSelectedItems({})}
+                      className="flex-1 bg-gradient-primary hover:opacity-90"
+                    >
+                      <Sparkles className="w-4 h-4 mr-2" />
+                      Clear All
+                    </Button>
+                    <Button variant="outline" className="flex-1 border-primary text-primary hover:bg-primary/10">
+                      Rotate 360°
+                    </Button>
+                  </div>
                 </div>
-              </ScrollArea>
-              
-              <div className="mt-3 flex gap-2">
-                <Button 
-                  onClick={() => {
-                    setSelectedItems({});
-                    toast.success("Cleared all items");
-                  }}
-                  className="flex-1 bg-gradient-primary hover:opacity-90 text-xs"
-                >
-                  Take Back
-                </Button>
+
+                {/* Right Column - Product Try-On Options (Scrollable) */}
+                <div className="flex flex-col h-full overflow-hidden">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-base font-semibold flex-shrink-0">Try-On Options</h3>
+                    {Object.keys(selectedItems).length > 0 && (
+                      <div className="text-xs text-green-600 font-medium">
+                        {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} worn
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 space-y-1.5 overflow-y-auto pr-1 min-h-0">
+                    {[
+                      { 
+                        name: "Leather Jacket", 
+                        brand: "Elegant Threads", 
+                        category: "Outerwear",
+                        price: "$299",
+                        image: "🧥"
+                      },
+                      { 
+                        name: "Designer Sneakers", 
+                        brand: "Active Life", 
+                        category: "Footwear",
+                        price: "$189",
+                        image: "👟"
+                      },
+                      { 
+                        name: "Statement Belt", 
+                        brand: "Trend Setters", 
+                        category: "Accessories",
+                        price: "$89",
+                        image: "👔"
+                      },
+                      { 
+                        name: "Premium White Tee", 
+                        brand: "Luxury Brand Co", 
+                        category: "Tops",
+                        price: "$79",
+                        image: "👕"
+                      },
+                      { 
+                        name: "Classic Denim", 
+                        brand: "Urban Style", 
+                        category: "Bottoms",
+                        price: "$129",
+                        image: "👖"
+                      },
+                      { 
+                        name: "Wool Blazer", 
+                        brand: "Professional Wear", 
+                        category: "Outerwear",
+                        price: "$399",
+                        image: "🤵"
+                      },
+                      { 
+                        name: "Silk Scarf", 
+                        brand: "Elegant Threads", 
+                        category: "Accessories",
+                        price: "$59",
+                        image: "🧣"
+                      },
+                      { 
+                        name: "Leather Boots", 
+                        brand: "Active Life", 
+                        category: "Footwear",
+                        price: "$249",
+                        image: "👢"
+                      },
+                      { 
+                        name: "Cashmere Sweater", 
+                        brand: "Luxury Co", 
+                        category: "Tops",
+                        price: "$199",
+                        image: "🧶"
+                      },
+                      { 
+                        name: "Silk Dress", 
+                        brand: "Elegant Threads", 
+                        category: "Dresses",
+                        price: "$399",
+                        image: "👗"
+                      },
+                      { 
+                        name: "Gold Watch", 
+                        brand: "Time Masters", 
+                        category: "Accessories",
+                        price: "$599",
+                        image: "⌚"
+                      },
+                      { 
+                        name: "Canvas Sneakers", 
+                        brand: "Street Style", 
+                        category: "Footwear",
+                        price: "$89",
+                        image: "👟"
+                      },
+                      { 
+                        name: "Wool Coat", 
+                        brand: "Winter Wear", 
+                        category: "Outerwear",
+                        price: "$349",
+                        image: "🧥"
+                      },
+                    ].map((item, idx) => (
+                      <Card key={idx} className="p-2 hover:shadow-card transition-all duration-300 cursor-pointer border hover:border-primary/30 group">
+                        <div className="flex items-start gap-2">
+                          <div className="text-xl">{item.image}</div>
+                          <div className="flex-1">
+                            <div className="flex items-start justify-between mb-1">
+                              <div>
+                                <h4 className="font-semibold text-xs group-hover:text-primary transition-colors">{item.name}</h4>
+                                <p className="text-xs text-muted-foreground">{item.brand}</p>
+                                <p className="text-xs text-primary font-medium">{item.category}</p>
+                              </div>
+                              <span className="text-xs font-bold text-primary">{item.price}</span>
+                            </div>
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleTryOn(item)}
+                              className={`w-full h-7 text-xs transition-all duration-300 group-hover:scale-105 ${
+                                getSelectedItemForCategory(item.category)?.name === item.name
+                                  ? 'bg-red-600 hover:bg-red-700 text-white'
+                                  : 'bg-gradient-primary hover:opacity-90'
+                              }`}
+                            >
+                              <Sparkles className="w-3 h-3 mr-1" />
+                              {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Off' : 'Try On'}
+                            </Button>
+                          </div>
+                        </div>
+                      </Card>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+        </Card>
       </div>
     );
   }
@@ -528,25 +505,14 @@ const AvatarWidget = () => {
   return (
     <button
       onClick={openModal}
-      className="fixed bottom-0 -right-24 z-40 group"
+      className="fixed bottom-4 right-4 z-40 group"
     >
       <div className="relative">
-        {/* Full body avatar silhouette - no background */}
-        <div className="relative w-48 h-72 sm:w-72 sm:h-96 transition-all hover:scale-105">
-          {processedAvatar ? (
-            <img 
-              src={processedAvatar} 
-              alt="Your 3D Avatar" 
-              className="w-full h-full object-contain"
-              style={{ 
-                filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))'
-              }}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="animate-pulse text-primary">Loading...</div>
-            </div>
-          )}
+        {/* 3D Avatar Preview */}
+        <div className="relative w-48 h-60 transition-all hover:scale-105">
+          <div className="w-full h-full">
+            <Avatar3D />
+          </div>
         </div>
         
         <div className="absolute top-4 right-2 bg-gradient-primary text-primary-foreground rounded-full p-2 shadow-lg animate-pulse">
