@@ -484,14 +484,13 @@ const AvatarWidget = () => {
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          style={{ color: 'white !important' } as React.CSSProperties}
-                          className={`h-6 text-xs transition-all duration-300 px-3 [&]:!text-white ${
+                          className={`h-6 text-xs transition-all duration-300 px-3 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
-                              ? 'bg-red-600 hover:bg-red-700 !text-white'
-                              : 'bg-gradient-primary hover:opacity-90 !text-white'
+                              ? 'bg-red-600 hover:bg-red-700'
+                              : 'bg-gradient-primary hover:opacity-90'
                           }`}
                         >
-                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Back' : 'Try On'}
+                          <span className="text-white">{getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Back' : 'Try On'}</span>
                         </Button>
                         <Button 
                           size="sm"
