@@ -526,9 +526,9 @@ const AvatarWidget = () => {
   }
 
   return (
-    <button
+    <button 
       onClick={openModal}
-      className="fixed bottom-0 -right-12 z-40 group"
+      className="fixed bottom-0 -right-20 z-40 group"
     >
       <div className="relative">
         {/* Full body avatar silhouette - no background */}
