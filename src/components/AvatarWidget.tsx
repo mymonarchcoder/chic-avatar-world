@@ -18,6 +18,7 @@ const AvatarWidget = () => {
   const [rotation, setRotation] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [isEditingAvatar, setIsEditingAvatar] = useState(false);
   const avatarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -114,6 +115,40 @@ const AvatarWidget = () => {
 
   const handleAddToCart = (item: any) => {
     toast.success(`Added ${item.name} to cart!`);
+  };
+
+  const handleAvatarClick = async () => {
+    if (!processedAvatar || isEditingAvatar) return;
+    
+    setIsEditingAvatar(true);
+    toast.loading("Transforming avatar pose...", { id: "edit-avatar" });
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/edit-avatar`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ imageUrl: processedAvatar }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to edit avatar");
+      }
+
+      const { imageUrl } = await response.json();
+      setProcessedAvatar(imageUrl);
+      toast.success("Avatar pose updated!", { id: "edit-avatar" });
+    } catch (error) {
+      console.error("Error editing avatar:", error);
+      toast.error("Failed to update avatar pose", { id: "edit-avatar" });
+    } finally {
+      setIsEditingAvatar(false);
+    }
   };
 
   const getSelectedItemForCategory = (category: string) => {
@@ -375,24 +410,34 @@ const AvatarWidget = () => {
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
             {/* Left Column - Full Body Avatar - Larger and closer to right */}
-            <div className="flex flex-col justify-center items-start h-full flex-shrink-0 w-[60%] overflow-visible">
+            <div className="flex flex-col justify-center items-center h-full flex-shrink-0 w-[65%] overflow-visible">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-start overflow-visible h-full w-full"
+                className="relative flex items-center justify-center overflow-visible h-full w-full cursor-pointer"
+                onClick={handleAvatarClick}
               >
                 {/* Animated Avatar */}
-                <AnimatedAvatar
-                  src={processedAvatar || avatarShowcase}
-                  rotation={rotation}
-                  isDragging={isDragging}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                />
+                <div className="relative">
+                  <AnimatedAvatar
+                    src={processedAvatar || avatarShowcase}
+                    rotation={rotation}
+                    isDragging={isDragging}
+                    onMouseDown={handleMouseDown}
+                    onMouseMove={handleMouseMove}
+                    onMouseUp={handleMouseUp}
+                    onMouseLeave={handleMouseUp}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                  />
+                  {isEditingAvatar && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg">
+                      <div className="bg-white px-4 py-2 rounded-lg shadow-lg">
+                        <p className="text-sm font-medium">Transforming pose...</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
                 
                 {/* Virtual Try-On Clothing Images */}
                 {avatarDimensions && Object.values(selectedItems).map((item: any, index) => {
@@ -417,8 +462,8 @@ const AvatarWidget = () => {
               </div>
             </div>
 
-            {/* Right Column - Apparel Items List - Overlapping Avatar */}
-            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-24">
+            {/* Right Column - Apparel Items List */}
+            <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-[35%]">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
                 {Object.keys(selectedItems).length > 0 && (
@@ -432,39 +477,32 @@ const AvatarWidget = () => {
                 <div className="space-y-1">
                 {[
                   { 
-                    name: "Silver Dress", 
-                    brand: "Reform", 
-                    category: "Dresses",
-                    price: "$180",
-                    image: "👗"
+                    name: "Green T-Shirt", 
+                    brand: "VERS", 
+                    category: "Tops",
+                    price: "$45",
+                    image: "👕"
                   },
                   { 
-                    name: "Burgundy Dress", 
-                    brand: "Evolv", 
-                    category: "Dresses",
-                    price: "$195",
-                    image: "👗"
+                    name: "White T-Shirt", 
+                    brand: "VERS", 
+                    category: "Tops",
+                    price: "$45",
+                    image: "👕"
                   },
                   { 
-                    name: "Black Dress", 
-                    brand: "Larson", 
-                    category: "Dresses",
-                    price: "$250",
-                    image: "👗"
+                    name: "Black T-Shirt", 
+                    brand: "VERS", 
+                    category: "Tops",
+                    price: "$45",
+                    image: "👕"
                   },
                   { 
-                    name: "Red Dress", 
-                    brand: "Reform", 
-                    category: "Dresses",
-                    price: "$200",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Evening Dress", 
-                    brand: "Evolv", 
-                    category: "Dresses",
-                    price: "$165",
-                    image: "👗"
+                    name: "Gray T-Shirt", 
+                    brand: "VERS", 
+                    category: "Tops",
+                    price: "$45",
+                    image: "👕"
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
