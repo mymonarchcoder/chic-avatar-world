@@ -38,7 +38,7 @@ const Hero = () => {
           </div>
 
           {/* Avatar Section */}
-          <div className="hidden lg:flex justify-start items-center -ml-20">
+          <div className="hidden lg:flex justify-start items-center -ml-40">
             <img 
               src={heroBanner} 
               alt="Style avatar" 
