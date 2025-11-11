@@ -37,14 +37,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Avatar Section */}
-          <div className="hidden lg:flex justify-start items-center -ml-40">
-            <img 
-              src={heroBanner} 
-              alt="Style avatar" 
-              className="w-full max-w-lg object-contain"
-            />
-          </div>
         </div>
       </div>
     </section>
