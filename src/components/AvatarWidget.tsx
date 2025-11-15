@@ -4,14 +4,17 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { ScrollArea } from "./ui/scroll-area";
 import { useAvatarModal } from "@/contexts/AvatarModalContext";
+import { useLocation } from "react-router-dom";
 import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
 import { malbonProducts } from "@/data/malbonProducts";
+import { aloProducts } from "@/data/aloProducts";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
+  const location = useLocation();
   const [processedAvatar, setProcessedAvatar] = useState<string | null>(null);
   const [selectedItems, setSelectedItems] = useState<{[key: string]: any}>({});
   const [avatarDimensions, setAvatarDimensions] = useState<{width: number, height: number} | null>(null);
@@ -20,6 +23,11 @@ const AvatarWidget = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const avatarRef = useRef<HTMLDivElement>(null);
+
+  // Determine which products to show based on current route
+  const isAloDemo = location.pathname === '/alo-demo';
+  const products = isAloDemo ? aloProducts : malbonProducts;
+  const brandName = isAloDemo ? "Alo Yoga" : "Malbon Golf";
 
   useEffect(() => {
     const processImage = async () => {
@@ -418,10 +426,10 @@ const AvatarWidget = () => {
               </div>
             </div>
 
-            {/* Right Column - Malbon Golf Products - Overlapping Avatar */}
+            {/* Right Column - Brand Products - Overlapping Avatar */}
             <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-20">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Malbon Golf</h3>
+                <h3 className="text-lg sm:text-2xl font-bold tracking-wide">{brandName}</h3>
                 {Object.keys(selectedItems).length > 0 && (
                   <div className="text-sm text-primary font-medium">
                     {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} selected
@@ -431,7 +439,7 @@ const AvatarWidget = () => {
               
               <ScrollArea className="flex-1 pr-2">
                 <div className="space-y-1">
-                {malbonProducts.map((item, idx) => (
+                {products.map((item, idx) => (
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex flex-col gap-1.5">
                       {/* Product Image and Details */}
