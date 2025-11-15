@@ -46,118 +46,93 @@ const AloApp = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Mobile App Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-        <div className="flex items-center justify-between px-4 py-3">
-          <Button 
-            variant="ghost" 
-            size="icon"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
-          
-          <h1 className="text-xl font-bold" style={{ letterSpacing: '-0.05em' }}>
-            Alo Yoga
-          </h1>
-          
-          <div className="flex items-center gap-1">
-            <Button variant="ghost" size="icon">
-              <Search className="w-5 h-5" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <Heart className="w-5 h-5" />
-            </Button>
-            <Button variant="ghost" size="icon">
-              <ShoppingBag className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
-        
-        {/* Search Bar */}
-        <div className="px-4 pb-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search products..." 
-              className="pl-10 bg-muted/50 border-0"
-            />
-          </div>
-        </div>
+      {/* Promo Banner */}
+      <div className="bg-[#4A1F1F] text-white text-center py-2 px-4 text-xs md:text-sm">
+        FREE 2-DAY SHIPPING + 30% OFF ✨ JOIN TO UNLOCK
+      </div>
 
-        {/* Category Scroll */}
-        <div className="flex overflow-x-auto gap-2 px-4 pb-3 scrollbar-hide">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant="outline"
-              size="sm"
-              className="whitespace-nowrap rounded-full text-xs"
-            >
-              {category}
-            </Button>
-          ))}
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-background border-b border-border">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold lowercase tracking-tight">alo</h1>
+            </div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center gap-8">
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+                Women
+              </button>
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+                Men
+              </button>
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+                Shoes
+              </button>
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+                Gift Guide
+              </button>
+            </nav>
+
+            {/* Right Side Icons */}
+            <div className="flex items-center gap-3">
+              <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Search className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" size="sm" className="hidden md:flex text-xs uppercase tracking-wider">
+                Sign In to Get Rewards
+              </Button>
+              <Button variant="ghost" size="icon" className="h-9 w-9">
+                <Heart className="w-5 h-5" />
+              </Button>
+              <Button variant="ghost" size="icon" className="h-9 w-9">
+                <ShoppingBag className="w-5 h-5" />
+              </Button>
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* Sidebar Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-sm">
-          <div className="p-6 pt-20">
-            <nav className="space-y-4">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  className="block text-lg font-medium hover:text-primary transition-colors w-full text-left"
-                >
-                  {category}
-                </button>
-              ))}
-            </nav>
-          </div>
-        </div>
-      )}
-
-      {/* Hero Banner */}
-      <div className="relative h-[40vh] overflow-hidden">
+      {/* Hero Section - Full Width Image */}
+      <div className="relative">
         <img 
-          src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=600&fit=crop"
-          alt="New Collection"
-          className="w-full h-full object-cover"
+          src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=1600&h=900&fit=crop"
+          alt="Singles Day Collection"
+          className="w-full h-[60vh] md:h-[80vh] object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end">
-          <div className="p-6 w-full">
-            <h2 className="text-2xl font-bold mb-2" style={{ letterSpacing: '-0.05em' }}>
-              Spring Collection
-            </h2>
-            <p className="text-sm text-muted-foreground mb-4">
-              Fresh styles for your active lifestyle
-            </p>
-            <Button className="bg-foreground text-background hover:bg-foreground/90">
-              Shop Now
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white">
+            <p className="text-sm uppercase tracking-widest mb-2">Ending Soon</p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4">SINGLES DAY</h2>
+            <p className="text-xl md:text-2xl mb-2">30% OFF sitewide</p>
+            <p className="text-sm uppercase tracking-wider mb-6">Exclusively for Members</p>
+            <Button className="bg-white text-black hover:bg-gray-100 uppercase tracking-wider px-8">
+              Join Now to Shop
             </Button>
           </div>
         </div>
       </div>
 
-      {/* Featured Products */}
-      <div className="px-4 py-6">
-        <h3 className="text-lg font-bold mb-4" style={{ letterSpacing: '-0.05em' }}>
+      {/* Trending Now Section */}
+      <div className="container mx-auto px-4 py-12">
+        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center uppercase tracking-wider">
           Trending Now
         </h3>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {featuredProducts.map((product) => (
-            <div key={product.id} className="group">
-              <div className="relative aspect-[3/4] mb-2 overflow-hidden rounded-lg bg-muted">
+            <div key={product.id} className="group cursor-pointer">
+              <div className="relative aspect-[3/4] mb-3 overflow-hidden bg-muted">
                 <img 
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <Button
                   size="icon"
                   variant="ghost"
-                  className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm hover:bg-background"
+                  className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white h-8 w-8"
                 >
                   <Heart className="w-4 h-4" />
                 </Button>
@@ -169,40 +144,37 @@ const AloApp = () => {
         </div>
       </div>
 
-      {/* More Categories */}
-      <div className="px-4 py-6 border-t border-border">
-        <h3 className="text-lg font-bold mb-4" style={{ letterSpacing: '-0.05em' }}>
-          Shop by Category
-        </h3>
-        <div className="space-y-3">
-          <div className="relative h-32 rounded-lg overflow-hidden">
+      {/* Category Grid */}
+      <div className="container mx-auto px-4 py-12 border-t border-border">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="relative h-64 overflow-hidden group cursor-pointer">
             <img 
-              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=300&fit=crop"
+              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=600&fit=crop"
               alt="Yoga"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent flex items-center">
-              <h4 className="text-lg font-bold ml-4">Yoga</h4>
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+              <h4 className="text-white text-2xl font-bold uppercase tracking-wider">Yoga</h4>
             </div>
           </div>
-          <div className="relative h-32 rounded-lg overflow-hidden">
+          <div className="relative h-64 overflow-hidden group cursor-pointer">
             <img 
-              src="https://images.unsplash.com/photo-1483721310020-03333e577078?w=800&h=300&fit=crop"
+              src="https://images.unsplash.com/photo-1483721310020-03333e577078?w=800&h=600&fit=crop"
               alt="Running"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent flex items-center">
-              <h4 className="text-lg font-bold ml-4">Running</h4>
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+              <h4 className="text-white text-2xl font-bold uppercase tracking-wider">Running</h4>
             </div>
           </div>
-          <div className="relative h-32 rounded-lg overflow-hidden">
+          <div className="relative h-64 overflow-hidden group cursor-pointer">
             <img 
-              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=300&fit=crop"
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop"
               alt="Lounge"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-background/60 to-transparent flex items-center">
-              <h4 className="text-lg font-bold ml-4">Lounge</h4>
+            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+              <h4 className="text-white text-2xl font-bold uppercase tracking-wider">Lounge</h4>
             </div>
           </div>
         </div>
