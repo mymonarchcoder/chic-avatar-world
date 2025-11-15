@@ -1,6 +1,5 @@
 import { BarChart3, TrendingUp, Users, ShoppingBag, Ruler, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const Dashboard = () => {
   // Sample data - in production this would come from your API
@@ -77,403 +76,281 @@ const Dashboard = () => {
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8">
+      <div className="container mx-auto px-6 py-4">
         {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Total Try-Ons</CardTitle>
-              <Users className="w-4 h-4 text-gray-500" />
+            <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-3">
+              <CardTitle className="text-xs font-medium text-gray-600">Total Try-Ons</CardTitle>
+              <Users className="w-3 h-3 text-gray-500" />
             </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-black">34,582</div>
-              <p className="text-xs text-green-600 mt-1">↑ 12.5% from last period</p>
+            <CardContent className="px-3 pb-3">
+              <div className="text-xl font-bold text-black">23,456</div>
+              <p className="text-xs text-green-600 flex items-center gap-1">
+                <TrendingUp className="w-3 h-3" />
+                +12.5%
+              </p>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Conversion Rate</CardTitle>
-              <TrendingUp className="w-4 h-4 text-gray-500" />
+            <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-3">
+              <CardTitle className="text-xs font-medium text-gray-600">Conversion Rate</CardTitle>
+              <BarChart3 className="w-3 h-3 text-gray-500" />
             </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-black">68.4%</div>
-              <p className="text-xs text-green-600 mt-1">↑ 5.2% from last period</p>
+            <CardContent className="px-3 pb-3">
+              <div className="text-xl font-bold text-black">68.2%</div>
+              <p className="text-xs text-green-600 flex items-center gap-1">
+                <TrendingUp className="w-3 h-3" />
+                +5.3%
+              </p>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Unique Body Types</CardTitle>
-              <Ruler className="w-4 h-4 text-gray-500" />
+            <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-3">
+              <CardTitle className="text-xs font-medium text-gray-600">Avg Order Value</CardTitle>
+              <ShoppingBag className="w-3 h-3 text-gray-500" />
             </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-black">12,963</div>
-              <p className="text-xs text-gray-600 mt-1">Across all categories</p>
+            <CardContent className="px-3 pb-3">
+              <div className="text-xl font-bold text-black">$127.45</div>
+              <p className="text-xs text-green-600 flex items-center gap-1">
+                <TrendingUp className="w-3 h-3" />
+                +8.1%
+              </p>
             </CardContent>
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600">Avg. Basket Size</CardTitle>
-              <ShoppingBag className="w-4 h-4 text-gray-500" />
+            <CardHeader className="flex flex-row items-center justify-between pb-1 pt-3 px-3">
+              <CardTitle className="text-xs font-medium text-gray-600">Return Rate</CardTitle>
+              <AlertCircle className="w-3 h-3 text-gray-500" />
             </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-black">$186</div>
-              <p className="text-xs text-green-600 mt-1">↑ 8.3% from last period</p>
+            <CardContent className="px-3 pb-3">
+              <div className="text-xl font-bold text-black">8.4%</div>
+              <p className="text-xs text-red-600 flex items-center gap-1">
+                <TrendingUp className="w-3 h-3 rotate-180" />
+                -3.2%
+              </p>
             </CardContent>
           </Card>
         </div>
 
-        <Tabs defaultValue="cross-shopping" className="space-y-6">
-          <TabsList className="bg-white border border-gray-200">
-            <TabsTrigger value="cross-shopping">Cross-Shopping</TabsTrigger>
-            <TabsTrigger value="body-types">Body Type Analytics</TabsTrigger>
-            <TabsTrigger value="sizing">Sizing Intelligence</TabsTrigger>
-            <TabsTrigger value="sku-performance">SKU Performance</TabsTrigger>
-            <TabsTrigger value="price-range">Price Insights</TabsTrigger>
-          </TabsList>
-
+        {/* Main Intelligence Grid - All on One Page */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
           {/* Cross-Shopping Intelligence */}
-          <TabsContent value="cross-shopping" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-black">Cross-Brand Try-On Behavior</CardTitle>
-                  <CardDescription>Users who try your products also try these brands</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {crossShoppingData.map((item, idx) => (
-                      <div key={idx} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                          <span className="font-medium text-black">{item.brand}</span>
-                          <span className="text-gray-600">{item.percentage}% overlap</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2">
-                          <div 
-                            className="bg-blue-600 h-2 rounded-full transition-all" 
-                            style={{ width: `${item.percentage}%` }}
-                          />
-                        </div>
-                        <p className="text-xs text-gray-500">{item.users.toLocaleString()} users</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-black">Competitive Intelligence</CardTitle>
-                  <CardDescription>Your high-value customers also shop at</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {bestCustomerBrands.map((item, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                        <div>
-                          <p className="font-medium text-black">{item.brand}</p>
-                          <p className="text-sm text-gray-600">{item.overlap}% customer overlap</p>
-                        </div>
-                        <BarChart3 className="w-5 h-5 text-blue-600" />
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          {/* Body Type Analytics */}
-          <TabsContent value="body-types" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-black">Conversion by Body Type</CardTitle>
-                <CardDescription>Real body dimension data showing what shapes convert best</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {bodyTypeConversion.map((item, idx) => (
-                    <div key={idx} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="font-medium text-black">{item.type}</p>
-                          <p className="text-xs text-gray-600">
-                            {item.tryOns.toLocaleString()} try-ons → {item.conversions.toLocaleString()} purchases
-                          </p>
-                        </div>
-                        <span className="text-2xl font-bold text-black">{item.rate}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-3">
-                        <div 
-                          className="bg-green-600 h-3 rounded-full transition-all" 
-                          style={{ width: `${item.rate}%` }}
-                        />
-                      </div>
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Cross-Brand Try-On Behavior</CardTitle>
+              <CardDescription className="text-xs">Users who try your products also try these brands</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {crossShoppingData.map((item, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="font-medium text-black">{item.brand}</span>
+                      <span className="text-gray-600">{item.percentage}%</span>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div 
+                        className="bg-blue-600 h-1.5 rounded-full transition-all" 
+                        style={{ width: `${item.percentage}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-black">Silhouette Performance by Body Type</CardTitle>
-                <CardDescription>What styles work best for different proportions</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="p-4 bg-blue-50 rounded-lg">
-                    <p className="text-sm font-medium text-black mb-2">High-Waist Styles</p>
-                    <p className="text-xs text-gray-600 mb-3">Best for: Pear, Hourglass</p>
-                    <p className="text-2xl font-bold text-blue-600">73% conversion</p>
+          {/* Competitive Intelligence */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Competitive Intelligence</CardTitle>
+              <CardDescription className="text-xs">Your high-value customers also shop at</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {bestCustomerBrands.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-2 bg-gray-50 rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium text-black">{item.brand}</p>
+                      <p className="text-xs text-gray-600">{item.overlap}% overlap</p>
+                    </div>
+                    <BarChart3 className="w-4 h-4 text-blue-600" />
                   </div>
-                  <div className="p-4 bg-green-50 rounded-lg">
-                    <p className="text-sm font-medium text-black mb-2">A-Line Cuts</p>
-                    <p className="text-xs text-gray-600 mb-3">Best for: Apple, Rectangle</p>
-                    <p className="text-2xl font-bold text-green-600">69% conversion</p>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Body Type & Sizing Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+          {/* Body Type Conversion */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Body Type Conversion Rates</CardTitle>
+              <CardDescription className="text-xs">Real body dimension analytics</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {bodyTypeConversion.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-2 border-b border-gray-100 last:border-0">
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-black">{item.type}</p>
+                      <p className="text-xs text-gray-500">{item.conversions.toLocaleString()} / {item.tryOns.toLocaleString()}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm font-bold text-green-600">{item.rate}%</p>
+                    </div>
                   </div>
-                  <div className="p-4 bg-purple-50 rounded-lg">
-                    <p className="text-sm font-medium text-black mb-2">Fitted Styles</p>
-                    <p className="text-xs text-gray-600 mb-3">Best for: Hourglass, Rectangle</p>
-                    <p className="text-2xl font-bold text-purple-600">71% conversion</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
           {/* Sizing Intelligence */}
-          <TabsContent value="sizing" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-black">Try-On vs Purchase Sizing</CardTitle>
-                  <CardDescription>Understanding size selection behavior</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-6">
-                    <div>
-                      <p className="text-sm font-medium text-black mb-3">Try-On Size Distribution</p>
-                      <div className="space-y-2">
-                        {sizingInsights.filter(s => s.category === "Try-On Size").map((item, idx) => (
-                          <div key={idx} className="flex items-center gap-3">
-                            <span className="w-8 text-sm font-medium text-black">{item.size}</span>
-                            <div className="flex-1 bg-gray-200 rounded-full h-8">
-                              <div 
-                                className="bg-blue-600 h-8 rounded-full flex items-center justify-end pr-3 text-white text-xs font-medium" 
-                                style={{ width: `${item.percentage}%` }}
-                              >
-                                {item.percentage}%
-                              </div>
-                            </div>
-                          </div>
-                        ))}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Try-On vs Purchase Sizing</CardTitle>
+              <CardDescription className="text-xs">Size behavior patterns</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div>
+                  <p className="text-xs font-medium text-gray-700 mb-2">Try-On Sizes</p>
+                  <div className="flex gap-2">
+                    {sizingInsights.filter(s => s.category === "Try-On Size").map((item, idx) => (
+                      <div key={idx} className="flex-1 text-center p-2 bg-blue-50 rounded">
+                        <p className="text-xs font-medium text-black">{item.size}</p>
+                        <p className="text-xs text-gray-600">{item.percentage}%</p>
                       </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-gray-700 mb-2">Purchase Sizes</p>
+                  <div className="flex gap-2">
+                    {sizingInsights.filter(s => s.category === "Purchase Size").map((item, idx) => (
+                      <div key={idx} className="flex-1 text-center p-2 bg-green-50 rounded">
+                        <p className="text-xs font-medium text-black">{item.size}</p>
+                        <p className="text-xs text-gray-600">{item.percentage}%</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* SKU Performance Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4">
+          {/* Top Performing SKUs */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Top Converting SKUs</CardTitle>
+              <CardDescription className="text-xs">High try-on to purchase conversion</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {topSKUs.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-2 bg-green-50 rounded-lg">
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-black">{item.sku}</p>
+                      <p className="text-xs text-gray-600">{item.tryOns.toLocaleString()} try-ons · {item.returns}% returns</p>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-black mb-3">Actual Purchase Size Distribution</p>
-                      <div className="space-y-2">
-                        {sizingInsights.filter(s => s.category === "Purchase Size").map((item, idx) => (
-                          <div key={idx} className="flex items-center gap-3">
-                            <span className="w-8 text-sm font-medium text-black">{item.size}</span>
-                            <div className="flex-1 bg-gray-200 rounded-full h-8">
-                              <div 
-                                className="bg-green-600 h-8 rounded-full flex items-center justify-end pr-3 text-white text-xs font-medium" 
-                                style={{ width: `${item.percentage}%` }}
-                              >
-                                {item.percentage}%
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-green-600">{item.conversionRate}%</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-black">Measurement Correlation to Returns</CardTitle>
-                  <CardDescription>Body dimensions linked to high return rates</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-red-50 rounded-lg border border-red-200">
-                      <div className="flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
-                        <div>
-                          <p className="font-medium text-black mb-1">Hip-to-Waist Ratio 1.4+</p>
-                          <p className="text-sm text-gray-600 mb-2">38% higher return rate on straight-leg styles</p>
-                          <p className="text-xs text-red-600 font-medium">Recommendation: Suggest bootcut or flare styles</p>
-                        </div>
-                      </div>
+          {/* Low Conversion SKUs */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Low Converting SKUs</CardTitle>
+              <CardDescription className="text-xs">High try-on but low purchase - action needed</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {lowConversionSKUs.map((item, idx) => (
+                  <div key={idx} className="flex items-center justify-between p-2 bg-red-50 rounded-lg">
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-black">{item.sku}</p>
+                      <p className="text-xs text-gray-600">{item.tryOns.toLocaleString()} try-ons · {item.reason}</p>
                     </div>
-
-                    <div className="p-4 bg-amber-50 rounded-lg border border-amber-200">
-                      <div className="flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5" />
-                        <div>
-                          <p className="font-medium text-black mb-1">Bust-to-Band Difference 4"+</p>
-                          <p className="text-sm text-gray-600 mb-2">42% return rate on standard sports bras</p>
-                          <p className="text-xs text-amber-600 font-medium">Recommendation: High-support bra styles</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="p-4 bg-orange-50 rounded-lg border border-orange-200">
-                      <div className="flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-orange-600 mt-0.5" />
-                        <div>
-                          <p className="font-medium text-black mb-1">Inseam Variance 2"+</p>
-                          <p className="text-sm text-gray-600 mb-2">31% return on full-length leggings</p>
-                          <p className="text-xs text-orange-600 font-medium">Recommendation: Offer 7/8 and cropped options</p>
-                        </div>
-                      </div>
+                    <div className="text-right">
+                      <p className="text-lg font-bold text-red-600">{item.conversionRate}%</p>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-          {/* SKU Performance */}
-          <TabsContent value="sku-performance" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-black">Top Performing SKUs</CardTitle>
-                <CardDescription>Highest try-on to purchase conversion rates</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr className="border-b border-gray-200">
-                        <th className="text-left py-3 px-4 text-sm font-medium text-gray-600">SKU</th>
-                        <th className="text-right py-3 px-4 text-sm font-medium text-gray-600">Try-Ons</th>
-                        <th className="text-right py-3 px-4 text-sm font-medium text-gray-600">Purchases</th>
-                        <th className="text-right py-3 px-4 text-sm font-medium text-gray-600">Conversion</th>
-                        <th className="text-right py-3 px-4 text-sm font-medium text-gray-600">Return Rate</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {topSKUs.map((sku, idx) => (
-                        <tr key={idx} className="border-b border-gray-100 hover:bg-gray-50">
-                          <td className="py-3 px-4 font-medium text-black">{sku.sku}</td>
-                          <td className="py-3 px-4 text-right text-gray-600">{sku.tryOns.toLocaleString()}</td>
-                          <td className="py-3 px-4 text-right text-gray-600">{sku.purchases.toLocaleString()}</td>
-                          <td className="py-3 px-4 text-right">
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                              {sku.conversionRate}%
-                            </span>
-                          </td>
-                          <td className="py-3 px-4 text-right text-gray-600">{sku.returns}%</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-black">High Try-On, Low Conversion SKUs</CardTitle>
-                <CardDescription>Items with engagement but poor conversion - action required</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {lowConversionSKUs.map((sku, idx) => (
-                    <div key={idx} className="p-4 bg-red-50 rounded-lg border border-red-200">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <p className="font-medium text-black">{sku.sku}</p>
-                          <p className="text-sm text-gray-600">{sku.tryOns.toLocaleString()} try-ons → {sku.purchases.toLocaleString()} purchases</p>
-                        </div>
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                          {sku.conversionRate}% conversion
-                        </span>
-                      </div>
-                      <p className="text-sm text-red-600 font-medium">⚠️ Primary Issue: {sku.reason}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
+        {/* Price Range & Measurement Insights */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {/* Price Range Insights */}
-          <TabsContent value="price-range" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-black">Price Range Performance</CardTitle>
-                <CardDescription>Target avatar try-on and conversion behavior by price point</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {priceRangeData.map((item, idx) => (
-                    <div key={idx} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <p className="font-medium text-black">{item.range}</p>
-                          <p className="text-sm text-gray-600">{item.tryOns.toLocaleString()} try-ons</p>
-                        </div>
-                        <span className="text-lg font-bold text-black">{item.conversions}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-3">
-                        <div 
-                          className="bg-blue-600 h-3 rounded-full transition-all" 
-                          style={{ width: `${item.conversions}%` }}
-                        />
-                      </div>
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Price Range Performance</CardTitle>
+              <CardDescription className="text-xs">Target avatar purchasing patterns</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {priceRangeData.map((item, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="flex justify-between text-xs">
+                      <span className="font-medium text-black">{item.range}</span>
+                      <span className="text-gray-600">{item.conversions}% conversion</span>
                     </div>
-                  ))}
+                    <div className="w-full bg-gray-200 rounded-full h-1.5">
+                      <div 
+                        className="bg-purple-600 h-1.5 rounded-full transition-all" 
+                        style={{ width: `${item.conversions}%` }}
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500">{item.tryOns.toLocaleString()} try-ons</p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Measurement Correlations */}
+          <Card>
+            <CardHeader className="pb-3">
+              <CardTitle className="text-base text-black">Measurement Return Correlations</CardTitle>
+              <CardDescription className="text-xs">Body measurements linked to high returns</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="p-2 bg-orange-50 rounded-lg">
+                  <p className="text-sm font-medium text-black">Hip-to-Waist Ratio &gt; 1.3</p>
+                  <p className="text-xs text-gray-600 mb-1">Leggings return 18% higher</p>
+                  <p className="text-xs text-orange-600 font-medium">Recommendation: Offer wider hip options</p>
                 </div>
-                <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                  <p className="text-sm font-medium text-black mb-2">💡 Key Insight</p>
-                  <p className="text-sm text-gray-600">
-                    Sweet spot: $100-150 range shows highest engagement (4,890 try-ons) AND conversion (72%). 
-                    Consider expanding product offerings in this range.
-                  </p>
+                <div className="p-2 bg-orange-50 rounded-lg">
+                  <p className="text-sm font-medium text-black">Torso Length &lt; 24"</p>
+                  <p className="text-xs text-gray-600 mb-1">Tops return 15% higher</p>
+                  <p className="text-xs text-orange-600 font-medium">Recommendation: Add petite sizing</p>
                 </div>
-              </CardContent>
-            </Card>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm text-gray-600">Avg. Try-On Price</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-3xl font-bold text-black">$127</p>
-                  <p className="text-xs text-gray-600 mt-1">Across all body types</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm text-gray-600">Avg. Purchase Price</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-3xl font-bold text-black">$142</p>
-                  <p className="text-xs text-green-600 mt-1">↑ 11.8% higher than try-on</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-sm text-gray-600">Premium Adoption</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-3xl font-bold text-black">34%</p>
-                  <p className="text-xs text-gray-600 mt-1">Purchase $150+ items</p>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
+                <div className="p-2 bg-orange-50 rounded-lg">
+                  <p className="text-sm font-medium text-black">Shoulder Width &gt; 17"</p>
+                  <p className="text-xs text-gray-600 mb-1">Sports bras return 22% higher</p>
+                  <p className="text-xs text-orange-600 font-medium">Recommendation: Adjust strap placement</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
