@@ -24,48 +24,48 @@ const BrandGrid = () => {
   const navigate = useNavigate();
   
   return (
-    <section className="py-24 bg-muted/30">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4" style={{ letterSpacing: '-0.1em' }}>
+    <section className="py-16 bg-muted/30">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-3" style={{ letterSpacing: '-0.1em' }}>
             Featured Brands
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
             Curate your perfect wardrobe from our collection of premium brands
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {brands.map((brand) => (
             <Card 
               key={brand.id} 
               className="group relative overflow-hidden border-border hover:shadow-elegant transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="aspect-[3/1] bg-background flex items-center justify-center p-6">
+              <div className="aspect-[3/1] bg-background flex items-center justify-center p-4">
                 {brand.logo && (
-                  <img src={brand.logo} alt={brand.name} className="h-20 w-auto object-contain" />
+                  <img src={brand.logo} alt={brand.name} className="h-14 w-auto object-contain" />
                 )}
               </div>
               
-              <div className="p-4">
+              <div className="p-3">
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <h3 className="text-base font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>{brand.name}</h3>
+                    <h3 className="text-sm font-semibold mb-0.5" style={{ letterSpacing: '-0.1em' }}>{brand.name}</h3>
                     <p className="text-xs text-muted-foreground">{brand.category}</p>
                   </div>
                 <Button
                   size="icon"
                   variant="ghost"
-                  className={isBrandFavorited(brand.id) ? "text-yellow-500 hover:text-yellow-600" : ""}
+                  className={`h-8 w-8 ${isBrandFavorited(brand.id) ? "text-yellow-500 hover:text-yellow-600" : ""}`}
                   onClick={() => toggleFavoriteBrand(brand)}
                 >
-                  <Star className={`w-5 h-5 ${isBrandFavorited(brand.id) ? "fill-yellow-500" : ""}`} />
+                  <Star className={`w-4 h-4 ${isBrandFavorited(brand.id) ? "fill-yellow-500" : ""}`} />
                 </Button>
                 </div>
                 
                 <Button 
                   size="sm"
-                  className="w-full mt-4 bg-muted text-background hover:bg-muted/80 text-xs"
+                  className="w-full mt-3 bg-muted text-background hover:bg-muted/80 text-xs py-1.5"
                   onClick={() => navigate(`/brand/${brand.id}`)}
                 >
                   Explore Collection
