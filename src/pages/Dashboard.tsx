@@ -1,5 +1,6 @@
 import { BarChart3, TrendingUp, Users, ShoppingBag, Ruler, AlertCircle } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import ChatAssistant from "@/components/ChatAssistant";
 
 const Dashboard = () => {
   // Sample data - in production this would come from your API
@@ -352,6 +353,7 @@ const Dashboard = () => {
           </Card>
         </div>
       </div>
+      <ChatAssistant />
     </div>
   );
 };
