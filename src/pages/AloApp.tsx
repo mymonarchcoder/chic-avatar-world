@@ -45,14 +45,14 @@ const AloApp = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       {/* Promo Banner */}
       <div className="bg-[#4A1F1F] text-white text-center py-2 px-4 text-xs md:text-sm">
         FREE 2-DAY SHIPPING + 30% OFF ✨ JOIN TO UNLOCK
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background border-b border-border">
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
