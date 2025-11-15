@@ -18,6 +18,7 @@ import Brands from "./pages/Brands";
 import BrandCollection from "./pages/BrandCollection";
 import ProductDetail from "./pages/ProductDetail";
 import AloDemo from "./pages/AloDemo";
+import AloApp from "./pages/AloApp";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -45,6 +46,7 @@ const App = () => (
               <Route path="/brand/:brandId" element={<BrandCollection />} />
               <Route path="/product/:productId" element={<ProductDetail />} />
               <Route path="/alo-demo" element={<AloDemo />} />
+              <Route path="/alo-app" element={<AloApp />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
               </Routes>

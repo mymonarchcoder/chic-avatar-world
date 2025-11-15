@@ -55,8 +55,12 @@ const Navigation = () => {
               >
                 Brands
               </Button>
-              <Button variant="ghost" className="text-muted-foreground hover:text-foreground text-sm px-2 hidden sm:block">
-                New Arrivals
+              <Button 
+                variant="ghost" 
+                className="text-muted-foreground hover:text-foreground text-sm px-2 hidden sm:block"
+                onClick={() => navigate('/alo-app')}
+              >
+                Alo App
               </Button>
             </div>
           </div>
