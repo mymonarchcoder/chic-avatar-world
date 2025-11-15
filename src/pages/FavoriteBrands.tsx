@@ -5,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import AvatarWidget from "@/components/AvatarWidget";
+import { useAvatarModal } from "@/contexts/AvatarModalContext";
 
 const FavoriteBrands = () => {
   const { favoriteBrands } = useFavorites();
   const navigate = useNavigate();
+  const { openModal } = useAvatarModal();
 
   const getBrandId = (brandName: string) => {
     return brandName.toLowerCase().replace(/\s+/g, '');
@@ -57,9 +59,15 @@ const FavoriteBrands = () => {
                     <Button 
                       size="sm"
                       className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
-                      onClick={() => navigate(`/brand/${getBrandId(brand.name)}`)}
+                      onClick={() => {
+                        if (brand.name === "Malbon") {
+                          openModal();
+                        } else {
+                          navigate(`/brand/${getBrandId(brand.name)}`);
+                        }
+                      }}
                     >
-                      Explore Collection
+                      {brand.name === "Malbon" ? "Try On Avatar" : "Explore Collection"}
                     </Button>
                   </div>
                 </Card>
