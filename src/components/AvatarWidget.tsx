@@ -8,6 +8,7 @@ import avatarShowcase from "@/assets/avatar-showcase.png";
 import { removeBackground, loadImage } from "@/lib/backgroundRemoval";
 import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
+import { malbonProducts } from "@/data/malbonProducts";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
@@ -417,10 +418,10 @@ const AvatarWidget = () => {
               </div>
             </div>
 
-            {/* Right Column - Apparel Items List - Overlapping Avatar */}
+            {/* Right Column - Malbon Golf Products - Overlapping Avatar */}
             <div className="flex flex-col h-full py-4 pr-4 overflow-hidden w-80 -ml-20">
               <div className="flex items-center justify-between mb-3">
-                <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Mix-Match</h3>
+                <h3 className="text-lg sm:text-2xl font-bold tracking-wide">Malbon Golf</h3>
                 {Object.keys(selectedItems).length > 0 && (
                   <div className="text-sm text-primary font-medium">
                     {Object.keys(selectedItems).length} item{Object.keys(selectedItems).length > 1 ? 's' : ''} selected
@@ -430,53 +431,23 @@ const AvatarWidget = () => {
               
               <ScrollArea className="flex-1 pr-2">
                 <div className="space-y-1">
-                {[
-                  { 
-                    name: "Silver Dress", 
-                    brand: "Reform", 
-                    category: "Dresses",
-                    price: "$180",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Burgundy Dress", 
-                    brand: "Evolv", 
-                    category: "Dresses",
-                    price: "$195",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Black Dress", 
-                    brand: "Larson", 
-                    category: "Dresses",
-                    price: "$250",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Red Dress", 
-                    brand: "Reform", 
-                    category: "Dresses",
-                    price: "$200",
-                    image: "👗"
-                  },
-                  { 
-                    name: "Evening Dress", 
-                    brand: "Evolv", 
-                    category: "Dresses",
-                    price: "$165",
-                    image: "👗"
-                  },
-                ].map((item, idx) => (
+                {malbonProducts.map((item, idx) => (
                   <div key={idx} className="p-1.5 sm:p-2 hover:bg-gray-50 transition-all duration-300 cursor-pointer rounded-lg group">
                     <div className="flex flex-col gap-1.5">
-                      {/* Emoji and name on same line */}
-                      <div className="flex items-center gap-0.5 pr-3 pl-3">
-                        <div className="text-3xl sm:text-4xl flex-shrink-0">{item.image}</div>
-                        <div className="min-w-0 mr-1">
+                      {/* Product Image and Details */}
+                      <div className="flex items-center gap-2 pr-3 pl-3">
+                        <div className="flex-shrink-0 w-16 h-16">
+                          <img 
+                            src={item.image} 
+                            alt={item.name}
+                            className="w-full h-full object-cover rounded"
+                          />
+                        </div>
+                        <div className="min-w-0 mr-1 flex-1">
                           <h4 className="font-semibold text-xs tracking-wide group-hover:text-primary transition-colors truncate">{item.name}</h4>
                           <p className="text-xs text-muted-foreground truncate">{item.brand}</p>
                         </div>
-                        <span className="text-[10px] font-bold text-primary flex-shrink-0 whitespace-nowrap">{item.price}</span>
+                        <span className="text-[10px] font-bold text-primary flex-shrink-0 whitespace-nowrap">${item.price}</span>
                       </div>
                       
                       {/* Buttons */}
