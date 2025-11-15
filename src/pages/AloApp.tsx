@@ -102,37 +102,37 @@ const AloApp = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold lowercase tracking-tight">alo</h1>
+              <h1 className="text-2xl font-bold lowercase tracking-tight text-black">alo</h1>
             </div>
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
-              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider text-black">
                 WOMEN
               </button>
-              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider text-black">
                 MEN
               </button>
-              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider text-black">
                 SHOES
               </button>
-              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
+              <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider text-black">
                 GIFT GUIDE
               </button>
             </nav>
 
             {/* Right Side Icons */}
             <div className="flex items-center gap-3">
-              <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Button variant="ghost" size="icon" className="h-9 w-9 text-black hover:bg-gray-100">
                 <Search className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="hidden md:flex text-xs uppercase tracking-wider border-b-2 border-black pb-0.5">
+              <Button variant="ghost" size="sm" className="hidden md:flex text-xs uppercase tracking-wider border-b-2 border-black pb-0.5 text-black hover:bg-gray-100">
                 SIGN IN TO GET REWARDS
               </Button>
-              <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Button variant="ghost" size="icon" className="h-9 w-9 text-black hover:bg-gray-100">
                 <Heart className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="h-9 w-9">
+              <Button variant="ghost" size="icon" className="h-9 w-9 text-black hover:bg-gray-100">
                 <ShoppingBag className="w-5 h-5" />
               </Button>
             </div>
