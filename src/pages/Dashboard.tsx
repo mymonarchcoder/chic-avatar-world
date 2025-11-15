@@ -165,7 +165,7 @@ const Dashboard = () => {
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-black">Best Customer Brand Affinity</CardTitle>
+                  <CardTitle className="text-black">Competitive Intelligence</CardTitle>
                   <CardDescription>Your high-value customers also shop at</CardDescription>
                 </CardHeader>
                 <CardContent>
