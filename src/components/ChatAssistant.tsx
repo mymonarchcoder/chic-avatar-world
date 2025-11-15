@@ -101,7 +101,7 @@ const ChatAssistant = () => {
         className="fixed bottom-6 left-6 z-50 w-12 h-12 rounded-full shadow-elegant bg-foreground text-background hover:bg-foreground/90"
         size="icon"
       >
-        {isOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-6 h-6" />}
+        {isOpen ? <X className="w-5 h-5" /> : <MessageCircle className="w-6 h-6 text-blue-500" />}
       </Button>
 
       {isOpen && (
