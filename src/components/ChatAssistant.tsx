@@ -3,29 +3,95 @@ import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 import { Input } from "./ui/input";
 import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "./ui/use-toast";
 
 const ChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi Katie! Fall is just around the corner — what are you shopping for today?" },
-    { role: "user", content: "I have a friend's wedding in two months and her colors are burgundy, cream, and fall tones. I prefer something long and silky, nothing over $250." },
-    { role: "assistant", content: "How exciting — that sounds like such a beautiful event! You're going to love these options I've found." }
+    { role: "assistant", content: "Hi! I'm your analytics assistant. Ask me anything about your dashboard data, conversion insights, or where to focus your efforts." }
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
     
-    setMessages([...messages, { role: "user", content: input }]);
+    const userMessage = input;
+    setMessages(prev => [...prev, { role: "user", content: userMessage }]);
     setInput("");
-    
-    // Simulate AI response
-    setTimeout(() => {
-      setMessages(prev => [...prev, {
-        role: "assistant",
-        content: "I'd love to help you find that! Could you tell me more about your style preferences?"
-      }]);
-    }, 1000);
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({ messages: [...messages, { role: "user", content: userMessage }] }),
+      });
+
+      if (!response.ok || !response.body) {
+        throw new Error("Failed to get response");
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let textBuffer = "";
+      let streamDone = false;
+      let assistantContent = "";
+
+      while (!streamDone) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        textBuffer += decoder.decode(value, { stream: true });
+
+        let newlineIndex: number;
+        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
+          let line = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+
+          if (line.endsWith("\r")) line = line.slice(0, -1);
+          if (line.startsWith(":") || line.trim() === "") continue;
+          if (!line.startsWith("data: ")) continue;
+
+          const jsonStr = line.slice(6).trim();
+          if (jsonStr === "[DONE]") {
+            streamDone = true;
+            break;
+          }
+
+          try {
+            const parsed = JSON.parse(jsonStr);
+            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+            if (content) {
+              assistantContent += content;
+              setMessages(prev => {
+                const last = prev[prev.length - 1];
+                if (last?.role === "assistant") {
+                  return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantContent } : m));
+                }
+                return [...prev, { role: "assistant", content: assistantContent }];
+              });
+            }
+          } catch {
+            textBuffer = line + "\n" + textBuffer;
+            break;
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Chat error:", error);
+      toast({
+        title: "Error",
+        description: "Failed to get response. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -68,11 +134,11 @@ const ChatAssistant = () => {
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && handleSend()}
-              placeholder="Ask me anything..."
-              className="flex-1 text-black"
+              onKeyPress={(e) => e.key === "Enter" && !isLoading && handleSend()}
+              placeholder="Ask about your analytics..."
+              disabled={isLoading}
             />
-            <Button onClick={handleSend} size="icon" className="bg-gradient-primary">
+            <Button onClick={handleSend} size="icon" disabled={isLoading}>
               <Send className="w-5 h-5" />
             </Button>
           </div>
