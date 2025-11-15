@@ -108,16 +108,16 @@ const AloApp = () => {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
               <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
-                Women
+                WOMEN
               </button>
               <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
-                Men
+                MEN
               </button>
               <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
-                Shoes
+                SHOES
               </button>
               <button className="text-sm font-medium hover:opacity-70 transition-opacity uppercase tracking-wider">
-                Gift Guide
+                GIFT GUIDE
               </button>
             </nav>
 
@@ -126,8 +126,8 @@ const AloApp = () => {
               <Button variant="ghost" size="icon" className="h-9 w-9">
                 <Search className="w-5 h-5" />
               </Button>
-              <Button variant="ghost" size="sm" className="hidden md:flex text-xs uppercase tracking-wider">
-                Sign In to Get Rewards
+              <Button variant="ghost" size="sm" className="hidden md:flex text-xs uppercase tracking-wider border-b-2 border-black pb-0.5">
+                SIGN IN TO GET REWARDS
               </Button>
               <Button variant="ghost" size="icon" className="h-9 w-9">
                 <Heart className="w-5 h-5" />
@@ -147,15 +147,15 @@ const AloApp = () => {
           {/* Left Sidebar - Filters */}
           <aside className="hidden lg:block w-64 flex-shrink-0">
             <div className="sticky top-24">
-              <h2 className="text-xl font-bold mb-6">FILTERS</h2>
-              <div className="space-y-4">
+              <h2 className="text-xl font-bold mb-6 text-black">FILTERS</h2>
+              <div className="space-y-0 border-t border-gray-200">
                 {filters.map((filter) => (
                   <button
                     key={filter}
-                    className="w-full flex items-center justify-between py-3 border-b border-gray-200 text-left hover:opacity-70 transition-opacity"
+                    className="w-full flex items-center justify-between py-4 border-b border-gray-200 text-left hover:opacity-70 transition-opacity"
                   >
-                    <span className="text-sm font-medium">{filter}</span>
-                    <ChevronDown className="w-4 h-4" />
+                    <span className="text-sm font-medium text-black">{filter}</span>
+                    <ChevronDown className="w-4 h-4 text-black" />
                   </button>
                 ))}
               </div>
@@ -177,9 +177,9 @@ const AloApp = () => {
                     <Button
                       size="icon"
                       variant="ghost"
-                      className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white h-8 w-8 rounded-full"
+                      className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white h-9 w-9 rounded-full"
                     >
-                      <Heart className="w-4 h-4" />
+                      <Heart className="w-4 h-4 text-black" />
                     </Button>
                   </div>
 
@@ -188,12 +188,12 @@ const AloApp = () => {
                     {product.colors.map((color, idx) => (
                       <div
                         key={idx}
-                        className="w-5 h-5 rounded-full border border-gray-300 cursor-pointer hover:scale-110 transition-transform"
+                        className="w-6 h-6 rounded-full border border-gray-300 cursor-pointer hover:scale-110 transition-transform"
                         style={{ backgroundColor: color }}
                       />
                     ))}
                     {product.moreColors > 0 && (
-                      <span className="text-xs text-gray-600">+{product.moreColors}</span>
+                      <span className="text-xs text-gray-600 font-medium">+{product.moreColors}</span>
                     )}
                   </div>
 
