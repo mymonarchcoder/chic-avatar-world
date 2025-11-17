@@ -45,7 +45,7 @@ const Navigation = () => {
               style={{ letterSpacing: '-0.1em' }}
               onClick={() => navigate('/')}
             >
-              VERS
+              twinnX
             </h1>
             <div className="flex gap-4">
               <Button 
