@@ -40,13 +40,6 @@ const Navigation = () => {
       <div className="container mx-auto px-4 py-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <h1 
-              className="text-2xl font-bold text-foreground font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
-              style={{ letterSpacing: '-0.1em' }}
-              onClick={() => navigate('/')}
-            >
-              twinnX
-            </h1>
             <div className="flex gap-4">
               <Button 
                 variant="ghost" 
@@ -63,6 +56,16 @@ const Navigation = () => {
                 Alo App
               </Button>
             </div>
+          </div>
+          
+          <div className="absolute left-1/2 transform -translate-x-1/2">
+            <h1 
+              className="text-2xl font-bold text-foreground font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
+              style={{ letterSpacing: '-0.1em' }}
+              onClick={() => navigate('/')}
+            >
+              twinnX
+            </h1>
           </div>
           
           <div className="flex items-center gap-0.5">
