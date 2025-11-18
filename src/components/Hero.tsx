@@ -14,7 +14,7 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           {/* Content Section */}
           <div className="w-full px-2 sm:px-4 text-center lg:text-left space-y-2 sm:space-y-1 animate-fade-in pt-4 sm:pt-8">
-            <h1 className="text-[10rem] sm:text-[16rem] md:text-[22rem] lg:text-[28rem] font-bold leading-none text-primary tracking-tighter font-baloo">
+            <h1 className="text-[10rem] sm:text-[16rem] md:text-[22rem] lg:text-[28rem] font-bold leading-none text-primary tracking-[-0.08em] font-baloo">
               tuuin
             </h1>
             
