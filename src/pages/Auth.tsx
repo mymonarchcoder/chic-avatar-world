@@ -21,7 +21,7 @@ const Auth = () => {
     e.preventDefault();
     toast({
       title: isLogin ? "Logged in!" : "Account created!",
-      description: "Welcome to tuuinX",
+      description: "Welcome to tuuin",
     });
     navigate("/");
   };
@@ -34,7 +34,7 @@ const Auth = () => {
         <div className="max-w-md mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ letterSpacing: '-0.1em' }}>
-              {isLogin ? "Welcome Back" : "Join tuuinX"}
+              {isLogin ? "Welcome Back" : "Join tuuin"}
             </h1>
             <p className="text-lg text-muted-foreground">
               {isLogin ? "Log in to access your virtual fitting room" : "Create your account and start trying on"}
