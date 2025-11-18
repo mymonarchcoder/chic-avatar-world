@@ -125,7 +125,7 @@ const CreateAvatar = () => {
       <div className="w-full max-w-4xl">
         {/* Header */}
         <div className="text-center mb-2 animate-fade-in">
-          <h1 className="text-2xl md:text-3xl font-bold mb-0.5">Welcome to twinnX!</h1>
+          <h1 className="text-2xl md:text-3xl font-bold mb-0.5">Welcome to tuuinX!</h1>
           <p className="text-muted-foreground text-xs tracking-wider">Create Your AI Shopping Avatar</p>
         </div>
 

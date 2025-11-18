@@ -15,7 +15,7 @@ const Hero = () => {
           {/* Content Section */}
           <div className="w-full px-2 sm:px-4 text-center lg:text-left space-y-2 sm:space-y-1 animate-fade-in pt-4 sm:pt-8">
             <h1 className="text-[8rem] sm:text-[12rem] md:text-[16rem] lg:text-[20rem] font-bold leading-none text-primary tracking-tighter font-baloo">
-              twinnX
+              tuuinX
             </h1>
             
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary -mt-1 sm:-mt-2 px-2">
