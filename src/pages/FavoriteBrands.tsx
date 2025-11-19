@@ -38,27 +38,27 @@ const FavoriteBrands = () => {
               <p className="text-muted-foreground">Start starring brands you love!</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-3">
               {favoriteBrands.map((brand) => (
                 <Card 
                   key={brand.id} 
                   className="group relative overflow-hidden border-border hover:shadow-elegant transition-all duration-300"
                 >
-                  <div className="aspect-[3/1] bg-background flex items-center justify-center p-6">
-                    <img src={brand.logo} alt={brand.name} className="h-20 w-auto object-contain" />
+                  <div className="aspect-[3/1] bg-background flex items-center justify-center p-3">
+                    <img src={brand.logo} alt={brand.name} className="h-10 w-auto object-contain" />
                   </div>
                   
-                  <div className="p-4">
-                    <div className="flex items-start justify-between">
+                  <div className="p-2.5">
+                    <div className="flex items-start justify-between mb-1.5">
                       <div>
-                        <h3 className="text-base font-semibold mb-1" style={{ letterSpacing: '-0.1em' }}>{brand.name}</h3>
-                        <p className="text-xs text-muted-foreground">{brand.category}</p>
+                        <h3 className="text-xs font-semibold mb-0.5" style={{ letterSpacing: '-0.1em' }}>{brand.name}</h3>
+                        <p className="text-[10px] text-muted-foreground">{brand.category}</p>
                       </div>
                     </div>
                     
                     <Button 
                       size="sm"
-                      className="w-full mt-4 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-xs"
+                      className="w-full mt-2 bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground text-[10px] py-1.5 h-7"
                       onClick={() => {
                         if (brand.name === "Malbon") {
                           openModal();
