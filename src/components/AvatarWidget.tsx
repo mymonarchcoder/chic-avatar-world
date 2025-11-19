@@ -129,179 +129,12 @@ const AvatarWidget = () => {
     return selectedItems[category] || null;
   };
 
-  // Function to get clothing image URL (using placeholder images for now)
+  // Function to get clothing image URL - now uses actual product images
   const getClothingImageUrl = (item: any) => {
-    // In a real implementation, these would be actual clothing PNG images
-    const clothingImages: {[key: string]: string} = {
-      'Leather Jacket': `data:image/svg+xml;base64,${btoa(`
-        <svg width="200" height="300" viewBox="0 0 200 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="jacketGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2c1810;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M20 50 L180 50 L190 80 L185 200 L15 200 L10 80 Z" fill="url(#jacketGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M20 50 L10 80 L20 100" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M180 50 L190 80 L180 100" fill="none" stroke="#000" stroke-width="2"/>
-        </svg>
-      `)}`,
-      'Designer Sneakers': `data:image/svg+xml;base64,${btoa(`
-        <svg width="150" height="80" viewBox="0 0 150 80" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="sneakerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#333333;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <ellipse cx="75" cy="40" rx="70" ry="35" fill="url(#sneakerGrad)" stroke="#000" stroke-width="2"/>
-          <rect x="20" y="25" width="110" height="30" rx="15" fill="#fff" opacity="0.3"/>
-        </svg>
-      `)}`,
-      'Statement Belt': `data:image/svg+xml;base64,${btoa(`
-        <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="beltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <rect x="10" y="15" width="100" height="10" rx="5" fill="url(#beltGrad)" stroke="#000" stroke-width="1"/>
-          <rect x="50" y="10" width="20" height="20" rx="10" fill="#ffd700"/>
-        </svg>
-      `)}`,
-      'Premium White Tee': `data:image/svg+xml;base64,${btoa(`
-        <svg width="180" height="250" viewBox="0 0 180 250" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="teeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M30 40 L150 40 L160 80 L155 200 L25 200 L20 80 Z" fill="url(#teeGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M30 40 L20 80 L30 100" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M150 40 L160 80 L150 100" fill="none" stroke="#000" stroke-width="2"/>
-        </svg>
-      `)}`,
-      'Classic Denim': `data:image/svg+xml;base64,${btoa(`
-        <svg width="160" height="200" viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="denimGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#4169E1;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M20 20 L140 20 L145 180 L15 180 Z" fill="url(#denimGrad)" stroke="#000" stroke-width="2"/>
-          <rect x="30" y="40" width="20" height="30" fill="#fff" opacity="0.3"/>
-          <rect x="110" y="40" width="20" height="30" fill="#fff" opacity="0.3"/>
-        </svg>
-      `)}`,
-      'Wool Blazer': `data:image/svg+xml;base64,${btoa(`
-        <svg width="200" height="280" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="blazerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M25 45 L175 45 L185 85 L180 250 L20 250 L15 85 Z" fill="url(#blazerGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M25 45 L15 85 L25 105" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M175 45 L185 85 L175 105" fill="none" stroke="#000" stroke-width="2"/>
-          <rect x="90" y="120" width="20" height="40" fill="#000"/>
-        </svg>
-      `)}`,
-      'Silk Scarf': `data:image/svg+xml;base64,${btoa(`
-        <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="scarfGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ff8e8e;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M20 20 L80 20 L85 130 L15 130 Z" fill="url(#scarfGrad)" stroke="#000" stroke-width="1"/>
-          <circle cx="50" cy="50" r="5" fill="#fff" opacity="0.5"/>
-          <circle cx="50" cy="100" r="5" fill="#fff" opacity="0.5"/>
-        </svg>
-      `)}`,
-      'Leather Boots': `data:image/svg+xml;base64,${btoa(`
-        <svg width="140" height="100" viewBox="0 0 140 100" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="bootGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2c1810;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M20 20 L120 20 L125 80 L15 80 Z" fill="url(#bootGrad)" stroke="#000" stroke-width="2"/>
-          <rect x="30" y="10" width="80" height="20" rx="10" fill="#000"/>
-        </svg>
-      `)}`,
-      'Cashmere Sweater': `data:image/svg+xml;base64,${btoa(`
-        <svg width="190" height="260" viewBox="0 0 190 260" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="sweaterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#D2691E;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#8B4513;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M25 35 L165 35 L175 75 L170 220 L20 220 L15 75 Z" fill="url(#sweaterGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M25 35 L15 75 L25 95" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M165 35 L175 75 L165 95" fill="none" stroke="#000" stroke-width="2"/>
-        </svg>
-      `)}`,
-      'Silk Dress': `data:image/svg+xml;base64,${btoa(`
-        <svg width="180" height="300" viewBox="0 0 180 300" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="dressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ffb6c1;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#ff69b4;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M30 30 L150 30 L160 70 L155 280 L25 280 L20 70 Z" fill="url(#dressGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M30 30 L20 70 L30 90" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M150 30 L160 70 L150 90" fill="none" stroke="#000" stroke-width="2"/>
-        </svg>
-      `)}`,
-      'Gold Watch': `data:image/svg+xml;base64,${btoa(`
-        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="watchGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#daa520;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <circle cx="30" cy="30" r="25" fill="url(#watchGrad)" stroke="#000" stroke-width="2"/>
-          <circle cx="30" cy="30" r="20" fill="#000"/>
-          <line x1="30" y1="30" x2="30" y2="15" stroke="#fff" stroke-width="2"/>
-          <line x1="30" y1="30" x2="35" y2="30" stroke="#fff" stroke-width="1"/>
-        </svg>
-      `)}`,
-      'Canvas Sneakers': `data:image/svg+xml;base64,${btoa(`
-        <svg width="150" height="80" viewBox="0 0 150 80" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="canvasGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#f0f0f0;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <ellipse cx="75" cy="40" rx="70" ry="35" fill="url(#canvasGrad)" stroke="#000" stroke-width="2"/>
-          <rect x="20" y="25" width="110" height="30" rx="15" fill="#000" opacity="0.1"/>
-        </svg>
-      `)}`,
-      'Wool Coat': `data:image/svg+xml;base64,${btoa(`
-        <svg width="200" height="320" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="coatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#4a4a4a;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#2d2d2d;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <path d="M20 30 L180 30 L190 70 L185 300 L15 300 L10 70 Z" fill="url(#coatGrad)" stroke="#000" stroke-width="2"/>
-          <path d="M20 30 L10 70 L20 90" fill="none" stroke="#000" stroke-width="2"/>
-          <path d="M180 30 L190 70 L180 90" fill="none" stroke="#000" stroke-width="2"/>
-        </svg>
-      `)}`
-    };
-    return clothingImages[item.name] || clothingImages['Premium White Tee'];
+    // Use the actual product image with transparent background if available
+    // For now, return the product image directly - in production, you'd want
+    // to use pre-processed transparent PNG versions of these images
+    return item.image;
   };
 
   // Function to calculate clothing positioning based on avatar dimensions
@@ -314,29 +147,29 @@ const AvatarWidget = () => {
     const scale = Math.min(scaleX, scaleY);
 
     const positions: {[key: string]: any} = {
-      'Outerwear': {
-        top: avatarHeight * 0.08,
+      'outerwear': {
+        top: avatarHeight * 0.15,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.85 * scale,
-        height: avatarHeight * 0.35 * scale,
+        width: avatarWidth * 0.70,
+        height: avatarHeight * 0.40,
         zIndex: 3,
-        transform: 'translateX(-50%) rotate(-2deg)'
+        transform: 'translateX(-50%)'
       },
-      'Tops': {
-        top: avatarHeight * 0.10,
+      'tops': {
+        top: avatarHeight * 0.18,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.8 * scale,
-        height: avatarHeight * 0.30 * scale,
+        width: avatarWidth * 0.60,
+        height: avatarHeight * 0.35,
         zIndex: 2,
-        transform: 'translateX(-50%) rotate(1deg)'
+        transform: 'translateX(-50%)'
       },
-      'Bottoms': {
-        top: avatarHeight * 0.40,
+      'bottoms': {
+        top: avatarHeight * 0.48,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.7 * scale,
-        height: avatarHeight * 0.45 * scale,
+        width: avatarWidth * 0.55,
+        height: avatarHeight * 0.42,
         zIndex: 1,
-        transform: 'translateX(-50%) rotate(-1deg)'
+        transform: 'translateX(-50%)'
       },
       'Footwear': {
         top: avatarHeight * 0.85,
@@ -459,32 +292,24 @@ const AvatarWidget = () => {
                       </div>
                       
                       {/* Buttons */}
-                      <div className="flex gap-1 justify-center">
+                      <div className="flex gap-2 justify-center px-3">
                         <Button 
                           size="sm" 
                           onClick={() => handleTryOn(item)}
-                          className={`h-6 text-xs transition-all duration-300 px-3 ${
+                          className={`h-8 text-sm font-semibold transition-all duration-300 px-4 flex-1 ${
                             getSelectedItemForCategory(item.category)?.name === item.name
-                              ? 'bg-red-600 hover:bg-red-700'
-                              : 'bg-gradient-primary hover:opacity-90'
+                              ? 'bg-red-600 hover:bg-red-700 text-white'
+                              : 'bg-primary hover:bg-primary/90 text-primary-foreground'
                           }`}
                         >
-                          <span className="text-white">{getSelectedItemForCategory(item.category)?.name === item.name ? 'Take Back' : 'Try On'}</span>
+                          {getSelectedItemForCategory(item.category)?.name === item.name ? 'Remove' : 'Try On'}
                         </Button>
                         <Button 
                           size="sm"
                           onClick={() => handleAddToCart(item)}
-                          variant="outline"
-                          className="h-6 w-6 p-0 border-primary text-primary hover:bg-primary/10 flex-shrink-0"
+                          className="h-8 w-10 p-0 bg-primary/10 hover:bg-primary/20 border border-primary text-primary flex-shrink-0"
                         >
-                          <ShoppingCart className="w-3 h-3" />
-                        </Button>
-                        <Button 
-                          size="sm"
-                          variant="outline"
-                          className="h-6 text-[10px] px-2 border-border hover:bg-accent flex-shrink-0"
-                        >
-                          Size
+                          <ShoppingCart className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
