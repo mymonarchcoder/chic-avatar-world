@@ -9,7 +9,7 @@ import { useToast } from "./ui/use-toast";
 const ChatAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", content: "Hi! I'm your analytics assistant. Ask me anything about your dashboard data, conversion insights, or where to focus your efforts." }
+    { role: "assistant", content: "Hi! I'm your shopping assistant. I can help you find the perfect items from our featured brands. What are you looking for today?" }
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
