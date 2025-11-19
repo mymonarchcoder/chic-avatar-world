@@ -384,10 +384,10 @@ const AvatarWidget = () => {
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
             {/* Left Column - Full Body Avatar */}
-            <div className="flex flex-col justify-center items-center h-full flex-shrink-0 w-[45%] overflow-visible">
+            <div className="flex flex-col justify-center items-center h-full flex-shrink-0 w-[45%] overflow-visible py-4">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-center overflow-visible h-full w-full scale-[1.4]"
+                className="relative flex items-center justify-center overflow-visible h-full w-full scale-[1.8]"
               >
                 {/* Animated Avatar */}
                 <AnimatedAvatar
@@ -427,7 +427,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Brand Products */}
-            <div className="flex flex-col h-full py-4 pr-4 pl-2 overflow-hidden flex-1 bg-background/95 backdrop-blur-sm rounded-l-lg shadow-lg">
+            <div className="flex flex-col h-full py-4 pr-4 pl-2 overflow-hidden flex-1 bg-background/95 backdrop-blur-sm rounded-l-lg shadow-lg min-h-0">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">{brandName}</h3>
                 {Object.keys(selectedItems).length > 0 && (
