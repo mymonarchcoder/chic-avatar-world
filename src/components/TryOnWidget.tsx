@@ -29,11 +29,25 @@ const TryOnWidget = () => {
                 setShowQRCode(false);
                 navigate('/');
               }}
-              className="bg-white p-4 rounded-lg border-2 border-gray-200 hover:border-primary transition-colors cursor-pointer"
+              className="bg-white p-6 rounded-lg border-2 border-gray-200 hover:border-black transition-colors cursor-pointer group"
             >
-              {/* QR Code - clickable to navigate to app */}
-              <div className="w-64 h-64 bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center rounded-lg hover:from-primary/30 hover:to-secondary/30 transition-all">
-                <QrCode className="w-32 h-32 text-primary" />
+              {/* Fake QR Code Pattern */}
+              <div className="w-64 h-64 bg-white p-4 grid grid-cols-8 gap-1">
+                {[
+                  1,1,1,1,1,0,0,1,
+                  1,0,0,0,1,0,1,0,
+                  1,0,1,0,1,0,1,1,
+                  1,0,0,0,1,0,0,0,
+                  1,1,1,1,1,0,1,1,
+                  0,0,0,0,0,0,0,0,
+                  1,0,1,1,0,1,0,1,
+                  0,1,0,1,1,0,1,0
+                ].map((filled, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`${filled ? 'bg-black' : 'bg-white'} rounded-sm group-hover:scale-105 transition-transform`}
+                  />
+                ))}
               </div>
             </button>
             <div className="text-center space-y-2">
