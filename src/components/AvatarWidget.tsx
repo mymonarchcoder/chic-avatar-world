@@ -148,11 +148,11 @@ const AvatarWidget = () => {
 
     const positions: {[key: string]: any} = {
       'outerwear': {
-        top: avatarHeight * 0.15,
+        top: avatarHeight * 0.12,
         left: avatarWidth * 0.5,
-        width: avatarWidth * 0.70,
-        height: avatarHeight * 0.40,
-        zIndex: 3,
+        width: avatarWidth * 0.85,
+        height: avatarHeight * 0.50,
+        zIndex: 5,
         transform: 'translateX(-50%)'
       },
       'tops': {
