@@ -25,7 +25,7 @@ const AvatarWidget = () => {
   const avatarRef = useRef<HTMLDivElement>(null);
 
   // Determine which products to show based on current route
-  const isAloDemo = location.pathname === '/alo-demo';
+  const isAloDemo = location.pathname === '/alo-demo' || location.pathname === '/alo-app';
   const products = isAloDemo ? aloProducts : malbonProducts;
   const brandName = isAloDemo ? "Alo Yoga" : "Malbon Golf";
 
