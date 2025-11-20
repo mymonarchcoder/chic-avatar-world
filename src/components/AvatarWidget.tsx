@@ -66,6 +66,12 @@ const AvatarWidget = () => {
   }, [isOpen]);
 
   const handleTryOn = (item: any) => {
+    // Skip outerwear items - don't allow try-on
+    if (item.category === 'outerwear') {
+      toast.info(`${item.name} try-on coming soon!`);
+      return;
+    }
+    
     const currentItem = selectedItems[item.category];
     if (currentItem && currentItem.name === item.name) {
       // If the same item is already selected, remove it with fade-out animation
