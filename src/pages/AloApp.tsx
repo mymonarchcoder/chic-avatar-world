@@ -1,6 +1,6 @@
 import { Heart, ShoppingBag, Search, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import AvatarWidget from "@/components/AvatarWidget";
+import TryOnWidget from "@/components/TryOnWidget";
 
 const AloApp = () => {
   const filters = [
@@ -216,8 +216,8 @@ const AloApp = () => {
       {/* Bottom Padding for Avatar Widget */}
       <div className="h-32" />
 
-      {/* Avatar Widget */}
-      <AvatarWidget />
+      {/* Try On Widget */}
+      <TryOnWidget />
     </div>
   );
 };
