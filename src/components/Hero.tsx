@@ -11,32 +11,28 @@ const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 py-8 sm:py-16 relative z-10 w-full">
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Content Section */}
-          <div className="w-full px-2 sm:px-4 text-center lg:text-left space-y-2 sm:space-y-1 animate-fade-in pt-4 sm:pt-8">
-            <h1 className="text-[10rem] sm:text-[16rem] md:text-[22rem] lg:text-[28rem] font-bold leading-none text-primary tracking-[-0.08em] font-baloo">
-              Tuuin
-            </h1>
-            
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary -mt-1 sm:-mt-2 px-2">
-              Your Personal Style
-            </h2>
-            
-            <p className="text-base sm:text-xl text-foreground max-w-2xl lg:max-w-none px-2 sm:px-0">
-              Discover your perfect look with AI-powered recommendations, virtual try-ons, 
-              and curated collections from your favorite brands.
-            </p>
-            
-            <div className="flex justify-center lg:justify-start pt-2 sm:pt-2">
-              <Button 
-                size="lg" 
-                className="shadow-elegant text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6"
-              >
-                Top Emerging Brands
-              </Button>
-            </div>
+        <div className="flex flex-col items-center justify-center text-center space-y-2 sm:space-y-1 animate-fade-in">
+          <h1 className="text-[10rem] sm:text-[16rem] md:text-[22rem] lg:text-[28rem] font-bold leading-none text-primary tracking-[-0.08em] font-baloo">
+            Tuuin
+          </h1>
+          
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary -mt-1 sm:-mt-2 px-2">
+            Your Personal Style
+          </h2>
+          
+          <p className="text-base sm:text-xl text-foreground max-w-2xl px-2 sm:px-0">
+            Discover your perfect look with AI-powered recommendations, virtual try-ons, 
+            and curated collections from your favorite brands.
+          </p>
+          
+          <div className="flex justify-center pt-2 sm:pt-2">
+            <Button 
+              size="lg" 
+              className="shadow-elegant text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6"
+            >
+              Top Emerging Brands
+            </Button>
           </div>
-
         </div>
       </div>
     </section>
