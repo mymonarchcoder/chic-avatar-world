@@ -32,22 +32,17 @@ const EmbeddableTryOnWidget = ({
     { id: "verytall", label: "6'0\"+" },
   ];
 
-  const handleTryWithAvatar = () => {
-    // Open the main app with selected options
-    const params = new URLSearchParams({
-      ...(productUrl && { url: productUrl }),
-      ...(productName && { name: productName }),
-      ...(productImage && { image: productImage }),
-      ...(selectedBodyType && { bodyType: selectedBodyType }),
-      ...(selectedHeight && { height: selectedHeight }),
-    });
+  const handleTryWithAvatar = async () => {
+    if (!selectedBodyType || !selectedHeight) return;
     
+    setShowModal(false);
+    
+    // Navigate to avatar generation page
     window.open(
-      `${window.location.origin}/?${params.toString()}`,
+      `${window.location.origin}/avatar-generation?bodyType=${selectedBodyType}&height=${selectedHeight}`,
       '_blank',
       'width=1200,height=800'
     );
-    setShowModal(false);
   };
 
   const handlePersonalize = () => {

@@ -26,6 +26,7 @@ import AloDemo from "./pages/AloDemo";
 import AloApp from "./pages/AloApp";
 import AloProductDemo from "./pages/AloProductDemo";
 import MalbonDemo from "./pages/MalbonDemo";
+import AvatarGeneration from "./pages/AvatarGeneration";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -62,6 +63,7 @@ const App = () => (
               <Route path="/alo-app" element={<AloApp />} />
               <Route path="/alo-product" element={<AloProductDemo />} />
               <Route path="/malbon-demo" element={<MalbonDemo />} />
+              <Route path="/avatar-generation" element={<AvatarGeneration />} />
               <Route path="/dashboard" element={<Dashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
