@@ -77,31 +77,31 @@ const EmbeddableTryOnWidget = ({
       </Button>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-xl">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold">Try On Your Avatar</DialogTitle>
+            <DialogTitle className="text-xl font-bold">Try On Your Avatar</DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-6 py-4">
+          <div className="space-y-4 py-2">
             {/* Body Type Selection */}
             <div>
-              <h3 className="text-lg font-semibold mb-3">Select Body Type</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <h3 className="text-sm font-semibold mb-2">Select Body Type</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {bodyTypes.map((type) => (
                   <button
                     key={type.id}
                     onClick={() => setSelectedBodyType(type.id)}
-                    className={`p-4 rounded-lg border-2 transition-all text-left ${
+                    className={`p-3 rounded-lg border-2 transition-all text-left ${
                       selectedBodyType === type.id
                         ? 'border-primary bg-primary/5'
                         : 'border-border hover:border-primary/50'
                     }`}
                   >
-                    <div className="flex items-start gap-3">
-                      <User className="w-5 h-5 mt-1" />
+                    <div className="flex items-start gap-2">
+                      <User className="w-4 h-4 mt-0.5" />
                       <div>
-                        <p className="font-semibold">{type.label}</p>
-                        <p className="text-sm text-muted-foreground">{type.description}</p>
+                        <p className="font-semibold text-sm">{type.label}</p>
+                        <p className="text-xs text-muted-foreground">{type.description}</p>
                       </div>
                     </div>
                   </button>
@@ -111,37 +111,36 @@ const EmbeddableTryOnWidget = ({
 
             {/* Height Selection */}
             <div>
-              <h3 className="text-lg font-semibold mb-3">Select Height</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <h3 className="text-sm font-semibold mb-2">Select Height</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {heights.map((height) => (
                   <button
                     key={height.id}
                     onClick={() => setSelectedHeight(height.id)}
-                    className={`p-4 rounded-lg border-2 transition-all ${
+                    className={`p-3 rounded-lg border-2 transition-all ${
                       selectedHeight === height.id
                         ? 'border-primary bg-primary/5'
                         : 'border-border hover:border-primary/50'
                     }`}
                   >
-                    <p className="font-semibold">{height.label}</p>
+                    <p className="font-semibold text-sm">{height.label}</p>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-3 pt-4">
+            <div className="space-y-2 pt-2">
               <Button
                 onClick={handleTryWithAvatar}
                 disabled={!selectedBodyType || !selectedHeight}
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                size="lg"
               >
-                <Scan className="w-5 h-5 mr-2" />
+                <Scan className="w-4 h-4 mr-2" />
                 Try On with Selected Avatar
               </Button>
 
-              <div className="relative">
+              <div className="relative py-2">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t" />
                 </div>
@@ -156,12 +155,11 @@ const EmbeddableTryOnWidget = ({
                 onClick={handlePersonalize}
                 variant="outline"
                 className="w-full"
-                size="lg"
               >
-                <Sparkles className="w-5 h-5 mr-2" />
+                <Sparkles className="w-4 h-4 mr-2" />
                 Personalize Your Avatar
               </Button>
-              <p className="text-xs text-center text-muted-foreground">
+              <p className="text-xs text-center text-muted-foreground px-4">
                 Create a fully customized avatar with body measurements, skin tone, and more
               </p>
             </div>
