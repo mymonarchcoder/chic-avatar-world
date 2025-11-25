@@ -78,7 +78,7 @@ const EmbeddableTryOnWidget = ({
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
         <DialogContent className="max-w-xl">
-          <DialogHeader>
+          <DialogHeader className="pt-4">
             <DialogTitle className="text-xl font-bold">Try On Your Avatar</DialogTitle>
           </DialogHeader>
 
