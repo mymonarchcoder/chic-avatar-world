@@ -85,11 +85,11 @@ const AvatarGeneration = () => {
           </div>
         ) : avatarImage ? (
           <div className="space-y-6">
-            <div className="bg-white rounded-lg p-4 shadow-lg">
+            <div className="bg-white rounded-lg p-4 shadow-lg max-w-md mx-auto">
               <img 
                 src={avatarImage}
                 alt="Generated Avatar"
-                className="w-full h-auto rounded-lg"
+                className="w-full h-auto rounded-lg max-h-[500px] object-contain"
               />
             </div>
             <div className="text-center">
