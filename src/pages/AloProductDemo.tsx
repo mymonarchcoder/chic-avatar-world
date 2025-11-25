@@ -10,14 +10,25 @@ const AloProductDemo = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
-      {/* Embedded Alo Yoga Product Page */}
-      <iframe
-        src={productData.url}
-        className="w-full h-screen border-0"
-        title="Alo Yoga Product Page"
-        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-      />
+    <div className="min-h-screen relative bg-background overflow-auto">
+      {/* Alo Yoga Product Page Screenshot */}
+      <div className="w-full max-w-[1920px] mx-auto">
+        <img 
+          src="https://www.aloyoga.com/cdn/shop/files/W54324R_001_2.jpg"
+          alt="Alo Yoga Product - Full Body"
+          className="w-full h-auto"
+        />
+        <img 
+          src="https://www.aloyoga.com/cdn/shop/files/W54324R_001_3.jpg"
+          alt="Alo Yoga Product - Detail"
+          className="w-full h-auto"
+        />
+        <img 
+          src="https://www.aloyoga.com/cdn/shop/files/W54324R_001_4.jpg"
+          alt="Alo Yoga Product - Back View"
+          className="w-full h-auto"
+        />
+      </div>
       
       {/* Our Try-On Widget Overlay */}
       <EmbeddableTryOnWidget
