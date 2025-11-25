@@ -24,6 +24,7 @@ import WidgetEmbed from "./pages/WidgetEmbed";
 import WidgetDemo from "./pages/WidgetDemo";
 import AloDemo from "./pages/AloDemo";
 import AloApp from "./pages/AloApp";
+import MalbonDemo from "./pages/MalbonDemo";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -58,6 +59,7 @@ const App = () => (
               <Route path="/widget-demo" element={<WidgetDemo />} />
               <Route path="/alo-demo" element={<AloDemo />} />
               <Route path="/alo-app" element={<AloApp />} />
+              <Route path="/malbon-demo" element={<MalbonDemo />} />
               <Route path="/dashboard" element={<Dashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
