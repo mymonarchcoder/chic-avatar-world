@@ -2,9 +2,9 @@ import EmbeddableTryOnWidget from "@/components/EmbeddableTryOnWidget";
 
 const MalbonDemo = () => {
   const productData = {
-    name: "Alo Softsculpt 7/8 Foldover Flare Legging",
+    name: "ALO Softsculpt //8 Foldover Flare Legging",
     brand: "Alo Yoga",
-    price: 118,
+    price: 144,
     url: "https://www.aloyoga.com/products/w54324r-alo-softsculpt-7-8-foldover-flare-legging-black",
     image: "https://www.aloyoga.com/cdn/shop/files/W54324R_001_1.jpg",
   };
