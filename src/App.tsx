@@ -19,6 +19,7 @@ import BrandCollection from "./pages/BrandCollection";
 import ProductDetail from "./pages/ProductDetail";
 import ProductDetailWithTryOn from "./pages/ProductDetailWithTryOn";
 import MalbonCondorPant from "./pages/MalbonCondorPant";
+import ShopWithTryOn from "./pages/ShopWithTryOn";
 import AloDemo from "./pages/AloDemo";
 import AloApp from "./pages/AloApp";
 import Dashboard from "./pages/Dashboard";
@@ -50,6 +51,7 @@ const App = () => (
               <Route path="/product/:productId" element={<ProductDetail />} />
               <Route path="/product-tryon/:productId" element={<ProductDetailWithTryOn />} />
               <Route path="/malbon-condor-pant" element={<MalbonCondorPant />} />
+              <Route path="/shop-with-tryon" element={<ShopWithTryOn />} />
               <Route path="/alo-demo" element={<AloDemo />} />
               <Route path="/alo-app" element={<AloApp />} />
               <Route path="/dashboard" element={<Dashboard />} />
