@@ -1,18 +1,31 @@
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import referenceFace from "@/assets/reference-face.jpg";
 
 const AvatarGeneration = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [avatarImage, setAvatarImage] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(true);
 
   const bodyType = searchParams.get("bodyType") || "athletic";
   const height = searchParams.get("height") || "average";
   const bodyPhotoParam = searchParams.get("bodyPhoto");
+
+  const handleTryOnOutfit = () => {
+    const outfitDescription = `Cream/beige Alo Yoga matching set:
+- Oversized boxy hoodie with drawstrings and front kangaroo pocket
+- Small "alo" logo embroidered on left chest
+- Matching sweatpants with drawstring waist and "alo" logo on hip
+- Soft, comfortable fleece material
+- Relaxed, athleisure aesthetic`;
+
+    navigate(`/tryon-generation?bodyType=${bodyType}&height=${height}&avatarImage=${encodeURIComponent(avatarImage || "")}&outfit=${encodeURIComponent(outfitDescription)}&size=xs`);
+  };
 
   useEffect(() => {
     generateAvatar();
@@ -94,16 +107,24 @@ const AvatarGeneration = () => {
                 className="w-full h-auto rounded-lg"
               />
             </div>
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground mb-4">
+            <div className="text-center space-y-4">
+              <p className="text-sm text-muted-foreground">
                 Your personalized avatar is ready! You can now use this to try on clothes virtually.
               </p>
-              <button 
-                onClick={generateAvatar}
-                className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
-              >
-                Regenerate Avatar
-              </button>
+              <div className="flex gap-4 justify-center">
+                <Button 
+                  onClick={generateAvatar}
+                  variant="outline"
+                >
+                  Regenerate Avatar
+                </Button>
+                <Button 
+                  onClick={handleTryOnOutfit}
+                  className="bg-primary text-primary-foreground"
+                >
+                  Try On Cream Alo Set (XS)
+                </Button>
+              </div>
             </div>
           </div>
         ) : (

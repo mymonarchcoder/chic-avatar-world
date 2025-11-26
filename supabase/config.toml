@@ -1,1 +1,10 @@
 project_id = "bomrmotullpywwuhjcye"
+
+[functions.chat]
+verify_jwt = false
+
+[functions.generate-avatar]
+verify_jwt = false
+
+[functions.generate-tryon]
+verify_jwt = false
