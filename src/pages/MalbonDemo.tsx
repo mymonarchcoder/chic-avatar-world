@@ -10,6 +10,10 @@ import jacketFront from "@/assets/alo-jacket-front.jpg";
 import jacketBack from "@/assets/alo-jacket-back.jpg";
 import sherpaFront from "@/assets/alo-sherpa-front.jpg";
 import sherpaBack from "@/assets/alo-sherpa-back.jpg";
+import aloSet1 from "@/assets/alo-set-1.jpg";
+import aloSet2 from "@/assets/alo-set-2.jpg";
+import aloSet3 from "@/assets/alo-set-3.jpg";
+import aloSet4 from "@/assets/alo-set-4.jpg";
 
 const MalbonDemo = () => {
   const [selectedSize, setSelectedSize] = useState("S");
@@ -28,14 +32,14 @@ const MalbonDemo = () => {
 
   // Multiple images for products
   const allProductImages = [
+    [aloSet1, aloSet2],
+    [aloSet3, aloSet4],
+    [sherpaFront, sherpaBack],
     [heroImage1, heroImage2],
     [heroImage3, heroImage4],
-    [sherpaFront, sherpaBack],
-    [heroImage2, heroImage4],
-    [heroImage3, heroImage1],
     [jacketFront, jacketBack],
-    [heroImage1, heroImage4],
-    [heroImage2, heroImage3],
+    [aloSet2, aloSet1],
+    [aloSet4, aloSet3],
   ];
 
   const productImages = allProductImages[selectedProductIndex % allProductImages.length];
