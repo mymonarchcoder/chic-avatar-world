@@ -29,6 +29,7 @@ import MalbonDemo from "./pages/MalbonDemo";
 import AvatarGeneration from "./pages/AvatarGeneration";
 import TryOnGeneration from "./pages/TryOnGeneration";
 import VirtualFittingRoom from "./pages/VirtualFittingRoom";
+import TryOnHistory from "./pages/TryOnHistory";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -68,6 +69,7 @@ const App = () => (
               <Route path="/avatar-generation" element={<AvatarGeneration />} />
               <Route path="/tryon-generation" element={<TryOnGeneration />} />
               <Route path="/virtual-fitting-room" element={<VirtualFittingRoom />} />
+              <Route path="/try-on-history" element={<TryOnHistory />} />
               <Route path="/dashboard" element={<Dashboard />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
