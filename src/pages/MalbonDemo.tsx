@@ -1,6 +1,10 @@
 import EmbeddableTryOnWidget from "@/components/EmbeddableTryOnWidget";
 import { Heart, Search, ShoppingBag, User } from "lucide-react";
 import { useState } from "react";
+import product1 from "@/assets/alo-product-1.jpg";
+import product2 from "@/assets/alo-product-2.jpg";
+import product3 from "@/assets/alo-product-3.jpg";
+import product4 from "@/assets/alo-product-4.jpg";
 
 const MalbonDemo = () => {
   const [selectedSize, setSelectedSize] = useState("S");
@@ -36,10 +40,10 @@ const MalbonDemo = () => {
   ];
 
   const productImages = [
-    "https://images.unsplash.com/photo-1556816723-1ce827b9cfbb?w=800&h=1000&fit=crop",
-    "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=1000&fit=crop",
-    "https://images.unsplash.com/photo-1518609571773-39b7d303a87b?w=800&h=1000&fit=crop",
-    "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=1000&fit=crop",
+    product1,
+    product2,
+    product3,
+    product4,
   ];
 
   return (
