@@ -11,7 +11,7 @@ serve(async (req) => {
   }
 
   try {
-    const { bodyType, height, faceImageBase64 } = await req.json();
+    const { bodyType, height, faceImageBase64, bodyPhotoBase64 } = await req.json();
     
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
@@ -33,17 +33,19 @@ serve(async (req) => {
       verytall: "over 6'0\" height",
     };
 
-    const prompt = `Create a full-body 3D avatar of a woman with the following characteristics:
+    let prompt = `Create a full-body 3D avatar with the following characteristics:
 - Body type: ${bodyTypeDescriptions[bodyType] || bodyType}
 - Height: ${heightDescriptions[height] || height}
-- Standing in a neutral pose, facing forward
+- Standing in a neutral T-pose, facing forward
 - Wearing form-fitting athletic wear (sports bra and leggings)
 - Clean white background
 - Professional studio lighting
-- Photorealistic 3D render style
+- Photorealistic style
 - Full body visible from head to toe
 
-The avatar should have the facial features and appearance from the reference image provided. Create a natural, realistic representation suitable for virtual try-on clothing.`;
+${bodyPhotoBase64 ? 'Use the provided full body photo as reference for body proportions and build. Match the facial features from the face reference image.' : 'The avatar should have the facial features and appearance from the reference face image provided.'}
+
+Create a natural, realistic representation suitable for virtual try-on clothing.`;
 
     console.log("Generating avatar with prompt:", prompt);
 
@@ -61,6 +63,14 @@ The avatar should have the facial features and appearance from the reference ima
       messages[0].content.push({
         type: "image_url",
         image_url: { url: faceImageBase64 }
+      });
+    }
+
+    // Add body photo if provided
+    if (bodyPhotoBase64) {
+      messages[0].content.push({
+        type: "image_url",
+        image_url: { url: bodyPhotoBase64 }
       });
     }
 

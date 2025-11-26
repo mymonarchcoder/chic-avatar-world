@@ -12,6 +12,7 @@ const AvatarGeneration = () => {
 
   const bodyType = searchParams.get("bodyType") || "athletic";
   const height = searchParams.get("height") || "average";
+  const bodyPhotoParam = searchParams.get("bodyPhoto");
 
   useEffect(() => {
     generateAvatar();
@@ -34,7 +35,8 @@ const AvatarGeneration = () => {
           body: {
             bodyType,
             height,
-            faceImageBase64: base64data
+            faceImageBase64: base64data,
+            bodyPhotoBase64: bodyPhotoParam || null
           }
         });
 
