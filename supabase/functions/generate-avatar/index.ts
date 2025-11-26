@@ -36,16 +36,18 @@ serve(async (req) => {
     let prompt = `Create a full-body 3D avatar with the following characteristics:
 - Body type: ${bodyTypeDescriptions[bodyType] || bodyType}
 - Height: ${heightDescriptions[height] || height}
-- Standing in a neutral T-pose, facing forward
+- Natural, relaxed standing pose (not T-pose) - slightly angled with weight on one leg
+- Head and gaze turned slightly to the right, looking towards the corner naturally
 - Wearing form-fitting athletic wear (sports bra and leggings)
 - Clean white background
 - Professional studio lighting
 - Photorealistic style
 - Full body visible from head to toe
+- Casual, natural posture with a slight hip tilt
 
-${bodyPhotoBase64 ? 'Use the provided full body photo as reference for body proportions and build. Match the facial features from the face reference image.' : 'The avatar should have the facial features and appearance from the reference face image provided.'}
+${bodyPhotoBase64 ? 'Use the provided full body photo as primary reference for body proportions, build, facial features, skin tone, and overall appearance. Match the person in the photo as closely as possible.' : 'The avatar should have the facial features and appearance from the reference face image provided.'}
 
-Create a natural, realistic representation suitable for virtual try-on clothing.`;
+Create a natural, realistic representation suitable for virtual try-on clothing with a relaxed, approachable pose.`;
 
     console.log("Generating avatar with prompt:", prompt);
 
