@@ -34,7 +34,7 @@ Size: XS (2-4)
 - Boxy, oversized fit as designed
 - Relaxed, comfortable drape`;
 
-    const prompt = `Create a photorealistic full-body image of this person wearing the following outfit:
+    const prompt = `Create a highly photorealistic full-body image of this person wearing the following outfit:
 
 OUTFIT DETAILS:
 ${outfitDescription}
@@ -45,20 +45,33 @@ ${sizeDetails}
 BODY TYPE: ${bodyTypeDescriptions[bodyType] || bodyType}
 
 STYLING REQUIREMENTS:
-- Outfit should fit like an oversized, boxy style on an XS frame
-- Cream/beige colored hoodie with drawstrings and front pocket
-- Matching cream/beige sweatpants with drawstring waist
-- Small "alo" logo embroidered on chest and hip
-- Hoodie should look relaxed and slightly oversized, not tight
-- Sweatpants should have a comfortable, slightly loose fit
-- Natural, relaxed standing pose with weight on one leg
-- Head and gaze turned slightly to the right, looking towards corner
-- Clean white background
-- Professional studio lighting
-- Full body visible from head to toe
-- Casual, natural posture with slight hip tilt
+- Cream/beige Alo Yoga hoodie with drawstrings, kangaroo front pocket, and hood
+- Small "alo" embroidered logo on left chest (subtle, small text)
+- Matching cream/beige Alo sweatpants with drawstring waist
+- Small "alo" logo embroidered on left hip area of pants
+- Soft fleece/terry material with natural texture and folds
+- Oversized, boxy fit on XS frame - hoodie should look relaxed and roomy, not tight
+- Sweatpants should have comfortable, slightly loose fit with natural draping
+- Visible seam details on shoulders and sleeves
+- Drawstrings hanging naturally from hood and waistband
+- Ribbed cuffs on sleeves and pant legs
 
-The outfit should drape naturally on the body, showing the oversized, comfortable fit characteristic of this style. Maintain accurate XS proportions while showing the intentionally relaxed fit of the garment.`;
+FACE & APPEARANCE (CRITICAL):
+- Natural, minimal makeup look - fresh-faced with bare skin
+- Real 3D skin texture with dimension and natural shadows
+- Avoid flat, plastic, or overly-smooth appearance
+- Natural facial contours with proper depth
+- Realistic, matte skin finish
+
+POSE & SETTING:
+- Natural, relaxed standing pose with weight on one leg
+- Head and gaze turned slightly to the right
+- Clean white/light gray background
+- Professional studio lighting with natural shadows showing fabric dimension
+- Full body visible from head to toe
+- Casual, approachable posture with slight hip tilt
+
+The outfit should drape naturally showing realistic fabric folds and the intentionally oversized fit of XS Alo athleisure wear.`;
 
     console.log("Generating try-on with prompt:", prompt);
 

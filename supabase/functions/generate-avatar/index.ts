@@ -33,21 +33,32 @@ serve(async (req) => {
       verytall: "over 6'0\" height",
     };
 
-    let prompt = `Create a full-body 3D avatar with the following characteristics:
+    let prompt = `Create a full-body 3D photorealistic avatar with the following characteristics:
+
+BODY & POSE:
 - Body type: ${bodyTypeDescriptions[bodyType] || bodyType}
 - Height: ${heightDescriptions[height] || height}
 - Natural, relaxed standing pose (not T-pose) - slightly angled with weight on one leg
 - Head and gaze turned slightly to the right, looking towards the corner naturally
 - Wearing form-fitting athletic wear (sports bra and leggings)
 - Clean white background
-- Professional studio lighting
-- Photorealistic style
+- Professional studio lighting with natural shadows
 - Full body visible from head to toe
 - Casual, natural posture with a slight hip tilt
 
-${bodyPhotoBase64 ? 'Use the provided full body photo as primary reference for body proportions, build, facial features, skin tone, and overall appearance. Match the person in the photo as closely as possible.' : 'The avatar should have the facial features and appearance from the reference face image provided.'}
+FACE & APPEARANCE (CRITICAL):
+- Natural, minimal makeup look - bare skin with just a hint of natural flush
+- Real skin texture with pores, natural imperfections, and dimension
+- 3D realistic facial features with proper depth, shadows, and contours
+- Avoid flat, plastic, or overly-smooth CGI appearance
+- Natural eyebrows, subtle eye makeup or none
+- Matte skin finish, not glossy or airbrushed
+- Realistic lighting that shows facial dimension and bone structure
+- Human-like texture and depth, not doll-like or artificial
 
-Create a natural, realistic representation suitable for virtual try-on clothing with a relaxed, approachable pose.`;
+${bodyPhotoBase64 ? 'Use the provided full body photo as primary reference for exact body proportions, build, facial features, skin tone, and overall appearance. Match the person in the photo as closely as possible with their natural beauty and realistic features.' : 'The avatar should have the natural facial features and appearance from the reference face image provided.'}
+
+Create a highly realistic, natural representation with proper 3D depth and human texture suitable for virtual try-on clothing.`;
 
     console.log("Generating avatar with prompt:", prompt);
 
