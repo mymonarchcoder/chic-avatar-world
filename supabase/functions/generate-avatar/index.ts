@@ -20,10 +20,10 @@ serve(async (req) => {
 
     // Build the prompt based on body type and height
     const bodyTypeDescriptions: Record<string, string> = {
-      petite: "petite build, shorter stature",
-      athletic: "athletic and toned physique with defined muscles",
-      curvy: "curvy hourglass figure",
-      plus: "plus-size build",
+      petite: "petite build with slender proportions",
+      athletic: "athletic and toned physique, lean and graceful - not bulky",
+      curvy: "curvy hourglass figure with feminine proportions",
+      plus: "plus-size build with natural proportions",
     };
 
     const heightDescriptions: Record<string, string> = {
@@ -36,6 +36,9 @@ serve(async (req) => {
     const prompt = `Create a full-body 3D avatar of a woman with the following characteristics:
 - Body type: ${bodyTypeDescriptions[bodyType] || bodyType}
 - Height: ${heightDescriptions[height] || height}
+- Athletic build with lean, toned muscles - NOT bulky or overly defined
+- Arms should be slender and toned, not muscular or bulky
+- Feminine, graceful physique with subtle muscle definition
 - Standing in a neutral pose, facing forward
 - Wearing form-fitting athletic wear (sports bra and leggings)
 - Clean white background
@@ -43,7 +46,7 @@ serve(async (req) => {
 - Photorealistic 3D render style
 - Full body visible from head to toe
 
-The avatar should have the facial features and appearance from the reference image provided. Create a natural, realistic representation suitable for virtual try-on clothing.`;
+The avatar should have the facial features and appearance from the reference image provided. Create a natural, realistic representation suitable for virtual try-on clothing with a lean, elegant build.`;
 
     console.log("Generating avatar with prompt:", prompt);
 
