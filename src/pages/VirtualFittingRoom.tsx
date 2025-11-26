@@ -117,14 +117,26 @@ const VirtualFittingRoom = () => {
           ))}
         </div>
 
-        <div className="bg-muted/50 rounded-lg p-8 text-center mb-12">
-          <h2 className="text-2xl font-semibold mb-2">Don't have an avatar yet?</h2>
-          <p className="text-muted-foreground mb-4">
-            Create your personalized 3D avatar to start trying on clothes
-          </p>
-          <Button onClick={() => navigate("/avatar-generation")} variant="outline">
-            Create Your Avatar
-          </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+          <div className="bg-muted/50 rounded-lg p-8 text-center">
+            <h2 className="text-2xl font-semibold mb-2">Don't have an avatar yet?</h2>
+            <p className="text-muted-foreground mb-4">
+              Create your personalized 3D avatar to start trying on clothes
+            </p>
+            <Button onClick={() => navigate("/avatar-generation")} variant="outline">
+              Create Your Avatar
+            </Button>
+          </div>
+          
+          <div className="bg-primary/5 rounded-lg p-8 text-center">
+            <h2 className="text-2xl font-semibold mb-2">View Your Try-On History</h2>
+            <p className="text-muted-foreground mb-4">
+              See all the items you've tried on across all brands
+            </p>
+            <Button onClick={() => navigate("/try-on-history")}>
+              View History
+            </Button>
+          </div>
         </div>
       </div>
     </div>
