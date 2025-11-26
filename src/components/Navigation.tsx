@@ -57,6 +57,13 @@ const Navigation = () => {
               </Button>
               <Button 
                 variant="ghost" 
+                className="text-muted-foreground hover:text-foreground text-sm px-2 hidden lg:block"
+                onClick={() => navigate('/virtual-fitting-room')}
+              >
+                Virtual Fitting Room
+              </Button>
+              <Button 
+                variant="ghost" 
                 className="text-muted-foreground hover:text-foreground text-sm px-2 hidden sm:block"
                 onClick={() => navigate('/alo-app')}
               >
