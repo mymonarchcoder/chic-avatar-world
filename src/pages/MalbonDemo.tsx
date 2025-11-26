@@ -2,6 +2,10 @@ import EmbeddableTryOnWidget from "@/components/EmbeddableTryOnWidget";
 import { Heart, Search, ShoppingBag, User, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { aloProducts } from "@/data/aloProducts";
+import heroImage1 from "@/assets/alo-hero-1.jpg";
+import heroImage2 from "@/assets/alo-hero-2.jpg";
+import heroImage3 from "@/assets/alo-hero-3.jpg";
+import heroImage4 from "@/assets/alo-hero-4.jpg";
 
 const MalbonDemo = () => {
   const [selectedSize, setSelectedSize] = useState("S");
@@ -18,11 +22,19 @@ const MalbonDemo = () => {
     image: currentProduct.image,
   };
 
-  // Mock multiple images for each product
-  const productImages = [
-    currentProduct.image,
-    currentProduct.image, // Using same image as placeholder
+  // Multiple images for products
+  const allProductImages = [
+    [heroImage1, heroImage2],
+    [heroImage3, heroImage4],
+    [heroImage1, heroImage3],
+    [heroImage2, heroImage4],
+    [heroImage3, heroImage1],
+    [heroImage4, heroImage2],
+    [heroImage1, heroImage4],
+    [heroImage2, heroImage3],
   ];
+
+  const productImages = allProductImages[selectedProductIndex % allProductImages.length];
 
   const handlePrevImage = () => {
     setSelectedImageIndex((prev) => (prev > 0 ? prev - 1 : productImages.length - 1));
