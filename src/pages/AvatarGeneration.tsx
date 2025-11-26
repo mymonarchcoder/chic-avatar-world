@@ -14,6 +14,7 @@ const AvatarGeneration = () => {
 
   const bodyType = searchParams.get("bodyType") || "athletic";
   const height = searchParams.get("height") || "average";
+  const avatarColor = searchParams.get("avatarColor") || "beige";
   const bodyPhotoParam = searchParams.get("bodyPhoto");
 
   const handleTryOnOutfit = () => {
@@ -48,6 +49,7 @@ const AvatarGeneration = () => {
           body: {
             bodyType,
             height,
+            avatarColor,
             faceImageBase64: base64data,
             bodyPhotoBase64: bodyPhotoParam || null
           }
@@ -96,6 +98,7 @@ const AvatarGeneration = () => {
             <div className="mt-6 space-y-2 text-sm text-muted-foreground">
               <p>• Body Type: {bodyType}</p>
               <p>• Height: {height}</p>
+              <p>• Color: {avatarColor}</p>
             </div>
           </div>
         ) : avatarImage ? (
