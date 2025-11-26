@@ -16,7 +16,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { supabase } from "@/integrations/supabase/client";
 
 const personalizeSchema = z.object({
   userName: z.string().optional(),
@@ -26,7 +25,6 @@ const personalizeSchema = z.object({
   weight: z.string().optional(),
   weightUnit: z.enum(["lbs", "kg"]).optional(),
   bodyType: z.string().optional(),
-  avatarColor: z.string().optional(),
   topSize: z.string().optional(),
   topFit: z.string().optional(),
   bottomSize: z.string().optional(),
@@ -47,14 +45,12 @@ const CreateAvatar = () => {
   const [processedImage, setProcessedImage] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [avatarReady, setAvatarReady] = useState(false);
-  const [generatedAvatarUrl, setGeneratedAvatarUrl] = useState<string | null>(null);
   
   const form = useForm<z.infer<typeof personalizeSchema>>({
     resolver: zodResolver(personalizeSchema),
     defaultValues: {
       userName: "",
       weightUnit: "lbs",
-      avatarColor: "beige",
       colors: [],
       fabrics: [],
       occasions: [],
@@ -109,7 +105,7 @@ const CreateAvatar = () => {
     setStep(2);
   };
 
-  const handleComplete = async (data: z.infer<typeof personalizeSchema>) => {
+  const handleComplete = (data: z.infer<typeof personalizeSchema>) => {
     // Store avatar data and preferences
     localStorage.setItem('userAvatar', processedImage || facePhoto || '');
     localStorage.setItem('userName', data.userName || '');
@@ -117,52 +113,11 @@ const CreateAvatar = () => {
     
     setStep(3);
     setAvatarReady(false);
-    setIsProcessing(true);
     
-    try {
-      // Prepare body type and height for API
-      const bodyType = data.bodyType || 'athletic';
-      const heightFt = parseInt(data.heightFt || '5');
-      const heightIn = parseInt(data.heightIn || '6');
-      const totalHeightInches = (heightFt * 12) + heightIn;
-      
-      // Map height to category
-      let heightCategory = 'average';
-      if (totalHeightInches < 63) heightCategory = 'short';
-      else if (totalHeightInches >= 63 && totalHeightInches < 68) heightCategory = 'average';
-      else if (totalHeightInches >= 68 && totalHeightInches < 72) heightCategory = 'tall';
-      else heightCategory = 'verytall';
-      
-      // Call edge function to generate mannequin avatar
-      const { data: avatarData, error } = await supabase.functions.invoke('generate-avatar', {
-        body: {
-          bodyType,
-          height: heightCategory,
-          avatarColor: data.avatarColor || 'beige',
-          faceImageBase64: null, // Not needed for mannequin style
-          bodyPhotoBase64: null
-        }
-      });
-
-      if (error) {
-        console.error('Error generating avatar:', error);
-        toast.error("Failed to generate avatar. Please try again.");
-        setIsProcessing(false);
-        return;
-      }
-
-      if (avatarData?.imageUrl) {
-        setGeneratedAvatarUrl(avatarData.imageUrl);
-        localStorage.setItem('userAvatar', avatarData.imageUrl);
-        toast.success("Avatar generated successfully!");
-        setAvatarReady(true);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error("Failed to generate avatar");
-    } finally {
-      setIsProcessing(false);
-    }
+    // Simulate avatar generation - show completion after 3 seconds
+    setTimeout(() => {
+      setAvatarReady(true);
+    }, 3000);
   };
 
   return (
@@ -524,36 +479,6 @@ const CreateAvatar = () => {
                       )}
                     />
 
-                    {/* Avatar Color */}
-                    <FormField
-                      control={form.control}
-                      name="avatarColor"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel className="text-sm">Avatar Color</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select avatar color" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              <SelectItem value="beige">Beige</SelectItem>
-                              <SelectItem value="cream">Cream</SelectItem>
-                              <SelectItem value="tan">Tan</SelectItem>
-                              <SelectItem value="light-gray">Light Gray</SelectItem>
-                              <SelectItem value="white">White</SelectItem>
-                              <SelectItem value="peach">Peach</SelectItem>
-                              <SelectItem value="rose">Rose</SelectItem>
-                              <SelectItem value="lavender">Lavender</SelectItem>
-                              <SelectItem value="mint">Mint</SelectItem>
-                              <SelectItem value="sky-blue">Sky Blue</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormItem>
-                      )}
-                    />
-
                     {/* Top Size */}
                     <div className="grid grid-cols-2 gap-2">
                       <FormField
@@ -863,8 +788,7 @@ const CreateAvatar = () => {
                   </div>
                   
                   <div className="space-y-4">
-                    <h2 className="text-2xl font-bold">Generating your mannequin avatar...</h2>
-                    <p className="text-muted-foreground">This may take 30-60 seconds</p>
+                    <h2 className="text-2xl font-bold">We're building your digital twin… just a sec!</h2>
                     <div className="space-y-2 max-w-md mx-auto">
                       <div className="h-2 bg-muted rounded-full overflow-hidden">
                         <div className="h-full bg-[hsl(225_73%_57%)] animate-[slide-in-right_2s_ease-in-out_infinite]"></div>
@@ -877,16 +801,13 @@ const CreateAvatar = () => {
                   <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[hsl(225_73%_57%)] mb-1">
                     <CheckCircle2 className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">Your avatar is ready!</h3>
-                  {generatedAvatarUrl && (
-                    <div className="bg-muted/30 rounded-lg p-4 mb-4">
-                      <img 
-                        src={generatedAvatarUrl}
-                        alt="Generated Avatar"
-                        className="w-full max-w-md mx-auto h-auto rounded-lg"
-                      />
-                    </div>
-                  )}
+                  <h3 className="text-2xl font-bold mb-0">Your avatar is ready!</h3>
+                  <div className="flex justify-center -mx-6 -mt-2">
+                    <Avatar3D className="w-full h-[600px]" />
+                  </div>
+                  <p className="text-xs text-muted-foreground -mt-4">
+                    Click and drag to rotate
+                  </p>
                   <Button 
                     className="mt-2" 
                     onClick={() => navigate('/')}

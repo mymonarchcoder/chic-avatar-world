@@ -11,7 +11,7 @@ serve(async (req) => {
   }
 
   try {
-    const { bodyType, height, faceImageBase64, bodyPhotoBase64, avatarColor = "beige" } = await req.json();
+    const { bodyType, height, faceImageBase64, bodyPhotoBase64 } = await req.json();
     
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) {
@@ -23,8 +23,6 @@ serve(async (req) => {
       petite: "petite build, shorter stature",
       athletic: "athletic and toned physique with defined muscles",
       curvy: "curvy hourglass figure",
-      lean: "lean and slender build",
-      broad: "broad-shouldered build",
       plus: "plus-size build",
     };
 
@@ -35,50 +33,32 @@ serve(async (req) => {
       verytall: "over 6'0\" height",
     };
 
-    const colorDescriptions: Record<string, string> = {
-      beige: "beige/tan color",
-      cream: "cream/off-white color",
-      tan: "tan/light brown color",
-      "light-gray": "light gray color",
-      white: "pure white color",
-      peach: "soft peach color",
-      rose: "soft rose pink color",
-      lavender: "soft lavender purple color",
-      mint: "soft mint green color",
-      "sky-blue": "soft sky blue color",
-    };
+    let prompt = `Create a full-body 3D photorealistic avatar with the following characteristics:
 
-    let prompt = `Create a 3D mannequin-style avatar with the following characteristics:
-
-CRITICAL STYLE REQUIREMENTS:
-- This is a MANNEQUIN, not a realistic human
-- Faceless head with NO facial features (no eyes, nose, mouth, or details)
-- Completely smooth, featureless face like a mannequin or dress form
-- Single solid ${colorDescriptions[avatarColor] || avatarColor} throughout the entire body
-- Clean, minimal 3D render aesthetic
-- Similar to clothing store display mannequins or 3D modeling software base meshes
-
-BODY & PROPORTIONS:
+BODY & POSE:
 - Body type: ${bodyTypeDescriptions[bodyType] || bodyType}
 - Height: ${heightDescriptions[height] || height}
-- Natural standing pose, relaxed and neutral
+- Natural, relaxed standing pose (not T-pose) - slightly angled with weight on one leg
+- Head and gaze turned slightly to the right, looking towards the corner naturally
+- Wearing form-fitting athletic wear (sports bra and leggings)
+- Clean white background
+- Professional studio lighting with natural shadows
 - Full body visible from head to toe
-- Clean proportions matching the specified body type
+- Casual, natural posture with a slight hip tilt
 
-SURFACE & APPEARANCE:
-- Completely smooth matte surface in ${colorDescriptions[avatarColor] || avatarColor}
-- No texture, no skin detail, no human features
-- Uniform color across entire mannequin
-- Subtle shading to show form and dimension
-- Professional 3D render quality
+FACE & APPEARANCE (CRITICAL):
+- Natural, minimal makeup look - bare skin with just a hint of natural flush
+- Real skin texture with pores, natural imperfections, and dimension
+- 3D realistic facial features with proper depth, shadows, and contours
+- Avoid flat, plastic, or overly-smooth CGI appearance
+- Natural eyebrows, subtle eye makeup or none
+- Matte skin finish, not glossy or airbrushed
+- Realistic lighting that shows facial dimension and bone structure
+- Human-like texture and depth, not doll-like or artificial
 
-LIGHTING & BACKGROUND:
-- Clean studio lighting with soft shadows
-- Neutral gray or white background
-- Lighting that shows the 3D form clearly
-- Professional product photography style
+${bodyPhotoBase64 ? 'Use the provided full body photo as primary reference for exact body proportions, build, facial features, skin tone, and overall appearance. Match the person in the photo as closely as possible with their natural beauty and realistic features.' : 'The avatar should have the natural facial features and appearance from the reference face image provided.'}
 
-Create a clean, minimal 3D mannequin suitable for virtual clothing try-on, focusing on body proportions and form without any human facial features or realistic skin texture.`;
+Create a highly realistic, natural representation with proper 3D depth and human texture suitable for virtual try-on clothing.`;
 
     console.log("Generating avatar with prompt:", prompt);
 
