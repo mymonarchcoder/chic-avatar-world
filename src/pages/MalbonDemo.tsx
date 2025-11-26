@@ -8,6 +8,8 @@ import heroImage3 from "@/assets/alo-hero-3.jpg";
 import heroImage4 from "@/assets/alo-hero-4.jpg";
 import jacketFront from "@/assets/alo-jacket-front.jpg";
 import jacketBack from "@/assets/alo-jacket-back.jpg";
+import sherpaFront from "@/assets/alo-sherpa-front.jpg";
+import sherpaBack from "@/assets/alo-sherpa-back.jpg";
 
 const MalbonDemo = () => {
   const [selectedSize, setSelectedSize] = useState("S");
@@ -28,10 +30,10 @@ const MalbonDemo = () => {
   const allProductImages = [
     [heroImage1, heroImage2],
     [heroImage3, heroImage4],
-    [jacketFront, jacketBack],
+    [sherpaFront, sherpaBack],
     [heroImage2, heroImage4],
     [heroImage3, heroImage1],
-    [jacketBack, jacketFront],
+    [jacketFront, jacketBack],
     [heroImage1, heroImage4],
     [heroImage2, heroImage3],
   ];
