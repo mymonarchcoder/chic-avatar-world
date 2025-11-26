@@ -1,7 +1,8 @@
-import { Scan, User, Sparkles } from "lucide-react";
+import { Scan, User, Sparkles, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface EmbeddableTryOnWidgetProps {
   productUrl?: string;
@@ -17,6 +18,7 @@ const EmbeddableTryOnWidget = ({
   const [showModal, setShowModal] = useState(false);
   const [selectedBodyType, setSelectedBodyType] = useState<string>("");
   const [selectedHeight, setSelectedHeight] = useState<string>("");
+  const [bodyPhoto, setBodyPhoto] = useState<string | null>(null);
   
   const bodyTypes = [
     { id: "petite", label: "Petite", description: "5'0\" - 5'3\"" },
@@ -32,14 +34,37 @@ const EmbeddableTryOnWidget = ({
     { id: "verytall", label: "6'0\"+" },
   ];
 
+  const handleBodyPhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error("Photo must be less than 5MB");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setBodyPhoto(reader.result as string);
+      toast.success("Body photo uploaded!");
+    };
+    reader.readAsDataURL(file);
+  };
+
   const handleTryWithAvatar = async () => {
     if (!selectedBodyType || !selectedHeight) return;
     
     setShowModal(false);
     
-    // Navigate to avatar generation page
+    // Navigate to avatar generation page with optional body photo
+    const params = new URLSearchParams({
+      bodyType: selectedBodyType,
+      height: selectedHeight,
+      ...(bodyPhoto && { bodyPhoto: bodyPhoto })
+    });
+    
     window.open(
-      `${window.location.origin}/avatar-generation?bodyType=${selectedBodyType}&height=${selectedHeight}`,
+      `${window.location.origin}/avatar-generation?${params.toString()}`,
       '_blank',
       'width=1200,height=800'
     );
@@ -122,6 +147,34 @@ const EmbeddableTryOnWidget = ({
                   </button>
                 ))}
               </div>
+            </div>
+
+            {/* Optional Body Photo Upload */}
+            <div>
+              <h3 className="text-sm font-semibold mb-2">
+                Upload Full Body Photo <span className="text-xs text-muted-foreground">(Optional)</span>
+              </h3>
+              <div className="relative">
+                <input
+                  type="file"
+                  id="body-photo"
+                  accept="image/*"
+                  onChange={handleBodyPhotoUpload}
+                  className="hidden"
+                />
+                <label
+                  htmlFor="body-photo"
+                  className="flex items-center justify-center gap-2 p-3 rounded-lg border-2 border-dashed border-border hover:border-primary/50 cursor-pointer transition-all"
+                >
+                  <Upload className="w-4 h-4" />
+                  <span className="text-sm">
+                    {bodyPhoto ? "Photo uploaded ✓" : "Click to upload"}
+                  </span>
+                </label>
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                For better accuracy, upload a full body photo in form-fitting clothes
+              </p>
             </div>
 
             {/* Action Buttons */}
