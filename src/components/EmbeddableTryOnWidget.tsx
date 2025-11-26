@@ -97,31 +97,31 @@ const EmbeddableTryOnWidget = ({
       </Button>
 
       <Dialog open={showModal} onOpenChange={setShowModal}>
-        <DialogContent className="max-w-xl">
-          <DialogHeader className="pt-4">
-            <DialogTitle className="text-xl font-bold">Try On Your Avatar</DialogTitle>
+        <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogHeader className="pt-3 pb-2">
+            <DialogTitle className="text-lg font-bold">Try On Your Avatar</DialogTitle>
           </DialogHeader>
 
-          <div className="space-y-4 py-2">
+          <div className="space-y-3 py-1">
             {/* Body Type Selection */}
             <div>
-              <h3 className="text-sm font-semibold mb-2">Select Body Type</h3>
-              <div className="grid grid-cols-2 gap-2">
+              <h3 className="text-xs font-semibold mb-1.5">Select Body Type</h3>
+              <div className="grid grid-cols-2 gap-1.5">
                 {bodyTypes.map((type) => (
                   <button
                     key={type.id}
                     onClick={() => setSelectedBodyType(type.id)}
-                    className={`p-3 rounded-lg border-2 transition-all text-left ${
+                    className={`p-2 rounded-md border transition-all text-left ${
                       selectedBodyType === type.id
                         ? 'border-primary bg-primary/5'
                         : 'border-border hover:border-primary/50'
                     }`}
                   >
-                    <div className="flex items-start gap-2">
-                      <User className="w-4 h-4 mt-0.5" />
+                    <div className="flex items-start gap-1.5">
+                      <User className="w-3 h-3 mt-0.5" />
                       <div>
-                        <p className="font-semibold text-sm">{type.label}</p>
-                        <p className="text-xs text-muted-foreground">{type.description}</p>
+                        <p className="font-semibold text-xs">{type.label}</p>
+                        <p className="text-[10px] text-muted-foreground">{type.description}</p>
                       </div>
                     </div>
                   </button>
@@ -131,19 +131,19 @@ const EmbeddableTryOnWidget = ({
 
             {/* Height Selection */}
             <div>
-              <h3 className="text-sm font-semibold mb-2">Select Height</h3>
-              <div className="grid grid-cols-2 gap-2">
+              <h3 className="text-xs font-semibold mb-1.5">Select Height</h3>
+              <div className="grid grid-cols-2 gap-1.5">
                 {heights.map((height) => (
                   <button
                     key={height.id}
                     onClick={() => setSelectedHeight(height.id)}
-                    className={`p-3 rounded-lg border-2 transition-all ${
+                    className={`p-2 rounded-md border transition-all ${
                       selectedHeight === height.id
                         ? 'border-primary bg-primary/5'
                         : 'border-border hover:border-primary/50'
                     }`}
                   >
-                    <p className="font-semibold text-sm">{height.label}</p>
+                    <p className="font-semibold text-xs">{height.label}</p>
                   </button>
                 ))}
               </div>
@@ -151,8 +151,8 @@ const EmbeddableTryOnWidget = ({
 
             {/* Optional Body Photo Upload */}
             <div>
-              <h3 className="text-sm font-semibold mb-2">
-                Upload Full Body Photo <span className="text-xs text-muted-foreground">(Optional)</span>
+              <h3 className="text-xs font-semibold mb-1.5">
+                Upload Full Body Photo <span className="text-[10px] text-muted-foreground">(Optional)</span>
               </h3>
               <div className="relative">
                 <input
@@ -164,35 +164,35 @@ const EmbeddableTryOnWidget = ({
                 />
                 <label
                   htmlFor="body-photo"
-                  className="flex items-center justify-center gap-2 p-3 rounded-lg border-2 border-dashed border-border hover:border-primary/50 cursor-pointer transition-all"
+                  className="flex items-center justify-center gap-1.5 p-2 rounded-md border border-dashed border-border hover:border-primary/50 cursor-pointer transition-all"
                 >
-                  <Upload className="w-4 h-4" />
-                  <span className="text-sm">
+                  <Upload className="w-3 h-3" />
+                  <span className="text-xs">
                     {bodyPhoto ? "Photo uploaded ✓" : "Click to upload"}
                   </span>
                 </label>
               </div>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-[10px] text-muted-foreground mt-0.5">
                 For better accuracy, upload a full body photo in form-fitting clothes
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="space-y-2 pt-2">
+            <div className="space-y-1.5 pt-1">
               <Button
                 onClick={handleTryWithAvatar}
                 disabled={!selectedBodyType || !selectedHeight}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs"
               >
-                <Scan className="w-4 h-4 mr-2" />
+                <Scan className="w-3 h-3 mr-1.5" />
                 Try On with Selected Avatar
               </Button>
 
-              <div className="relative py-2">
+              <div className="relative py-1">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t" />
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
+                <div className="relative flex justify-center text-[10px] uppercase">
                   <span className="bg-background px-2 text-muted-foreground">
                     Or
                   </span>
@@ -202,12 +202,12 @@ const EmbeddableTryOnWidget = ({
               <Button
                 onClick={handlePersonalize}
                 variant="outline"
-                className="w-full"
+                className="w-full h-8 text-xs"
               >
-                <Sparkles className="w-4 h-4 mr-2" />
+                <Sparkles className="w-3 h-3 mr-1.5" />
                 Personalize Your Avatar
               </Button>
-              <p className="text-xs text-center text-muted-foreground px-4">
+              <p className="text-[10px] text-center text-muted-foreground px-2">
                 Create a fully customized avatar with body measurements, skin tone, and more
               </p>
             </div>
