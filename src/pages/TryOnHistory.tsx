@@ -193,11 +193,11 @@ const TryOnHistory = () => {
           <Badge variant="outline" className="cursor-pointer">Levi's</Badge>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mb-12">
+        <div className="grid grid-cols-3 gap-3 mb-12">
           {mockTryOnHistory.map((item) => (
             <Card key={item.id} className="group hover:shadow-lg transition-all cursor-pointer">
-              <CardContent className="p-3">
-                <div className="aspect-square mb-3 overflow-hidden rounded-md bg-muted">
+              <CardContent className="p-2">
+                <div className="aspect-square mb-2 overflow-hidden rounded-md bg-muted">
                   <img 
                     src={item.image} 
                     alt={item.productName}
@@ -205,25 +205,25 @@ const TryOnHistory = () => {
                   />
                 </div>
                 <div className="space-y-1">
-                  <p className="text-xs text-muted-foreground">{item.brand}</p>
-                  <h3 className="font-semibold text-sm line-clamp-2">{item.productName}</h3>
+                  <p className="text-[10px] text-muted-foreground">{item.brand}</p>
+                  <h3 className="font-semibold text-xs line-clamp-2">{item.productName}</h3>
                   <div className="flex items-center justify-between">
-                    <p className="text-sm font-bold">${item.price}</p>
+                    <p className="text-xs font-bold">${item.price}</p>
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                    <Clock className="w-3 h-3" />
+                  <div className="flex items-center gap-1 text-[10px] text-muted-foreground">
+                    <Clock className="w-2.5 h-2.5" />
                     <span>{item.triedOnAt}</span>
                   </div>
-                  <div className="text-xs text-muted-foreground">
+                  <div className="text-[10px] text-muted-foreground">
                     {item.color} • {item.size}
                   </div>
-                  <div className="flex gap-2 pt-2">
-                    <Button size="sm" variant="outline" className="flex-1 h-8 text-xs">
-                      <Heart className="w-3 h-3 mr-1" />
+                  <div className="flex gap-1.5 pt-1.5">
+                    <Button size="sm" variant="outline" className="flex-1 h-7 text-[10px]">
+                      <Heart className="w-2.5 h-2.5 mr-0.5" />
                       Save
                     </Button>
-                    <Button size="sm" className="flex-1 h-8 text-xs">
-                      <ShoppingCart className="w-3 h-3 mr-1" />
+                    <Button size="sm" className="flex-1 h-7 text-[10px]">
+                      <ShoppingCart className="w-2.5 h-2.5 mr-0.5" />
                       Buy
                     </Button>
                   </div>
