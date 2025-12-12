@@ -89,12 +89,24 @@ export const InventoryForecastCard = ({ data, loading, onAnalyze }: InventoryFor
             <div className="p-2 bg-indigo-50 rounded">
               <p className="text-xs font-medium text-indigo-700 mb-2">Optimal Size Curve (Next Order)</p>
               <div className="flex gap-2 text-center">
-                {Object.entries(analysis.sizeCurveOptimization ?? { XS: 10, S: 22, M: 35, L: 23, XL: 10 }).map(([size, pct]) => (
-                  <div key={size} className="flex-1">
-                    <div className="text-sm font-bold text-indigo-600">{pct}%</div>
-                    <div className="text-[10px] text-gray-600">{size}</div>
-                  </div>
-                ))}
+                {(() => {
+                  const sizeCurve = analysis.sizeCurveOptimization ?? { XS: 10, S: 22, M: 35, L: 23, XL: 10 };
+                  // Handle if it's an array of objects or a plain object
+                  if (Array.isArray(sizeCurve)) {
+                    return sizeCurve.map((item: { size?: string; sku?: string; percentage?: number; recommendation?: string }, idx: number) => (
+                      <div key={idx} className="flex-1">
+                        <div className="text-sm font-bold text-indigo-600">{item.percentage ?? 0}%</div>
+                        <div className="text-[10px] text-gray-600">{item.size ?? item.sku ?? 'N/A'}</div>
+                      </div>
+                    ));
+                  }
+                  return Object.entries(sizeCurve).map(([size, pct]) => (
+                    <div key={size} className="flex-1">
+                      <div className="text-sm font-bold text-indigo-600">{typeof pct === 'number' ? pct : 0}%</div>
+                      <div className="text-[10px] text-gray-600">{size}</div>
+                    </div>
+                  ));
+                })()}
               </div>
             </div>
           </div>
