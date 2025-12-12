@@ -223,10 +223,10 @@ const AvatarWidget = () => {
           {/* Content - Two Column Layout Always Side by Side */}
           <div className="h-full flex overflow-hidden relative">
             {/* Left Column - Full Body Avatar */}
-            <div className="flex flex-col justify-center items-center h-full flex-shrink-0 w-[45%] overflow-visible py-4">
+            <div className="flex flex-col justify-end items-center h-full flex-shrink-0 w-[45%] overflow-hidden">
               <div 
                 ref={avatarRef}
-                className="relative flex items-center justify-center overflow-visible h-full w-full scale-[1.8]"
+                className="relative flex items-end justify-center h-full w-full"
               >
                 {/* Animated Avatar */}
                 <AnimatedAvatar
@@ -240,6 +240,7 @@ const AvatarWidget = () => {
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
                   onTouchEnd={handleTouchEnd}
+                  className="h-full w-auto max-h-full object-contain"
                 />
                 
                 {/* Virtual Try-On Clothing Images */}

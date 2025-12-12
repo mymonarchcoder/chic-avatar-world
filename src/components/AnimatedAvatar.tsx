@@ -11,6 +11,7 @@ interface AnimatedAvatarProps {
   onTouchStart: (e: React.TouchEvent) => void;
   onTouchMove: (e: React.TouchEvent) => void;
   onTouchEnd: () => void;
+  className?: string;
 }
 
 const AnimatedAvatar = ({
@@ -24,6 +25,7 @@ const AnimatedAvatar = ({
   onTouchStart,
   onTouchMove,
   onTouchEnd,
+  className,
 }: AnimatedAvatarProps) => {
   const [animationPhase, setAnimationPhase] = useState(0);
 
@@ -68,7 +70,7 @@ const AnimatedAvatar = ({
   };
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className={`relative w-full h-full flex items-end justify-center ${className || ''}`}>
       {/* Breathing animation wrapper */}
       <div
         className="absolute inset-0 flex items-center justify-center"
