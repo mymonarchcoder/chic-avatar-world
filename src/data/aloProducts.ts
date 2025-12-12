@@ -34,17 +34,6 @@ export const aloProducts = [
     description: "Oversized half-zip sweatshirt with alo logo"
   },
   {
-    id: 4,
-    name: "Accolade Sweatpant",
-    price: 128,
-    brand: "Alo Yoga",
-    image: "https://images.unsplash.com/photo-1594633313515-afa736043176?w=600&h=800&fit=crop&q=80",
-    category: "bottoms",
-    sizes: ["XXS", "XS", "S", "M", "L", "XL", "2XL"],
-    color: "Periwinkle Blue",
-    description: "Matching sweatpants with embroidered logo"
-  },
-  {
     id: 5,
     name: "Airlift Legging",
     price: 118,
