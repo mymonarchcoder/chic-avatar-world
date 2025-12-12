@@ -78,49 +78,51 @@ const AvatarGeneration = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-8">
-      <div className="max-w-2xl w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold mb-2">Generating Your Avatar</h1>
-          <p className="text-muted-foreground">
+    <div className="min-h-screen bg-white flex flex-col">
+      <div className="flex-1 flex flex-col items-center justify-center p-4">
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-bold text-black mb-1">Generating Your Avatar</h1>
+          <p className="text-gray-600 text-sm">
             Creating a personalized avatar with your specifications...
           </p>
         </div>
 
         {isGenerating ? (
-          <div className="flex flex-col items-center justify-center py-20">
-            <Loader2 className="w-16 h-16 animate-spin text-primary mb-4" />
-            <p className="text-lg text-muted-foreground">
+          <div className="flex flex-col items-center justify-center py-12">
+            <Loader2 className="w-12 h-12 animate-spin text-primary mb-3" />
+            <p className="text-gray-600">
               This may take 30-60 seconds...
             </p>
-            <div className="mt-6 space-y-2 text-sm text-muted-foreground">
+            <div className="mt-4 space-y-1 text-xs text-gray-500">
               <p>• Body Type: {bodyType}</p>
               <p>• Height: {height}</p>
             </div>
           </div>
         ) : avatarImage ? (
-          <div className="space-y-6">
-            <div className="bg-white rounded-lg p-4 shadow-lg">
+          <div className="flex-1 flex flex-col items-center w-full max-w-md">
+            <div className="flex-1 flex items-center justify-center w-full py-2">
               <img 
                 src={avatarImage}
                 alt="Generated Avatar"
-                className="w-full h-auto rounded-lg"
+                className="max-h-[calc(100vh-200px)] w-auto object-contain rounded-lg shadow-lg"
               />
             </div>
-            <div className="text-center space-y-4">
-              <p className="text-sm text-muted-foreground">
-                Your personalized avatar is ready! You can now use this to try on clothes virtually.
+            <div className="text-center space-y-3 py-4">
+              <p className="text-xs text-gray-600">
+                Your personalized avatar is ready! Try on clothes virtually.
               </p>
-              <div className="flex gap-4 justify-center">
+              <div className="flex gap-3 justify-center">
                 <Button 
                   onClick={generateAvatar}
                   variant="outline"
+                  size="sm"
                 >
-                  Regenerate Avatar
+                  Regenerate
                 </Button>
                 <Button 
                   onClick={handleTryOnOutfit}
                   className="bg-primary text-primary-foreground"
+                  size="sm"
                 >
                   Try On Cream Alo Set (XS)
                 </Button>
@@ -128,11 +130,11 @@ const AvatarGeneration = () => {
             </div>
           </div>
         ) : (
-          <div className="text-center py-20">
+          <div className="text-center py-12">
             <p className="text-red-500">Failed to generate avatar</p>
             <button 
               onClick={generateAvatar}
-              className="mt-4 px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90"
+              className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 text-sm"
             >
               Try Again
             </button>
