@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import AnimatedAvatar from "./AnimatedAvatar";
 import { malbonProducts } from "@/data/malbonProducts";
 import { aloProducts } from "@/data/aloProducts";
+import pilatesStudioBg from "@/assets/pilates-studio-bg.jpg";
 
 const AvatarWidget = () => {
   const { isOpen, openModal, closeModal } = useAvatarModal();
@@ -208,7 +209,14 @@ const AvatarWidget = () => {
 
   if (isOpen) {
     return (
-      <div className="fixed inset-0 z-50 bg-white flex items-center justify-center animate-fade-in">
+      <div 
+        className="fixed inset-0 z-50 flex items-center justify-center animate-fade-in"
+        style={{
+          backgroundImage: `url(${pilatesStudioBg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         <div className="w-full h-full max-w-7xl flex flex-col overflow-hidden animate-scale-in relative">
           {/* Floating Close Button */}
           <Button
