@@ -90,7 +90,7 @@ const EmbeddableTryOnWidget = ({
     <>
       <Button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-6 right-6 z-[9999] bg-[hsl(220,15%,85%)] text-foreground hover:bg-[hsl(220,15%,75%)] shadow-lg rounded-full px-6 py-6 flex items-center gap-2 transition-all hover:scale-105"
+        className="fixed bottom-6 right-6 z-[9999] bg-white text-black border-2 border-black hover:bg-gray-100 shadow-lg rounded-full px-6 py-6 flex items-center gap-2 transition-all hover:scale-105"
       >
         <Scan className="w-5 h-5" />
         Try On
