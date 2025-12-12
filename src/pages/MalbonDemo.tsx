@@ -60,18 +60,18 @@ const MalbonDemo = () => {
       </div>
 
       {/* Header */}
-      <header className="border-b">
+      <header className="border-b text-black">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-12">
-            <div className="text-4xl font-bold tracking-tight">alo</div>
-            <nav className="hidden md:flex gap-8 text-sm font-medium">
+            <div className="text-4xl font-bold tracking-tight text-black">alo</div>
+            <nav className="hidden md:flex gap-8 text-sm font-medium text-black">
               <a href="#" className="hover:text-gray-600">WOMEN</a>
               <a href="#" className="hover:text-gray-600">MEN</a>
               <a href="#" className="hover:text-gray-600">SHOES</a>
               <a href="#" className="hover:text-gray-600">GIFT GUIDE</a>
             </nav>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 text-black">
             <Search className="w-5 h-5 cursor-pointer hover:text-gray-600" />
             <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-600">
               <User className="w-5 h-5" />
@@ -123,13 +123,13 @@ const MalbonDemo = () => {
       </div>
 
       {/* Product Info Sidebar - Fixed Right */}
-      <div className="fixed right-0 top-32 w-[400px] h-[calc(100vh-8rem)] bg-white border-l border-gray-200 overflow-y-auto p-6 z-10">
-        <h1 className="text-xl font-medium mb-1">{productData.name}</h1>
-        <p className="text-lg font-medium mb-6">${productData.price}</p>
+      <div className="fixed right-0 top-32 w-[400px] h-[calc(100vh-8rem)] bg-white border-l border-gray-200 overflow-y-auto p-6 z-10 text-black">
+        <h1 className="text-xl font-medium mb-1 text-black">{productData.name}</h1>
+        <p className="text-lg font-medium mb-6 text-black">${productData.price}</p>
 
         {/* Color */}
         <div className="mb-6">
-          <p className="text-sm mb-3">
+          <p className="text-sm mb-3 text-black">
             Core: {currentProduct.color}{" "}
             <span className="underline cursor-pointer">(Shop All)</span>
           </p>
@@ -142,14 +142,14 @@ const MalbonDemo = () => {
 
         {/* Fit Info */}
         <div className="mb-6">
-          <p className="text-sm">
+          <p className="text-sm text-black">
             <span className="font-medium">Fit:</span> {currentProduct.description}
           </p>
         </div>
 
         {/* Size Guide */}
         <div className="mb-6">
-          <button className="text-sm underline font-medium mb-3">Size Guide</button>
+          <button className="text-sm underline font-medium mb-3 text-black">Size Guide</button>
           <div className="grid grid-cols-2 gap-2">
             {currentProduct.sizes.map((size) => (
               <button
