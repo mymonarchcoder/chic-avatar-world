@@ -41,8 +41,13 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 
-              className="text-2xl font-bold text-foreground cursor-pointer hover:opacity-80 transition-opacity" 
-              style={{ letterSpacing: '-0.02em' }}
+              className="text-3xl font-black cursor-pointer hover:opacity-90 transition-opacity text-3d tracking-wide"
+              style={{ 
+                background: 'linear-gradient(180deg, hsl(45 80% 70%) 0%, hsl(35 90% 50%) 50%, hsl(45 80% 70%) 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
               onClick={() => navigate('/')}
             >
               TUUIN.AI
