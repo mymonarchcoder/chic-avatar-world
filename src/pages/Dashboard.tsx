@@ -99,11 +99,11 @@ const Dashboard = () => {
       {/* Tabs */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col px-4 pb-4 overflow-hidden">
         <TabsList className="bg-gray-100 h-9 mb-3">
-          <TabsTrigger value="overview" className="text-xs data-[state=active]:bg-white data-[state=active]:text-[#3B5EEB]">Overview</TabsTrigger>
-          <TabsTrigger value="ai-insights" className="text-xs data-[state=active]:bg-white data-[state=active]:text-[#3B5EEB]">
+          <TabsTrigger value="overview" className="text-xs data-[state=active]:bg-lime-500 data-[state=active]:text-white hover:bg-lime-100">Overview</TabsTrigger>
+          <TabsTrigger value="ai-insights" className="text-xs data-[state=active]:bg-lime-500 data-[state=active]:text-white hover:bg-lime-100">
             <Brain className="w-3 h-3 mr-1" />AI Insights
           </TabsTrigger>
-          <TabsTrigger value="predictions" className="text-xs data-[state=active]:bg-white data-[state=active]:text-[#3B5EEB]">Predictions</TabsTrigger>
+          <TabsTrigger value="predictions" className="text-xs data-[state=active]:bg-lime-500 data-[state=active]:text-white hover:bg-lime-100">Predictions</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="flex-1 overflow-auto m-0">
