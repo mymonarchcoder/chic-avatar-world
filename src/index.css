@@ -4,98 +4,100 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
-Dark, futuristic theme with iridescent accents
+Futuristic dark theme with metallic gold/silver accents
 */
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 2%;
+    --foreground: 45 10% 90%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 5%;
+    --card-foreground: 45 10% 90%;
 
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 45 10% 90%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 0%;
-    --primary-glow: 280 100% 70%;
+    --primary: 45 30% 70%;
+    --primary-foreground: 0 0% 2%;
+    --primary-glow: 45 50% 55%;
 
-    --secondary: 0 0% 8%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 45 10% 90%;
 
-    --accent: 280 100% 70%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 45 70% 50%;
+    --accent-foreground: 0 0% 2%;
 
     --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted-foreground: 0 0% 50%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 280 100% 70%;
+    --border: 45 20% 20%;
+    --input: 0 0% 12%;
+    --ring: 45 50% 55%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Iridescent gradient inspired by holographic effects */
-    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(200 100% 60%), hsl(60 100% 70%));
-    --gradient-accent: linear-gradient(135deg, hsl(320 100% 60%), hsl(280 100% 70%), hsl(200 100% 60%));
-    --gradient-hero: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 4%) 100%);
-    --gradient-iridescent: linear-gradient(135deg, 
-      hsl(320 100% 60%) 0%, 
-      hsl(280 100% 70%) 20%, 
-      hsl(200 100% 60%) 40%, 
-      hsl(160 100% 50%) 60%, 
-      hsl(60 100% 70%) 80%, 
-      hsl(320 100% 60%) 100%
+    /* Metallic gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(45 50% 70%), hsl(45 30% 50%), hsl(45 50% 70%));
+    --gradient-accent: linear-gradient(180deg, hsl(45 70% 60%), hsl(35 80% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 6%) 100%);
+    --gradient-silver: linear-gradient(135deg, hsl(0 0% 80%), hsl(0 0% 50%), hsl(0 0% 80%));
+    --gradient-gold: linear-gradient(180deg, hsl(45 80% 65%) 0%, hsl(35 90% 45%) 50%, hsl(45 80% 65%) 100%);
+    --gradient-metallic: linear-gradient(135deg, 
+      hsl(45 60% 70%) 0%, 
+      hsl(45 40% 55%) 25%, 
+      hsl(45 70% 75%) 50%, 
+      hsl(45 40% 55%) 75%, 
+      hsl(45 60% 70%) 100%
     );
     
-    --shadow-elegant: 0 10px 40px -10px hsl(280 100% 70% / 0.3);
-    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
-    --shadow-glow: 0 0 60px hsl(280 100% 70% / 0.2);
+    --shadow-elegant: 0 10px 40px -10px hsl(45 50% 50% / 0.3);
+    --shadow-card: 0 4px 30px -4px hsl(0 0% 0% / 0.6);
+    --shadow-glow: 0 0 60px hsl(45 50% 50% / 0.15);
+    --shadow-gold: 0 4px 20px hsl(45 70% 50% / 0.3);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 98%;
+    --background: 0 0% 2%;
+    --foreground: 45 10% 90%;
 
-    --card: 0 0% 4%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 5%;
+    --card-foreground: 45 10% 90%;
 
-    --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 45 10% 90%;
 
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 0%;
-    --primary-glow: 280 100% 70%;
+    --primary: 45 30% 70%;
+    --primary-foreground: 0 0% 2%;
+    --primary-glow: 45 50% 55%;
 
-    --secondary: 0 0% 8%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 45 10% 90%;
 
-    --accent: 280 100% 70%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 45 70% 50%;
+    --accent-foreground: 0 0% 2%;
 
     --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted-foreground: 0 0% 50%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 15%;
-    --ring: 280 100% 70%;
+    --border: 45 20% 20%;
+    --input: 0 0% 12%;
+    --ring: 45 50% 55%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(200 100% 60%), hsl(60 100% 70%));
-    --gradient-accent: linear-gradient(135deg, hsl(320 100% 60%), hsl(280 100% 70%), hsl(200 100% 60%));
-    --gradient-hero: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 4%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(45 50% 70%), hsl(45 30% 50%), hsl(45 50% 70%));
+    --gradient-accent: linear-gradient(180deg, hsl(45 70% 60%), hsl(35 80% 45%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 2%) 0%, hsl(0 0% 6%) 100%);
     
-    --shadow-elegant: 0 10px 40px -10px hsl(280 100% 70% / 0.3);
-    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
+    --shadow-elegant: 0 10px 40px -10px hsl(45 50% 50% / 0.3);
+    --shadow-card: 0 4px 30px -4px hsl(0 0% 0% / 0.6);
   }
 }
 
@@ -115,20 +117,60 @@ Dark, futuristic theme with iridescent accents
   }
 }
 
-/* Iridescent text effect utility */
-.text-iridescent {
-  background: var(--gradient-iridescent);
+/* Metallic text effects */
+.text-metallic-gold {
+  background: linear-gradient(180deg, hsl(45 80% 70%) 0%, hsl(35 90% 50%) 50%, hsl(45 80% 70%) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 2px 4px hsl(45 70% 50% / 0.3));
 }
 
-/* Iridescent border effect */
-.border-iridescent {
-  border-image: var(--gradient-iridescent) 1;
+.text-metallic-silver {
+  background: linear-gradient(180deg, hsl(0 0% 90%) 0%, hsl(0 0% 60%) 50%, hsl(0 0% 90%) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 4px hsl(0 0% 50% / 0.3));
 }
 
-/* Glow effect */
+/* 3D Bold Text Effect */
+.text-3d {
+  text-shadow: 
+    0 1px 0 hsl(45 40% 45%),
+    0 2px 0 hsl(45 40% 40%),
+    0 3px 0 hsl(45 40% 35%),
+    0 4px 0 hsl(45 40% 30%),
+    0 5px 10px hsl(0 0% 0% / 0.5);
+}
+
+/* Glow effects */
 .glow {
   box-shadow: var(--shadow-glow);
+}
+
+.glow-gold {
+  box-shadow: var(--shadow-gold);
+}
+
+/* Futuristic border */
+.border-metallic {
+  border: 1px solid transparent;
+  background: linear-gradient(var(--background), var(--background)) padding-box,
+              linear-gradient(135deg, hsl(45 60% 60%), hsl(45 30% 30%), hsl(45 60% 60%)) border-box;
+}
+
+/* Scanline effect for futuristic feel */
+.scanlines::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    hsl(0 0% 0% / 0.03) 2px,
+    hsl(0 0% 0% / 0.03) 4px
+  );
+  pointer-events: none;
 }

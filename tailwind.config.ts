@@ -60,12 +60,15 @@ export default {
         'gradient-primary': 'var(--gradient-primary)',
         'gradient-accent': 'var(--gradient-accent)',
         'gradient-hero': 'var(--gradient-hero)',
-        'gradient-iridescent': 'var(--gradient-iridescent)',
+        'gradient-gold': 'var(--gradient-gold)',
+        'gradient-silver': 'var(--gradient-silver)',
+        'gradient-metallic': 'var(--gradient-metallic)',
       },
       boxShadow: {
         'elegant': 'var(--shadow-elegant)',
         'card': 'var(--shadow-card)',
         'glow': 'var(--shadow-glow)',
+        'gold': 'var(--shadow-gold)',
       },
       transitionTimingFunction: {
         'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
