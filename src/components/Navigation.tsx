@@ -41,11 +41,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <h1 
-              className="text-2xl font-bold text-foreground font-baloo cursor-pointer hover:opacity-80 transition-opacity" 
-              style={{ letterSpacing: '-0.1em' }}
+              className="text-2xl font-bold text-foreground cursor-pointer hover:opacity-80 transition-opacity" 
+              style={{ letterSpacing: '-0.02em' }}
               onClick={() => navigate('/')}
             >
-              tuuin
+              TUUIN.AI
             </h1>
             <div className="flex gap-4">
               <Button 
