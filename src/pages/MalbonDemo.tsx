@@ -155,10 +155,10 @@ const MalbonDemo = () => {
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`py-3 px-4 border text-sm font-medium transition-all ${
+                className={`py-3 px-4 border-2 border-black text-sm font-medium transition-all ${
                   selectedSize === size
-                    ? "border-black bg-black text-white"
-                    : "border-gray-300 hover:border-black"
+                    ? "bg-black text-white"
+                    : "bg-white text-black hover:bg-gray-100"
                 }`}
               >
                 {size}
