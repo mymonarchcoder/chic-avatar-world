@@ -275,7 +275,7 @@ const AvatarWidget = () => {
             </div>
 
             {/* Right Column - Brand Products */}
-            <div className="flex flex-col h-full py-4 pr-4 pl-2 overflow-hidden w-[320px] max-w-[35%] bg-background/95 backdrop-blur-sm rounded-l-lg shadow-lg min-h-0">
+            <div className="flex flex-col h-full py-4 pr-4 pl-2 overflow-hidden w-[400px] max-w-[45%] bg-background/95 backdrop-blur-sm rounded-l-lg shadow-lg min-h-0">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="text-lg sm:text-2xl font-bold tracking-wide">{brandName}</h3>
                 {Object.keys(selectedItems).length > 0 && (
