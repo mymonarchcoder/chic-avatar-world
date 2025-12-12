@@ -4,87 +4,98 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
+Dark, futuristic theme with iridescent accents
 */
 
 @layer base {
   :root {
-    --background: 214 45% 85%;
-    --foreground: 240 10% 3.9%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
 
     --primary: 0 0% 98%;
-    --primary-foreground: 225 73% 57%;
-    --primary-glow: 0 0% 90%;
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 280 100% 70%;
 
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 240 6% 10%;
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 98%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 240 10% 3.9%;
+    --accent: 280 100% 70%;
+    --accent-foreground: 0 0% 98%;
 
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 30%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 98% / 0.2;
-    --input: 0 0% 98% / 0.2;
-    --ring: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 280 100% 70%;
 
     --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(225 73% 57%), hsl(225 73% 67%));
-    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%), hsl(45 100% 60%));
-    --gradient-hero: linear-gradient(180deg, hsl(263 70% 98%), hsl(0 0% 100%));
+    /* Iridescent gradient inspired by holographic effects */
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(200 100% 60%), hsl(60 100% 70%));
+    --gradient-accent: linear-gradient(135deg, hsl(320 100% 60%), hsl(280 100% 70%), hsl(200 100% 60%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 4%) 100%);
+    --gradient-iridescent: linear-gradient(135deg, 
+      hsl(320 100% 60%) 0%, 
+      hsl(280 100% 70%) 20%, 
+      hsl(200 100% 60%) 40%, 
+      hsl(160 100% 50%) 60%, 
+      hsl(60 100% 70%) 80%, 
+      hsl(320 100% 60%) 100%
+    );
     
-    --shadow-elegant: 0 10px 40px -10px hsl(263 70% 50% / 0.2);
-    --shadow-card: 0 4px 20px -2px hsl(240 10% 3.9% / 0.08);
+    --shadow-elegant: 0 10px 40px -10px hsl(280 100% 70% / 0.3);
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 60px hsl(280 100% 70% / 0.2);
     
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 0 0% 0%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 6%;
+    --card: 0 0% 4%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 6%;
+    --popover: 0 0% 4%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --primary-glow: 0 0% 90%;
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 280 100% 70%;
 
-    --secondary: 240 6% 10%;
+    --secondary: 0 0% 8%;
     --secondary-foreground: 0 0% 98%;
 
-    --accent: 38 92% 50%;
+    --accent: 280 100% 70%;
     --accent-foreground: 0 0% 98%;
 
-    --muted: 240 6% 10%;
-    --muted-foreground: 240 5% 64.9%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 6% 20%;
-    --input: 240 6% 20%;
-    --ring: 0 0% 98%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 280 100% 70%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(0 0% 98%), hsl(0 0% 90%));
-    --gradient-accent: linear-gradient(135deg, hsl(38 92% 50%), hsl(45 100% 60%));
-    --gradient-hero: linear-gradient(180deg, hsl(240 10% 6%), hsl(240 10% 3.9%));
+    --gradient-primary: linear-gradient(135deg, hsl(280 100% 70%), hsl(200 100% 60%), hsl(60 100% 70%));
+    --gradient-accent: linear-gradient(135deg, hsl(320 100% 60%), hsl(280 100% 70%), hsl(200 100% 60%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 4%) 100%);
     
-    --shadow-elegant: 0 10px 40px -10px hsl(263 70% 60% / 0.3);
-    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.3);
+    --shadow-elegant: 0 10px 40px -10px hsl(280 100% 70% / 0.3);
+    --shadow-card: 0 4px 20px -2px hsl(0 0% 0% / 0.5);
   }
 }
 
@@ -94,13 +105,30 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply text-foreground;
-    background: linear-gradient(180deg, hsl(215 85% 72%) 0%, hsl(214 45% 85%) 100%);
+    @apply text-foreground bg-background;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     letter-spacing: 0.02em;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    letter-spacing: -0.118em;
+    letter-spacing: -0.02em;
   }
+}
+
+/* Iridescent text effect utility */
+.text-iridescent {
+  background: var(--gradient-iridescent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Iridescent border effect */
+.border-iridescent {
+  border-image: var(--gradient-iridescent) 1;
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: var(--shadow-glow);
 }
