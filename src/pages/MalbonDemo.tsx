@@ -55,30 +55,30 @@ const MalbonDemo = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Top Banner */}
-      <div className="bg-[#2d4a3e] text-white text-center py-2 text-sm font-medium">
+      <div className="bg-[#3B5EEB] text-white text-center py-2 text-sm font-medium">
         FREE SHIPPING & EXTENDED RETURNS TILL 1/10
       </div>
 
       {/* Header */}
-      <header className="border-b text-black">
+      <header className="border-b text-[#3B5EEB]">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-12">
-            <div className="text-4xl font-bold tracking-tight text-black">alo</div>
-            <nav className="hidden md:flex gap-8 text-sm font-medium text-black">
-              <a href="#" className="hover:text-gray-600">WOMEN</a>
-              <a href="#" className="hover:text-gray-600">MEN</a>
-              <a href="#" className="hover:text-gray-600">SHOES</a>
-              <a href="#" className="hover:text-gray-600">GIFT GUIDE</a>
+            <div className="text-4xl font-bold tracking-tight text-[#3B5EEB]">alo</div>
+            <nav className="hidden md:flex gap-8 text-sm font-medium text-[#3B5EEB]">
+              <a href="#" className="hover:text-[#2a4ad4]">WOMEN</a>
+              <a href="#" className="hover:text-[#2a4ad4]">MEN</a>
+              <a href="#" className="hover:text-[#2a4ad4]">SHOES</a>
+              <a href="#" className="hover:text-[#2a4ad4]">GIFT GUIDE</a>
             </nav>
           </div>
-          <div className="flex items-center gap-4 text-black">
-            <Search className="w-5 h-5 cursor-pointer hover:text-gray-600" />
-            <button className="flex items-center gap-2 text-sm font-medium hover:text-gray-600">
+          <div className="flex items-center gap-4 text-[#3B5EEB]">
+            <Search className="w-5 h-5 cursor-pointer hover:text-[#2a4ad4]" />
+            <button className="flex items-center gap-2 text-sm font-medium hover:text-[#2a4ad4]">
               <User className="w-5 h-5" />
               SIGN IN TO GET REWARDS
             </button>
-            <Heart className="w-5 h-5 cursor-pointer hover:text-gray-600" />
-            <ShoppingBag className="w-5 h-5 cursor-pointer hover:text-gray-600" />
+            <Heart className="w-5 h-5 cursor-pointer hover:text-[#2a4ad4]" />
+            <ShoppingBag className="w-5 h-5 cursor-pointer hover:text-[#2a4ad4]" />
           </div>
         </div>
       </header>
@@ -123,42 +123,42 @@ const MalbonDemo = () => {
       </div>
 
       {/* Product Info Sidebar - Fixed Right */}
-      <div className="fixed right-0 top-32 w-[400px] h-[calc(100vh-8rem)] bg-white border-l border-gray-200 overflow-y-auto p-6 z-10 text-black">
-        <h1 className="text-xl font-medium mb-1 text-black">{productData.name}</h1>
-        <p className="text-lg font-medium mb-6 text-black">${productData.price}</p>
+      <div className="fixed right-0 top-32 w-[400px] h-[calc(100vh-8rem)] bg-white border-l border-gray-200 overflow-y-auto p-6 z-10 text-[#3B5EEB]">
+        <h1 className="text-xl font-medium mb-1 text-[#3B5EEB]">{productData.name}</h1>
+        <p className="text-lg font-medium mb-6 text-[#3B5EEB]">${productData.price}</p>
 
         {/* Color */}
         <div className="mb-6">
-          <p className="text-sm mb-3 text-black">
+          <p className="text-sm mb-3 text-[#3B5EEB]">
             Core: {currentProduct.color}{" "}
             <span className="underline cursor-pointer">(Shop All)</span>
           </p>
           <div className="flex gap-2 mb-2">
-            <button className="w-12 h-12 rounded-full border-2 border-black bg-black" />
+            <button className="w-12 h-12 rounded-full border-2 border-[#3B5EEB] bg-[#3B5EEB]" />
             <button className="w-12 h-12 rounded-full border-2 border-gray-300 bg-gray-400" />
           </div>
-          <p className="text-xs text-gray-600">Limited</p>
+          <p className="text-xs text-[#3B5EEB]/60">Limited</p>
         </div>
 
         {/* Fit Info */}
         <div className="mb-6">
-          <p className="text-sm text-black">
+          <p className="text-sm text-[#3B5EEB]">
             <span className="font-medium">Fit:</span> {currentProduct.description}
           </p>
         </div>
 
         {/* Size Guide */}
         <div className="mb-6">
-          <button className="text-sm underline font-medium mb-3 text-black">Size Guide</button>
+          <button className="text-sm underline font-medium mb-3 text-[#3B5EEB]">Size Guide</button>
           <div className="grid grid-cols-2 gap-2">
             {currentProduct.sizes.map((size) => (
               <button
                 key={size}
                 onClick={() => setSelectedSize(size)}
-                className={`py-3 px-4 border-2 border-black text-sm font-medium transition-all ${
+                className={`py-3 px-4 border-2 border-[#3B5EEB] text-sm font-medium transition-all ${
                   selectedSize === size
-                    ? "bg-black text-white"
-                    : "bg-white text-black hover:bg-gray-100"
+                    ? "bg-[#3B5EEB] text-white"
+                    : "bg-white text-[#3B5EEB] hover:bg-[#3B5EEB]/10"
                 }`}
               >
                 {size}
@@ -168,29 +168,29 @@ const MalbonDemo = () => {
         </div>
 
         {/* Add to Bag */}
-        <button className="w-full bg-black text-white py-4 text-sm font-medium hover:bg-gray-900 transition-colors mb-4">
+        <button className="w-full bg-[#3B5EEB] text-white py-4 text-sm font-medium hover:bg-[#2a4ad4] transition-colors mb-4">
           ADD TO BAG
         </button>
 
         {/* Model Info */}
-        <p className="text-xs text-gray-600 text-center mb-6">
+        <p className="text-xs text-[#3B5EEB]/60 text-center mb-6">
           Model is 5'9" wearing S
         </p>
 
         {/* Product Navigation */}
-        <div className="flex items-center justify-between gap-2 pt-4 border-t">
+        <div className="flex items-center justify-between gap-2 pt-4 border-t border-[#3B5EEB]/20">
           <button
             onClick={() => setSelectedProductIndex((prev) => (prev > 0 ? prev - 1 : aloProducts.length - 1))}
-            className="flex-1 py-2 border border-gray-300 hover:border-black transition-colors text-xs font-medium"
+            className="flex-1 py-2 border border-[#3B5EEB]/30 hover:border-[#3B5EEB] transition-colors text-xs font-medium text-[#3B5EEB]"
           >
             ← Previous
           </button>
-          <span className="text-xs text-gray-600">
+          <span className="text-xs text-[#3B5EEB]/60">
             {selectedProductIndex + 1}/{aloProducts.length}
           </span>
           <button
             onClick={() => setSelectedProductIndex((prev) => (prev < aloProducts.length - 1 ? prev + 1 : 0))}
-            className="flex-1 py-2 border border-gray-300 hover:border-black transition-colors text-xs font-medium"
+            className="flex-1 py-2 border border-[#3B5EEB]/30 hover:border-[#3B5EEB] transition-colors text-xs font-medium text-[#3B5EEB]"
           >
             Next →
           </button>
