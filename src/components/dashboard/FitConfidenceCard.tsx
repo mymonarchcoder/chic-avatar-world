@@ -26,10 +26,9 @@ export const FitConfidenceCard = ({ data, loading, onAnalyze }: FitConfidenceCar
           </div>
           <Button 
             size="sm" 
-            variant="outline" 
             onClick={onAnalyze}
             disabled={loading}
-            className="text-xs h-7 border-[#3B5EEB] text-[#3B5EEB] hover:bg-[#3B5EEB]/10"
+            className="text-xs h-7 bg-[#3B5EEB] text-white hover:bg-[#2a4ad4]"
           >
             {loading ? <Loader2 className="w-3 h-3 animate-spin" /> : <Brain className="w-3 h-3 mr-1" />}
             Analyze
